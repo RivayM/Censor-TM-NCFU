@@ -1,0 +1,166 @@
+C51 COMPILER V9.53.0.0   COMMON                                                            08/23/2024 19:06:42 PAGE 1   
+
+
+C51 COMPILER V9.53.0.0, COMPILATION OF MODULE COMMON
+OBJECT MODULE PLACED IN .\Code\Obj\Common.obj
+COMPILER INVOKED BY: D:\USR\Keil_v5\C51\BIN\C51.EXE Common\Common.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\Lib_nuvoton;.\Comm
+                    -on;.\Code\Head;.\Code\Source;.\Code\Obj;.\LST;.\Output) DEFINE(FOSC_160000) DEBUG OBJECTEXTEND PRINT(.\LST\Common.lst) T
+                    -ABS(2) OBJECT(.\Code\Obj\Common.obj)
+
+line level    source
+
+   1          /*--------------------------------------------------------------------------------------------------------
+             --*/
+   2          /*                                                                                                        
+             - */
+   3          /* Copyright(c) 2016 Nuvoton Technology Corp. All rights reserved.                                        
+             - */
+   4          /*                                                                                                        
+             - */
+   5          /*--------------------------------------------------------------------------------------------------------
+             --*/
+   6          
+   7          //********************************************************************************************************
+             -***
+   8          //  Nuvoton Technoledge Corp. 
+   9          //  Website: http://www.nuvoton.com
+  10          //  E-Mail : MicroC-8bit@nuvoton.com
+  11          //  Date   : Apr/21/2016
+  12          //********************************************************************************************************
+             -***
+  13          
+  14          #include "N76E003.h"
+  15          //
+  16          //----------------------------------------------------------------------------------
+  17          // UART0 baud rate initial setting 
+  18          //----------------------------------------------------------------------------------
+  19          //void InitialUART0_Timer1(UINT32 u32Baudrate)    //T1M = 1, SMOD = 1
+  20          //{
+  21          //    P06_Quasi_Mode;   //Setting UART pin as Quasi mode for transmit
+  22          //    P07_Quasi_Mode;   //Setting UART pin as Quasi mode for transmit
+  23          //  
+  24          //    SCON = 0x50;      //UART0 Mode1,REN=1,TI=1
+  25          //    TMOD |= 0x20;     //Timer1 Mode1
+  26          //    
+  27          //    set_SMOD;         //UART0 Double Rate Enable
+  28          //    set_T1M;
+  29          //    clr_BRCK;         //Serial port 0 baud rate clock source = Timer1
+  30          // 
+  31          //#ifdef FOSC_160000
+  32          //    TH1 = 256 - (1000000/u32Baudrate+1);               /*16 MHz */
+  33          //#endif      
+  34          //#ifdef FOSC_166000
+  35          //    TH1 = 256 - (1037500/u32Baudrate);                 /*16.6 MHz */
+  36          //#endif
+  37          //    set_TR1;
+  38          //    set_TI;           //For printf function must setting TI = 1
+  39          //}
+  40          //---------------------------------------------------------------
+  41          //void InitialUART0_Timer3(UINT32 u32Baudrate) //use timer3 as Baudrate generator
+  42          //{
+  43          //    P06_Quasi_Mode;   //Setting UART pin as Quasi mode for transmit
+  44          //    P07_Quasi_Mode;   //Setting UART pin as Quasi mode for transmit 
+  45          //  
+  46          //    SCON = 0x50;     //UART0 Mode1,REN=1,TI=1
+C51 COMPILER V9.53.0.0   COMMON                                                            08/23/2024 19:06:42 PAGE 2   
+
+  47          //    set_SMOD;        //UART0 Double Rate Enable
+  48          //    T3CON &= 0xF8;   //T3PS2=0,T3PS1=0,T3PS0=0(Prescale=1)
+  49          //    set_BRCK;        //UART0 baud rate clock source = Timer3
+  50          
+  51          //#ifdef FOSC_160000
+  52          //    RH3    = HIBYTE(65536 - (1000000/u32Baudrate)-1);     /*16 MHz */
+  53          //    RL3    = LOBYTE(65536 - (1000000/u32Baudrate)-1);     /*16 MHz */
+  54          //#endif
+  55          //#ifdef FOSC_166000
+  56          //    RH3    = HIBYTE(65536 - (1037500/u32Baudrate));       /*16.6 MHz */
+  57          //    RL3    = LOBYTE(65536 - (1037500/u32Baudrate));       /*16.6 MHz */
+  58          //#endif
+  59          //    set_TR3;         //Trigger Timer3
+  60          //    set_TI;          //For printf function must setting TI = 1
+  61          //}
+  62          
+  63          //UINT8 Receive_Data_From_UART0(void)
+  64          //{
+  65          //    UINT8 c;
+  66          //    while (!RI);
+  67          //    c = SBUF;
+  68          //    RI = 0;
+  69          //    return (c);
+  70          //}
+  71          
+  72          //void Send_Data_To_UART0 (UINT8 c)
+  73          //{
+  74          //    TI = 0;
+  75          //    SBUF = c;
+  76          //    while(TI==0);
+  77          //}
+  78          
+  79          
+  80          ////----------------------------------------------------------------------------------
+  81          //// UART1 baud rate initial setting 
+  82          ////----------------------------------------------------------------------------------
+  83          //void InitialUART1_Timer3(UINT32 u32Baudrate) //use timer3 as Baudrate generator
+  84          //{
+  85          //    P02_Quasi_Mode;   //Setting UART pin as Quasi mode for transmit
+  86          //    P16_Quasi_Mode;   //Setting UART pin as Quasi mode for transmit
+  87          //  
+  88          //    SCON_1 = 0x50;    //UART1 Mode1,REN_1=1,TI_1=1
+  89          //    T3CON = 0x08;     //T3PS2=0,T3PS1=0,T3PS0=0(Prescale=1), UART1 in MODE 1
+  90          //    clr_BRCK;
+  91          //  
+  92          //#ifdef FOSC_160000
+  93          //    RH3    = HIBYTE(65536 - (1000000/u32Baudrate)-1);     /*16 MHz */
+  94          //    RL3    = LOBYTE(65536 - (1000000/u32Baudrate)-1);     /*16 MHz */
+  95          //#endif
+  96          //#ifdef FOSC_166000
+  97          //    RH3    = HIBYTE(65536 - (1037500/u32Baudrate));       /*16.6 MHz */
+  98          //    RL3    = LOBYTE(65536 - (1037500/u32Baudrate));       /*16.6 MHz */
+  99          //#endif
+ 100          //    set_TR3;         //Trigger Timer3
+ 101          //}
+ 102          
+ 103          //UINT8 Receive_Data_From_UART1(void)
+ 104          //{
+ 105          //    UINT8 c;
+ 106          //    
+ 107          //    while (!RI_1);
+ 108          //    c = SBUF_1;
+C51 COMPILER V9.53.0.0   COMMON                                                            08/23/2024 19:06:42 PAGE 3   
+
+ 109          //    RI_1 = 0;
+ 110          //    return (c);
+ 111          //}
+ 112          
+ 113          //void Send_Data_To_UART1 (UINT8 c)
+ 114          //{
+ 115          //    TI_1 = 0;
+ 116          //    SBUF_1 = c;
+ 117          //    while(TI_1==0);
+ 118          //}
+ 119          
+ 120          
+ 121          ///*==========================================================================*/
+ 122          //#ifdef SW_Reset
+ 123          //void SW_Reset(void)
+ 124          //{
+ 125          //    TA = 0xAA;
+ 126          //    TA = 0x55;
+ 127          //    set_SWRST;
+ 128          //}
+ 129          //#endif
+ 130          ///*==========================================================================*/
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   ----    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

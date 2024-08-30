@@ -1,0 +1,5 @@
+"main.obj",
+"Common.obj",
+"Delay.obj" 
+TO "censor_tm_ADC+RF" 
+RAMSIZE(256) 
