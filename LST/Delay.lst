@@ -1,4 +1,4 @@
-C51 COMPILER V9.53.0.0   DELAY                                                             08/23/2024 19:06:42 PAGE 1   
+C51 COMPILER V9.53.0.0   DELAY                                                             09/17/2024 11:03:08 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE DELAY
@@ -62,7 +62,7 @@ line level    source
   44   2              TH0 = HIBYTE(TIMER_DIV12_VALUE_1ms);
   45   2              while (TF0 != 1);                       //Check Timer0 Time-Out Flag
   46   2              clr_TF0;
-C51 COMPILER V9.53.0.0   DELAY                                                             08/23/2024 19:06:42 PAGE 2   
+C51 COMPILER V9.53.0.0   DELAY                                                             09/17/2024 11:03:08 PAGE 2   
 
   47   2              u32CNT --;
   48   2          }
@@ -118,30 +118,30 @@ line level    source
   98   1          clr_TR3;                                    //Stop Timer3
   99   1      }
  100          ////------------------------------------------------------------------------------
- 101          //void Timer3_Delay10us(UINT32 u32CNT)
- 102          //{
- 103          //    T3CON = 0x07;                               //Timer3 Clock = Fsys/128
- 104          //    set_TR3;                                    //Trigger Timer3
- 105          //    while (u32CNT != 0)
- 106          //    {
- 107          //        RL3 = LOBYTE(TIMER_DIV4_VALUE_10us); //Find  define in "Function_define.h" "TIMER VALUE"
- 108          //        RH3 = HIBYTE(TIMER_DIV4_VALUE_10us);
-C51 COMPILER V9.53.0.0   DELAY                                                             08/23/2024 19:06:42 PAGE 3   
+ 101          void Timer3_Delay10us(UINT32 u32CNT)
+ 102          {
+ 103   1          T3CON = 0x07;                               //Timer3 Clock = Fsys/128
+ 104   1          set_TR3;                                    //Trigger Timer3
+ 105   1          while (u32CNT != 0)
+ 106   1          {
+ 107   2              RL3 = LOBYTE(TIMER_DIV4_VALUE_10us); //Find  define in "Function_define.h" "TIMER VALUE"
+ 108   2              RH3 = HIBYTE(TIMER_DIV4_VALUE_10us);
+C51 COMPILER V9.53.0.0   DELAY                                                             09/17/2024 11:03:08 PAGE 3   
 
- 109          //        while ((T3CON&SET_BIT4) != SET_BIT4);   //Check Timer3 Time-Out Flag
- 110          //        clr_TF3;
- 111          //        u32CNT --;
- 112          //    }
- 113          //    clr_TR3;                                    //Stop Timer3
- 114          //}
+ 109   2              while ((T3CON&SET_BIT4) != SET_BIT4);   //Check Timer3 Time-Out Flag
+ 110   2              clr_TF3;
+ 111   2              u32CNT --;
+ 112   2          }
+ 113   1          clr_TR3;                                    //Stop Timer3
+ 114   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    302    ----
+   CODE SIZE        =    379    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =   ----      16
+   DATA SIZE        =   ----      20
    IDATA SIZE       =   ----    ----
    BIT SIZE         =      1    ----
 END OF MODULE INFORMATION.

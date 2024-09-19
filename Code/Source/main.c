@@ -1,63 +1,75 @@
-//***********************************************************************************************************
+//********************************************************
 //  PKB NCFU 
 //  Date   : 2024.06.20
-//***********************************************************************************************************
-
-//***********************************************************************************************************
+//********************************************************
+//********************************************************
 //  Cенсор . Узел Телеметрической системы
-//***********************************************************************************************************
+//********************************************************
 
 #include <GPIO.h>
+#include <CONFIG.h>
 #include <N76E003.h>
-#include <SPI.h>
 
+#include <Interface_com.H>
 
-//#include <NRF_ex.h>
-
-#define TX_MODE
+#define TX_mode
 
 void main(){
 	/****************/	
-	unsigned char a = 0x20;
 	unsigned char *rec;
-	unsigned char stat;
+	unsigned char a = 0x56;
+	unsigned char stat = 0x24;
+	unsigned char b[BUFFER_SPI_MASSIV_SIZE] = {0x7A,0x99,0x4E,0x22,0xFF};
 	/****************/
-	SPI_Initial();
-	//Set_All_GPIO_Quasi_Mode;
-	/*P01_PushPull_Mode;*/ P0M1&=~SET_BIT1;P0M2|=SET_BIT1;
-	/*P00_PushPull_Mode; */P0M1&=~SET_BIT0;P0M2|=SET_BIT0;
-	/*P10_PushPull_Mode; */P1M1&=~SET_BIT0;P1M2|=SET_BIT0;
-	/*P11_PushPull_Mode; */P1M1&=~SET_BIT1;P1M2|=SET_BIT1;
-	/*P15_PushPull_Mode;*/ P1M1&=~SET_BIT5;P1M2|=SET_BIT5;
+	Set_All_GPIO_Quasi_Mode;
+//	P11_PushPull_Mode;
+//	P15_PushPull_Mode;
+//	P10_PushPull_Mode;
+	P00_PushPull_Mode;
+//	P01_PushPull_Mode;
+//	P04_PushPull_Mode;
 	PIN_LED_GREEN = 1;
 	PIN_LED_RED = 1;
 	PIN_RF_ON = 1 ;
+	/****************/  
+	//SPI_Initial;
+  //nRF_config();	
 	/****************/
-	Timer0_Delay100us(100);
-	SPI_CE=0;                             //Chip enable
-  SPI_CSRF=1;                           //SPI disable
-	/****************/
-	while(1){
+	InCom_SPI_init_Timer();
+	InCom_SPI_CLK_init(0);
+	FlagInComSPIGlobal = 1;
+	FlagInComSPIexchangeArray = 1;
+	//FlagInComSPIexchangeByte = 1;
+	InCom_SPI_byte_transitive(&a);
+	valueBufferArrayTx[5] = b[5];
+//	valueBufferArrayTx[0] = 0x7A;
+//	valueBufferArrayTx[1] = 0x99;
+//	valueBufferArrayTx[2] = 0x4E;
+//	valueBufferArrayTx[3] = 0x22;
+//	valueBufferArrayTx[4] = 0xFF;
+	
+  while(1){
+		if (FlagInComSPIGlobal == 0){
+			InCom_SPI_byte_transitive(&a);
+			FlagInComSPIGlobal = 1;
+			FlagInComSPIexchangeArray = 1;
+			//FlagInComSPIexchangeByte = 1;
+		}
 
-		SPI_CSRF= 0;
-		SPI_Send(a);
-		SPI_Send(a);
-		SPI_CSRF=1; 
-		Timer0_Delay100us(1000);
-//		#ifndef RX_MODE
-//		rec=RX_PL();
-//		Timer0_Delay100us(1000);
-//		if(*rec == a) {PIN_LED_RED =~PIN_LED_RED;}
-//		PIN_LED_GREEN =~PIN_LED_GREEN;
-//		#endif
-//		#ifndef TX_MODE
-//		stat = TX_PL(&a);
-//    switch(stat){
-//			case 0:{PIN_LED_GREEN =~PIN_LED_GREEN;};
-//			case 1:{PIN_LED_RED =~PIN_LED_RED;};			
-//		Timer0_Delay100us(1000);
-//		}
-//		#endif		
+		Timer3_Delay100ms(10);
+		PIN_LED_GREEN =~PIN_LED_GREEN;
+		if (valueBufferRx == 0x38){
+			PIN_LED_RED = ~PIN_LED_RED;
+		}
+		valueBufferRx = 0x00;
+		
 	}
 }
-
+//********************************************************
+// ISR
+//********************************************************
+void ISR_Timer0()interrupt 1{  // <Interface_com.H>
+	if(FlagInComSPIGlobal == 1){ // обмен по SPI - 1 пакет
+	    InCom_SPI_exchange();
+	}
+}

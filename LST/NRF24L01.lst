@@ -1,4 +1,4 @@
-C51 COMPILER V9.53.0.0   NRF24L01                                                          08/23/2024 19:06:42 PAGE 1   
+C51 COMPILER V9.53.0.0   NRF24L01                                                          09/17/2024 11:03:08 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE NRF24L01
@@ -14,14 +14,92 @@ line level    source
    2          //  NRF24L01 
    3          //********************************************************************************************************
              -***
+   4          #include <GPIO.h>
+   5          #include <N76E003.h>
+   6          #include <CONFIG.h>
+   7          #include <NRF24L01.h>
+   8          #include <Interface_com.H>
+   9          
+  10          unsigned char NRF_TX_ADDRESS[BUFFER_MASSIV_SIZE ] =
+  11          {'i','n','t','e','r'};  // адрес передатчика
+  12          unsigned char NRF_RX_ADDRESS[BUFFER_MASSIV_SIZE ] =
+  13          {'m','a','r','k','1'};  // адрес приемника 
+  14          
+  15          void NRF_Get_Status(void){
+  16   1        //spi_RREG(STATUS);        
+  17   1      }
+  18          void NRF_clear_irq(){
+  19   1        //spi_WREG(W_REG|STATUS,0x70);              //Clear RX_DR, TX_DS, MAX_RT flags
+  20   1      }
+  21          void NRF_config()
+  22          {
+  23   1         
+  24   1        // задать адрес( все настроить и только читать +
+  25   1        // очистку буфера добавить )
+  26   1      #ifdef RX_mode
+              //  SPI_CE=0;                       
+              //  Timer0_Delay100us(100);
+              //  spi_WREG(W_REG|EN_AA,0x01);                             //Enable ShockBurst (Enable Auto ACK)    
+              //  spi_WREG(W_REG|SETUP_AW,0x03);                          //Puts the address field width 5bytes  
+              //  spi_WREG(W_REG|RF_CH,0x6E);                             //Set frequency channel 110 (2.510MHz)
+              //  spi_WREG(W_REG|RF_SETUP,0x06);                          //Setup: 1Mbps, 0dBm, LNA off  
+              //  spi_WREG(W_REG|EN_RXADDR,0x01);                         //Enable data pipe 0                  
+              //  spi_WBUF(W_REG|RX_ADDR_P0,RX_ADDRESS,TX_ADD_WIDTH);   //Set static RX address for auto ack
+              //  spi_WREG(W_REG|RX_PW_P0,TX_PLOAD_WIDTH);                //Set RX payload length
+              //  spi_WREG(FLUSH_RX,NOP);                                 //Clear the RX_FIFO
+              //  spi_WREG(FLUSH_TX,NOP);                    //Clear the TX_FIFO
+              //  spi_WREG(W_REG|CONFIG,0x0F);    //Set PWR_UP bit, enable CRC(2 bytes) & Prim:RX. RX_DR enabled  
+              //  Timer0_Delay100us(5);
+              //  SPI_CE=1;
+              #endif
+  42   1      }
+  43          
+  44          #ifdef TX_mode
+              unsigned char TX_PL(unsigned char *payload)
+              {
+                unsigned char stat;
+              //  SPI_CE=0;    
+              //  Timer0_Delay100us(100);
+              //  spi_WREG(W_REG|CONFIG,0x0E);               //PRIM_RX : PTX
+              //  clear_irq();
+C51 COMPILER V9.53.0.0   NRF24L01                                                          09/17/2024 11:03:08 PAGE 2   
+
+              //  spi_WREG(W_REG|EN_AA,0x01);                //Enable ShockBurst (Enable Auto ACK)
+              //  spi_WREG(W_REG|EN_RXADDR,0x01);            //Enable data pipe 0
+              //  spi_WREG(W_REG|SETUP_AW,0x03);             // Puts the address field width 5bytes
+              //  spi_WREG(W_REG|SETUP_PETR,0x1A);           //Auto retransmit: wait 500us, 10 retries
+              //  spi_WREG(W_REG|RF_CH,0x6E);                //Set frequency channel 110 (2.510MHz)
+              //  spi_WREG(W_REG|RF_SETUP,0x06);             //Setup: 1Mbps, 0dBm, LNA off 
+              //  //spi_WREG(W_REG|CONFIG,0x0E);             //Set PWR_UP bit, enable CRC(2 bytes) & Prim:TX. MAX_RT & T
+             -X_DS enabled 
+              //  spi_WBUF(W_REG|TX_ADDR,TX_ADDRESS,TX_ADD_WIDTH);      //Set static TX address
+              //  spi_WBUF(W_REG|RX_ADDR_P0,RX_ADDRESS,TX_ADD_WIDTH);   //Set static RX address for auto ack
+              //  spi_WBUF(W_TX_PL,payload,TX_PLOAD_WIDTH);  //Write specified buffer to FIFO
+              //  SPI_CE=1;
+              //  Timer0_Delay100us(1);
+              //  SPI_CE=0;
+              //  get_status();
+              //  spi_WREG(FLUSH_RX,NOP);                    //Clear the RX_FIFO
+              //  spi_WREG(FLUSH_TX,NOP);                    //Clear the TX_FIFO
+                return stat;  
+              }
+              #endif
+  71          
+  72          
+  73          
+  74          
+  75          
+  76          
+  77          
+  78          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =   ----    ----
+   CODE SIZE        =      3    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =   ----    ----
+   DATA SIZE        =     10    ----
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.
