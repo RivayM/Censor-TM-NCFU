@@ -7,23 +7,40 @@
 #include <NRF24L01.h>
 #include <Interface_com.H>
 
+int currentProgress = 0;
+
 unsigned char NRF_TX_ADDRESS[BUFFER_MASSIV_SIZE ] =
 {'i','n','t','e','r'};  // адрес передатчика
 unsigned char NRF_RX_ADDRESS[BUFFER_MASSIV_SIZE ] =
 {'m','a','r','k','1'};  // адрес приемника 
 
-void NRF_Get_Status(void){
-  //spi_RREG(STATUS);        
+void NRF_send_byte(unsigned char *byte){
+	InCom_SPI_byte_transitive(byte);	
+	FlagInComSPIGlobal = 1;
+	FlagInComSPIexchangeByte = 1;
 }
-void NRF_clear_irq(){
-  //spi_WREG(W_REG|STATUS,0x70);              //Clear RX_DR, TX_DS, MAX_RT flags
+
+void NRF_send_array(unsigned char *array){
+	InCom_SPI_byte_transitive(array);	
+	FlagInComSPIGlobal = 1;
+	FlagInComSPIexchangeArray = 1;
 }
-void NRF_config()
-{
-   
-	// задать адрес( все настроить и только читать +
-	// очистку буфера добавить )
-#ifdef RX_mode
+
+
+void NRF_config(int mode){ 
+	NRF_CE = 0;
+	switch(mode){
+		case TX_mode:	
+			break;
+		case RX_mode:	
+			break;
+		case RTX_mode:
+			break;
+		default: break;
+	}
+}
+	
+	
 //  SPI_CE=0;                       
 //  Timer0_Delay100us(100);
 //	spi_WREG(W_REG|EN_AA,0x01);                             //Enable ShockBurst (Enable Auto ACK)    
@@ -38,13 +55,9 @@ void NRF_config()
 //	spi_WREG(W_REG|CONFIG,0x0F);    //Set PWR_UP bit, enable CRC(2 bytes) & Prim:RX. RX_DR enabled  
 //	Timer0_Delay100us(5);
 //	SPI_CE=1;
-#endif
-}
 
-#ifdef TX_mode
-unsigned char TX_PL(unsigned char *payload)
-{
-  unsigned char stat;
+
+
 //  SPI_CE=0;    
 //	Timer0_Delay100us(100);
 //  spi_WREG(W_REG|CONFIG,0x0E);               //PRIM_RX : PTX
@@ -65,10 +78,6 @@ unsigned char TX_PL(unsigned char *payload)
 //  get_status();
 //	spi_WREG(FLUSH_RX,NOP);                    //Clear the RX_FIFO
 //	spi_WREG(FLUSH_TX,NOP);                    //Clear the TX_FIFO
-  return stat;  
-}
-#endif
-
 
 
 

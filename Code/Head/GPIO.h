@@ -48,10 +48,12 @@
 #define SPI_MISO P01
 #define SPI_MOSI P00
 #define SPI_SCK P10
-#define SPI_CE P11
 #define SPI_CSN P15
 #define SPI_CSFRAM P13
-#define SPI_IRQ P17					//INT1
+
+/* <NRF24.h>  */
+#define NRF_CE P11
+#define NRF_IRQ P17					//INT1
 
 void Led_Switch_State();
 void Button_Read();

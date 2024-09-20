@@ -6,6 +6,7 @@
 
 extern unsigned char TX_ADDRESS[BUFFER_MASSIV_SIZE]; // адрес передатчика
 extern unsigned char RX_ADDRESS[BUFFER_MASSIV_SIZE]; // адрес приемника
+extern int currentProgress;      // текущий прогресс
 
 /******************************/
 /*Commands*/

@@ -1,5 +1,4 @@
 ".\Code\Obj\main.obj",
-".\Code\Obj\SPI.obj",
 ".\Code\Obj\I2C_ADC_HX711.obj",
 ".\Code\Obj\NRF24L01.obj",
 ".\Code\Obj\GPIO.obj",
