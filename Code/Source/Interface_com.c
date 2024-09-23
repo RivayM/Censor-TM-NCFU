@@ -4,10 +4,8 @@
 #include <Interface_com.H>
 #include <N76E003.H>
 
-unsigned char valueBufferArrayTx
-	[BUFFER_SPI_MASSIV_SIZE];  // прочитать можно только тогда
-unsigned char valueBufferArrayRx
-	[BUFFER_SPI_MASSIV_SIZE];  // когда обмен закончен(размер +1)
+unsigned char valueBufferArrayTx[BUFFER_SPI_MASSIV_SIZE];  // прочитать можно только тогда
+unsigned char valueBufferArrayRx[BUFFER_SPI_MASSIV_SIZE];  // когда обмен закончен(размер +1)
 
 int amountByteArrayForSend = BUFFER_SPI_MASSIV_SIZE; // количество байт которое надо отправить
 int counterBit             = 0;   // использовать в interrupt 1
@@ -34,8 +32,12 @@ void InCom_SPI_exchange(void){
 
 /* начать обмен( чтения и передача) */
 void InCom_SPI(bit valueMosi, unsigned char *outSideBuffer){ 
-	int read = 3;                 // количество чтений линии MISO
+	int read = 33;                 // количество чтений линии MISO
 	/******************************/
+	if(counterBit == 0) {}  //  CPOL - имитация	 (для slk)
+	else {
+		PIN_CLK_SPI =~ PIN_CLK_SPI; // каждый запуск(в таймере)менять состояние
+	}
 	if( PIN_CLK_SPI == 0) {       //  CPHA - имитация
 	/******************************/
 		switch(counterBit){		// Начало обмена		
@@ -45,16 +47,22 @@ void InCom_SPI(bit valueMosi, unsigned char *outSideBuffer){
 				PIN_MOSI_SPI = 1;
 				PIN_MISO_SPI = 1;
 				PIN_CLK_SPI  = 0;
-				FlagInComSPIGlobal = 0; // Завершить все 
 				counterBit = 0;
+				FlagInComSPIGlobal = 0; // Завершить все 
 				break;
 			/*Все остальные биты пакета*/
 			default:                            // Идет обмен		
 				PIN_CS_SPI   = 0;
-				if (valueMosi) {PIN_MOSI_SPI =1;} // отправка
-				else{PIN_MOSI_SPI = 0;}
-				while(read--){                    // чтение
-					if ( PIN_MISO_SPI == 1){        // если 1 ( записать)
+				if (valueMosi) {
+				PIN_MOSI_SPI =1;
+				} // отправка
+				else{
+				PIN_MOSI_SPI = 0;
+				}
+				// сделать for
+				//for(read = 30; read > 0; read--){  // чтение
+				while(read--){
+					if ( PIN_MISO_SPI == 1){        // чтение
 						InCom_SPI_Input_in_buffer(outSideBuffer);
 					}	
 				}
@@ -62,7 +70,6 @@ void InCom_SPI(bit valueMosi, unsigned char *outSideBuffer){
 				break;
 		}
 	}
-	PIN_CLK_SPI =~ PIN_CLK_SPI; // каждый запуск(в таймере)менять состояние
 }
 
 
@@ -83,6 +90,9 @@ void InCom_SPI_Input_in_buffer(unsigned char *outSideBuffer){
 			counterBit = counterBit - 1;
 		}
 		buf = buf + (0x01 << counterBit);
+		if(SPI_MSB){
+			counterBit++;
+		}
 		*outSideBuffer = buf;	
 	}
 }

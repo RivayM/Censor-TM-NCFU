@@ -22,10 +22,8 @@
 #define BUFFER_SPI 8   // количество бит в пакете
 #define BUFFER_SPI_MASSIV_SIZE NRF24_BUFFER_MASSIV_SIZE // количество пакетов( в 1 передаче/приеме)
 #define SPI_MSB 1      // or use SPI_LSB = 0
-extern unsigned char valueBufferArrayTx
-	[BUFFER_SPI_MASSIV_SIZE];  // прочитать можно только тогда
-extern unsigned char valueBufferArrayRx
-	[BUFFER_SPI_MASSIV_SIZE];  // когда обмен закончен(размер +1)
+extern unsigned char valueBufferArrayTx[BUFFER_SPI_MASSIV_SIZE];  // прочитать можно только тогда
+extern unsigned char valueBufferArrayRx[BUFFER_SPI_MASSIV_SIZE];  // когда обмен закончен(размер +1)
 
 extern int counterBit;       // количество бит / использовать в interrupt 1
 extern int counterByte; // количетсво пакетов уже отправленных
@@ -40,10 +38,10 @@ extern bit FlagInComSPIGlobal;  	        // –азрешение ( обмена)
 
 /*¬спомогательное*/
 void InCom_SPI_init_Timer(void);
-bit InCom_SPI_Output_in_buffer(unsigned char *outsidebuffer);
+bit InCom_SPI_Output_in_buffer(unsigned char *outSideBuffer);
 void InCom_SPI(bit valueMosi, unsigned char *outSideBuffer );
 void InCom_SPI_CLK_init(bit init);
-void InCom_SPI_Input_in_buffer(unsigned char *outsidebuffer);
+void InCom_SPI_Input_in_buffer(unsigned char *outSideBuffer);
 
 /*ќбмен*/
 void InCom_SPI_exchange(void);    

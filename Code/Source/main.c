@@ -25,31 +25,31 @@ void main(){
 	PIN_RF_ON = 1 ;
 	/****************/
 	InCom_SPI_init_Timer();
-	//InCom_SPI_CLK_init(0);
-	P10 = 0;
+	InCom_SPI_CLK_init(0);
 	/****************/
-	valueBufferArrayTx[0] = 0xBB;
+	valueBufferArrayTx[0] = 0xFA;
 	FlagInComSPIGlobal = 1;          // ¬ключить сразу же spi
 	/****************/
   while(1){
-		if (FlagInComSPIGlobal == 0){
-			//FlagInComSPIGlobal = 1;
+		
+		if(FlagInComSPIGlobal){
+			InCom_SPI_exchange();
+			FlagInComSPIGlobal = 0 ;
 		}
 		
 		PIN_LED_GREEN =~PIN_LED_GREEN;
+		
 		if (valueBufferArrayRx[0] == 0x38){
 			PIN_LED_RED = ~PIN_LED_RED;
 		}
-		
-		Timer3_Delay100ms(10);
 		
 	}
 }
 //********************************************************
 // ISR
 //********************************************************
-void ISR_Timer0()interrupt 1{  // <Interface_com.H>
-	if(FlagInComSPIGlobal == 1){ // обмен по SPI - 1 пакет
-	    InCom_SPI_exchange();
-	}
+void ISR_Timer0() interrupt 1 {  // <Interface_com.H>
+	//if(FlagInComSPIGlobal){ InCom_SPI_exchange();}
+	if (FlagInComSPIGlobal == 0){FlagInComSPIGlobal = 1;}
+	
 }
