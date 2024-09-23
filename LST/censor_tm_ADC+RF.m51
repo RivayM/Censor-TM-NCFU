@@ -1,4 +1,4 @@
-BL51 BANKED LINKER/LOCATER V6.22                                                        09/20/2024  15:49:32  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22                                                        09/23/2024  15:44:20  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
@@ -20,11 +20,8 @@ INPUT MODULES INCLUDED:
   .\Code\Obj\Common.obj (COMMON)
   .\Code\Obj\Delay.obj (DELAY)
   D:\USR\KEIL_V5\C51\LIB\C51S.LIB (?C_STARTUP)
-  D:\USR\KEIL_V5\C51\LIB\C51S.LIB (?C?COPY)
   D:\USR\KEIL_V5\C51\LIB\C51S.LIB (?C?CLDPTR)
-  D:\USR\KEIL_V5\C51\LIB\C51S.LIB (?C?CLDOPTR)
   D:\USR\KEIL_V5\C51\LIB\C51S.LIB (?C?CSTPTR)
-  D:\USR\KEIL_V5\C51\LIB\C51S.LIB (?C?CSTOPTR)
   D:\USR\KEIL_V5\C51\LIB\C51S.LIB (?C?ULCMP)
   D:\USR\KEIL_V5\C51\LIB\C51S.LIB (?C?LSHL)
   D:\USR\KEIL_V5\C51\LIB\C51S.LIB (?C_INIT)
@@ -38,66 +35,51 @@ LINK MAP OF MODULE:  .\Code\Obj\censor_tm_ADC+RF (MAIN)
 
             * * * * * * *   D A T A   M E M O R Y   * * * * * * *
             REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
-            DATA    0008H     0016H     UNIT         _DATA_GROUP_
-                    001EH     0002H                  *** GAP ***
-            BIT     0020H.0   0000H.4   UNIT         ?BI?INTERFACE_COM
-            BIT     0020H.4   0000H.2   UNIT         _BIT_GROUP_
-            BIT     0020H.6   0000H.1   UNIT         ?BI?DELAY
-                    0020H.7   0000H.1                *** GAP ***
-            DATA    0021H     0010H     UNIT         ?DT?INTERFACE_COM
-            DATA    0031H     000CH     UNIT         ?DT?NRF24L01
-            DATA    003DH     0004H     UNIT         ?DT?_TX_PL?NRF24L01
-            DATA    0041H     0004H     UNIT         ?DT?_TIMER0_DELAY100US?DELAY
-            DATA    0045H     0004H     UNIT         ?DT?_TIMER0_DELAY1MS?DELAY
-            DATA    0049H     0004H     UNIT         ?DT?_TIMER1_DELAY10MS?DELAY
-            DATA    004DH     0004H     UNIT         ?DT?_TIMER3_DELAY10US?DELAY
-            DATA    0051H     0003H     UNIT         ?DT?_INCOM_SPI_ARRAY_TRANSITIVE?INTERFACE_COM
-            DATA    0054H     0003H     UNIT         ?DT?_INCOM_ARRAY_CLEAR?INTERFACE_COM
-            IDATA   0057H     0001H     UNIT         ?STACK
+            DATA    0008H     0012H     UNIT         ?DT?INTERFACE_COM
+            DATA    001AH     0004H     UNIT         ?DT?_TIMER0_DELAY100US?DELAY
+            DATA    001EH     0002H     UNIT         ?DT?_NRF_CONFIG?NRF24L01
+            BIT     0020H.0   0000H.1   UNIT         ?BI?INCOM_SPI_CLK_INIT?INTERFACE_COM
+            BIT     0020H.1   0000H.1   UNIT         ?BI?INTERFACE_COM
+            BIT     0020H.2   0000H.1   UNIT         ?BI?DELAY
+            BIT     0020H.3   0000H.1   UNIT         _BIT_GROUP_
+                    0020H.4   0000H.4                *** GAP ***
+            DATA    0021H     000CH     UNIT         _DATA_GROUP_
+            DATA    002DH     0004H     UNIT         ?DT?_TIMER0_DELAY1MS?DELAY
+            DATA    0031H     0004H     UNIT         ?DT?_TIMER1_DELAY10MS?DELAY
+            DATA    0035H     0004H     UNIT         ?DT?_TIMER3_DELAY10US?DELAY
+            DATA    0039H     0002H     UNIT         ?DT?NRF24L01
+            IDATA   003BH     0001H     UNIT         ?STACK
 
             * * * * * * *   C O D E   M E M O R Y   * * * * * * *
             CODE    0000H     0003H     ABSOLUTE     
             CODE    0003H     0008H     UNIT         ?PR?ADCHX711_INITIAL?I2C_ADC_HX711
             CODE    000BH     0003H     ABSOLUTE     
-BL51 BANKED LINKER/LOCATER V6.22                                                      09/20/2024  15:49:32  PAGE 2
+            CODE    000EH     008CH     UNIT         ?C_C51STARTUP
+            CODE    009AH     0059H     UNIT         ?PR?_INCOM_SPI_INPUT_IN_BUFFER?INTERFACE_COM
+            CODE    00F3H     0055H     UNIT         ?PR?INCOM_SPI?INTERFACE_COM
+            CODE    0148H     004FH     UNIT         ?C?LIB_CODE
+            CODE    0197H     004DH     UNIT         ?PR?_TIMER3_DELAY100MS?DELAY
+BL51 BANKED LINKER/LOCATER V6.22                                                      09/23/2024  15:44:20  PAGE 2
 
 
-            CODE    000EH     0194H     UNIT         ?C?LIB_CODE
-            CODE    01A2H     008CH     UNIT         ?C_C51STARTUP
-            CODE    022EH     0073H     UNIT         ?PR?MAIN?MAIN
-            CODE    02A1H     006EH     UNIT         ?PR?INCOM_SPI?INTERFACE_COM
-            CODE    030FH     0059H     UNIT         ?PR?_INCOM_SPI_INPUT_IN_BUFFER?INTERFACE_COM
-            CODE    0368H     0053H     UNIT         ?PR?INCOM_SPI_EXCHANGE?INTERFACE_COM
-            CODE    03BBH     004DH     UNIT         ?PR?_TIMER3_DELAY100MS?DELAY
-            CODE    0408H     004DH     UNIT         ?PR?_TIMER3_DELAY10US?DELAY
-            CODE    0455H     004BH     UNIT         ?PR?_TIMER0_DELAY100US?DELAY
-            CODE    04A0H     004BH     UNIT         ?PR?_TIMER0_DELAY1MS?DELAY
-            CODE    04EBH     004BH     UNIT         ?PR?_TIMER1_DELAY10MS?DELAY
-            CODE    0536H     003EH     UNIT         ?PR?ISR_TIMER0?MAIN
-            CODE    0574H     003AH     UNIT         ?PR?_INCOM_SPI_ARRAY_TRANSITIVE?INTERFACE_COM
-            CODE    05AEH     0039H     UNIT         ?PR?ADCHX711_READ?I2C_ADC_HX711
-            CODE    05E7H     0037H     UNIT         ?C_INITSEG
-            CODE    061EH     0036H     UNIT         ?PR?_INCOM_SPI_OUTPUT_IN_BUFFER?INTERFACE_COM
-            CODE    0654H     0034H     UNIT         ?PR?_INCOM_ARRAY_CLEAR?INTERFACE_COM
-            CODE    0688H     0013H     UNIT         ?PR?INCOM_SPI_INIT_TIMER?INTERFACE_COM
-            CODE    069BH     000AH     UNIT         ?PR?SWITCH_STATE_POWER_RF?GPIO
-            CODE    06A5H     0009H     UNIT         ?PR?_TX_PL?NRF24L01
-            CODE    06AEH     0009H     UNIT         ?PR?INCOM_SPI_ARRAY_TRANSITIVE_CLEAR?INTERFACE_COM
-            CODE    06B7H     0009H     UNIT         ?PR?INCOM_SPI_ARRAY_RECEIVED_CLEAR?INTERFACE_COM
-            CODE    06C0H     0008H     UNIT         ?PR?_NRF_SEND_BYTE?NRF24L01
-            CODE    06C8H     0008H     UNIT         ?PR?_NRF_SEND_ARRAY?NRF24L01
-            CODE    06D0H     0007H     UNIT         ?PR?INCOM_SPI_BYTE_RECEIVED?INTERFACE_COM
-            CODE    06D7H     0007H     UNIT         ?PR?INCOM_SPI_ARRAY_RECEIVED?INTERFACE_COM
-            CODE    06DEH     0006H     UNIT         ?PR?_INCOM_SPI_BYTE_TRANSITIVE?INTERFACE_COM
-            CODE    06E4H     0005H     UNIT         ?CO?MAIN
-            CODE    06E9H     0005H     UNIT         ?PR?INCOM_SPI_CLK_INIT?INTERFACE_COM
-            CODE    06EEH     0005H     UNIT         ?PR?INCOM_SPI_SEND_BYTE?INTERFACE_COM
-            CODE    06F3H     0005H     UNIT         ?PR?INCOM_SPI_SEND_ARRAY?INTERFACE_COM
-            CODE    06F8H     0004H     UNIT         ?PR?INCOM_SPI_BYTE_RECEIVED_CLEAR?INTERFACE_COM
-            CODE    06FCH     0004H     UNIT         ?PR?INCOM_SPI_BYTE_TRANSITIVE_CLEAR?INTERFACE_COM
-            CODE    0700H     0003H     UNIT         ?PR?_NRF_CONFIG?NRF24L01
-            CODE    0703H     0001H     UNIT         ?PR?LED_SWITCH_STATE?GPIO
-            CODE    0704H     0001H     UNIT         ?PR?BUTTON_READ?GPIO
+            CODE    01E4H     004DH     UNIT         ?PR?_TIMER3_DELAY10US?DELAY
+            CODE    0231H     004BH     UNIT         ?PR?_TIMER0_DELAY100US?DELAY
+            CODE    027CH     004BH     UNIT         ?PR?_TIMER0_DELAY1MS?DELAY
+            CODE    02C7H     004BH     UNIT         ?PR?_TIMER1_DELAY10MS?DELAY
+            CODE    0312H     003EH     UNIT         ?PR?ISR_TIMER0?MAIN
+            CODE    0350H     0039H     UNIT         ?PR?MAIN?MAIN
+            CODE    0389H     0039H     UNIT         ?PR?ADCHX711_READ?I2C_ADC_HX711
+            CODE    03C2H     0036H     UNIT         ?PR?_INCOM_SPI_OUTPUT_IN_BUFFER?INTERFACE_COM
+            CODE    03F8H     0017H     UNIT         ?PR?INCOM_SPI_EXCHANGE?INTERFACE_COM
+            CODE    040FH     0013H     UNIT         ?C_INITSEG
+            CODE    0422H     0013H     UNIT         ?PR?INCOM_SPI_INIT_TIMER?INTERFACE_COM
+            CODE    0435H     000BH     UNIT         ?PR?NRF_SETUP_RX?NRF24L01
+            CODE    0440H     000AH     UNIT         ?PR?SWITCH_STATE_POWER_RF?GPIO
+            CODE    044AH     0005H     UNIT         ?PR?_NRF_CONFIG?NRF24L01
+            CODE    044FH     0005H     UNIT         ?PR?INCOM_SPI_CLK_INIT?INTERFACE_COM
+            CODE    0454H     0001H     UNIT         ?PR?NRF_SETUP_TX?NRF24L01
+            CODE    0455H     0001H     UNIT         ?PR?LED_SWITCH_STATE?GPIO
+            CODE    0456H     0001H     UNIT         ?PR?BUTTON_READ?GPIO
 
 
 
@@ -114,13 +96,10 @@ SEGMENT                                             BIT_GROUP          DATA_GROU
   +--> ?PR?_INCOM_SPI_OUTPUT_IN_BUFFER?INTER...
   +--> ?PR?INCOM_SPI?INTERFACE_COM
 
-?PR?INCOM_SPI?INTERFACE_COM                      0020H.4  0000H.1    0008H    0005H
+?PR?INCOM_SPI?INTERFACE_COM                      0020H.3  0000H.1    0021H    0005H
   +--> ?PR?_INCOM_SPI_INPUT_IN_BUFFER?INTERF...
 
-?PR?_INCOM_SPI_INPUT_IN_BUFFER?INTERF...         -----    -----      000DH    0003H
-
-BL51 BANKED LINKER/LOCATER V6.22                                                      09/20/2024  15:49:32  PAGE 3
-
+?PR?_INCOM_SPI_INPUT_IN_BUFFER?INTERF...         -----    -----      0026H    0003H
 
 *** NEW ROOT ***************************************************
 
@@ -128,16 +107,11 @@ SEGMENT                                             BIT_GROUP          DATA_GROU
   +--> ?PR?MAIN?MAIN
   +--> ?C_INITSEG
 
-?PR?MAIN?MAIN                                    -----    -----      0010H    000AH
-  +--> ?CO?MAIN
+?PR?MAIN?MAIN                                    -----    -----      -----    -----
   +--> ?PR?INCOM_SPI_INIT_TIMER?INTERFACE_COM
-  +--> ?PR?INCOM_SPI_CLK_INIT?INTERFACE_COM
-  +--> ?PR?_INCOM_SPI_BYTE_TRANSITIVE?INTERF...
   +--> ?PR?_TIMER3_DELAY100MS?DELAY
 
-?PR?INCOM_SPI_CLK_INIT?INTERFACE_COM             0020H.5  0000H.1    -----    -----
-
-?PR?_TIMER3_DELAY100MS?DELAY                     -----    -----      001AH    0004H
+?PR?_TIMER3_DELAY100MS?DELAY                     -----    -----      0029H    0004H
 
 
 
@@ -145,6 +119,9 @@ SYMBOL TABLE OF MODULE:  .\Code\Obj\censor_tm_ADC+RF (MAIN)
 
   VALUE           TYPE          NAME
   ----------------------------------
+BL51 BANKED LINKER/LOCATER V6.22                                                      09/23/2024  15:44:20  PAGE 3
+
+
 
   -------         MODULE        MAIN
   C:0000H         SYMBOL        _ICE_DUMMY_
@@ -158,68 +135,53 @@ SYMBOL TABLE OF MODULE:  .\Code\Obj\censor_tm_ADC+RF (MAIN)
   D:00A0H         PUBLIC        P2
   D:00B0H         PUBLIC        P3
   D:00ADH         PUBLIC        P3M2
-  C:0536H         PUBLIC        ISR_Timer0
+  C:0312H         PUBLIC        ISR_Timer0
   D:00D8H         PUBLIC        PWMCON0
   D:00A8H         PUBLIC        IE
   D:00B8H         PUBLIC        IP
-  C:022EH         PUBLIC        main
+  C:0350H         PUBLIC        main
+  B:0090H.0       PUBLIC        P10
   B:0080H.2       PUBLIC        P02
   B:0090H.2       PUBLIC        P12
   D:0098H         PUBLIC        SCON
   D:0088H         PUBLIC        TCON
   B:0090H.6       PUBLIC        P16
-  C:06E4H         SYMBOL        _?ix1000
   D:00F8H         PUBLIC        SCON_1
   D:00E8H         PUBLIC        ADCCON0
   D:00C0H         PUBLIC        I2CON
   D:00C8H         PUBLIC        T2CON
   D:00D0H         PUBLIC        PSW
   -------         PROC          MAIN
-  -------         DO            
-  D:0010H         SYMBOL        rec
-  D:0013H         SYMBOL        a
-  D:0014H         SYMBOL        stat
-BL51 BANKED LINKER/LOCATER V6.22                                                      09/20/2024  15:49:32  PAGE 4
-
-
-  D:0015H         SYMBOL        b
-  -------         ENDDO         
-  C:022EH         LINE#         17
-  C:022EH         LINE#         20
-  C:0231H         LINE#         21
-  C:0234H         LINE#         22
-  C:0247H         LINE#         24
-  C:0254H         LINE#         28
-  C:025AH         LINE#         31
-  C:025CH         LINE#         32
-  C:025EH         LINE#         33
-  C:0260H         LINE#         38
-  C:0263H         LINE#         39
-  C:0268H         LINE#         40
-  C:026AH         LINE#         41
-  C:026CH         LINE#         43
-  C:0275H         LINE#         44
-  C:0278H         LINE#         51
-  C:0278H         LINE#         52
-  C:027BH         LINE#         53
-  C:0284H         LINE#         54
-  C:0286H         LINE#         55
-  C:0288H         LINE#         57
-  C:0288H         LINE#         59
-  C:0293H         LINE#         60
-  C:0295H         LINE#         61
-  C:029AH         LINE#         62
-  C:029CH         LINE#         63
-  C:029CH         LINE#         64
-  C:029FH         LINE#         66
+  C:0350H         LINE#         14
+  C:0350H         LINE#         16
+  C:035DH         LINE#         20
+  C:0363H         LINE#         23
+  C:0365H         LINE#         24
+  C:0367H         LINE#         25
+  C:0369H         LINE#         27
+  C:036CH         LINE#         29
+  C:036EH         LINE#         31
+  C:0371H         LINE#         32
+  C:0373H         LINE#         34
+  C:0373H         LINE#         35
+  C:0373H         LINE#         37
+  C:0373H         LINE#         39
+  C:0375H         LINE#         40
+  C:037AH         LINE#         41
+  C:037CH         LINE#         42
+  C:037CH         LINE#         44
+  C:0387H         LINE#         46
   -------         ENDPROC       MAIN
   -------         PROC          ISR_TIMER0
-  C:0536H         LINE#         71
-  C:0553H         LINE#         72
-  C:0556H         LINE#         73
-  C:0559H         LINE#         74
-  C:0559H         LINE#         75
+  C:0312H         LINE#         51
+  C:032FH         LINE#         52
+  C:0332H         LINE#         53
+  C:0335H         LINE#         54
+  C:0335H         LINE#         55
   -------         ENDPROC       ISR_TIMER0
+BL51 BANKED LINKER/LOCATER V6.22                                                      09/23/2024  15:44:20  PAGE 4
+
+
   -------         ENDMOD        MAIN
 
   -------         MODULE        I2C_ADC_HX711
@@ -239,10 +201,7 @@ SYMBOL TABLE OF MODULE:  .\Code\Obj\censor_tm_ADC+RF (MAIN)
   D:00F8H         PUBLIC        SCON_1
   D:00E8H         PUBLIC        ADCCON0
   D:00C0H         PUBLIC        I2CON
-BL51 BANKED LINKER/LOCATER V6.22                                                      09/20/2024  15:49:32  PAGE 5
-
-
-  C:05AEH         PUBLIC        ADCHX711_Read
+  C:0389H         PUBLIC        ADCHX711_Read
   D:00C8H         PUBLIC        T2CON
   D:00D0H         PUBLIC        PSW
   -------         PROC          ADCHX711_INITIAL
@@ -256,23 +215,23 @@ SYMBOL TABLE OF MODULE:  .\Code\Obj\censor_tm_ADC+RF (MAIN)
   D:0004H         SYMBOL        Count
   D:0003H         SYMBOL        i
   -------         ENDDO         
-  C:05AEH         LINE#         16
-  C:05AEH         LINE#         20
-  C:05B0H         LINE#         21
-  C:05B8H         LINE#         22
-  C:05BAH         LINE#         23
-  C:05CAH         LINE#         24
-  C:05CCH         LINE#         25
-  C:05D1H         LINE#         26
-  C:05D3H         LINE#         27
-  C:05D7H         LINE#         29
-  C:05D9H         LINE#         30
-  C:05DBH         LINE#         31
-  C:05DCH         LINE#         32
-  C:05DEH         LINE#         33
-  C:05E2H         LINE#         34
-  C:05E6H         LINE#         35
-  C:05E6H         LINE#         36
+  C:0389H         LINE#         16
+  C:0389H         LINE#         20
+  C:038BH         LINE#         21
+  C:0393H         LINE#         22
+  C:0395H         LINE#         23
+  C:03A5H         LINE#         24
+  C:03A7H         LINE#         25
+  C:03ACH         LINE#         26
+  C:03AEH         LINE#         27
+  C:03B2H         LINE#         29
+  C:03B4H         LINE#         30
+  C:03B6H         LINE#         31
+  C:03B7H         LINE#         32
+  C:03B9H         LINE#         33
+  C:03BDH         LINE#         34
+  C:03C1H         LINE#         35
+  C:03C1H         LINE#         36
   -------         ENDPROC       ADCHX711_READ
   -------         ENDMOD        I2C_ADC_HX711
 
@@ -280,70 +239,43 @@ SYMBOL TABLE OF MODULE:  .\Code\Obj\censor_tm_ADC+RF (MAIN)
   C:0000H         SYMBOL        _ICE_DUMMY_
   D:0080H         PUBLIC        P0
   D:0090H         PUBLIC        P1
+BL51 BANKED LINKER/LOCATER V6.22                                                      09/23/2024  15:44:20  PAGE 5
+
+
   D:00A0H         PUBLIC        P2
   D:00B0H         PUBLIC        P3
   D:00D8H         PUBLIC        PWMCON0
-  C:06C0H         PUBLIC        _NRF_send_byte
   D:00A8H         PUBLIC        IE
   D:00B8H         PUBLIC        IP
-  C:06A5H         PUBLIC        _TX_PL
+  C:044AH         PUBLIC        _NRF_Config
   B:0090H.1       PUBLIC        P11
   D:0098H         PUBLIC        SCON
   D:0088H         PUBLIC        TCON
-  C:0700H         PUBLIC        _NRF_config
   D:00F8H         PUBLIC        SCON_1
   D:00E8H         PUBLIC        ADCCON0
-  D:0031H         PUBLIC        NRF_RX_ADDRESS
   D:00C0H         PUBLIC        I2CON
-  D:0036H         PUBLIC        NRF_TX_ADDRESS
-  D:003BH         PUBLIC        currentProgress
+  D:0039H         PUBLIC        currentProgress
+  C:0435H         PUBLIC        NRF_Setup_RX
   D:00C8H         PUBLIC        T2CON
-  C:06C8H         PUBLIC        _NRF_send_array
-BL51 BANKED LINKER/LOCATER V6.22                                                      09/20/2024  15:49:32  PAGE 6
-
-
+  C:0454H         PUBLIC        NRF_Setup_TX
   D:00D0H         PUBLIC        PSW
-  -------         PROC          _NRF_SEND_BYTE
-  D:0001H         SYMBOL        byte
-  C:06C0H         LINE#         17
-  C:06C0H         LINE#         18
-  C:06C3H         LINE#         19
-  C:06C5H         LINE#         20
-  C:06C7H         LINE#         21
-  -------         ENDPROC       _NRF_SEND_BYTE
-  -------         PROC          _NRF_SEND_ARRAY
-  D:0001H         SYMBOL        array
-  C:06C8H         LINE#         23
-  C:06C8H         LINE#         24
-  C:06CBH         LINE#         25
-  C:06CDH         LINE#         26
-  C:06CFH         LINE#         27
-  -------         ENDPROC       _NRF_SEND_ARRAY
   -------         PROC          _NRF_CONFIG
-  D:0006H         SYMBOL        mode
-  C:0700H         LINE#         36
-  C:0700H         LINE#         37
-  C:0702H         LINE#         38
-  C:0702H         LINE#         39
-  C:0702H         LINE#         40
-  C:0702H         LINE#         41
-  C:0702H         LINE#         42
-  C:0702H         LINE#         43
-  C:0702H         LINE#         44
-  C:0702H         LINE#         45
-  C:0702H         LINE#         46
-  C:0702H         LINE#         65
+  D:001EH         SYMBOL        mode
+  C:044AH         LINE#         19
+  C:044EH         LINE#         27
   -------         ENDPROC       _NRF_CONFIG
-  -------         PROC          _TX_PL
-  D:003DH         SYMBOL        payload
-  -------         DO            
-  D:0040H         SYMBOL        stat
-  -------         ENDDO         
-  C:06A5H         LINE#         68
-  C:06ABH         LINE#         69
-  C:06ABH         LINE#         91
-  C:06ADH         LINE#         92
-  -------         ENDPROC       _TX_PL
+  -------         PROC          NRF_SETUP_TX
+  C:0454H         LINE#         30
+  C:0454H         LINE#         38
+  -------         ENDPROC       NRF_SETUP_TX
+  -------         PROC          NRF_SETUP_RX
+  C:0435H         LINE#         41
+  C:0435H         LINE#         42
+  C:043DH         LINE#         43
+  C:043FH         LINE#         44
+  C:043FH         LINE#         45
+  C:043FH         LINE#         46
+  -------         ENDPROC       NRF_SETUP_RX
   -------         ENDMOD        NRF24L01
 
   -------         MODULE        GPIO
@@ -358,27 +290,27 @@ SYMBOL TABLE OF MODULE:  .\Code\Obj\censor_tm_ADC+RF (MAIN)
   B:0090H.2       PUBLIC        P12
   D:0098H         PUBLIC        SCON
   D:0088H         PUBLIC        TCON
-  C:069BH         PUBLIC        Switch_State_Power_RF
-BL51 BANKED LINKER/LOCATER V6.22                                                      09/20/2024  15:49:32  PAGE 7
-
-
+  C:0440H         PUBLIC        Switch_State_Power_RF
   D:00F8H         PUBLIC        SCON_1
-  C:0703H         PUBLIC        Led_Switch_State
+  C:0455H         PUBLIC        Led_Switch_State
   D:00E8H         PUBLIC        ADCCON0
   D:00C0H         PUBLIC        I2CON
-  C:0704H         PUBLIC        Button_Read
+  C:0456H         PUBLIC        Button_Read
   D:00C8H         PUBLIC        T2CON
   D:00D0H         PUBLIC        PSW
   -------         PROC          LED_SWITCH_STATE
-  C:0703H         LINE#         8
+BL51 BANKED LINKER/LOCATER V6.22                                                      09/23/2024  15:44:20  PAGE 6
+
+
+  C:0455H         LINE#         8
   -------         ENDPROC       LED_SWITCH_STATE
   -------         PROC          BUTTON_READ
-  C:0704H         LINE#         9
+  C:0456H         LINE#         9
   -------         ENDPROC       BUTTON_READ
   -------         PROC          SWITCH_STATE_POWER_RF
-  C:069BH         LINE#         10
-  C:069BH         LINE#         11
-  C:06A4H         LINE#         12
+  C:0440H         LINE#         10
+  C:0440H         LINE#         11
+  C:0449H         LINE#         12
   -------         ENDPROC       SWITCH_STATE_POWER_RF
   -------         ENDMOD        GPIO
 
@@ -409,235 +341,133 @@ SYMBOL TABLE OF MODULE:  .\Code\Obj\censor_tm_ADC+RF (MAIN)
   B:00A8H.7       PUBLIC        EA
   D:00D8H         PUBLIC        PWMCON0
   D:00A8H         PUBLIC        IE
-  B:0020H.0       PUBLIC        FlagInComSPIexchangeArray
-  D:0021H         PUBLIC        counterBufferSpi
   D:00B8H         PUBLIC        IP
   B:0020H.1       PUBLIC        FlagInComSPIGlobal
-  C:0688H         PUBLIC        InCom_SPI_init_Timer
-  B:0020H.2       PUBLIC        FlagInComSPIexchangeByte
-  C:0654H         PUBLIC        _InCom_Array_clear
-  C:02A1H         PUBLIC        InCom_SPI
+  D:0008H         PUBLIC        counterByte
+  C:0422H         PUBLIC        InCom_SPI_init_Timer
+  C:00F3H         PUBLIC        InCom_SPI
+  D:000AH         PUBLIC        counterBit
   B:0080H.0       PUBLIC        P00
   B:0080H.1       PUBLIC        P01
-BL51 BANKED LINKER/LOCATER V6.22                                                      09/20/2024  15:49:32  PAGE 8
-
-
   B:0090H.0       PUBLIC        P10
-  C:030FH         PUBLIC        _InCom_SPI_Input_in_buffer
-  C:061EH         PUBLIC        _InCom_SPI_Output_in_buffer
+  C:009AH         PUBLIC        _InCom_SPI_Input_in_buffer
+  C:03C2H         PUBLIC        _InCom_SPI_Output_in_buffer
   D:0098H         PUBLIC        SCON
   D:0089H         PUBLIC        TMOD
   D:0088H         PUBLIC        TCON
   B:0090H.5       PUBLIC        P15
-  C:06F3H         PUBLIC        InCom_SPI_send_array
-  C:06B7H         PUBLIC        InCom_SPI_array_received_clear
   D:00F8H         PUBLIC        SCON_1
-  C:06AEH         PUBLIC        InCom_SPI_array_transitive_clear
   B:00A8H.1       PUBLIC        ET0
-  C:06EEH         PUBLIC        InCom_SPI_send_byte
-  D:0023H         PUBLIC        valueBufferRx
   D:008CH         PUBLIC        TH0
-  D:0024H         PUBLIC        valueBufferTx
-  D:0025H         PUBLIC        valueBufferArrayRx
-  C:0368H         PUBLIC        InCom_SPI_exchange
-  D:002AH         PUBLIC        valueBufferArrayTx
+BL51 BANKED LINKER/LOCATER V6.22                                                      09/23/2024  15:44:20  PAGE 7
+
+
+  D:000CH         PUBLIC        valueBufferArrayRx
+  C:03F8H         PUBLIC        InCom_SPI_exchange
+  D:0012H         PUBLIC        valueBufferArrayTx
   D:008AH         PUBLIC        TL0
-  C:06F8H         PUBLIC        InCom_SPI_byte_received_clear
   B:0088H.4       PUBLIC        TR0
-  C:06D7H         PUBLIC        InCom_SPI_array_received
-  B:0020H.3       PUBLIC        FlagInComSPIexchangeContinue
-  C:06FCH         PUBLIC        InCom_SPI_byte_transitive_clear
   D:00E8H         PUBLIC        ADCCON0
-  C:0574H         PUBLIC        _InCom_SPI_array_transitive
   D:00C0H         PUBLIC        I2CON
   D:00C8H         PUBLIC        T2CON
-  C:06D0H         PUBLIC        InCom_SPI_byte_received
-  C:06DEH         PUBLIC        _InCom_SPI_byte_transitive
-  D:002FH         PUBLIC        counterBufferSpiPacket
-  C:06E9H         PUBLIC        InCom_SPI_CLK_init
+  D:0018H         PUBLIC        amountByteArrayForSend
+  C:044FH         PUBLIC        InCom_SPI_CLK_init
   D:00D0H         PUBLIC        PSW
   -------         PROC          INCOM_SPI_INIT_TIMER
-  C:0688H         LINE#         21
-  C:0688H         LINE#         22
-  C:068EH         LINE#         23
-  C:0691H         LINE#         24
-  C:0694H         LINE#         25
-  C:0696H         LINE#         26
-  C:0698H         LINE#         27
-  C:069AH         LINE#         28
+  C:0422H         LINE#         18
+  C:0422H         LINE#         19
+  C:0428H         LINE#         20
+  C:042BH         LINE#         21
+  C:042EH         LINE#         22
+  C:0430H         LINE#         23
+  C:0432H         LINE#         24
+  C:0434H         LINE#         25
   -------         ENDPROC       INCOM_SPI_INIT_TIMER
   -------         PROC          INCOM_SPI_EXCHANGE
-  C:0368H         LINE#         33
-  C:0368H         LINE#         35
-  C:036BH         LINE#         36
-  C:0382H         LINE#         41
-  C:0382H         LINE#         43
-  C:0385H         LINE#         44
-  C:038BH         LINE#         45
-  C:038DH         LINE#         46
-  C:038DH         LINE#         47
-  C:03A9H         LINE#         51
-  C:03B8H         LINE#         52
-  C:03BAH         LINE#         53
-BL51 BANKED LINKER/LOCATER V6.22                                                      09/20/2024  15:49:32  PAGE 9
-
-
-  C:03BAH         LINE#         55
-  C:03BAH         LINE#         56
+  C:03F8H         LINE#         28
+  C:03F8H         LINE#         29
   -------         ENDPROC       INCOM_SPI_EXCHANGE
   -------         PROC          INCOM_SPI
-  B:0020H.4       SYMBOL        valueMosi
-  D:0008H         SYMBOL        outSideBuffer
+  B:0020H.3       SYMBOL        valueMosi
+  D:0021H         SYMBOL        outSideBuffer
   -------         DO            
-  D:000BH         SYMBOL        read
+  D:0024H         SYMBOL        read
   -------         ENDDO         
-  C:02A1H         LINE#         60
-  C:02A1H         LINE#         61
-  C:02A7H         LINE#         63
-  C:02ADH         LINE#         64
-  C:02ADH         LINE#         65
-  C:02AFH         LINE#         66
-  C:02AFH         LINE#         67
-  C:02B2H         LINE#         69
-  C:02BCH         LINE#         71
-  C:02BCH         LINE#         72
-  C:02BFH         LINE#         73
-  C:02C7H         LINE#         74
-  C:02C9H         LINE#         75
-  C:02C9H         LINE#         76
-  C:02CBH         LINE#         77
-  C:02CDH         LINE#         78
-  C:02CFH         LINE#         79
-  C:02D1H         LINE#         80
-  C:02D3H         LINE#         81
-  C:02D5H         LINE#         82
-  C:02DAH         LINE#         83
-  C:02DAH         LINE#         84
-  C:02DFH         LINE#         85
-  C:02E0H         LINE#         87
-  C:02E0H         LINE#         88
-  C:02E2H         LINE#         89
-  C:02E9H         LINE#         90
-  C:02EBH         LINE#         91
-  C:02F8H         LINE#         92
-  C:02FBH         LINE#         93
-  C:0304H         LINE#         94
-  C:0304H         LINE#         95
-  C:0306H         LINE#         96
-  C:030EH         LINE#         98
-  C:030EH         LINE#         99
-  C:030EH         LINE#         100
+  C:00F3H         LINE#         36
+  C:00F3H         LINE#         37
+  C:00F9H         LINE#         39
+  C:00FCH         LINE#         41
+  C:0106H         LINE#         43
+  C:0106H         LINE#         44
+  C:0108H         LINE#         45
+  C:010AH         LINE#         46
+  C:010CH         LINE#         47
+  C:010EH         LINE#         48
+  C:0110H         LINE#         49
+  C:0115H         LINE#         50
+  C:0117H         LINE#         52
+  C:0117H         LINE#         53
+  C:0119H         LINE#         54
+  C:0120H         LINE#         55
+  C:0122H         LINE#         56
+  C:012FH         LINE#         57
+  C:0132H         LINE#         58
+  C:013BH         LINE#         59
+  C:013BH         LINE#         60
+  C:013DH         LINE#         61
+  C:0145H         LINE#         62
+  C:0145H         LINE#         63
+  C:0145H         LINE#         64
+  C:0145H         LINE#         65
+BL51 BANKED LINKER/LOCATER V6.22                                                      09/23/2024  15:44:20  PAGE 8
+
+
+  C:0147H         LINE#         66
   -------         ENDPROC       INCOM_SPI
   -------         PROC          _INCOM_SPI_INPUT_IN_BUFFER
-  D:000DH         SYMBOL        outSideBuffer
+  D:0026H         SYMBOL        outSideBuffer
   -------         DO            
   D:0007H         SYMBOL        buf
   -------         ENDDO         
-  C:030FH         LINE#         105
-  C:0315H         LINE#         107
-  C:0319H         LINE#         108
-  C:031FH         LINE#         109
-  C:031FH         LINE#         110
-  C:032BH         LINE#         111
-BL51 BANKED LINKER/LOCATER V6.22                                                      09/20/2024  15:49:32  PAGE 10
-
-
-  C:032FH         LINE#         112
-  C:0339H         LINE#         113
-  C:033BH         LINE#         115
-  C:033BH         LINE#         116
-  C:0348H         LINE#         117
-  C:0348H         LINE#         118
-  C:0350H         LINE#         119
-  C:0350H         LINE#         120
-  C:035EH         LINE#         121
-  C:0367H         LINE#         122
-  C:0367H         LINE#         123
+  C:009AH         LINE#         70
+  C:00A0H         LINE#         72
+  C:00A4H         LINE#         73
+  C:00AAH         LINE#         74
+  C:00AAH         LINE#         75
+  C:00B6H         LINE#         76
+  C:00BAH         LINE#         77
+  C:00C4H         LINE#         78
+  C:00C6H         LINE#         80
+  C:00C6H         LINE#         81
+  C:00D3H         LINE#         82
+  C:00D3H         LINE#         83
+  C:00DBH         LINE#         84
+  C:00DBH         LINE#         85
+  C:00E9H         LINE#         86
+  C:00F2H         LINE#         87
+  C:00F2H         LINE#         88
   -------         ENDPROC       _INCOM_SPI_INPUT_IN_BUFFER
   -------         PROC          _INCOM_SPI_OUTPUT_IN_BUFFER
   D:0001H         SYMBOL        outSideBuffer
   -------         DO            
   D:0007H         SYMBOL        buf
   -------         ENDDO         
-  C:061EH         LINE#         129
-  C:061EH         LINE#         131
-  C:0622H         LINE#         132
-  C:0628H         LINE#         133
-  C:062BH         LINE#         134
-  C:062BH         LINE#         135
-  C:062BH         LINE#         136
-  C:063EH         LINE#         137
-  C:064DH         LINE#         138
-  C:064DH         LINE#         139
-  C:0653H         LINE#         140
+  C:03C2H         LINE#         92
+  C:03C2H         LINE#         94
+  C:03C6H         LINE#         95
+  C:03CCH         LINE#         96
+  C:03CFH         LINE#         97
+  C:03CFH         LINE#         98
+  C:03CFH         LINE#         99
+  C:03E2H         LINE#         100
+  C:03F1H         LINE#         101
+  C:03F1H         LINE#         102
+  C:03F7H         LINE#         103
   -------         ENDPROC       _INCOM_SPI_OUTPUT_IN_BUFFER
-  -------         PROC          INCOM_SPI_BYTE_RECEIVED
-  C:06D0H         LINE#         145
-  -------         ENDPROC       INCOM_SPI_BYTE_RECEIVED
-  -------         PROC          INCOM_SPI_ARRAY_RECEIVED
-  C:06D7H         LINE#         148
-  -------         ENDPROC       INCOM_SPI_ARRAY_RECEIVED
-  -------         PROC          _INCOM_SPI_BYTE_TRANSITIVE
-  D:0001H         SYMBOL        byte
-  C:06DEH         LINE#         151
-  C:06DEH         LINE#         152
-  C:06E3H         LINE#         153
-  -------         ENDPROC       _INCOM_SPI_BYTE_TRANSITIVE
-  -------         PROC          _INCOM_SPI_ARRAY_TRANSITIVE
-  D:0051H         SYMBOL        array
-  -------         DO            
-  D:0006H         SYMBOL        i
-  -------         ENDDO         
-  C:0574H         LINE#         157
-  C:057AH         LINE#         159
-  C:0588H         LINE#         160
-  C:0592H         LINE#         161
-  C:05A6H         LINE#         162
-  C:05ADH         LINE#         163
-  -------         ENDPROC       _INCOM_SPI_ARRAY_TRANSITIVE
-  -------         PROC          INCOM_SPI_BYTE_RECEIVED_CLEAR
-  C:06F8H         LINE#         170
-  -------         ENDPROC       INCOM_SPI_BYTE_RECEIVED_CLEAR
-  -------         PROC          INCOM_SPI_BYTE_TRANSITIVE_CLEAR
-BL51 BANKED LINKER/LOCATER V6.22                                                      09/20/2024  15:49:32  PAGE 11
-
-
-  C:06FCH         LINE#         173
-  -------         ENDPROC       INCOM_SPI_BYTE_TRANSITIVE_CLEAR
-  -------         PROC          INCOM_SPI_ARRAY_TRANSITIVE_CLEAR
-  C:06AEH         LINE#         176
-  -------         ENDPROC       INCOM_SPI_ARRAY_TRANSITIVE_CLEAR
-  -------         PROC          INCOM_SPI_ARRAY_RECEIVED_CLEAR
-  C:06B7H         LINE#         179
-  -------         ENDPROC       INCOM_SPI_ARRAY_RECEIVED_CLEAR
-  -------         PROC          _INCOM_ARRAY_CLEAR
-  D:0054H         SYMBOL        array
-  -------         DO            
-  D:0006H         SYMBOL        i
-  -------         ENDDO         
-  C:0654H         LINE#         182
-  C:065AH         LINE#         184
-  C:0668H         LINE#         185
-  C:0672H         LINE#         186
-  C:0680H         LINE#         187
-  C:0687H         LINE#         188
-  -------         ENDPROC       _INCOM_ARRAY_CLEAR
   -------         PROC          INCOM_SPI_CLK_INIT
-  B:0020H.5       SYMBOL        init
-  C:06E9H         LINE#         192
+  B:0020H.0       SYMBOL        init
+  C:044FH         LINE#         106
   -------         ENDPROC       INCOM_SPI_CLK_INIT
-  -------         PROC          INCOM_SPI_SEND_BYTE
-  C:06EEH         LINE#         195
-  C:06EEH         LINE#         196
-  C:06F0H         LINE#         197
-  C:06F2H         LINE#         198
-  -------         ENDPROC       INCOM_SPI_SEND_BYTE
-  -------         PROC          INCOM_SPI_SEND_ARRAY
-  C:06F3H         LINE#         202
-  C:06F3H         LINE#         203
-  C:06F5H         LINE#         204
-  C:06F7H         LINE#         205
-  -------         ENDPROC       INCOM_SPI_SEND_ARRAY
   -------         ENDMOD        INTERFACE_COM
 
   -------         MODULE        COMMON
@@ -649,6 +479,9 @@ SYMBOL TABLE OF MODULE:  .\Code\Obj\censor_tm_ADC+RF (MAIN)
   D:00D8H         PUBLIC        PWMCON0
   D:00A8H         PUBLIC        IE
   D:00B8H         PUBLIC        IP
+BL51 BANKED LINKER/LOCATER V6.22                                                      09/23/2024  15:44:20  PAGE 9
+
+
   D:0098H         PUBLIC        SCON
   D:0088H         PUBLIC        TCON
   D:00F8H         PUBLIC        SCON_1
@@ -659,34 +492,31 @@ SYMBOL TABLE OF MODULE:  .\Code\Obj\censor_tm_ADC+RF (MAIN)
   -------         ENDMOD        COMMON
 
   -------         MODULE        DELAY
-BL51 BANKED LINKER/LOCATER V6.22                                                      09/20/2024  15:49:32  PAGE 12
-
-
   C:0000H         SYMBOL        _ICE_DUMMY_
   D:0080H         PUBLIC        P0
   D:0090H         PUBLIC        P1
   D:00A0H         PUBLIC        P2
   D:00B0H         PUBLIC        P3
-  C:0455H         PUBLIC        _Timer0_Delay100us
+  C:0231H         PUBLIC        _Timer0_Delay100us
   D:00D8H         PUBLIC        PWMCON0
   D:00A8H         PUBLIC        IE
   D:00B8H         PUBLIC        IP
-  C:04A0H         PUBLIC        _Timer0_Delay1ms
-  B:0020H.6       PUBLIC        BIT_TMP
+  C:027CH         PUBLIC        _Timer0_Delay1ms
+  B:0020H.2       PUBLIC        BIT_TMP
   D:0098H         PUBLIC        SCON
   D:0089H         PUBLIC        TMOD
   D:0088H         PUBLIC        TCON
   D:00F8H         PUBLIC        SCON_1
   B:0088H.5       PUBLIC        TF0
   B:0088H.7       PUBLIC        TF1
-  C:04EBH         PUBLIC        _Timer1_Delay10ms
+  C:02C7H         PUBLIC        _Timer1_Delay10ms
   D:008CH         PUBLIC        TH0
   D:00C6H         PUBLIC        RH3
   D:008DH         PUBLIC        TH1
   D:008AH         PUBLIC        TL0
   D:00C5H         PUBLIC        RL3
   D:008BH         PUBLIC        TL1
-  C:0408H         PUBLIC        _Timer3_Delay10us
+  C:01E4H         PUBLIC        _Timer3_Delay10us
   B:0088H.4       PUBLIC        TR0
   B:0088H.6       PUBLIC        TR1
   D:00E8H         PUBLIC        ADCCON0
@@ -695,184 +525,145 @@ SYMBOL TABLE OF MODULE:  .\Code\Obj\censor_tm_ADC+RF (MAIN)
   D:00C4H         PUBLIC        T3CON
   D:008EH         PUBLIC        CKCON
   D:00D0H         PUBLIC        PSW
-  C:03BBH         PUBLIC        _Timer3_Delay100ms
+  C:0197H         PUBLIC        _Timer3_Delay100ms
   -------         PROC          _TIMER0_DELAY100US
-  D:0041H         SYMBOL        u32CNT
-  C:0455H         LINE#         20
-  C:045DH         LINE#         21
-  C:045DH         LINE#         22
-  C:0460H         LINE#         23
-  C:0463H         LINE#         24
-  C:0465H         LINE#         25
-  C:0478H         LINE#         26
-  C:0478H         LINE#         27
-  C:047BH         LINE#         28
-  C:047EH         LINE#         29
-  C:0481H         LINE#         30
-  C:0483H         LINE#         31
-  C:049BH         LINE#         32
-  C:049DH         LINE#         33
-  C:049FH         LINE#         34
+  D:001AH         SYMBOL        u32CNT
+  C:0231H         LINE#         20
+  C:0239H         LINE#         21
+  C:0239H         LINE#         22
+  C:023CH         LINE#         23
+  C:023FH         LINE#         24
+  C:0241H         LINE#         25
+  C:0254H         LINE#         26
+  C:0254H         LINE#         27
+  C:0257H         LINE#         28
+  C:025AH         LINE#         29
+  C:025DH         LINE#         30
+BL51 BANKED LINKER/LOCATER V6.22                                                      09/23/2024  15:44:20  PAGE 10
+
+
+  C:025FH         LINE#         31
+  C:0277H         LINE#         32
+  C:0279H         LINE#         33
+  C:027BH         LINE#         34
   -------         ENDPROC       _TIMER0_DELAY100US
   -------         PROC          _TIMER0_DELAY1MS
-  D:0045H         SYMBOL        u32CNT
-  C:04A0H         LINE#         36
-  C:04A8H         LINE#         37
-  C:04A8H         LINE#         38
-BL51 BANKED LINKER/LOCATER V6.22                                                      09/20/2024  15:49:32  PAGE 13
-
-
-  C:04ABH         LINE#         39
-  C:04AEH         LINE#         40
-  C:04B0H         LINE#         41
-  C:04C3H         LINE#         42
-  C:04C3H         LINE#         43
-  C:04C6H         LINE#         44
-  C:04C9H         LINE#         45
-  C:04CCH         LINE#         46
-  C:04CEH         LINE#         47
-  C:04E6H         LINE#         48
-  C:04E8H         LINE#         49
-  C:04EAH         LINE#         50
+  D:002DH         SYMBOL        u32CNT
+  C:027CH         LINE#         36
+  C:0284H         LINE#         37
+  C:0284H         LINE#         38
+  C:0287H         LINE#         39
+  C:028AH         LINE#         40
+  C:028CH         LINE#         41
+  C:029FH         LINE#         42
+  C:029FH         LINE#         43
+  C:02A2H         LINE#         44
+  C:02A5H         LINE#         45
+  C:02A8H         LINE#         46
+  C:02AAH         LINE#         47
+  C:02C2H         LINE#         48
+  C:02C4H         LINE#         49
+  C:02C6H         LINE#         50
   -------         ENDPROC       _TIMER0_DELAY1MS
   -------         PROC          _TIMER1_DELAY10MS
-  D:0049H         SYMBOL        u32CNT
-  C:04EBH         LINE#         53
-  C:04F3H         LINE#         54
-  C:04F3H         LINE#         55
-  C:04F6H         LINE#         56
-  C:04F9H         LINE#         57
-  C:04FBH         LINE#         58
-  C:050EH         LINE#         59
-  C:050EH         LINE#         60
-  C:0511H         LINE#         61
-  C:0514H         LINE#         62
-  C:0517H         LINE#         63
-  C:0519H         LINE#         64
-  C:0531H         LINE#         65
-  C:0533H         LINE#         66
-  C:0535H         LINE#         67
+  D:0031H         SYMBOL        u32CNT
+  C:02C7H         LINE#         53
+  C:02CFH         LINE#         54
+  C:02CFH         LINE#         55
+  C:02D2H         LINE#         56
+  C:02D5H         LINE#         57
+  C:02D7H         LINE#         58
+  C:02EAH         LINE#         59
+  C:02EAH         LINE#         60
+  C:02EDH         LINE#         61
+  C:02F0H         LINE#         62
+  C:02F3H         LINE#         63
+  C:02F5H         LINE#         64
+  C:030DH         LINE#         65
+  C:030FH         LINE#         66
+  C:0311H         LINE#         67
   -------         ENDPROC       _TIMER1_DELAY10MS
   -------         PROC          _TIMER3_DELAY100MS
-  D:001AH         SYMBOL        u32CNT
-  C:03BBH         LINE#         86
-  C:03C3H         LINE#         87
-  C:03C3H         LINE#         88
-  C:03C6H         LINE#         89
-  C:03C9H         LINE#         90
-  C:03DCH         LINE#         91
-  C:03DCH         LINE#         92
-  C:03DFH         LINE#         93
-  C:03E2H         LINE#         94
-  C:03E7H         LINE#         95
-  C:03EAH         LINE#         96
-  C:0402H         LINE#         97
-  C:0404H         LINE#         98
-  C:0407H         LINE#         99
+  D:0029H         SYMBOL        u32CNT
+  C:0197H         LINE#         86
+  C:019FH         LINE#         87
+  C:019FH         LINE#         88
+  C:01A2H         LINE#         89
+  C:01A5H         LINE#         90
+  C:01B8H         LINE#         91
+  C:01B8H         LINE#         92
+  C:01BBH         LINE#         93
+  C:01BEH         LINE#         94
+  C:01C3H         LINE#         95
+  C:01C6H         LINE#         96
+  C:01DEH         LINE#         97
+  C:01E0H         LINE#         98
+  C:01E3H         LINE#         99
+BL51 BANKED LINKER/LOCATER V6.22                                                      09/23/2024  15:44:20  PAGE 11
+
+
   -------         ENDPROC       _TIMER3_DELAY100MS
   -------         PROC          _TIMER3_DELAY10US
-  D:004DH         SYMBOL        u32CNT
-  C:0408H         LINE#         101
-  C:0410H         LINE#         102
-  C:0410H         LINE#         103
-  C:0413H         LINE#         104
-  C:0416H         LINE#         105
-  C:0429H         LINE#         106
-  C:0429H         LINE#         107
-BL51 BANKED LINKER/LOCATER V6.22                                                      09/20/2024  15:49:32  PAGE 14
-
-
-  C:042CH         LINE#         108
-  C:042FH         LINE#         109
-  C:0434H         LINE#         110
-  C:0437H         LINE#         111
-  C:044FH         LINE#         112
-  C:0451H         LINE#         113
-  C:0454H         LINE#         114
+  D:0035H         SYMBOL        u32CNT
+  C:01E4H         LINE#         101
+  C:01ECH         LINE#         102
+  C:01ECH         LINE#         103
+  C:01EFH         LINE#         104
+  C:01F2H         LINE#         105
+  C:0205H         LINE#         106
+  C:0205H         LINE#         107
+  C:0208H         LINE#         108
+  C:020BH         LINE#         109
+  C:0210H         LINE#         110
+  C:0213H         LINE#         111
+  C:022BH         LINE#         112
+  C:022DH         LINE#         113
+  C:0230H         LINE#         114
   -------         ENDPROC       _TIMER3_DELAY10US
   -------         ENDMOD        DELAY
 
-  -------         MODULE        ?C?COPY
-  C:00DEH         PUBLIC        ?C?COPY
-  -------         ENDMOD        ?C?COPY
-
   -------         MODULE        ?C?CLDPTR
-  C:0104H         PUBLIC        ?C?CLDPTR
+  C:0148H         PUBLIC        ?C?CLDPTR
   -------         ENDMOD        ?C?CLDPTR
 
-  -------         MODULE        ?C?CLDOPTR
-  C:011DH         PUBLIC        ?C?CLDOPTR
-  -------         ENDMOD        ?C?CLDOPTR
-
   -------         MODULE        ?C?CSTPTR
-  C:014AH         PUBLIC        ?C?CSTPTR
+  C:0161H         PUBLIC        ?C?CSTPTR
   -------         ENDMOD        ?C?CSTPTR
 
-  -------         MODULE        ?C?CSTOPTR
-  C:015CH         PUBLIC        ?C?CSTOPTR
-  -------         ENDMOD        ?C?CSTOPTR
-
   -------         MODULE        ?C?ULCMP
-  C:017EH         PUBLIC        ?C?ULCMP
+  C:0173H         PUBLIC        ?C?ULCMP
   -------         ENDMOD        ?C?ULCMP
 
   -------         MODULE        ?C?LSHL
-  C:018FH         PUBLIC        ?C?LSHL
+  C:0184H         PUBLIC        ?C?LSHL
   -------         ENDMOD        ?C?LSHL
 
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?ADCHX711_INITIAL?I2C_ADC_HX711
 
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_NRF_SEND_BYTE?NRF24L01
-
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_NRF_SEND_ARRAY?NRF24L01
-
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?_NRF_CONFIG?NRF24L01
 
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_TX_PL?NRF24L01
+    SEGMENT: ?PR?NRF_SETUP_TX?NRF24L01
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?NRF_SETUP_RX?NRF24L01
 
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?LED_SWITCH_STATE?GPIO
 
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-BL51 BANKED LINKER/LOCATER V6.22                                                      09/20/2024  15:49:32  PAGE 15
-
-
     SEGMENT: ?PR?BUTTON_READ?GPIO
 
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?SWITCH_STATE_POWER_RF?GPIO
 
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?INCOM_SPI_BYTE_RECEIVED?INTERFACE_COM
+BL51 BANKED LINKER/LOCATER V6.22                                                      09/23/2024  15:44:20  PAGE 12
+
 
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?INCOM_SPI_ARRAY_RECEIVED?INTERFACE_COM
-
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_INCOM_SPI_ARRAY_TRANSITIVE?INTERFACE_COM
-
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?INCOM_SPI_BYTE_RECEIVED_CLEAR?INTERFACE_COM
-
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?INCOM_SPI_BYTE_TRANSITIVE_CLEAR?INTERFACE_COM
-
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?INCOM_SPI_ARRAY_TRANSITIVE_CLEAR?INTERFACE_COM
-
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?INCOM_SPI_ARRAY_RECEIVED_CLEAR?INTERFACE_COM
-
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?INCOM_SPI_SEND_BYTE?INTERFACE_COM
-
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?INCOM_SPI_SEND_ARRAY?INTERFACE_COM
+    SEGMENT: ?PR?INCOM_SPI_CLK_INIT?INTERFACE_COM
 
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?_TIMER0_DELAY100US?DELAY
@@ -886,5 +677,5 @@ SYMBOL TABLE OF MODULE:  .\Code\Obj\censor_tm_ADC+RF (MAIN)
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?_TIMER3_DELAY10US?DELAY
 
-Program Size: data=85.7 xdata=0 code=1797
-LINK/LOCATE RUN COMPLETE.  21 WARNING(S),  0 ERROR(S)
+Program Size: data=59.4 xdata=0 code=1111
+LINK/LOCATE RUN COMPLETE.  12 WARNING(S),  0 ERROR(S)

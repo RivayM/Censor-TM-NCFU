@@ -1,4 +1,4 @@
-C51 COMPILER V9.53.0.0   MAIN                                                              09/20/2024 15:49:31 PAGE 1   
+C51 COMPILER V9.53.0.0   MAIN                                                              09/23/2024 15:44:20 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE MAIN
@@ -20,85 +20,63 @@ line level    source
    9          #include <GPIO.h>
   10          #include <CONFIG.h>
   11          #include <N76E003.h>
-  12          
-  13          #include <Interface_com.H>
-  14          
-  15          #define TX_mode
-*** WARNING C317 IN LINE 15 OF Code\Source\main.c: attempt to redefine macro 'TX_mode'
-  16          
-  17          void main(){
-  18   1        /****************/  
-  19   1        unsigned char *rec;
-  20   1        unsigned char a = 0x56;
-  21   1        unsigned char stat = 0x24;
-  22   1        unsigned char b[BUFFER_SPI_MASSIV_SIZE] = {0x7A,0x99,0x4E,0x22,0xFF};
-  23   1        /****************/
-  24   1        Set_All_GPIO_Quasi_Mode;
-  25   1      //  P11_PushPull_Mode;
-  26   1      //  P15_PushPull_Mode;
-  27   1      //  P10_PushPull_Mode;
-  28   1        P00_PushPull_Mode;
-  29   1      //  P01_PushPull_Mode;
-  30   1      //  P04_PushPull_Mode;
-  31   1        PIN_LED_GREEN = 1;
-  32   1        PIN_LED_RED = 1;
-  33   1        PIN_RF_ON = 1 ;
-  34   1        /****************/  
-  35   1        //SPI_Initial;
-  36   1        //nRF_config(); 
-  37   1        /****************/
-  38   1        InCom_SPI_init_Timer();
-  39   1        InCom_SPI_CLK_init(0);
-  40   1        FlagInComSPIGlobal = 1;
-  41   1        FlagInComSPIexchangeArray = 1;
-  42   1        //FlagInComSPIexchangeByte = 1;
-  43   1        InCom_SPI_byte_transitive(&a);
-  44   1        valueBufferArrayTx[5] = b[5];
-  45   1      //  valueBufferArrayTx[0] = 0x7A;
-  46   1      //  valueBufferArrayTx[1] = 0x99;
-  47   1      //  valueBufferArrayTx[2] = 0x4E;
-  48   1      //  valueBufferArrayTx[3] = 0x22;
-  49   1      //  valueBufferArrayTx[4] = 0xFF;
-  50   1        
-  51   1        while(1){
-  52   2          if (FlagInComSPIGlobal == 0){
-C51 COMPILER V9.53.0.0   MAIN                                                              09/20/2024 15:49:31 PAGE 2   
+  12          #include <Interface_com.H>
+  13          
+  14          void main(){
+  15   1        /****************/  
+  16   1        Set_All_GPIO_Quasi_Mode;
+  17   1      //  P11_PushPull_Mode;
+  18   1      //  P15_PushPull_Mode;
+  19   1      //  P10_PushPull_Mode;
+  20   1        P00_PushPull_Mode;
+  21   1      //  P01_PushPull_Mode;
+  22   1      //  P04_PushPull_Mode;
+  23   1        PIN_LED_GREEN = 1;
+  24   1        PIN_LED_RED = 1;
+  25   1        PIN_RF_ON = 1 ;
+  26   1        /****************/
+  27   1        InCom_SPI_init_Timer();
+  28   1        //InCom_SPI_CLK_init(0);
+  29   1        P10 = 0;
+  30   1        /****************/
+  31   1        valueBufferArrayTx[0] = 0xBB;
+  32   1        FlagInComSPIGlobal = 1;          // ¬ключить сразу же spi
+  33   1        /****************/
+  34   1        while(1){
+  35   2          if (FlagInComSPIGlobal == 0){
+  36   3            //FlagInComSPIGlobal = 1;
+  37   3          }
+  38   2          
+  39   2          PIN_LED_GREEN =~PIN_LED_GREEN;
+  40   2          if (valueBufferArrayRx[0] == 0x38){
+  41   3            PIN_LED_RED = ~PIN_LED_RED;
+  42   3          }
+  43   2          
+  44   2          Timer3_Delay100ms(10);
+  45   2          
+  46   2        }
+  47   1      }
+  48          //********************************************************
+  49          // ISR
+  50          //********************************************************
+  51          void ISR_Timer0()interrupt 1{  // <Interface_com.H>
+  52   1        if(FlagInComSPIGlobal == 1){ // обмен по SPI - 1 пакет
+  53   2            InCom_SPI_exchange();
+C51 COMPILER V9.53.0.0   MAIN                                                              09/23/2024 15:44:20 PAGE 2   
 
-  53   3            InCom_SPI_byte_transitive(&a);
-  54   3            FlagInComSPIGlobal = 1;
-  55   3            FlagInComSPIexchangeArray = 1;
-  56   3            //FlagInComSPIexchangeByte = 1;
-  57   3          }
-  58   2      
-  59   2          Timer3_Delay100ms(10);
-  60   2          PIN_LED_GREEN =~PIN_LED_GREEN;
-  61   2          if (valueBufferRx == 0x38){
-  62   3            PIN_LED_RED = ~PIN_LED_RED;
-  63   3          }
-  64   2          valueBufferRx = 0x00;
-  65   2          
-  66   2        }
-  67   1      }
-*** WARNING C280 IN LINE 19 OF Code\Source\main.c: 'rec': unreferenced local variable
-  68          //********************************************************
-  69          // ISR
-  70          //********************************************************
-  71          void ISR_Timer0()interrupt 1{  // <Interface_com.H>
-  72   1        if(FlagInComSPIGlobal == 1){ // обмен по SPI - 1 пакет
-  73   2            InCom_SPI_exchange();
-  74   2        }
-  75   1      }
+  54   2        }
+  55   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    177    ----
-   CONSTANT SIZE    =      5    ----
+   CODE SIZE        =    119    ----
+   CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =   ----      10
+   DATA SIZE        =   ----    ----
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.
 
 
-C51 COMPILATION COMPLETE.  2 WARNING(S),  0 ERROR(S)
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

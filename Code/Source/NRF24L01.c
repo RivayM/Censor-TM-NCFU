@@ -5,41 +5,49 @@
 #include <N76E003.h>
 #include <CONFIG.h>
 #include <NRF24L01.h>
-#include <Interface_com.H>
+//#include <Interface_com.H>
 
 int currentProgress = 0;
-
+/*
 unsigned char NRF_TX_ADDRESS[BUFFER_MASSIV_SIZE ] =
 {'i','n','t','e','r'};  // адрес передатчика
 unsigned char NRF_RX_ADDRESS[BUFFER_MASSIV_SIZE ] =
 {'m','a','r','k','1'};  // адрес приемника 
 
-void NRF_send_byte(unsigned char *byte){
-	InCom_SPI_byte_transitive(byte);	
-	FlagInComSPIGlobal = 1;
-	FlagInComSPIexchangeByte = 1;
-}
-
-void NRF_send_array(unsigned char *array){
-	InCom_SPI_byte_transitive(array);	
-	FlagInComSPIGlobal = 1;
-	FlagInComSPIexchangeArray = 1;
-}
-
-
-void NRF_config(int mode){ 
-	NRF_CE = 0;
-	switch(mode){
-		case TX_mode:	
-			break;
-		case RX_mode:	
-			break;
-		case RTX_mode:
-			break;
+*/
+/* Выбор настройки модуля(и его запуск) */
+void NRF_Config(int mode){ 
+	/*switch(mode){
+		case TX_mode:	 NRF_Setup_TX();  break;
+		case RX_mode:	 NRF_Setup_RX();  break;
+		case RTX_mode: NRF_Setup_RTX(); break;
 		default: break;
+	}*/
+
+}
+
+/* Настройка модуля как передатчик */
+void NRF_Setup_TX(){	
+	/*switch(currentProgress){
+		case 0: NRF_CE = 0; break;
+		case 1: NRF_Send_Byte(W_REG|CONFIG); break;  // Выбор регистра Config
+		case 2: NRF_Send_Byte(0x0F); break;  				 // Отправка значения регистра
+		*/
+		
+		
+}
+	
+/* Настройка модуля как приемние */
+void NRF_Setup_RX(){
+	switch(currentProgress){
+		case 0: NRF_CE = 0; break;
+		case 1: /*функция*/break;
 	}
 }
 	
+/*void NRF_Setup_RTX(){}*/
+
+
 	
 //  SPI_CE=0;                       
 //  Timer0_Delay100us(100);
@@ -78,10 +86,5 @@ void NRF_config(int mode){
 //  get_status();
 //	spi_WREG(FLUSH_RX,NOP);                    //Clear the RX_FIFO
 //	spi_WREG(FLUSH_TX,NOP);                    //Clear the TX_FIFO
-
-
-
-
-
 
 
