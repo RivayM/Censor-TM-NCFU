@@ -23,8 +23,8 @@
 		P4 	- ADC_ON
 */
 //**************************************************************************
-#ifndef U
-#define U
+#ifndef GPIO
+#define GPIO
 /* main */
 #define PIN_LED_RED P02
 #define PIN_LED_GREEN P16

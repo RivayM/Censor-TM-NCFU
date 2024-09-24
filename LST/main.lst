@@ -1,4 +1,4 @@
-C51 COMPILER V9.53.0.0   MAIN                                                              09/23/2024 17:12:01 PAGE 1   
+C51 COMPILER V9.53.0.0   MAIN                                                              09/24/2024 17:15:00 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE MAIN
@@ -29,7 +29,7 @@ line level    source
   18   1      //  P15_PushPull_Mode;
   19   1      //  P10_PushPull_Mode;
   20   1        P00_PushPull_Mode;
-  21   1      //  P01_PushPull_Mode;
+  21   1        //P01_PushPull_Mode;
   22   1      //  P04_PushPull_Mode;
   23   1        PIN_LED_GREEN = 1;
   24   1        PIN_LED_RED = 1;
@@ -38,38 +38,38 @@ line level    source
   27   1        InCom_SPI_init_Timer();
   28   1        InCom_SPI_CLK_init(0);
   29   1        /****************/
-  30   1        valueBufferArrayTx[0] = 0xFA;
+  30   1        valueBufferArrayTx[0] = 0xAA;
   31   1        FlagInComSPIGlobal = 1;          // ¬ключить сразу же spi
   32   1        /****************/
   33   1        while(1){
   34   2          
-  35   2          if(FlagInComSPIGlobal){
-  36   3            InCom_SPI_exchange();
-  37   3            FlagInComSPIGlobal = 0 ;
-  38   3          }
-  39   2          
-  40   2          PIN_LED_GREEN =~PIN_LED_GREEN;
-  41   2          
-  42   2          if (valueBufferArrayRx[0] == 0x38){
-  43   3            PIN_LED_RED = ~PIN_LED_RED;
-  44   3          }
-  45   2          
-  46   2        }
-  47   1      }
-  48          //********************************************************
-  49          // ISR
-  50          //********************************************************
-  51          void ISR_Timer0() interrupt 1 {  // <Interface_com.H>
-  52   1        //if(FlagInComSPIGlobal){ InCom_SPI_exchange();}
-  53   1        if (FlagInComSPIGlobal == 0){FlagInComSPIGlobal = 1;}
-C51 COMPILER V9.53.0.0   MAIN                                                              09/23/2024 17:12:01 PAGE 2   
+  35   2          if(FlagInComSPIGlobal == 0){
+  36   3            FlagInComSPIGlobal = 1;
+  37   3          }
+  38   2          
+  39   2          PIN_LED_GREEN =~PIN_LED_GREEN;
+  40   2          
+  41   2          if (valueBufferArrayRx[0] == 0x38){
+  42   3            PIN_LED_RED = ~PIN_LED_RED;
+  43   3            valueBufferArrayRx[0] = 0x00;  // пришло значение его надо обнулить
+  44   3          }   
+  45   2        
+  46   2          Timer3_Delay100ms(10);
+  47   2        }
+  48   1      }
+  49          //********************************************************
+  50          // ISR
+  51          //********************************************************
+  52          void ISR_Timer0() interrupt 1 {  // <Interface_com.H>
+  53   1        if(FlagInComSPIGlobal){ InCom_SPI_exchange();}
+C51 COMPILER V9.53.0.0   MAIN                                                              09/24/2024 17:15:00 PAGE 2   
 
   54   1        
   55   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =     63    ----
+   CODE SIZE        =    130    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----

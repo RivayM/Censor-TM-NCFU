@@ -32,7 +32,7 @@ void InCom_SPI_exchange(void){
 
 /* начать обмен( чтения и передача) */
 void InCom_SPI(bit valueMosi, unsigned char *outSideBuffer){ 
-	int read = 33;                 // количество чтений линии MISO
+	int read = 2;                 // количество чтений линии MISO
 	/******************************/
 	if(counterBit == 0) {}  //  CPOL - имитация	 (для slk)
 	else {
@@ -53,19 +53,12 @@ void InCom_SPI(bit valueMosi, unsigned char *outSideBuffer){
 			/*Все остальные биты пакета*/
 			default:                            // Идет обмен		
 				PIN_CS_SPI   = 0;
-				if (valueMosi) {
-				PIN_MOSI_SPI =1;
-				} // отправка
-				else{
-				PIN_MOSI_SPI = 0;
-				}
-				// сделать for
-				//for(read = 30; read > 0; read--){  // чтение
-				while(read--){
-					if ( PIN_MISO_SPI == 1){        // чтение
+				PIN_MOSI_SPI = valueMosi; // отправка
+				
+					if ( PIN_MISO_SPI == 1){       
 						InCom_SPI_Input_in_buffer(outSideBuffer);
 					}	
-				}
+				
 				counterBit ++; // следующий бит
 				break;
 		}
@@ -79,19 +72,16 @@ void InCom_SPI_Input_in_buffer(unsigned char *outSideBuffer){
 	buf = *outSideBuffer;
 	if(counterBit == 0){                // начальный бит
 		if(SPI_MSB){
-			*outSideBuffer = (buf & 0xFE) << 7;   // младщий бит - установить на старший
-			buf = buf >> 1;
-			*outSideBuffer = *outSideBuffer | buf;
+			*outSideBuffer = 0x80;   // младщий бит - установить на старший
+			return;
 		}
-		return;
 	}
 	if(counterBit < BUFFER_SPI){
 		if(SPI_MSB){
-			counterBit = counterBit - 1;
+			buf = buf + (0x01 << counterBit -1);
 		}
-		buf = buf + (0x01 << counterBit);
-		if(SPI_MSB){
-			counterBit++;
+		else {
+			buf = buf + (0x01 << counterBit);
 		}
 		*outSideBuffer = buf;	
 	}
