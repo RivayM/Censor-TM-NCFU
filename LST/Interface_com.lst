@@ -1,4 +1,4 @@
-C51 COMPILER V9.53.0.0   INTERFACE_COM                                                     09/24/2024 17:15:01 PAGE 1   
+C51 COMPILER V9.53.0.0   INTERFACE_COM                                                     09/25/2024 13:50:12 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE INTERFACE_COM
@@ -15,119 +15,110 @@ line level    source
    4          #include <Interface_com.H>
    5          #include <N76E003.H>
    6          
-   7          unsigned char valueBufferArrayTx[BUFFER_SPI_MASSIV_SIZE];  // прочитать можно только тогда
-   8          unsigned char valueBufferArrayRx[BUFFER_SPI_MASSIV_SIZE];  // когда обмен закончен(размер +1)
+   7          unsigned char valueBufferArrayTx[BUFFER_SPI_MASSIV_SIZE];  
+   8          unsigned char valueBufferArrayRx[BUFFER_SPI_MASSIV_SIZE];  
    9          
-  10          int amountByteArrayForSend = BUFFER_SPI_MASSIV_SIZE; // количество байт которое надо отправить
-  11          int counterBit             = 0;   // использовать в interrupt 1
+  10          int amountByteArrayForSend = BUFFER_SPI_MASSIV_SIZE; 
+  11          int counterBit             = 0;   
   12          int counterByte            = 0;
-  13          bit FlagInComSPIGlobal     = 0;   // 
+  13          bit FlagInComSPIGlobal     = 0;   
   14          
-  15          /* Инициализация таймера(и его запуск) */
+  15          /* Init timer and start */
   16          void InCom_SPI_init_Timer(){
-  17   1        TIMER0_MODE1_ENABLE;      // Режим - 16 битный таймер
-  18   1        TH0 = FREQ_H;             // настройка частоты
+  17   1        TIMER0_MODE1_ENABLE;      // Mode timer
+  18   1        TH0 = FREQ_H;             // setting freq:
   19   1        TL0 = FREQ_L;             // 
   20   1        set_ET0;                  // enable Timer0 interrupt
   21   1        set_EA;                   // enable interrupts
   22   1        set_TR0;                  // Timer0 run
   23   1      }
   24          
-  25          /* запустить spi обмен пакета /пакетов */
+  25          /* main func(for timer) */
   26          void InCom_SPI_exchange(void){
   27   1        InCom_SPI( 
   28   1          InCom_SPI_Output_in_buffer(
-  29   1            &valueBufferArrayTx[0]),   // буффер для передачи
-  30   1          &valueBufferArrayRx[0]);      // буффер для приема;
+  29   1            &valueBufferArrayTx[0]),   // buf  for Tx
+  30   1          &valueBufferArrayRx[0]);     // buf  for Rx
   31   1      }
   32          
-  33          /* начать обмен( чтения и передача) */
+  33          /* exchange bitwise operation */
   34          void InCom_SPI(bit valueMosi, unsigned char *outSideBuffer){ 
-  35   1        int read = 2;                 // количество чтений линии MISO
-  36   1        /******************************/
-  37   1        if(counterBit == 0) {}  //  CPOL - имитация  (для slk)
-  38   1        else {
-  39   2          PIN_CLK_SPI =~ PIN_CLK_SPI; // каждый запуск(в таймере)менять состояние
-  40   2        }
-  41   1        if( PIN_CLK_SPI == 0) {       //  CPHA - имитация
-  42   2        /******************************/
-  43   2          switch(counterBit){   // Начало обмена    
-  44   3            /*Последний бит пакета*/
-  45   3            case BUFFER_SPI:          // Конец обмена 
-  46   3              PIN_CS_SPI   = 1;
-  47   3              PIN_MOSI_SPI = 1;
-  48   3              PIN_MISO_SPI = 1;
-  49   3              PIN_CLK_SPI  = 0;
-  50   3              counterBit = 0;
-  51   3              FlagInComSPIGlobal = 0; // Завершить все 
-  52   3              break;
-  53   3            /*Все остальные биты пакета*/
-C51 COMPILER V9.53.0.0   INTERFACE_COM                                                     09/24/2024 17:15:01 PAGE 2   
+  35   1        int read = 2;                         // amount read MISO
+  36   1        if(counterBit == 0) {}                // CPOL 
+  37   1        else {PIN_CLK_SPI =~ PIN_CLK_SPI;}    // clocking
+  38   1        if( PIN_CLK_SPI == 0) {               // CPHA
+  39   2          switch(counterBit){                 // Start
+  40   3            /******************************/
+  41   3            case BUFFER_SPI:                  // END
+  42   3              PIN_CS_SPI   = 1;
+  43   3              PIN_MOSI_SPI = 1;
+  44   3              PIN_MISO_SPI = 1;
+  45   3              PIN_CLK_SPI  = 0;
+  46   3              counterBit = 0;
+  47   3              FlagInComSPIGlobal = 0; 
+  48   3              break;
+  49   3            /******************************/
+  50   3            default:                          // process going
+  51   3              PIN_CS_SPI   = 0;
+  52   3              PIN_MOSI_SPI = valueMosi;       // send MoSi
+  53   3                if ( PIN_MISO_SPI == 1){      // send MiSo  
+C51 COMPILER V9.53.0.0   INTERFACE_COM                                                     09/25/2024 13:50:12 PAGE 2   
 
-  54   3            default:                            // Идет обмен   
-  55   3              PIN_CS_SPI   = 0;
-  56   3              PIN_MOSI_SPI = valueMosi; // отправка
-  57   3              
-  58   3                if ( PIN_MISO_SPI == 1){       
-  59   4                  InCom_SPI_Input_in_buffer(outSideBuffer);
-  60   4                } 
-  61   3              
-  62   3              counterBit ++; // следующий бит
-  63   3              break;
-  64   3          }
-  65   2        }
-  66   1      }
-  67          
-  68          
-  69          /* складывать в буфер приема прочитанный бит */
-  70          void InCom_SPI_Input_in_buffer(unsigned char *outSideBuffer){
-  71   1        unsigned char buf;
-  72   1        buf = *outSideBuffer;
-  73   1        if(counterBit == 0){                // начальный бит
-  74   2          if(SPI_MSB){
-  75   3            *outSideBuffer = 0x80;   // младщий бит - установить на старший
-  76   3            return;
-  77   3          }
-  78   2        }
-  79   1        if(counterBit < BUFFER_SPI){
-  80   2          if(SPI_MSB){
-  81   3            buf = buf + (0x01 << counterBit -1);
-  82   3          }
-  83   2          else {
-  84   3            buf = buf + (0x01 << counterBit);
-  85   3          }
-  86   2          *outSideBuffer = buf; 
-  87   2        }
-  88   1      }
-  89          
-  90          
-  91          /* читать из буфера передачи и отправить значение*/
-  92          bit InCom_SPI_Output_in_buffer(unsigned char *outSideBuffer){
-  93   1        unsigned char buf;
-  94   1        buf = *outSideBuffer;  // сохранить текущее значение буфера для передачи
-  95   1        if (counterBit == 0){         // получить 1 бит для отправки
-  96   2          if(SPI_MSB){ buf = buf & 0x01; }  // маска для MSB
-  97   2          else       { buf = buf & 0x80; }  // маска для LSB
-  98   2        }
-  99   1        if( counterBit < 8 && counterBit != 0){ // последующие биты для отправки 
- 100   2          buf = buf & (0x01 << counterBit);
- 101   2        }
- 102   1        if(buf) { return 1; } else { return 0; } // если 0x00 =>0,а если нет =>1
- 103   1      }
- 104          
- 105          /* установить значение clk */
- 106          void InCom_SPI_CLK_init(bit init){ PIN_CLK_SPI = init;}
- 107          
-*** WARNING C294 IN LINE 84 OF Code\Source\Interface_com.c: unreachable code
-*** WARNING C294 IN LINE 97 OF Code\Source\Interface_com.c: unreachable code
+  54   4                  InCom_SPI_Input_in_buffer(outSideBuffer);
+  55   4                } 
+  56   3              counterBit ++; // next bit
+  57   3              break;
+  58   3          }
+  59   2        }
+  60   1      }
+  61          
+  62          
+  63          
+  64          /* save reading bit in buf */
+  65          void InCom_SPI_Input_in_buffer(unsigned char *outSideBuffer){
+  66   1        unsigned char buf;
+  67   1        buf = *outSideBuffer;
+  68   1        if(counterBit == 0){         // start bit
+  69   2          if(SPI_MSB){
+  70   3            *outSideBuffer = 0x80;   
+  71   3            return;
+  72   3          }
+  73   2        }
+  74   1        if(counterBit < BUFFER_SPI){ // next bit
+  75   2          if(SPI_MSB)buf = buf + (0x01 << counterBit -1);
+  76   2          
+  77   2          else buf = buf + (0x01 << counterBit);
+  78   2          
+  79   2          *outSideBuffer = buf; 
+  80   2        }
+  81   1      }
+  82          
+  83          
+  84          /* читать из буфера передачи и отправить значение*/
+  85          bit InCom_SPI_Output_in_buffer(unsigned char *outSideBuffer){
+  86   1        unsigned char buf;
+  87   1        buf = *outSideBuffer;  // сохранить текущее значение буфера для передачи
+  88   1        if (counterBit == 0){         // получить 1 бит для отправки
+  89   2          if(SPI_MSB){ buf = buf & 0x01; }  // маска для MSB
+  90   2          else       { buf = buf & 0x80; }  // маска для LSB
+  91   2        }
+  92   1        if( counterBit < 8 && counterBit != 0){ // последующие биты для отправки 
+  93   2          buf = buf & (0x01 << counterBit);
+  94   2        }
+  95   1        if(buf) { return 1; } else { return 0; } // если 0x00 =>0,а если нет =>1
+  96   1      }
+  97          
+  98          /* установить значение clk */
+  99          void InCom_SPI_CLK_init(bit init){ PIN_CLK_SPI = init;}
+ 100          
+*** WARNING C294 IN LINE 77 OF Code\Source\Interface_com.c: unreachable code
+*** WARNING C294 IN LINE 90 OF Code\Source\Interface_com.c: unreachable code
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
    CODE SIZE        =    220    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
-C51 COMPILER V9.53.0.0   INTERFACE_COM                                                     09/24/2024 17:15:01 PAGE 3   
-
    PDATA SIZE       =   ----    ----
    DATA SIZE        =     18       5
    IDATA SIZE       =   ----    ----

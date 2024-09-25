@@ -1,4 +1,4 @@
-BL51 BANKED LINKER/LOCATER V6.22                                                        09/24/2024  17:15:01  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22                                                        09/25/2024  13:50:12  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
@@ -59,7 +59,7 @@ LINK MAP OF MODULE:  .\Code\Obj\censor_tm_ADC+RF (MAIN)
             CODE    0183H     004BH     UNIT         ?PR?_TIMER0_DELAY100US?DELAY
             CODE    01CEH     004BH     UNIT         ?PR?_TIMER0_DELAY1MS?DELAY
             CODE    0219H     004BH     UNIT         ?PR?_TIMER1_DELAY10MS?DELAY
-BL51 BANKED LINKER/LOCATER V6.22                                                      09/24/2024  17:15:01  PAGE 2
+BL51 BANKED LINKER/LOCATER V6.22                                                      09/25/2024  13:50:12  PAGE 2
 
 
             CODE    0264H     0046H     UNIT         ?PR?INCOM_SPI?INTERFACE_COM
@@ -119,7 +119,7 @@ SYMBOL TABLE OF MODULE:  .\Code\Obj\censor_tm_ADC+RF (MAIN)
   -------         MODULE        MAIN
   C:0000H         SYMBOL        _ICE_DUMMY_
   D:00B1H         PUBLIC        P0M1
-BL51 BANKED LINKER/LOCATER V6.22                                                      09/24/2024  17:15:01  PAGE 3
+BL51 BANKED LINKER/LOCATER V6.22                                                      09/25/2024  13:50:12  PAGE 3
 
 
   D:00B3H         PUBLIC        P1M1
@@ -179,7 +179,7 @@ SYMBOL TABLE OF MODULE:  .\Code\Obj\censor_tm_ADC+RF (MAIN)
   -------         MODULE        I2C_ADC_HX711
   C:0000H         SYMBOL        _ICE_DUMMY_
   D:0080H         PUBLIC        P0
-BL51 BANKED LINKER/LOCATER V6.22                                                      09/24/2024  17:15:01  PAGE 4
+BL51 BANKED LINKER/LOCATER V6.22                                                      09/25/2024  13:50:12  PAGE 4
 
 
   D:0090H         PUBLIC        P1
@@ -239,7 +239,7 @@ SYMBOL TABLE OF MODULE:  .\Code\Obj\censor_tm_ADC+RF (MAIN)
   D:00D8H         PUBLIC        PWMCON0
   D:00A8H         PUBLIC        IE
   D:00B8H         PUBLIC        IP
-BL51 BANKED LINKER/LOCATER V6.22                                                      09/24/2024  17:15:01  PAGE 5
+BL51 BANKED LINKER/LOCATER V6.22                                                      09/25/2024  13:50:12  PAGE 5
 
 
   D:0098H         PUBLIC        SCON
@@ -299,7 +299,7 @@ SYMBOL TABLE OF MODULE:  .\Code\Obj\censor_tm_ADC+RF (MAIN)
   D:00F8H         PUBLIC        SCON_1
   D:00E8H         PUBLIC        ADCCON0
   D:00C0H         PUBLIC        I2CON
-BL51 BANKED LINKER/LOCATER V6.22                                                      09/24/2024  17:15:01  PAGE 6
+BL51 BANKED LINKER/LOCATER V6.22                                                      09/25/2024  13:50:12  PAGE 6
 
 
   D:00C8H         PUBLIC        T2CON
@@ -359,7 +359,7 @@ SYMBOL TABLE OF MODULE:  .\Code\Obj\censor_tm_ADC+RF (MAIN)
   C:03CCH         LINE#         27
   -------         ENDPROC       INCOM_SPI_EXCHANGE
   -------         PROC          INCOM_SPI
-BL51 BANKED LINKER/LOCATER V6.22                                                      09/24/2024  17:15:01  PAGE 7
+BL51 BANKED LINKER/LOCATER V6.22                                                      09/25/2024  13:50:12  PAGE 7
 
 
   B:0020H.0       SYMBOL        valueMosi
@@ -369,78 +369,72 @@ SYMBOL TABLE OF MODULE:  .\Code\Obj\censor_tm_ADC+RF (MAIN)
   -------         ENDDO         
   C:0264H         LINE#         34
   C:0264H         LINE#         35
-  C:026AH         LINE#         37
-  C:0270H         LINE#         38
-  C:0270H         LINE#         39
-  C:0272H         LINE#         40
-  C:0272H         LINE#         41
-  C:0275H         LINE#         43
-  C:027FH         LINE#         45
-  C:027FH         LINE#         46
-  C:0281H         LINE#         47
-  C:0283H         LINE#         48
-  C:0285H         LINE#         49
-  C:0287H         LINE#         50
-  C:028CH         LINE#         51
-  C:028EH         LINE#         52
-  C:028FH         LINE#         54
-  C:028FH         LINE#         55
-  C:0291H         LINE#         56
-  C:0295H         LINE#         58
-  C:0298H         LINE#         59
-  C:02A1H         LINE#         60
-  C:02A1H         LINE#         62
-  C:02A9H         LINE#         63
-  C:02A9H         LINE#         64
-  C:02A9H         LINE#         65
-  C:02A9H         LINE#         66
+  C:026AH         LINE#         36
+  C:0270H         LINE#         37
+  C:0272H         LINE#         38
+  C:0275H         LINE#         39
+  C:027FH         LINE#         41
+  C:027FH         LINE#         42
+  C:0281H         LINE#         43
+  C:0283H         LINE#         44
+  C:0285H         LINE#         45
+  C:0287H         LINE#         46
+  C:028CH         LINE#         47
+  C:028EH         LINE#         48
+  C:028FH         LINE#         50
+  C:028FH         LINE#         51
+  C:0291H         LINE#         52
+  C:0295H         LINE#         53
+  C:0298H         LINE#         54
+  C:02A1H         LINE#         55
+  C:02A1H         LINE#         56
+  C:02A9H         LINE#         57
+  C:02A9H         LINE#         58
+  C:02A9H         LINE#         59
+  C:02A9H         LINE#         60
   -------         ENDPROC       INCOM_SPI
   -------         PROC          _INCOM_SPI_INPUT_IN_BUFFER
   D:0001H         SYMBOL        outSideBuffer
   -------         DO            
   D:0007H         SYMBOL        buf
   -------         ENDDO         
-  C:039BH         LINE#         70
-  C:039BH         LINE#         72
-  C:039FH         LINE#         73
-  C:03A5H         LINE#         74
-  C:03A5H         LINE#         75
-  C:03A9H         LINE#         77
-  C:03A9H         LINE#         78
-  C:03A9H         LINE#         79
-  C:03B6H         LINE#         80
-  C:03B6H         LINE#         81
-  C:03C7H         LINE#         82
-  C:03C7H         LINE#         83
-  C:03C7H         LINE#         84
-  C:03C7H         LINE#         85
-  C:03C7H         LINE#         86
-  C:03CBH         LINE#         87
-  C:03CBH         LINE#         88
+  C:039BH         LINE#         65
+  C:039BH         LINE#         67
+  C:039FH         LINE#         68
+  C:03A5H         LINE#         69
+  C:03A5H         LINE#         70
+  C:03A9H         LINE#         72
+  C:03A9H         LINE#         73
+  C:03A9H         LINE#         74
+  C:03B6H         LINE#         75
+  C:03C7H         LINE#         77
+  C:03C7H         LINE#         79
+  C:03CBH         LINE#         80
+  C:03CBH         LINE#         81
   -------         ENDPROC       _INCOM_SPI_INPUT_IN_BUFFER
   -------         PROC          _INCOM_SPI_OUTPUT_IN_BUFFER
-BL51 BANKED LINKER/LOCATER V6.22                                                      09/24/2024  17:15:01  PAGE 8
-
-
   D:0001H         SYMBOL        outSideBuffer
   -------         DO            
   D:0007H         SYMBOL        buf
   -------         ENDDO         
-  C:0365H         LINE#         92
-  C:0365H         LINE#         94
-  C:0369H         LINE#         95
-  C:036FH         LINE#         96
-  C:0372H         LINE#         97
-  C:0372H         LINE#         98
-  C:0372H         LINE#         99
-  C:0385H         LINE#         100
-  C:0394H         LINE#         101
-  C:0394H         LINE#         102
-  C:039AH         LINE#         103
+  C:0365H         LINE#         85
+  C:0365H         LINE#         87
+BL51 BANKED LINKER/LOCATER V6.22                                                      09/25/2024  13:50:12  PAGE 8
+
+
+  C:0369H         LINE#         88
+  C:036FH         LINE#         89
+  C:0372H         LINE#         90
+  C:0372H         LINE#         91
+  C:0372H         LINE#         92
+  C:0385H         LINE#         93
+  C:0394H         LINE#         94
+  C:0394H         LINE#         95
+  C:039AH         LINE#         96
   -------         ENDPROC       _INCOM_SPI_OUTPUT_IN_BUFFER
   -------         PROC          INCOM_SPI_CLK_INIT
   B:0020H.1       SYMBOL        init
-  C:0413H         LINE#         106
+  C:0413H         LINE#         99
   -------         ENDPROC       INCOM_SPI_CLK_INIT
   -------         ENDMOD        INTERFACE_COM
 
@@ -479,15 +473,15 @@ SYMBOL TABLE OF MODULE:  .\Code\Obj\censor_tm_ADC+RF (MAIN)
   D:0088H         PUBLIC        TCON
   D:00F8H         PUBLIC        SCON_1
   B:0088H.5       PUBLIC        TF0
-BL51 BANKED LINKER/LOCATER V6.22                                                      09/24/2024  17:15:01  PAGE 9
-
-
   B:0088H.7       PUBLIC        TF1
   C:0219H         PUBLIC        _Timer1_Delay10ms
   D:008CH         PUBLIC        TH0
   D:00C6H         PUBLIC        RH3
   D:008DH         PUBLIC        TH1
   D:008AH         PUBLIC        TL0
+BL51 BANKED LINKER/LOCATER V6.22                                                      09/25/2024  13:50:12  PAGE 9
+
+
   D:00C5H         PUBLIC        RL3
   D:008BH         PUBLIC        TL1
   C:0136H         PUBLIC        _Timer3_Delay10us
@@ -539,15 +533,15 @@ SYMBOL TABLE OF MODULE:  .\Code\Obj\censor_tm_ADC+RF (MAIN)
   -------         PROC          _TIMER1_DELAY10MS
   D:002EH         SYMBOL        u32CNT
   C:0219H         LINE#         53
-BL51 BANKED LINKER/LOCATER V6.22                                                      09/24/2024  17:15:01  PAGE 10
-
-
   C:0221H         LINE#         54
   C:0221H         LINE#         55
   C:0224H         LINE#         56
   C:0227H         LINE#         57
   C:0229H         LINE#         58
   C:023CH         LINE#         59
+BL51 BANKED LINKER/LOCATER V6.22                                                      09/25/2024  13:50:12  PAGE 10
+
+
   C:023CH         LINE#         60
   C:023FH         LINE#         61
   C:0242H         LINE#         62
@@ -599,14 +593,14 @@ SYMBOL TABLE OF MODULE:  .\Code\Obj\censor_tm_ADC+RF (MAIN)
 
   -------         MODULE        ?C?CSTPTR
   C:00B3H         PUBLIC        ?C?CSTPTR
-BL51 BANKED LINKER/LOCATER V6.22                                                      09/24/2024  17:15:01  PAGE 11
-
-
   -------         ENDMOD        ?C?CSTPTR
 
   -------         MODULE        ?C?ULCMP
   C:00C5H         PUBLIC        ?C?ULCMP
   -------         ENDMOD        ?C?ULCMP
+
+BL51 BANKED LINKER/LOCATER V6.22                                                      09/25/2024  13:50:12  PAGE 11
+
 
   -------         MODULE        ?C?LSHL
   C:00D6H         PUBLIC        ?C?LSHL
