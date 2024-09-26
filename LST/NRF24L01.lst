@@ -1,4 +1,4 @@
-C51 COMPILER V9.53.0.0   NRF24L01                                                          09/25/2024 13:50:12 PAGE 1   
+C51 COMPILER V9.53.0.0   NRF24L01                                                          09/26/2024 16:25:25 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE NRF24L01
@@ -15,18 +15,79 @@ line level    source
    3          //********************************************************************************************************
              -***
    4          #include <GPIO.h>
-   5          #include <N76E003.h>
-   6          
-   7          int currentProgress = 0;
+   5          #include <Interface_com.H>
+   6          #include <NRF24L01.H>
+   7          #include <N76E003.h>
    8          
+   9          // размер адреса
+  10          // номер канала
+  11          // 
+  12          
+  13          unsigned char CONFIG_SEND[BUFFER_MASSIV_SIZE] ={0x01,0x02,0x03,0x04,0x05};
+  14          unsigned char CONFIG_SENDE[BUFFER_MASSIV_SIZE] ={0x09,0x12,0x13,0x14,0x05};
+  15          
+  16          
+  17          unsigned char TX_ADDRESS[BUFFER_MASSIV_SIZE] = 
+  18            {0x01,0x02,0x03,0x04,0x05};
+  19          unsigned char RX_ADDRESS[BUFFER_MASSIV_SIZE] =
+  20            {0x01,0x02,0x03,0x04,0x05};
+  21          
+  22          int currentProgress = 0;
+  23          
+  24          void NRF_init(){
+  25   1        NRF_CE = 0;
+  26   1        // init IRQ 
+  27   1      }
+  28          
+  29          
+  30          void NRF_init_RX(){
+  31   1        NRF_CE = 0;
+  32   1        switch(currentProgress){
+  33   2          default:FlagInComSPIGlobal = 0; break;
+  34   2          case 0: NRF_send( &CONFIG_SEND  , 4 ); break;
+  35   2          case 1: NRF_send( &CONFIG_SENDE , 4 ); break;
+  36   2          
+  37   2        }
+  38   1      }
+  39          
+  40          void NRF_init_TX(){
+  41   1        NRF_CE = 0;
+  42   1      }
+  43            
+  44          /*send info for SPI*/
+  45          void NRF_send(unsigned char *message,int amountMessage){
+  46   1        int i;
+  47   1        for(i = 0; i <= amountMessage; i++){
+  48   2          valueBufferArrayTx[i] = *(message + i);
+  49   2        }   
+  50   1        amountByteArrayForSend = amountMessage;
+  51   1        FlagInComSPIGlobal = 1;
+C51 COMPILER V9.53.0.0   NRF24L01                                                          09/26/2024 16:25:25 PAGE 2   
+
+  52   1      }
+  53          
+  54          /*get info for SPI*/
+  55          unsigned char *NRF_read(){
+  56   1        return 0x00;
+  57   1      }
+  58            
+  59          void NRF_clear_IRQ(void){}
+  60          void NRF_get_status(void){}
+  61            
+  62            
+  63            
+  64            
+  65            
+  66            
+  67            
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =   ----    ----
+   CODE SIZE        =    119    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =      2    ----
+   DATA SIZE        =     26       5
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.

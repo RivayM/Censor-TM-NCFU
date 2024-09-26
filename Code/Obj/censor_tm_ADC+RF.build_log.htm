@@ -32,13 +32,23 @@ compiling NRF24L01.c...
 compiling GPIO.c...
 compiling NRF_ex.c...
 compiling Interface_com.c...
-Code\Source\Interface_com.c(77): warning C294: unreachable code
-Code\Source\Interface_com.c(90): warning C294: unreachable code
+Code\Source\Interface_com.c(80): warning C294: unreachable code
+Code\Source\Interface_com.c(92): warning C294: unreachable code
 compiling Common.c...
 compiling Delay.c...
 linking...
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?ADCHX711_INITIAL?I2C_ADC_HX711
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?NRF_INIT?NRF24L01
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?NRF_INIT_TX?NRF24L01
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?NRF_READ?NRF24L01
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?NRF_CLEAR_IRQ?NRF24L01
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?NRF_GET_STATUS?NRF24L01
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?LED_SWITCH_STATE?GPIO
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
@@ -52,7 +62,17 @@ linking...
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?_TIMER1_DELAY10MS?DELAY
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_TIMER3_DELAY100MS?DELAY
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?_TIMER3_DELAY10US?DELAY
-Program Size: data=54.4 xdata=0 code=1050
+Program Size: data=88.4 xdata=0 code=1539
 creating hex file from ".\Code\Obj\censor_tm_ADC+RF"...
-".\Code\Obj\censor_tm_ADC+RF" - 0 Error(s), 10 Warning(s).
+".\Code\Obj\censor_tm_ADC+RF" - 0 Error(s), 16 Warning(s).
+Load "C:\\Users\\MASTER.CERN\\Desktop\\PROGRAMM COD\\CENSOR\\Code\\Obj\\censor_tm_ADC+RF" 
+Flash Erase Done.
+Flash Write Done: 1539 bytes programmed.
+Flash Verify Done: 1539 bytes verified.
+Load "C:\\Users\\MASTER.CERN\\Desktop\\PROGRAMM COD\\CENSOR\\Code\\Obj\\censor_tm_ADC+RF" 
+Flash Erase Done.
+Flash Write Done: 1539 bytes programmed.
+Flash Verify Done: 1539 bytes verified.

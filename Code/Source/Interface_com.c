@@ -25,9 +25,9 @@ void InCom_SPI_init_Timer(){
 /* main func(for timer) */
 void InCom_SPI_exchange(void){
 	InCom_SPI( 
-		InCom_SPI_Output_in_buffer(
-			&valueBufferArrayTx[0]),   // buf  for Tx
-		&valueBufferArrayRx[0]);	   // buf  for Rx
+	InCom_SPI_Output_in_buffer(
+		&valueBufferArrayTx[counterByte]),   // buf  for Tx
+	&valueBufferArrayRx[counterByte]);	   // buf  for Rx
 }
 
 /* exchange bitwise operation */
@@ -38,13 +38,17 @@ void InCom_SPI(bit valueMosi, unsigned char *outSideBuffer){
 	if( PIN_CLK_SPI == 0) {       				// CPHA
 		switch(counterBit){		 							// Start
 			/******************************/
-			case BUFFER_SPI:          				// END
-				PIN_CS_SPI   = 1;
+			case BUFFER_SPI:          				// End packet
 				PIN_MOSI_SPI = 1;
 				PIN_MISO_SPI = 1;
-				PIN_CLK_SPI  = 0;
+				PIN_CLK_SPI  = 0;	
 				counterBit = 0;
-				FlagInComSPIGlobal = 0; 
+				if(counterByte == amountByteArrayForSend){ // end exchange
+					PIN_CS_SPI  = 1;
+					counterByte = 0;
+					FlagInComSPIGlobal = 0; 
+				}
+				else counterByte ++;                 // next packet
 				break;
 			/******************************/
 			default:                  				// process going
@@ -53,7 +57,7 @@ void InCom_SPI(bit valueMosi, unsigned char *outSideBuffer){
 					if ( PIN_MISO_SPI == 1){      // send MiSo 	
 						InCom_SPI_Input_in_buffer(outSideBuffer);
 					}	
-				counterBit ++; // next bit
+				counterBit ++; 									// next bit
 				break;
 		}
 	}

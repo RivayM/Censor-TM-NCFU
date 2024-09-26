@@ -1,7 +1,8 @@
 /******************************/
 /* NRF24L01*/
 /******************************/
-
+#ifndef NRF24L01
+#define NRF24L01
 #define BUFFER_MASSIV_SIZE NRF24_BUFFER_MASSIV_SIZE // размер буфера
 
 extern unsigned char TX_ADDRESS[BUFFER_MASSIV_SIZE]; // адрес передатчика
@@ -47,7 +48,17 @@ extern int currentProgress;      // текущий прогресс
 #define RX_PW_P5     0x16            //RX payload width, pipe 5
 #define FIFO_STATUS  0x17            //FIFO Status Reg
 
+unsigned char *NRF_read();
+void NRF_send(unsigned char *message,int amountMessage);
+	
+void NRF_init();
+void NRF_init_RX();
+void NRF_init_TX();
+	
+void NRF_clear_IRQ(void);
+void NRF_get_status(void);
 
+#endif
 
 
 
