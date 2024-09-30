@@ -58,5 +58,6 @@
 void Led_Switch_State();
 void Button_Read();
 int Switch_State_Power_RF();
+void GPIO_init();
 #endif
 

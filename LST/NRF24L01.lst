@@ -1,4 +1,4 @@
-C51 COMPILER V9.53.0.0   NRF24L01                                                          09/26/2024 16:25:25 PAGE 1   
+C51 COMPILER V9.53.0.0   NRF24L01                                                          09/30/2024 12:28:04 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE NRF24L01
@@ -21,73 +21,79 @@ line level    source
    8          
    9          // размер адреса
   10          // номер канала
-  11          // 
+  11          //              
   12          
-  13          unsigned char CONFIG_SEND[BUFFER_MASSIV_SIZE] ={0x01,0x02,0x03,0x04,0x05};
-  14          unsigned char CONFIG_SENDE[BUFFER_MASSIV_SIZE] ={0x09,0x12,0x13,0x14,0x05};
-  15          
-  16          
-  17          unsigned char TX_ADDRESS[BUFFER_MASSIV_SIZE] = 
-  18            {0x01,0x02,0x03,0x04,0x05};
-  19          unsigned char RX_ADDRESS[BUFFER_MASSIV_SIZE] =
-  20            {0x01,0x02,0x03,0x04,0x05};
-  21          
-  22          int currentProgress = 0;
-  23          
-  24          void NRF_init(){
-  25   1        NRF_CE = 0;
-  26   1        // init IRQ 
-  27   1      }
-  28          
+  13          xdata unsigned char CONFIG_SEND[BUFFER_MASSIV_SIZE] =
+  14            {0x01,0x02,0x03,0x04,0x05};
+  15          xdata unsigned char CONFIG_SENDE[BUFFER_MASSIV_SIZE] =
+  16            {0x09,0x12,0x13,0x14,0x05};
+  17          
+  18          unsigned char TX_ADDRESS[BUFFER_MASSIV_SIZE] = 
+  19            {0x01,0x02,0x03,0x04,0x05};
+  20          unsigned char RX_ADDRESS[BUFFER_MASSIV_SIZE] =
+  21            {0x01,0x02,0x03,0x04,0x05};
+  22          
+  23          int currentProgress = 0;
+  24          
+  25          void NRF_init(){
+  26   1        NRF_CE = 0;
+  27   1        // init IRQ 
+  28   1      }
   29          
   30          void NRF_init_RX(){
   31   1        NRF_CE = 0;
   32   1        switch(currentProgress){
-  33   2          default:FlagInComSPIGlobal = 0; break;
-  34   2          case 0: NRF_send( &CONFIG_SEND  , 4 ); break;
-  35   2          case 1: NRF_send( &CONFIG_SENDE , 4 ); break;
-  36   2          
+  33   2          case START_PROGRESS: NRF_send( &CONFIG_SEND  , 4 ); break;
+  34   2          case 1: NRF_send( &CONFIG_SENDE , 4 ); break;
+  35   2          case END_PROGRESS:break;
+  36   2          default: break;
   37   2        }
-  38   1      }
-  39          
-  40          void NRF_init_TX(){
-  41   1        NRF_CE = 0;
-  42   1      }
-  43            
-  44          /*send info for SPI*/
-  45          void NRF_send(unsigned char *message,int amountMessage){
-  46   1        int i;
-  47   1        for(i = 0; i <= amountMessage; i++){
-  48   2          valueBufferArrayTx[i] = *(message + i);
-  49   2        }   
-  50   1        amountByteArrayForSend = amountMessage;
-  51   1        FlagInComSPIGlobal = 1;
-C51 COMPILER V9.53.0.0   NRF24L01                                                          09/26/2024 16:25:25 PAGE 2   
+  38   1        currentProgress++;
+  39   1      }
+  40          
+  41          void NRF_init_TX(){
+  42   1        NRF_CE = 0;
+  43   1      }
+  44            
+  45          /*send info for SPI*/
+  46          void NRF_send(unsigned char *message,int amountMessage){
+  47   1        int i;
+  48   1        for(i = 0; i <= amountMessage; i++){
+  49   2          valueBufferArrayTx[i] = *(message + i);
+  50   2        }   
+  51   1        amountByteArrayForSend = amountMessage;
+C51 COMPILER V9.53.0.0   NRF24L01                                                          09/30/2024 12:28:04 PAGE 2   
 
-  52   1      }
-  53          
-  54          /*get info for SPI*/
-  55          unsigned char *NRF_read(){
-  56   1        return 0x00;
-  57   1      }
-  58            
-  59          void NRF_clear_IRQ(void){}
-  60          void NRF_get_status(void){}
-  61            
-  62            
-  63            
-  64            
-  65            
-  66            
+  52   1        FlagInComSPIGlobal = 1;                    //start exchange
+  53   1      }
+  54          
+  55          /*get info for SPI*/
+  56          unsigned char *NRF_read(){
+  57   1        return 0x00;
+  58   1      }
+  59            
+  60          void NRF_clear_IRQ(void){
+  61   1        
+  62   1      }
+  63          
+  64          void NRF_get_status(void){
+  65   1        
+  66   1      }
   67            
+  68            
+  69            
+  70            
+  71            
+  72            
+  73            
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    119    ----
+   CODE SIZE        =    123    ----
    CONSTANT SIZE    =   ----    ----
-   XDATA SIZE       =   ----    ----
+   XDATA SIZE       =     12    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =     26       5
+   DATA SIZE        =     14       5
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.

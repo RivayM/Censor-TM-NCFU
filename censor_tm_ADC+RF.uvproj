@@ -392,6 +392,11 @@
               <FileType>5</FileType>
               <FilePath>.\Code\Head\CONFIG.h</FilePath>
             </File>
+            <File>
+              <FileName>CENCOR_PROGRAMM.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Code\Head\CENCOR_PROGRAMM.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -426,6 +431,11 @@
               <FileName>Interface_com.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Code\Source\Interface_com.c</FilePath>
+            </File>
+            <File>
+              <FileName>CENCOR_PROGRAMM.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Code\Source\CENCOR_PROGRAMM.c</FilePath>
             </File>
           </Files>
         </Group>

@@ -124,7 +124,24 @@
           <Name></Name>
         </SetRegEntry>
       </TargetDriverDllRegistry>
-      <Breakpoint/>
+      <Breakpoint>
+        <Bp>
+          <Number>0</Number>
+          <Type>0</Type>
+          <LineNumber>37</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>-16776209</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>C:\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Code\Source\NRF24L01.C</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\censor_tm_ADC+RF\NRF24L01\37</Expression>
+        </Bp>
+      </Breakpoint>
       <WatchWindow1>
         <Ww>
           <count>0</count>
@@ -150,6 +167,11 @@
           <count>4</count>
           <WinNumber>1</WinNumber>
           <ItemText>buf</ItemText>
+        </Ww>
+        <Ww>
+          <count>5</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>i</ItemText>
         </Ww>
       </WatchWindow1>
       <Tracepoint>
