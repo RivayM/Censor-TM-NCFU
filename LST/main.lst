@@ -1,4 +1,4 @@
-C51 COMPILER V9.53.0.0   MAIN                                                              09/30/2024 12:28:04 PAGE 1   
+C51 COMPILER V9.53.0.0   MAIN                                                              10/02/2024 16:53:46 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE MAIN
@@ -17,29 +17,26 @@ line level    source
    6          
    7          void main(){
    8   1        /****************/
-   9   1        
+   9   1        /*    init      */
   10   1        /****************/  
   11   1        GPIO_init();
-  12   1        /****************/
-  13   1        InCom_SPI_init_Timer();
-  14   1        InCom_SPI_CLK_init(0);
-  15   1        /****************/
-  16   1        //NRF_send(&value,3);
-  17   1        
+  12   1        InCom_SPI_init_Timer();
+  13   1        InCom_SPI_CLK_init(0);
+  14   1        /****************/
+  15   1        /* start work   */
+  16   1        /****************/
+  17   1      
   18   1        /****************/
-  19   1        // start work
-  20   1        NRF_init_RX();
-  21   1        
-  22   1        while(1){
-  23   2          Main_Work_NRF();
-  24   2          // work with ADC
-  25   2          // work with FRAM
-  26   2        }
-  27   1      }
+  19   1        while(1){
+  20   2          Work_NRF();
+  21   2          PIN_LED_RED = Button_Read();  //чтение кнопки
+  22   2        }
+  23   1      }
+  24          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =     19    ----
+   CODE SIZE        =     21    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----

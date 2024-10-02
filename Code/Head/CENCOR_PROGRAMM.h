@@ -14,7 +14,7 @@
 
 extern int mainStateProgress;
 
-void Main_Work_NRF(void);
+void Work_NRF(void);
 void ISR_Timer0(void);
 
 

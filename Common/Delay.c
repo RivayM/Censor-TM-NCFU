@@ -12,10 +12,10 @@
 //***********************************************************************************************************
 
 #include "N76E003.h"
-/*
+
 
 bit BIT_TMP;
-
+/*
 //-------------------------------------------------------------------------
 void Timer0_Delay100us(UINT32 u32CNT)
 {
@@ -33,6 +33,8 @@ void Timer0_Delay100us(UINT32 u32CNT)
     clr_TR0;                       			        //Stop Timer0
 }
 ////------------------------------------------------------------------------------
+
+
 void Timer0_Delay1ms(UINT32 u32CNT)
 {
     clr_T0M;                                		//T0M=0, Timer0 Clock = Fsys/12
@@ -65,24 +67,24 @@ void Timer1_Delay10ms(UINT32 u32CNT)
     }
     clr_TR1;                               			//Stop Timer1
 }
-////------------------------------------------------------------------------------
-//void Timer2_Delay500us(UINT32 u32CNT)
-//{
-//    clr_T2DIV2;																	//Timer2 Clock = Fsys/4 
-//    clr_T2DIV1;
-//    set_T2DIV0;
-//    set_TR2;                                		//Start Timer2
-//    while (u32CNT != 0)
-//    {
-//        TL2 = LOBYTE(TIMER_DIV4_VALUE_500us);		//Find  define in "Function_define.h" "TIMER VALUE"
-//        TH2 = HIBYTE(TIMER_DIV4_VALUE_500us);
-//        while (TF2 != 1);                   		//Check Timer2 Time-Out Flag
-//        clr_TF2;
-//        u32CNT --;
-//    }
-//    clr_TR2;                                		//Stop Timer2
-//}
-////------------------------------------------------------------------------------
+//------------------------------------------------------------------------------
+void Timer2_Delay500us(UINT32 u32CNT)
+{
+    clr_T2DIV2;																	//Timer2 Clock = Fsys/4 
+    clr_T2DIV1;
+    set_T2DIV0;
+    set_TR2;                                		//Start Timer2
+    while (u32CNT != 0)
+    {
+        TL2 = LOBYTE(TIMER_DIV4_VALUE_500us);		//Find  define in "Function_define.h" "TIMER VALUE"
+        TH2 = HIBYTE(TIMER_DIV4_VALUE_500us);
+        while (TF2 != 1);                   		//Check Timer2 Time-Out Flag
+        clr_TF2;
+        u32CNT --;
+    }
+    clr_TR2;                                		//Stop Timer2
+}*/
+//------------------------------------------------------------------------------
 void Timer3_Delay100ms(UINT32 u32CNT)
 {
     T3CON = 0x07;                           		//Timer3 Clock = Fsys/128
@@ -98,6 +100,7 @@ void Timer3_Delay100ms(UINT32 u32CNT)
     clr_TR3;                                		//Stop Timer3
 }
 ////------------------------------------------------------------------------------
+/*
 void Timer3_Delay10us(UINT32 u32CNT)
 {
     T3CON = 0x07;                           		//Timer3 Clock = Fsys/128
@@ -111,5 +114,4 @@ void Timer3_Delay10us(UINT32 u32CNT)
         u32CNT --;
     }
     clr_TR3;                                		//Stop Timer3
-}
-*/
+}*/

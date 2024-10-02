@@ -32,9 +32,9 @@ void InCom_SPI_exchange(void){
 
 /* exchange bitwise operation */
 void InCom_SPI(bit valueMosi, unsigned char *outSideBuffer){ 
-	int read = 2;													// amount read MISO
-	if(counterBit == 0) {}  							// CPOL 
-	else {PIN_CLK_SPI =~ PIN_CLK_SPI;} 		// clocking
+	if(counterBit) {                      // CPOL 
+		PIN_CLK_SPI =~PIN_CLK_SPI;          // clocking
+	}  								
 	if( PIN_CLK_SPI == 0) {       				// CPHA
 		switch(counterBit){		 							// Start
 			/******************************/
@@ -43,27 +43,25 @@ void InCom_SPI(bit valueMosi, unsigned char *outSideBuffer){
 				PIN_MISO_SPI = 1;
 				PIN_CLK_SPI  = 0;	
 				counterBit = 0;
-				if(counterByte == amountByteArrayForSend){ // end exchange
+				if(counterByte == amountByteArrayForSend - 1){ // end exchange
 					PIN_CS_SPI  = 1;
 					counterByte = 0;
 					FlagInComSPIGlobal = 0; 
 				}
-				else counterByte ++;                 // next packet
+				else counterByte++;                 // next packet
 				break;
 			/******************************/
 			default:                  				// process going
 				PIN_CS_SPI   = 0;
 				PIN_MOSI_SPI = valueMosi; 			// send MoSi
-					if ( PIN_MISO_SPI == 1){      // send MiSo 	
-						InCom_SPI_Input_in_buffer(outSideBuffer);
-					}	
-				counterBit ++; 									// next bit
+				if ( PIN_MISO_SPI == 1){      // send MiSo 	
+					InCom_SPI_Input_in_buffer(outSideBuffer);
+				}	
+				counterBit++; 									// next bit
 				break;
 		}
 	}
 }
-
-
 
 /* save reading bit in buf */
 void InCom_SPI_Input_in_buffer(unsigned char *outSideBuffer){
@@ -87,9 +85,9 @@ void InCom_SPI_Input_in_buffer(unsigned char *outSideBuffer){
 bit InCom_SPI_Output_in_buffer(unsigned char *outSideBuffer){
 	unsigned char buf;
 	buf = *outSideBuffer;  
-	if (counterBit == 0){	 // start bit
-		if(SPI_MSB){ buf = buf & 0x01; }  // mask MSB
-		else       { buf = buf & 0x80; }  // mask LSB
+	if (counterBit == 0){	 									// start bit
+		if(SPI_MSB){ buf = buf & 0x01; } 		 	// mask MSB
+		else       { buf = buf & 0x80; } 			// mask LSB
 	}
 	if( counterBit < 8 && counterBit != 0){	// next bit 
 		buf = buf & (0x01 << counterBit);
@@ -100,3 +98,4 @@ bit InCom_SPI_Output_in_buffer(unsigned char *outSideBuffer){
 /* init clk */
 void InCom_SPI_CLK_init(bit init){ PIN_CLK_SPI = init;}
 
+void InCom_SPI_start(void){FlagInComSPIGlobal = 1;}

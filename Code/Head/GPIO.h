@@ -56,7 +56,7 @@
 #define NRF_IRQ P17					//INT1
 
 void Led_Switch_State();
-void Button_Read();
+bit Button_Read();
 int Switch_State_Power_RF();
 void GPIO_init();
 #endif

@@ -1,4 +1,4 @@
-C51 COMPILER V9.53.0.0   NRF24L01                                                          09/30/2024 12:28:04 PAGE 1   
+C51 COMPILER V9.53.0.0   NRF24L01                                                          10/02/2024 16:53:46 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE NRF24L01
@@ -19,81 +19,126 @@ line level    source
    6          #include <NRF24L01.H>
    7          #include <N76E003.h>
    8          
-   9          // размер адреса
-  10          // номер канала
-  11          //              
-  12          
-  13          xdata unsigned char CONFIG_SEND[BUFFER_MASSIV_SIZE] =
-  14            {0x01,0x02,0x03,0x04,0x05};
-  15          xdata unsigned char CONFIG_SENDE[BUFFER_MASSIV_SIZE] =
-  16            {0x09,0x12,0x13,0x14,0x05};
-  17          
-  18          unsigned char TX_ADDRESS[BUFFER_MASSIV_SIZE] = 
-  19            {0x01,0x02,0x03,0x04,0x05};
-  20          unsigned char RX_ADDRESS[BUFFER_MASSIV_SIZE] =
-  21            {0x01,0x02,0x03,0x04,0x05};
-  22          
-  23          int currentProgress = 0;
-  24          
-  25          void NRF_init(){
-  26   1        NRF_CE = 0;
-  27   1        // init IRQ 
-  28   1      }
-  29          
-  30          void NRF_init_RX(){
-  31   1        NRF_CE = 0;
-  32   1        switch(currentProgress){
-  33   2          case START_PROGRESS: NRF_send( &CONFIG_SEND  , 4 ); break;
-  34   2          case 1: NRF_send( &CONFIG_SENDE , 4 ); break;
-  35   2          case END_PROGRESS:break;
-  36   2          default: break;
-  37   2        }
-  38   1        currentProgress++;
-  39   1      }
-  40          
-  41          void NRF_init_TX(){
-  42   1        NRF_CE = 0;
-  43   1      }
-  44            
-  45          /*send info for SPI*/
-  46          void NRF_send(unsigned char *message,int amountMessage){
-  47   1        int i;
-  48   1        for(i = 0; i <= amountMessage; i++){
-  49   2          valueBufferArrayTx[i] = *(message + i);
-  50   2        }   
-  51   1        amountByteArrayForSend = amountMessage;
-C51 COMPILER V9.53.0.0   NRF24L01                                                          09/30/2024 12:28:04 PAGE 2   
+   9          //**************************************************************************
+  10          //  struct for send mode RX
+  11          //**************************************************************************
+  12          xdata struct PACKET packetRX = {
+  13            /*reg:            ,value:   */
+  14            {W_REG|NRF_CONFIG ,0x03},   //  CONFIG
+  15            {W_REG|EN_AA      ,0x00},   //  EN_AA
+  16            {W_REG|SETUP_AW   ,0x03},   //  SETUP_AW
+  17            {W_REG|RF_CH      ,0x6E},   //  RF_CH   
+  18            {W_REG|RF_SETUP   ,0x06},   //  RF_SETUP
+  19            {W_REG|EN_RXADDR  ,0x01},   //  EN_RXADDR   
+  20            {W_REG|RX_PW_P0   ,0x01},   //  RX_PW_P0
+  21            //{0x01,0x02,0x03,0x04,0x05,0x05}               //  RX_PW_P1
+  22            {W_REG|TX_ADDR    ,'V','V','V','V','t'},        //  TX_ADDR 
+  23            {W_REG|RX_ADDR_P0 ,'V','V','V','V','r'},        //  RX_ADDR0
+  24            //{0x01,0x02,0x03,0x04,0x05,0x05}               //  RX_ADDR1
+  25            {FLUSH_RX         ,NOP}     //  FLUSH   
+  26          };
+  27          
+  28          //**************************************************************************
+  29          //  struct for send mode TX
+  30          //**************************************************************************
+  31          xdata struct PACKET packetTX = {
+  32            /*reg:            ,value:*/
+  33            {W_REG|NRF_CONFIG ,0x02,0x00,0x04,0x05,0x05},   //  CONFIG
+  34            {W_REG|EN_AA      ,0x0B,0x0C,0x0D,0x0E,0x05},   //  EN_AA
+  35            {W_REG|SETUP_AW   ,0x02,0x03,0x04,0x05,0x05},   //  SETUP_AW
+  36            {W_REG|RF_CH      ,0x02,0x03,0x04,0x05,0x05},   //  RF_CH   
+  37            {W_REG|RF_SETUP   ,0x02,0x03,0x04,0x05,0x05},   //  RF_SETUP
+  38            {W_REG|EN_RXADDR  ,0x02,0x03,0x04,0x05,0x05},   //  EN_RXADDR   
+  39            {W_REG|RX_ADDR_P0 ,0x02,0x03,0x04,0x05,0x05},   //  RX_PW_P0
+  40            //{0x01,0x02,0x03,0x04,0x05,0x05}               //  RX_PW_P1
+  41            {W_REG|TX_ADDR    ,'V','V','V','V','t'},        //  TX_ADDR 
+  42            {W_REG|RX_ADDR_P0 ,'V','V','V','V','r'},        //  RX_ADDR0
+  43            //{0x01,0x02,0x03,0x04,0x05,0x05}               //  RX_ADDR1
+  44            {FLUSH_RX         ,NOP,0x03,0x04,0x05,0x05}     //  FLUSH   
+  45          };
+  46          
+  47          //**************************************************************************
+  48          // NRF24L01
+  49          //**************************************************************************
+  50          
+  51          int currentProgress = 0;
+C51 COMPILER V9.53.0.0   NRF24L01                                                          10/02/2024 16:53:46 PAGE 2   
 
-  52   1        FlagInComSPIGlobal = 1;                    //start exchange
-  53   1      }
-  54          
-  55          /*get info for SPI*/
-  56          unsigned char *NRF_read(){
-  57   1        return 0x00;
-  58   1      }
-  59            
-  60          void NRF_clear_IRQ(void){
-  61   1        
-  62   1      }
-  63          
-  64          void NRF_get_status(void){
-  65   1        
-  66   1      }
-  67            
-  68            
-  69            
-  70            
-  71            
-  72            
-  73            
+  52          xdata unsigned char readBuf[BUFFER_MASSIV_SIZE]={0x00}; 
+  53          
+  54          /*initialization as receiver*/
+  55          bit NRF_init(struct PACKET *packet){
+  56   1        switch(currentProgress){
+  57   2          case START_PROGRESS: NRF_CE = 0;            break;
+  58   2          case 1: Timer3_Delay100ms(START_DELAY);     break;
+  59   2          case 2: NRF_send( packet->vCONFIG,    2 );  break;
+  60   2          case 3: NRF_send( packet->vEN_AA,     2 );  break;  
+  61   2          case 4: NRF_send( packet->vSETUP_AW,  2 );  break;  
+  62   2          case 5: NRF_send( packet->vRF_CH,     2 );  break;  
+  63   2          case 6: NRF_send( packet->vRF_SETUP,  2 );  break;  
+  64   2          case 7: NRF_send( packet->vEN_RXADDR, 2 );  break;  
+  65   2          case 8: NRF_send( packet->vRX_PW_P0,  2 );  break;  
+  66   2          case 9: NRF_send( packet->vTX_ADDR,   6 );  break;  
+  67   2          case 10:NRF_send( packet->vRX_ADDR0,  6 );  break;  
+  68   2          case 11:NRF_CE = 1;                         break;
+  69   2          case 12:currentProgress = END_PROGRESS;     break;
+  70   2          default: break;
+  71   2        }
+  72   1        if(currentProgress == END_PROGRESS){ 
+  73   2          currentProgress = 0;
+  74   2          return 1;
+  75   2        }
+  76   1        else {
+  77   2          currentProgress++;
+  78   2          return 0;
+  79   2        }
+  80   1      }
+  81          
+  82          /*send info for SPI*/
+  83          void NRF_send(unsigned char *message,int amountMessage){
+  84   1        int i;
+  85   1        for(i = 0; i <= amountMessage; i++){
+  86   2          valueBufferArrayTx[i] = *(message + i);
+  87   2        }   
+  88   1        amountByteArrayForSend = amountMessage;
+  89   1        InCom_SPI_start();      //start exchange
+  90   1      }
+  91          
+  92          /* clear all flags*/    
+  93          void NRF_clear_IRQ(void){
+  94   1        unsigned char array[BUFFER_MASSIV_SIZE] = 
+  95   1          {W_REG|STATUS,0x70};
+  96   1        NRF_send(array,   2);   // Clear RX_DR, TX_DS, MAX_RT flags
+  97   1      }
+  98          /* ask the status*/ 
+  99          void NRF_ack_status(void){
+ 100   1        unsigned char array[BUFFER_MASSIV_SIZE] =
+ 101   1          {STATUS};
+ 102   1        NRF_send( array, 1 );   // read Status
+ 103   1      } 
+ 104          
+ 105          /* read last answer for spi*/ 
+ 106          void NRF_get_value(void){
+ 107   1        int i;
+ 108   1        for(i = 0; i < BUFFER_MASSIV_SIZE;i++){
+ 109   2          readBuf[i] = valueBufferArrayRx[i];
+ 110   2        }
+ 111   1      }
+ 112            
+ 113            
+C51 COMPILER V9.53.0.0   NRF24L01                                                          10/02/2024 16:53:46 PAGE 3   
+
+ 114            
+ 115            
+ 116            
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    123    ----
-   CONSTANT SIZE    =   ----    ----
-   XDATA SIZE       =     12    ----
+   CODE SIZE        =    409    ----
+   CONSTANT SIZE    =     12    ----
+   XDATA SIZE       =    126    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =     14       5
+   DATA SIZE        =      2      20
    IDATA SIZE       =   ----    ----
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.

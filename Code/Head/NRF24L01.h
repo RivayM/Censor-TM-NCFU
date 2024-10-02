@@ -3,12 +3,11 @@
 /******************************/
 #ifndef NRF24L01
 #define NRF24L01
-#define BUFFER_MASSIV_SIZE NRF24_BUFFER_MASSIV_SIZE // размер буфера
-
-extern unsigned char TX_ADDRESS[BUFFER_MASSIV_SIZE]; // адрес передатчика
-extern unsigned char RX_ADDRESS[BUFFER_MASSIV_SIZE]; // адрес приемника
-extern int currentProgress;      // текущий прогресс
-
+#define BUFFER_MASSIV_SIZE NRF24_BUFFER_MASSIV_SIZE		// size buffer
+/******************************/
+/*SETINGS*/
+/******************************/
+#define START_DELAY  10          		 // first start
 /******************************/
 /*Commands*/
 /******************************/
@@ -47,17 +46,44 @@ extern int currentProgress;      // текущий прогресс
 #define RX_PW_P4     0x15            //RX payload width, pipe 4
 #define RX_PW_P5     0x16            //RX payload width, pipe 5
 #define FIFO_STATUS  0x17            //FIFO Status Reg
+/******************************/
+/*FLAG*/
+/******************************/
+#define FLAG_RX_DR   0x40            // Data Ready RX FIFO interrupt
+#define FLAG_TX_DS   0x20            // Data Sent TX FIFO interrupt.
+#define FLAG_MAX_RT  0x10            // Maximum number of TX retransmits
 
-unsigned char *NRF_read();
+
+extern int currentProgress;      		 // current progress
+extern xdata unsigned char readBuf[BUFFER_MASSIV_SIZE];      // buffer 
+	
+extern struct PACKET{  //PACKET vXXXX -> v= value XXX=REGISTR
+	unsigned char vCONFIG			[BUFFER_MASSIV_SIZE];			// 
+	unsigned char vEN_AA			[BUFFER_MASSIV_SIZE];			//
+	unsigned char vSETUP_AW		[BUFFER_MASSIV_SIZE];			//
+	unsigned char vRF_CH			[BUFFER_MASSIV_SIZE];			//
+	unsigned char vRF_SETUP		[BUFFER_MASSIV_SIZE];			//
+	unsigned char vEN_RXADDR	[BUFFER_MASSIV_SIZE];			//
+	unsigned char vRX_PW_P0		[BUFFER_MASSIV_SIZE];			//
+	// unsigned char vRX_PW_P1[BUFFER_MASSIV_SIZE];			//
+	unsigned char vTX_ADDR		[BUFFER_MASSIV_SIZE];			//
+	unsigned char vRX_ADDR0		[BUFFER_MASSIV_SIZE];			//
+	//unsigned char vRX_ADDR1		[BUFFER_MASSIV_SIZE];		//
+	unsigned char vFLUSH			[BUFFER_MASSIV_SIZE];			//	
+};
+
+extern xdata struct PACKET packetRX;
+extern xdata struct PACKET packetTX;
+
 void NRF_send(unsigned char *message,int amountMessage);
 	
-void NRF_init();
-void NRF_init_RX();
+bit NRF_init(struct PACKET *packet);
 void NRF_init_TX();
 	
 void NRF_clear_IRQ(void);
-void NRF_get_status(void);
-
+void NRF_ack_status(void);
+void NRF_get_value(void);
+	
 #endif
 
 

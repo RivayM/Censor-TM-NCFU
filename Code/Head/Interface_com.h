@@ -47,6 +47,7 @@ void InCom_SPI(bit valueMosi, unsigned char *outSideBuffer );
 void InCom_SPI_CLK_init(bit init);
 void InCom_SPI_Input_in_buffer(unsigned char *outSideBuffer);
 void InCom_SPI_exchange(void);    
+void InCom_SPI_start(void);
 //********************************************************
 
 #endif
