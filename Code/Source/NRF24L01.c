@@ -51,25 +51,25 @@ xdata struct PACKET packetTX = {
 int currentProgress = 0;
 xdata unsigned char readBuf[BUFFER_MASSIV_SIZE]={0x00}; 
 
-/*initialization as receiver*/
+/*initialization RF*/
 bit NRF_init(struct PACKET *packet){
 	switch(currentProgress){
-		case START_PROGRESS: NRF_CE = 0;						break;
-		case 1:	Timer3_Delay100ms(START_DELAY);			break;
-		case 2: NRF_send( packet->vCONFIG,		2 );	break;
-		case 3: NRF_send( packet->vEN_AA,			2 );	break;	
-		case 4:	NRF_send( packet->vSETUP_AW,	2 );	break;	
-		case 5:	NRF_send( packet->vRF_CH, 		2 );	break;	
-		case 6:	NRF_send( packet->vRF_SETUP, 	2 );	break;	
-		case 7:	NRF_send( packet->vEN_RXADDR, 2 );	break;	
-		case 8:	NRF_send( packet->vRX_PW_P0, 	2 );	break;	
-		case 9:	NRF_send( packet->vTX_ADDR, 	6 );	break;	
-		case 10:NRF_send( packet->vRX_ADDR0,	6 );	break;	
-		case 11:NRF_CE = 1;													break;
-		case 12:currentProgress = END_PROGRESS;			break;
+		case START_PROCESS: NRF_CE = 0;									break;
+		case 1:	Timer3_Delay100ms(START_DELAY);					break;
+		case 2: Send_SPI_NRF( packet->vCONFIG,		2 );	break;
+		case 3: Send_SPI_NRF( packet->vEN_AA,			2 );	break;	
+		case 4:	Send_SPI_NRF( packet->vSETUP_AW,	2 );	break;	
+		case 5:	Send_SPI_NRF( packet->vRF_CH, 		2 );	break;	
+		case 6:	Send_SPI_NRF( packet->vRF_SETUP, 	2 );	break;	
+		case 7:	Send_SPI_NRF( packet->vEN_RXADDR, 2 );	break;	
+		case 8:	Send_SPI_NRF( packet->vRX_PW_P0, 	2 );	break;	
+		case 9:	Send_SPI_NRF( packet->vTX_ADDR, 	6 );	break;	
+		case 10:Send_SPI_NRF( packet->vRX_ADDR0,	6 );	break;	
+		case 11:NRF_CE = 1;															break;
+		case 12:currentProgress = END_PROCESS;					break;
 		default: break;
 	}
-	if(currentProgress == END_PROGRESS){ 
+	if(currentProgress == END_PROCESS){ 
 		currentProgress = 0;
 		return 1;
 	}
@@ -79,35 +79,69 @@ bit NRF_init(struct PACKET *packet){
 	}
 }
 
+/*NRF send(radio) */
+bit NRF_send(void){
+	
+	//процесс очистки.
+	// дергать сe ( как ардуино гдето 200микросекунд или более)
+	//или попробовать ждать прерывание об окончании отправки пакета
+	// и се= 0
+	
+}
+
+/*NRF get(radio) */
+bit NRF_get(void){
+	// ждать или прочитать статус
+	// считать данные ( по регистуру) его записать со значением
+	// после чтения стереть буффер.
+}	
+
 /*send info for SPI*/
-void NRF_send(unsigned char *message,int amountMessage){
+void Send_SPI_NRF(unsigned char *message,int amountMessage){
 	int i;
 	for(i = 0; i <= amountMessage; i++){
 		valueBufferArrayTx[i] = *(message + i);
 	}		
 	amountByteArrayForSend = amountMessage;
-	InCom_SPI_start();      //start exchange
+	InCom_SPI_start();      			//start exchange
 }
 
 /* clear all flags*/		
 void NRF_clear_IRQ(void){
 	unsigned char array[BUFFER_MASSIV_SIZE] = 
 		{W_REG|STATUS,0x70};
-	NRF_send(array,		2);		// Clear RX_DR, TX_DS, MAX_RT flags
+	Send_SPI_NRF(&array,		2);		// Clear RX_DR, TX_DS, MAX_RT flags
 }
 
 /* Clear all FIFO*/		
-void NRF_clear_FIFO(void){
-	unsigned char array[BUFFER_MASSIV_SIZE] = 
-		{W_REG|STATUS,0x70};
-	NRF_send(array,		2);		// Clear RX_DR, TX_DS, MAX_RT flags
+bit NRF_clear_FIFO(void){
+	unsigned char arrayRX[BUFFER_MASSIV_SIZE] = 
+		{W_REG|FLUSH_RX,NOP};
+	unsigned char	arrayTX[BUFFER_MASSIV_SIZE] = 
+		{W_REG|FLUSH_TX,NOP};
+	switch(currentProgress){
+		case START_PROCESS: NRF_CE = 0;						break;
+		case 1:	Send_SPI_NRF(&arrayRX,		2);			break;
+		case 2: Send_SPI_NRF(&arrayTX,		2);			break;
+		case 3: NRF_CE = 1;												break;	
+		case 4: currentProgress = END_PROCESS;		break;
+		default: break;
+	}
+	if(currentProgress == END_PROCESS){ 
+		currentProgress = 0;
+		return 1;
+	}
+	else {
+		currentProgress++;
+		return 0;
+	}
 }
 
 /* ask the status*/	
 void NRF_ack_status(void){
 	unsigned char array[BUFFER_MASSIV_SIZE] =
 		{STATUS};
-	NRF_send( array, 1 ); 	// read Status
+	Send_SPI_NRF( array, 1 ); 	// read Status
 }	
 
 /* read last answer for spi*/	
@@ -122,3 +156,9 @@ void NRF_get_value(void){
 	
 	
 	
+void NRF_read(){
+	
+}
+
+
+

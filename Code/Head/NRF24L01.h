@@ -53,7 +53,6 @@
 #define FLAG_TX_DS   0x20            // Data Sent TX FIFO interrupt.
 #define FLAG_MAX_RT  0x10            // Maximum number of TX retransmits
 
-
 extern int currentProgress;      		 // current progress
 extern xdata unsigned char readBuf[BUFFER_MASSIV_SIZE];      // buffer 
 	
@@ -75,15 +74,19 @@ extern struct PACKET{  //PACKET vXXXX -> v= value XXX=REGISTR
 extern xdata struct PACKET packetRX;
 extern xdata struct PACKET packetTX;
 
-void NRF_send(unsigned char *message,int amountMessage);
-	
+/*длительные процессы*/
 bit NRF_init(struct PACKET *packet);
-void NRF_init_TX();
-	
+bit NRF_clear_FIFO(void);
+bit NRF_send(void);
+bit NRF_get(void);
+
+/*вспомогательное*/
 void NRF_clear_IRQ(void);
 void NRF_ack_status(void);
 void NRF_get_value(void);
-	
+
+void Send_SPI_NRF(unsigned char *message,int amountMessage);
+
 #endif
 
 

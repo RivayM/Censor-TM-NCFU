@@ -33,7 +33,7 @@ compiling GPIO.c...
 compiling NRF_ex.c...
 compiling Interface_com.c...
 Code\Source\Interface_com.c(78): warning C294: unreachable code
-Code\Source\Interface_com.c(93): warning C294: unreachable code
+Code\Source\Interface_com.c(90): warning C294: unreachable code
 compiling CENCOR_PROGRAMM.c...
 compiling Common.c...
 compiling Delay.c...
@@ -43,145 +43,59 @@ linking...
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?NRF_CLEAR_IRQ?NRF24L01
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?NRF_CLEAR_FIFO?NRF24L01
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?NRF_ACK_STATUS?NRF24L01
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?NRF_GET_VALUE?NRF24L01
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?NRF_READ?NRF24L01
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?LED_SWITCH_STATE?GPIO
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?SWITCH_STATE_POWER_RF?GPIO
-Program Size: data=54.4 xdata=126 code=1647
-creating hex file from ".\Code\Obj\censor_tm_ADC+RF"...
-".\Code\Obj\censor_tm_ADC+RF" - 0 Error(s), 8 Warning(s).
-e from ".\Code\Obj\censor_tm_ADC+RF"...
-".\Code\Obj\censor_tm_ADC+RF" - 0 Error(s), 9 Warning(s).
-Load "C:\\Users\\MASTER.CERN\\Desktop\\PROGRAMM COD\\CENSOR\\Code\\Obj\\censor_tm_ADC+RF" 
-Flash Erase Done.
-Flash Write Done: 1647 bytes programmed.
-Flash Verify Done: 1647 bytes verified.
-ENT: ?PR?LED_SWITCH_STATE?GPIO
+    SEGMENT: ?PR?BUTTON_READ?GPIO
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?SWITCH_STATE_POWER_RF?GPIO
-Program Size: data=60.4 xdata=360 code=1647
-Target not created.
- 'GPIO_init': not in formal parameter list
-Code\Source\main.c(12): error C132: 'InCom_SPI_init_Timer': not in formal parameter list
-Code\Source\main.c(13): error C141: syntax error near '0'
-Code\Source\main.c(13): error C132: 'InCom_SPI_CLK_init': not in formal parameter list
-Code\Source\main.c(19): error C141: syntax error near 'while'
-Code\Source\main.c(19): error C141: syntax error near '1'
-Code\Source\main.c(21): error C231: 'P02': redefinition
-Code\Source\main.c(21): error C231: 'P02': redefinition
-Code\Source\main.c(22): error C141: syntax error near '}'
-compiling I2C_ADC_HX711.c...
-compiling NRF24L01.c...
-D:\USR\Keil_v5\C51\Inc\stdio.h(22): error C127: 'size_t': invalid storage class
-D:\USR\Keil_v5\C51\Inc\stdio.h(27): error C127: '_getkey': invalid storage class
-D:\USR\Keil_v5\C51\Inc\stdio.h(28): error C127: 'getchar': invalid storage class
-D:\USR\Keil_v5\C51\Inc\stdio.h(29): error C127: '_ungetchar': invalid storage class
-D:\USR\Keil_v5\C51\Inc\stdio.h(30): error C127: '_putchar': invalid storage class
-D:\USR\Keil_v5\C51\Inc\stdio.h(31): error C127: '_printf': invalid storage class
-D:\USR\Keil_v5\C51\Inc\stdio.h(32): error C127: '_sprintf': invalid storage class
-D:\USR\Keil_v5\C51\Inc\stdio.h(33): error C127: '_vprintf': invalid storage class
-D:\USR\Keil_v5\C51\Inc\stdio.h(34): error C127: '_vsprintf': invalid storage class
-D:\USR\Keil_v5\C51\Inc\stdio.h(35): error C127: '_gets': invalid storage class
-D:\USR\Keil_v5\C51\Inc\stdio.h(36): error C127: '_scanf': invalid storage class
-D:\USR\Keil_v5\C51\Inc\stdio.h(37): error C127: '_sscanf': invalid storage class
-D:\USR\Keil_v5\C51\Inc\stdio.h(38): error C127: '_puts': invalid storage class
-D:\USR\Keil_v5\C51\Inc\intrins.h(19): error C127: '__nop_': invalid storage class
-D:\USR\Keil_v5\C51\Inc\intrins.h(20): error C127: '__testbit_': invalid storage class
-D:\USR\Keil_v5\C51\Inc\intrins.h(21): error C127: '__cror_': invalid storage class
-D:\USR\Keil_v5\C51\Inc\intrins.h(22): error C127: '__iror_': invalid storage class
-D:\USR\Keil_v5\C51\Inc\intrins.h(23): error C127: '__lror_': invalid storage class
-D:\USR\Keil_v5\C51\Inc\intrins.h(24): error C127: '__crol_': invalid storage class
-D:\USR\Keil_v5\C51\Inc\intrins.h(25): error C127: '__irol_': invalid storage class
-D:\USR\Keil_v5\C51\Inc\intrins.h(26): error C127: '__lrol_': invalid storage class
-D:\USR\Keil_v5\C51\Inc\intrins.h(27): error C127: '__chkfloat_': invalid storage class
-D:\USR\Keil_v5\C51\Inc\intrins.h(33): error C127: '__push_': invalid storage class
-D:\USR\Keil_v5\C51\Inc\intrins.h(34): error C127: '__pop_': invalid storage class
-\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Function_define.h(7): error C127: 'BIT': invalid storage class
-\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Function_define.h(8): error C127: 'UINT8': invalid storage class
-\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Function_define.h(9): error C127: 'UINT16': invalid storage class
-\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Function_define.h(10): error C127: 'UINT32': invalid storage class
-\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Function_define.h(12): error C127: 'uint8_t': invalid storage class
-\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Function_define.h(13): error C127: 'uint16_t': invalid storage class
-\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Function_define.h(14): error C127: 'uint32_t': invalid storage class
-\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Function_define.h(16): error C127: 'int8_t': invalid storage class
-\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Function_define.h(17): error C127: 'int16_t': invalid storage class
-\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Function_define.h(18): error C127: 'int32_t': invalid storage class
-\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Common.h(15): error C141: syntax error near 'u32Baudrate', expected ')'
-\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Common.h(15): error C132: '_InitialUART0_Timer1': not in formal parameter list
-\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Common.h(16): error C141: syntax error near 'u32Baudrate', expected ')'
-\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Common.h(16): error C132: '_InitialUART0_Timer3': not in formal parameter list
-\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Common.h(17): error C141: syntax error near 'u32Baudrate', expected ')'
-\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Common.h(17): error C132: '_InitialUART1_Timer3': not in formal parameter list
-\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Common.h(18): error C141: syntax error near 'c', expected ')'
-\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Common.h(18): error C132: '_Send_Data_To_UART0': not in formal parameter list
-\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Common.h(19): error C132: 'UINT8': not in formal parameter list
-\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Common.h(19): error C141: syntax error near 'Receive_Data_From_UART0'
-\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Common.h(19): error C132: 'Receive_Data_From_UART0': not in formal parameter list
-\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Common.h(20): error C141: syntax error near 'c', expected ')'
-\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Common.h(20): error C132: '_Send_Data_To_UART1': not in formal parameter list
-\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Common.h(21): error C132: 'UINT8': not in formal parameter list
-\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Common.h(21): error C141: syntax error near 'Receive_Data_From_UART1'
-\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Common.h(21): error C132: 'Receive_Data_From_UART1': not in formal parameter list
-\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Common.h(22): error C141: syntax error near 'u32Baudrate', expected ')'
-\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Common.h(22): error C132: '_InitialUART1': not in formal parameter list
-\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Common.h(24): error C127: 'BIT_TMP': invalid storage class
-\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Delay.h(1): error C141: syntax error near 'u32CNT', expected ')'
-\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Delay.h(1): error C132: '_Timer0_Delay100us': not in formal parameter list
-\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Delay.h(2): error C141: syntax error near 'u32CNT', expected ')'
-\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Delay.h(2): error C132: '_Timer0_Delay1ms': not in formal parameter list
-\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Delay.h(3): error C141: syntax error near 'u32CNT', expected ')'
-\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Delay.h(3): error C132: '_Timer1_Delay10ms': not in formal parameter list
-\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Delay.h(4): error C141: syntax error near 'u32CNT', expected ')'
-\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Delay.h(4): error C132: '_Timer2_Delay500us': not in formal parameter list
-\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Delay.h(5): error C141: syntax error near 'u32CNT', expected ')'
-\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Delay.h(5): error C132: '_Timer3_Delay100ms': not in formal parameter list
-\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Delay.h(7): error C141: syntax error near 'u32CNT', expected ')'
-\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Delay.h(7): error C132: '_Timer0_Delay40ms': not in formal parameter list
-\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Delay.h(8): error C141: syntax error near 'u32CNT', expected ')'
-\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Delay.h(8): error C132: '_Timer3_Delay10us': not in formal parameter list
-.\Lib_nuvoton\N76E003.h(9): error C141: syntax error near 'sfr'
-compiling GPIO.c...
-compiling NRF_ex.c...
-compiling Interface_com.c...
-Code\Source\Interface_com.c(78): warning C294: unreachable code
-Code\Source\Interface_com.c(90): warning C294: unreachable code
-compiling CENCOR_PROGRAMM.c...
-.\Code\Head\Interface_com.H(30): error C127: 'valueBufferArrayTx': invalid storage class
-.\Code\Head\Interface_com.H(31): error C127: 'valueBufferArrayRx': invalid storage class
-.\Code\Head\Interface_com.H(33): error C127: 'counterBit': invalid storage class
-.\Code\Head\Interface_com.H(34): error C127: 'counterByte': invalid storage class
-.\Code\Head\Interface_com.H(35): error C127: 'amountByteArrayForSend': invalid storage class
-.\Code\Head\Interface_com.H(36): error C127: 'FlagInComSPIGlobal': invalid storage class
-.\Code\Head\Interface_com.H(44): error C132: 'InCom_SPI_init_Timer': not in formal parameter list
-.\Code\Head\Interface_com.H(45): error C132: '_InCom_SPI_Output_in_buffer': not in formal parameter list
-.\Code\Head\Interface_com.H(46): error C132: 'InCom_SPI': not in formal parameter list
-.\Code\Head\Interface_com.H(47): error C132: 'InCom_SPI_CLK_init': not in formal parameter list
-.\Code\Head\Interface_com.H(48): error C132: '_InCom_SPI_Input_in_buffer': not in formal parameter list
-.\Code\Head\Interface_com.H(49): error C132: 'InCom_SPI_exchange': not in formal parameter list
-.\Code\Head\Interface_com.H(50): error C132: 'InCom_SPI_start': not in formal parameter list
-.\Code\Head\CENCOR_PROGRAMM.h(15): error C127: 'mainStateProgress': invalid storage class
-.\Code\Head\CENCOR_PROGRAMM.h(17): error C132: 'Work_NRF': not in formal parameter list
-.\Code\Head\CENCOR_PROGRAMM.h(18): error C132: 'ISR_Timer0': not in formal parameter list
-Code\Source\CENCOR_PROGRAMM.c(7): error C244: 'mainStateProgress': can't initialize, bad type or class
-Code\Source\CENCOR_PROGRAMM.c(7): error C132: 'mainStateProgress': not in formal parameter list
-Code\Source\CENCOR_PROGRAMM.c(14): error C132: 'Work_NRF': not in formal parameter list
-Code\Source\CENCOR_PROGRAMM.c(14): error C141: syntax error near '{'
-Code\Source\CENCOR_PROGRAMM.c(16): error C136: 'FlagInComSPIGlobal': 'void' on variable
-Code\Source\CENCOR_PROGRAMM.c(16): error C132: 'FlagInComSPIGlobal': not in formal parameter list
-Code\Source\CENCOR_PROGRAMM.c(16): error C141: syntax error near '{'
-Code\Source\CENCOR_PROGRAMM.c(21): error C136: 'mainStateProgress': 'void' on variable
-Code\Source\CENCOR_PROGRAMM.c(21): error C132: 'mainStateProgress': not in formal parameter list
-Code\Source\CENCOR_PROGRAMM.c(21): error C141: syntax error near '{'
-Code\Source\CENCOR_PROGRAMM.c(51): error C132: 'ISR_Timer0': not in formal parameter list
-Code\Source\CENCOR_PROGRAMM.c(51): error C141: syntax error near 'interrupt'
-Code\Source\CENCOR_PROGRAMM.c(52): error C136: 'FlagInComSPIGlobal': 'void' on variable
-Code\Source\CENCOR_PROGRAMM.c(52): error C132: 'FlagInComSPIGlobal': not in formal parameter list
-Code\Source\CENCOR_PROGRAMM.c(52): error C141: syntax error near '{'
-Code\Source\CENCOR_PROGRAMM.c(52): error C132: 'InCom_SPI_exchange': not in formal parameter list
-Code\Source\CENCOR_PROGRAMM.c(52): error C141: syntax error near '}'
-compiling Common.c...
-compiling Delay.c...
-Target not created.
+Program Size: data=64.4 xdata=130 code=1853
+creating hex file from ".\Code\Obj\censor_tm_ADC+RF"...
+".\Code\Obj\censor_tm_ADC+RF" - 0 Error(s), 11 Warning(s).
+MM)
+    ADDRESS: 0453H
+Program Size: data=58.4 xdata=128 code=1749
+creating hex file from ".\Code\Obj\censor_tm_ADC+RF"...
+".\Code\Obj\censor_tm_ADC+RF" - 0 Error(s), 12 Warning(s).
+RNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  MAINSTATEPROGRESSSPI
+    MODULE:  .\Code\Obj\CENCOR_PROGRAMM.obj (CENCOR_PROGRAMM)
+    ADDRESS: 0668H
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  MODERF
+    MODULE:  .\Code\Obj\CENCOR_PROGRAMM.obj (CENCOR_PROGRAMM)
+    ADDRESS: 04D0H
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  MAINSTATEPROGRESSSPI
+    MODULE:  .\Code\Obj\CENCOR_PROGRAMM.obj (CENCOR_PROGRAMM)
+    ADDRESS: 04EEH
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  MAINSTATEPROGRESSSPI
+    MODULE:  .\Code\Obj\CENCOR_PROGRAMM.obj (CENCOR_PROGRAMM)
+    ADDRESS: 04F0H
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  MAINSTATEPROGRESSSPI
+    MODULE:  .\Code\Obj\CENCOR_PROGRAMM.obj (CENCOR_PROGRAMM)
+    ADDRESS: 04F4H
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  MAINSTATEPROGRESSSPI
+    MODULE:  .\Code\Obj\CENCOR_PROGRAMM.obj (CENCOR_PROGRAMM)
+    ADDRESS: 0501H
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  MAINSTATEPROGRESSSPI
+    MODULE:  .\Code\Obj\CENCOR_PROGRAMM.obj (CENCOR_PROGRAMM)
+    ADDRESS: 0503H
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  MAINSTATEPROGRESSSPI
+    MODULE:  .\Code\Obj\CENCOR_PROGRAMM.obj (CENCOR_PROGRAMM)
+    ADDRESS: 0507H
+Program Size: data=60.4 xdata=126 code=1730
+creating hex file from ".\Code\Obj\censor_tm_ADC+RF"...
+".\Code\Obj\censor_tm_ADC+RF" - 0 Error(s), 21 Warning(s).

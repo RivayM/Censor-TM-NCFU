@@ -74,8 +74,8 @@ void InCom_SPI_Input_in_buffer(unsigned char *outSideBuffer){
 		}
 	}
 	if(counterBit < BUFFER_SPI){ // next bit
-		if(SPI_MSB)buf = buf + (0x01 << counterBit -1);
-		else buf = buf + (0x01 << counterBit);
+		if(SPI_MSB)	buf = buf + (0x01 << counterBit -1);
+		else 				buf = buf + (0x01 << counterBit);
 		*outSideBuffer = buf;	
 	}
 }

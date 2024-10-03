@@ -4,11 +4,24 @@
 
 #include <CENCOR_PROGRAMM.h>
 
-int mainStateProgress = 0;  // state main func.( work cencor)
-
+xdata int mainStateProgressSPI = 0;  	// state main func.( work cencor)
+xdata int modeRF = RX_MODE;						// mode by default
 
 //********************************************************
 // MAIN FUNC - work censor
+//********************************************************
+
+//********************************************************
+//  Work with periphery /led/button
+//********************************************************
+
+//********************************************************
+//  Work with ADC
+//********************************************************
+
+
+//********************************************************
+//  Work with NRF and FRAM 
 //********************************************************
 
 void Work_NRF(){
@@ -17,33 +30,46 @@ void Work_NRF(){
 		/*waiting*/
 	}
 	else{
-		// on each 0 ( packet send) next state
-		switch(mainStateProgress){
-			/*init radio  NRF24*/
-			case START_PROGRESS: 
-				if(NRF_init( &packetTX) ){ //end init rf?
-					mainStateProgress++;
-				} 
-				break; 
-			/*init ADC HX711*/
+		switch(mainStateProgressSPI){
+			case START_PROCESS: 	
+				Process_init_RF();
+				break; 				
+			/*main work RF*/
 			case 1: 
-				
+				Process_work_RF();
 				break;
-			/*ON read ADC HX711 full time*/
-			case 2:
-
-				break;
-			/*Mode censor*/
-			case 3:break;
-			/*END main progress(return?)*/
-			case END_PROGRESS:break;
+			// case 2: init FRAM
+			// case 3: Work with FRAM
+			case END_PROCESS:break;
 		}
 	}
-
-	// ДРУГОЙ ПРОЦЕСС
-
 }
 
+/*init radio  NRF24*/
+void Process_init_RF(void){
+	switch(modeRF){
+		case TX_MODE:
+			if(NRF_init(&packetTX)){  	// end init rf?
+				mainStateProgressSPI++;   // process ->end go to next
+			}
+		case RX_MODE:
+			if(NRF_init(&packetRX)){  	// end init rf?
+				mainStateProgressSPI++;   // process ->end go to next
+			}
+		default:break;
+	}
+}
+
+/*main work RF*/
+void Process_work_RF(void){
+	// пока прочитать статус и самостоятельно считать
+	//	а после настроить прерывание по нему ( извлекать)
+	//	флага нет , не считывать данные и пропускать процедуру
+	// считывания
+		
+	
+	
+}
 
 //********************************************************
 // ISR SPI

@@ -1,4 +1,4 @@
-C51 COMPILER V9.53.0.0   INTERFACE_COM                                                     10/02/2024 16:53:47 PAGE 1   
+C51 COMPILER V9.53.0.0   INTERFACE_COM                                                     10/03/2024 13:19:08 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE INTERFACE_COM
@@ -62,7 +62,7 @@ line level    source
   51   3              else counterByte++;                 // next packet
   52   3              break;
   53   3            /******************************/
-C51 COMPILER V9.53.0.0   INTERFACE_COM                                                     10/02/2024 16:53:47 PAGE 2   
+C51 COMPILER V9.53.0.0   INTERFACE_COM                                                     10/03/2024 13:19:08 PAGE 2   
 
   54   3            default:                          // process going
   55   3              PIN_CS_SPI   = 0;
@@ -87,8 +87,8 @@ line level    source
   74   3          }
   75   2        }
   76   1        if(counterBit < BUFFER_SPI){ // next bit
-  77   2          if(SPI_MSB)buf = buf + (0x01 << counterBit -1);
-  78   2          else buf = buf + (0x01 << counterBit);
+  77   2          if(SPI_MSB) buf = buf + (0x01 << counterBit -1);
+  78   2          else        buf = buf + (0x01 << counterBit);
   79   2          *outSideBuffer = buf; 
   80   2        }
   81   1      }
@@ -98,26 +98,22 @@ line level    source
   85          bit InCom_SPI_Output_in_buffer(unsigned char *outSideBuffer){
   86   1        unsigned char buf;
   87   1        buf = *outSideBuffer;  
-  88   1        if (counterBit == 0){  // start bit
-  89   2          if(SPI_MSB){ 
-  90   3            buf = buf & SET_BIT1;  // mask MSB
-  91   3          } 
-  92   2          else{ 
-  93   3            buf &= SET_BIT7;  // mask LSB
-  94   3          } 
-  95   2        }
-  96   1        if( counterBit < 8 && counterBit != 0){ // next bit 
-  97   2          buf = buf & (0x01 << counterBit);
-  98   2        }
-  99   1        if(buf) { return 1; } else { return 0; } 
- 100   1      }
- 101          
- 102          /* init clk */
- 103          void InCom_SPI_CLK_init(bit init){ PIN_CLK_SPI = init;}
- 104          
- 105          void InCom_SPI_start(void){FlagInComSPIGlobal = 1;}
+  88   1        if (counterBit == 0){                   // start bit
+  89   2          if(SPI_MSB){ buf = buf & 0x01; }      // mask MSB
+  90   2          else       { buf = buf & 0x80; }      // mask LSB
+  91   2        }
+  92   1        if( counterBit < 8 && counterBit != 0){ // next bit 
+  93   2          buf = buf & (0x01 << counterBit);
+  94   2        }
+  95   1        if(buf) { return 1; } else { return 0; } 
+  96   1      }
+  97          
+  98          /* init clk */
+  99          void InCom_SPI_CLK_init(bit init){ PIN_CLK_SPI = init;}
+ 100          
+ 101          void InCom_SPI_start(void){FlagInComSPIGlobal = 1;}
 *** WARNING C294 IN LINE 78 OF Code\Source\Interface_com.c: unreachable code
-*** WARNING C294 IN LINE 93 OF Code\Source\Interface_com.c: unreachable code
+*** WARNING C294 IN LINE 90 OF Code\Source\Interface_com.c: unreachable code
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
@@ -126,8 +122,6 @@ MODULE INFORMATION:   STATIC OVERLAYABLE
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
    DATA SIZE        =     18       3
-C51 COMPILER V9.53.0.0   INTERFACE_COM                                                     10/02/2024 16:53:47 PAGE 3   
-
    IDATA SIZE       =   ----    ----
    BIT SIZE         =      1       2
 END OF MODULE INFORMATION.
