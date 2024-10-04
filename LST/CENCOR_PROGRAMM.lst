@@ -1,4 +1,4 @@
-C51 COMPILER V9.53.0.0   CENCOR_PROGRAMM                                                   10/03/2024 13:19:08 PAGE 1   
+C51 COMPILER V9.53.0.0   CENCOR_PROGRAMM                                                   10/04/2024 12:31:30 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE CENCOR_PROGRAMM
@@ -62,7 +62,7 @@ line level    source
   51   2          case TX_MODE:
   52   2            if(NRF_init(&packetTX)){    // end init rf?
   53   3              mainStateProgressSPI++;   // process ->end go to next
-C51 COMPILER V9.53.0.0   CENCOR_PROGRAMM                                                   10/03/2024 13:19:08 PAGE 2   
+C51 COMPILER V9.53.0.0   CENCOR_PROGRAMM                                                   10/04/2024 12:31:30 PAGE 2   
 
   54   3            }
   55   2          case RX_MODE:

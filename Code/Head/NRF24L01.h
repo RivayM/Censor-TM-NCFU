@@ -3,7 +3,7 @@
 /******************************/
 #ifndef NRF24L01
 #define NRF24L01
-#define BUFFER_MASSIV_SIZE NRF24_BUFFER_MASSIV_SIZE		// size buffer
+#define NRF_MASSIV_SIZE NRF24_BUFFER_MASSIV_SIZE		// size buffer
 /******************************/
 /*SETINGS*/
 /******************************/
@@ -54,28 +54,47 @@
 #define FLAG_MAX_RT  0x10            // Maximum number of TX retransmits
 
 extern int currentProgress;      		 // current progress
-extern xdata unsigned char readBuf[BUFFER_MASSIV_SIZE];      // buffer 
+extern xdata unsigned char readBuf[NRF_MASSIV_SIZE];      // buffer 
 	
-extern struct PACKET{  //PACKET vXXXX -> v= value XXX=REGISTR
-	unsigned char vCONFIG			[BUFFER_MASSIV_SIZE];			// 
-	unsigned char vEN_AA			[BUFFER_MASSIV_SIZE];			//
-	unsigned char vSETUP_AW		[BUFFER_MASSIV_SIZE];			//
-	unsigned char vRF_CH			[BUFFER_MASSIV_SIZE];			//
-	unsigned char vRF_SETUP		[BUFFER_MASSIV_SIZE];			//
-	unsigned char vEN_RXADDR	[BUFFER_MASSIV_SIZE];			//
-	unsigned char vRX_PW_P0		[BUFFER_MASSIV_SIZE];			//
-	// unsigned char vRX_PW_P1[BUFFER_MASSIV_SIZE];			//
-	unsigned char vTX_ADDR		[BUFFER_MASSIV_SIZE];			//
-	unsigned char vRX_ADDR0		[BUFFER_MASSIV_SIZE];			//
-	//unsigned char vRX_ADDR1		[BUFFER_MASSIV_SIZE];		//
-	unsigned char vFLUSH			[BUFFER_MASSIV_SIZE];			//	
+extern struct NRF_PACKET_SPI{  //PACKET vXXXX -> v= value XXX=REGISTR
+	unsigned char vCONFIG			[NRF_MASSIV_SIZE];			// 
+	unsigned char vEN_AA			[NRF_MASSIV_SIZE];			//
+	unsigned char vSETUP_AW		[NRF_MASSIV_SIZE];			//
+	unsigned char vRF_CH			[NRF_MASSIV_SIZE];			//
+	unsigned char vRF_SETUP		[NRF_MASSIV_SIZE];			//
+	unsigned char vEN_RXADDR	[NRF_MASSIV_SIZE];			//
+	
+	unsigned char vRX_PW_P0		[NRF_MASSIV_SIZE];			//
+	unsigned char vRX_PW_P1		[NRF_MASSIV_SIZE];			//
+	unsigned char vRX_PW_P2		[NRF_MASSIV_SIZE];			//
+	unsigned char vRX_PW_P3		[NRF_MASSIV_SIZE];			//
+	unsigned char vRX_PW_P4		[NRF_MASSIV_SIZE];			//
+	unsigned char vRX_PW_P5		[NRF_MASSIV_SIZE];			//
+	
+	unsigned char vTX_ADDR		[NRF_MASSIV_SIZE];			//
+	
+	unsigned char vRX_ADDR0		[NRF_MASSIV_SIZE];			//
+	unsigned char vRX_ADDR1		[NRF_MASSIV_SIZE];			//
+	unsigned char vRX_ADDR2		[NRF_MASSIV_SIZE];			//
+	unsigned char vRX_ADDR3		[NRF_MASSIV_SIZE];			//
+	unsigned char vRX_ADDR4		[NRF_MASSIV_SIZE];			//
+	unsigned char vRX_ADDR5		[NRF_MASSIV_SIZE];			//
+	
+	unsigned char vFLUSH			[NRF_MASSIV_SIZE];			//	
 };
 
-extern xdata struct PACKET packetRX;
-extern xdata struct PACKET packetTX;
+
+
+
+
+extern xdata struct NRF_PACKET_SPI packetRX;
+extern xdata struct NRF_PACKET_SPI packetTX;
 
 /*длительные процессы*/
-bit NRF_init(struct PACKET *packet);
+bit NRF_init(struct NRF_PACKET_SPI *packet);
+bit NRF_get(/*struct DATA_PACKET_SAVE *packet*/);
+bit NRF_send(/*struct DATA_PACKET_SEND *packet*/);
+
 bit NRF_clear_FIFO(void);
 bit NRF_send(void);
 bit NRF_get(void);
@@ -83,7 +102,7 @@ bit NRF_get(void);
 /*вспомогательное*/
 void NRF_clear_IRQ(void);
 void NRF_ack_status(void);
-void NRF_get_value(void);
+void NRF_read_value(void);
 
 void Send_SPI_NRF(unsigned char *message,int amountMessage);
 

@@ -1,4 +1,4 @@
-C51 COMPILER V9.53.0.0   NRF24L01                                                          10/03/2024 13:19:08 PAGE 1   
+C51 COMPILER V9.53.0.0   NRF24L01                                                          10/04/2024 12:31:30 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE NRF24L01
@@ -22,7 +22,7 @@ line level    source
    9          //**************************************************************************
   10          //  struct for send mode RX
   11          //**************************************************************************
-  12          xdata struct PACKET packetRX = {
+  12          xdata struct NRF_PACKET_SPI packetRX = {
   13            /*reg:            ,value:   */
   14            {W_REG|NRF_CONFIG ,0x03},   //  CONFIG
   15            {W_REG|EN_AA      ,0x00},   //  EN_AA
@@ -41,7 +41,7 @@ line level    source
   28          //**************************************************************************
   29          //  struct for send mode TX
   30          //**************************************************************************
-  31          xdata struct PACKET packetTX = {
+  31          xdata struct NRF_PACKET_SPI packetTX = {
   32            /*reg:            ,value:*/
   33            {W_REG|NRF_CONFIG ,0x02,0x00,0x04,0x05,0x05},   //  CONFIG
   34            {W_REG|EN_AA      ,0x0B,0x0C,0x0D,0x0E,0x05},   //  EN_AA
@@ -62,12 +62,12 @@ line level    source
   49          //**************************************************************************
   50          
   51          int currentProgress = 0;
-C51 COMPILER V9.53.0.0   NRF24L01                                                          10/03/2024 13:19:08 PAGE 2   
+C51 COMPILER V9.53.0.0   NRF24L01                                                          10/04/2024 12:31:30 PAGE 2   
 
-  52          xdata unsigned char readBuf[BUFFER_MASSIV_SIZE]={0x00}; 
+  52          xdata unsigned char readBuf[NRF_MASSIV_SIZE]={0x00}; 
   53          
   54          /*initialization RF*/
-  55          bit NRF_init(struct PACKET *packet){
+  55          bit NRF_init(struct NRF_PACKET_SPI *packet){
   56   1        switch(currentProgress){
   57   2          case START_PROCESS: NRF_CE = 0;                 break;
   58   2          case 1: Timer3_Delay100ms(START_DELAY);         break;
@@ -94,78 +94,129 @@ line level    source
   79   2        }
   80   1      }
   81          
-  82          /*send info for SPI*/
-  83          void Send_SPI_NRF(unsigned char *message,int amountMessage){
-  84   1        int i;
-  85   1        for(i = 0; i <= amountMessage; i++){
-  86   2          valueBufferArrayTx[i] = *(message + i);
-  87   2        }   
-  88   1        amountByteArrayForSend = amountMessage;
-  89   1        InCom_SPI_start();            //start exchange
-  90   1      }
-  91          
-  92          /* clear all flags*/    
-  93          void NRF_clear_IRQ(void){
-  94   1        unsigned char array[BUFFER_MASSIV_SIZE] = 
-  95   1          {W_REG|STATUS,0x70};
-  96   1        Send_SPI_NRF(&array,    2);   // Clear RX_DR, TX_DS, MAX_RT flags
-  97   1      }
-  98          
-  99          /* Clear all FIFO*/   
- 100          bit NRF_clear_FIFO(void){
- 101   1        unsigned char arrayRX[BUFFER_MASSIV_SIZE] = 
- 102   1          {W_REG|FLUSH_RX,NOP};
- 103   1        unsigned char arrayTX[BUFFER_MASSIV_SIZE] = 
- 104   1          {W_REG|FLUSH_TX,NOP};
+  82          /*NRF send(radio) */
+  83          bit NRF_send(/*struct DATA_PACKET_SEND *packet*/){
+  84   1        switch(currentProgress){
+  85   2          case START_PROCESS: NRF_CE = 0;                 break;
+  86   2          default: break;
+  87   2        
+  88   2        }
+  89   1        //процесс очистки.
+  90   1        // дергать сe ( как ардуино гдето 200микросекунд или более)
+  91   1        //или попробовать ждать прерывание об окончании отправки пакета
+  92   1        // и се= 0
+  93   1        if(currentProgress == END_PROCESS){ 
+  94   2          currentProgress = 0;
+  95   2          return 1;
+  96   2        }
+  97   1        else {
+  98   2          currentProgress++;
+  99   2          return 0;
+ 100   2        }
+ 101   1      }
+ 102          
+ 103          /*NRF get(radio) */
+ 104          bit NRF_get(/*struct DATA_PACKET_SAVE *packet*/){
  105   1        switch(currentProgress){
- 106   2          case START_PROCESS: NRF_CE = 0;           break;
- 107   2          case 1: Send_SPI_NRF(&arrayRX,    2);     break;
- 108   2          case 2: Send_SPI_NRF(&arrayTX,    2);     break;
- 109   2          case 3: NRF_CE = 1;                       break;  
- 110   2          case 4: currentProgress = END_PROCESS;    break;
- 111   2          default: break;
- 112   2        }
- 113   1        if(currentProgress == END_PROCESS){ 
-C51 COMPILER V9.53.0.0   NRF24L01                                                          10/03/2024 13:19:08 PAGE 3   
+ 106   2          case START_PROCESS: NRF_CE = 0;       break;
+ 107   2          case 1: NRF_ack_status();             break; // ждать или прочитать статус
+ 108   2          case 2: NRF_read_value();             break;
+ 109   2          case 3: 
+ 110   2            if( readBuf[0] & FLAG_RX_DR ){
+ 111   3              Send_SPI_NRF( R_RX_PL,  NRF_MASSIV_SIZE );
+ 112   3            }
+ 113   2            else{
+C51 COMPILER V9.53.0.0   NRF24L01                                                          10/04/2024 12:31:30 PAGE 3   
 
- 114   2          currentProgress = 0;
- 115   2          return 1;
- 116   2        }
- 117   1        else {
- 118   2          currentProgress++;
- 119   2          return 0;
- 120   2        }
- 121   1      }
- 122          
- 123          /* ask the status*/ 
- 124          void NRF_ack_status(void){
- 125   1        unsigned char array[BUFFER_MASSIV_SIZE] =
- 126   1          {STATUS};
- 127   1        Send_SPI_NRF( array, 1 );   // read Status
- 128   1      } 
- 129          
- 130          /* read last answer for spi*/ 
- 131          void NRF_get_value(void){
- 132   1        int i;
- 133   1        for(i = 0; i < BUFFER_MASSIV_SIZE;i++){
- 134   2          readBuf[i] = valueBufferArrayRx[i];
+ 114   3              currentProgress = END_PROCESS;
+ 115   3            }
+ 116   2            break;
+ 117   2          case 4: NRF_read_value();             break;  
+ 118   2          case 5: 
+ 119   2            if( NRF_clear_FIFO() ){             // until the process is completed
+ 120   3              break;
+ 121   3            }
+ 122   2            else {
+ 123   3              return 0;
+ 124   3            }
+ 125   2          case 6: currentProgress = END_PROCESS;break;
+ 126   2          default: break;
+ 127   2        }
+ 128   1        if(currentProgress == END_PROCESS){ 
+ 129   2          currentProgress = 0;
+ 130   2          return 1;
+ 131   2        }
+ 132   1        else {
+ 133   2          currentProgress++;
+ 134   2          return 0;
  135   2        }
- 136   1      }
- 137            
- 138            
- 139            
- 140            
- 141            
- 142          void NRF_read(){
- 143   1        
- 144   1      }
- 145          
- 146          
- 147          
+ 136   1      
+ 137   1      } 
+ 138          
+ 139          /*send info for SPI*/
+ 140          void Send_SPI_NRF(unsigned char *message,int amountMessage){
+ 141   1        int i;
+ 142   1        for(i = 0; i <= amountMessage; i++){
+ 143   2          valueBufferArrayTx[i] = *(message + i);
+ 144   2        }   
+ 145   1        amountByteArrayForSend = amountMessage;
+ 146   1        InCom_SPI_start();            //start exchange
+ 147   1      }
+ 148          
+ 149          /* clear all flags*/    
+ 150          void NRF_clear_IRQ(void){
+ 151   1        unsigned char array[NRF_MASSIV_SIZE] = 
+ 152   1          {W_REG|STATUS,0x70};
+ 153   1        Send_SPI_NRF(&array,    2);   // Clear RX_DR, TX_DS, MAX_RT flags
+ 154   1      }
+ 155          
+ 156          /* Clear all FIFO*/   
+ 157          bit NRF_clear_FIFO(void){
+ 158   1        unsigned char arrayRX[NRF_MASSIV_SIZE] = 
+ 159   1          {W_REG|FLUSH_RX,NOP};
+ 160   1        unsigned char arrayTX[NRF_MASSIV_SIZE] = 
+ 161   1          {W_REG|FLUSH_TX,NOP};
+ 162   1        switch(currentProgress){
+ 163   2          case START_PROCESS: NRF_CE = 0;           break;
+ 164   2          case 1: Send_SPI_NRF(&arrayRX,    2);     break;
+ 165   2          case 2: Send_SPI_NRF(&arrayTX,    2);     break;
+ 166   2          case 3: NRF_CE = 1;                       break;  
+ 167   2          case 4: currentProgress = END_PROCESS;    break;
+ 168   2          default: break;
+ 169   2        }
+ 170   1        if(currentProgress == END_PROCESS){ 
+ 171   2          currentProgress = 0;
+ 172   2          return 1;
+ 173   2        }
+ 174   1        else {
+ 175   2          currentProgress++;
+C51 COMPILER V9.53.0.0   NRF24L01                                                          10/04/2024 12:31:30 PAGE 4   
+
+ 176   2          return 0;
+ 177   2        }
+ 178   1      }
+ 179          
+ 180          /* ask the status*/ 
+ 181          void NRF_ack_status(void){
+ 182   1        unsigned char array[NRF_MASSIV_SIZE] =
+ 183   1          {STATUS};
+ 184   1        Send_SPI_NRF( array, 1 );   // read Status
+ 185   1      } 
+ 186          
+ 187          /* read last answer for spi*/ 
+ 188          void NRF_read_value(void){
+ 189   1        int i;
+ 190   1        for(i = 0; i < NRF_MASSIV_SIZE;i++){
+ 191   2          readBuf[i] = valueBufferArrayRx[i];
+ 192   2        }
+ 193   1      }
+ 194          
+ 195          
+ 196          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    534    ----
+   CODE SIZE        =    689    ----
    CONSTANT SIZE    =     24    ----
    XDATA SIZE       =    126    ----
    PDATA SIZE       =   ----    ----
