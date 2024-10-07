@@ -46,14 +46,28 @@
 #define RX_PW_P4     0x15            //RX payload width, pipe 4
 #define RX_PW_P5     0x16            //RX payload width, pipe 5
 #define FIFO_STATUS  0x17            //FIFO Status Reg
+#define DYNPD     	 0x1C          	 //Enable dynamic payload length
+#define FEATURE 		 0x1D            //Feature Register
 /******************************/
 /*FLAG*/
 /******************************/
 #define FLAG_RX_DR   0x40            // Data Ready RX FIFO interrupt
 #define FLAG_TX_DS   0x20            // Data Sent TX FIFO interrupt.
 #define FLAG_MAX_RT  0x10            // Maximum number of TX retransmits
+/******************************/
+/*ARRAY*/
+/******************************/
+extern xdata unsigned char COMMAND_READ_RF[NRF_MASSIV_SIZE];
+extern xdata unsigned char COMMAND_CLEAR_FLUSH_RX[NRF_MASSIV_SIZE];
+extern xdata unsigned char COMMAND_CLEAR_FLUSH_TX[NRF_MASSIV_SIZE]; 
+extern xdata unsigned char COMMAND_CLEAR_IRQ[NRF_MASSIV_SIZE]; 
+		
+/******************************/
+/*OTHER*/
+/******************************/
 
-extern int currentProgress;      		 // current progress
+extern bit FlagDataReadReady;
+extern int currentProcess;      		 // current progress
 extern xdata unsigned char readBuf[NRF_MASSIV_SIZE];      // buffer 
 	
 extern struct NRF_PACKET_SPI{  //PACKET vXXXX -> v= value XXX=REGISTR
@@ -63,6 +77,8 @@ extern struct NRF_PACKET_SPI{  //PACKET vXXXX -> v= value XXX=REGISTR
 	unsigned char vRF_CH			[NRF_MASSIV_SIZE];			//
 	unsigned char vRF_SETUP		[NRF_MASSIV_SIZE];			//
 	unsigned char vEN_RXADDR	[NRF_MASSIV_SIZE];			//
+	unsigned char vDYNPD			[NRF_MASSIV_SIZE];			//
+	unsigned char vFEATURE		[NRF_MASSIV_SIZE];			//
 	
 	unsigned char vRX_PW_P0		[NRF_MASSIV_SIZE];			//
 	unsigned char vRX_PW_P1		[NRF_MASSIV_SIZE];			//
@@ -83,10 +99,6 @@ extern struct NRF_PACKET_SPI{  //PACKET vXXXX -> v= value XXX=REGISTR
 	unsigned char vFLUSH			[NRF_MASSIV_SIZE];			//	
 };
 
-
-
-
-
 extern xdata struct NRF_PACKET_SPI packetRX;
 extern xdata struct NRF_PACKET_SPI packetTX;
 
@@ -103,8 +115,8 @@ bit NRF_get(void);
 void NRF_clear_IRQ(void);
 void NRF_ack_status(void);
 void NRF_read_value(void);
-
 void Send_SPI_NRF(unsigned char *message,int amountMessage);
+bit Check_Out();
 
 #endif
 

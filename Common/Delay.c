@@ -85,6 +85,7 @@ void Timer2_Delay500us(UINT32 u32CNT)
     clr_TR2;                                		//Stop Timer2
 }*/
 //------------------------------------------------------------------------------
+/*
 void Timer3_Delay100ms(UINT32 u32CNT)
 {
     T3CON = 0x07;                           		//Timer3 Clock = Fsys/128
@@ -100,7 +101,7 @@ void Timer3_Delay100ms(UINT32 u32CNT)
     clr_TR3;                                		//Stop Timer3
 }
 ////------------------------------------------------------------------------------
-/*
+
 void Timer3_Delay10us(UINT32 u32CNT)
 {
     T3CON = 0x07;                           		//Timer3 Clock = Fsys/128
@@ -114,4 +115,5 @@ void Timer3_Delay10us(UINT32 u32CNT)
         u32CNT --;
     }
     clr_TR3;                                		//Stop Timer3
-}*/
+}
+*/
