@@ -19,6 +19,8 @@
 #define FLUSH_RX     0xE2            //Flush RX register 
 #define REUSE_TX_PL  0xE3            //Reuse TX payload register
 #define NOP          0xFF            //No operation, might be used to read status register
+#define W_ACK_PL		 0xA8						 // 10101000 + PPP
+#define RX_P_NO      0x0E            // Mask for get PPP
 /******************************/
 /*Register Address*/
 /******************************/
@@ -116,7 +118,8 @@ void NRF_clear_IRQ(void);
 void NRF_ack_status(void);
 void NRF_read_value(void);
 void Send_SPI_NRF(unsigned char *message,int amountMessage);
-bit Check_Out();
+bit Check_Out(void);
+void NRF_delay10(void);
 
 #endif
 

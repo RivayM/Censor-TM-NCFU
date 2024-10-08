@@ -65,7 +65,7 @@ void Process_work_RF(void){
 	if( NRF_get() ){
 		/*mainStateProgressSPI++;*/
 	}
-	
+	PIN_LED_GREEN = ~PIN_LED_GREEN;
 	// пока прочитать статус и самостоятельно считать
 	//	а после настроить прерывание по нему ( извлекать)
 	//	флага нет , не считывать данные и пропускать процедуру
@@ -75,14 +75,21 @@ void Process_work_RF(void){
 //********************************************************
 // ISR SPI
 //********************************************************
-void ISR_Timer0() interrupt 1 {  // <Interface_com.H>
-	if(FlagInComSPIGlobal){ InCom_SPI_exchange();}
+void ISR_Timer0() interrupt 1 {  				// <Interface_com.H>
+	if(FlagInComSPIGlobal){ 
+		if(FlagInComDelay){
+			InCom_Delay(); 										//	Spi delay
+		} 
+		else{
+			InCom_SPI_exchange();							//	main exchange SPI
+		} 
+	}
 }
 
 //********************************************************
 // ISR ADC
 //********************************************************
-/*void ISR_INT0() interrupt 1 {  // INT0
+/*void ISR_INT0() interrupt 0 {  // INT0
 	if(FlagInComSPIGlobal){ InCom_SPI_exchange();}
 }*/
 

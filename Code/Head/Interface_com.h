@@ -22,7 +22,7 @@ if(FlagInComSPIGlobal){ InCom_SPI_exchange();}
 }
 */
 //********************************************************
-//  for NRF24L01
+//  for SPI
 //********************************************************
 #define BUFFER_SPI 8   // amount bit in packet(byte)
 #define BUFFER_SPI_MASSIV_SIZE NRF24_BUFFER_MASSIV_SIZE // amount packet(byte)
@@ -34,6 +34,10 @@ extern int counterBit;  // current bit in packet(byte)
 extern int counterByte; // current packet(byte)
 extern int amountByteArrayForSend; // current packet(byte) for SEND
 extern bit FlagInComSPIGlobal;  	 // Permission (exchange)
+
+extern int valueDelay;             // delay values 1 = 1 timer cycle timer
+extern bit FlagInComDelay;         // allow delay
+
 
 /* USE GPIO.h FOR SPI*/
 #define PIN_CLK_SPI    P10
@@ -48,6 +52,9 @@ void InCom_SPI_CLK_init(bit init);
 void InCom_SPI_Input_in_buffer(unsigned char *outSideBuffer);
 void InCom_SPI_exchange(void);    
 void InCom_SPI_start(void);
+void InCom_Set_Delay(int delay);
+void InCom_Delay();
+
 //********************************************************
 
 #endif

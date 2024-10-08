@@ -10,7 +10,10 @@ unsigned char valueBufferArrayRx[BUFFER_SPI_MASSIV_SIZE];
 int amountByteArrayForSend = BUFFER_SPI_MASSIV_SIZE; 
 int counterBit             = 0;   
 int counterByte            = 0;
-bit FlagInComSPIGlobal     = 0;   
+bit FlagInComSPIGlobal     = 0;  
+
+int	valueDelay						 = 0;
+bit FlagInComDelay				 = 0;
 
 /* Init timer and start */
 void InCom_SPI_init_Timer(){
@@ -18,7 +21,6 @@ void InCom_SPI_init_Timer(){
 	TH0 = FREQ_H;           	// setting freq:
   TL0 = FREQ_L; 						// 
 	set_ET0;									// enable Timer0 interrupt
-	set_EA;										// enable interrupts
 	set_TR0;                  // Timer0 run
 }
 
@@ -93,6 +95,28 @@ bit InCom_SPI_Output_in_buffer(unsigned char *outSideBuffer){
 		buf = buf & (0x01 << counterBit);
 	}
 	if(buf) { return 1; } else { return 0; } 
+}
+
+
+
+
+
+
+
+/*Delay = 1 timer cycle timer*/
+void InCom_Delay(){
+	if(valueDelay){	valueDelay--;	}
+	else{	
+		FlagInComDelay = 0;	
+		FlagInComSPIGlobal = 0;
+	}
+}
+
+/*SET Delay = 1 timer cycle timer*/
+void InCom_Set_Delay(int delay){
+	valueDelay = delay;
+	FlagInComDelay = 1;
+	FlagInComSPIGlobal = 1;
 }
 
 /* init clk */

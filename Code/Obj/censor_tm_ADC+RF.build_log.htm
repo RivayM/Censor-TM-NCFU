@@ -32,8 +32,8 @@ compiling NRF24L01.c...
 compiling GPIO.c...
 compiling NRF_ex.c...
 compiling Interface_com.c...
-Code\Source\Interface_com.c(78): warning C294: unreachable code
-Code\Source\Interface_com.c(90): warning C294: unreachable code
+Code\Source\Interface_com.c(80): warning C294: unreachable code
+Code\Source\Interface_com.c(92): warning C294: unreachable code
 compiling CENCOR_PROGRAMM.c...
 compiling Common.c...
 compiling Delay.c...
@@ -50,35 +50,41 @@ linking...
     SEGMENT: ?PR?BUTTON_READ?GPIO
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?SWITCH_STATE_POWER_RF?GPIO
-*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
-    SYMBOL:  _TIMER3_DELAY100MS
-    MODULE:  .\Code\Obj\NRF24L01.obj (NRF24L01)
-*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
-    SYMBOL:  _TIMER3_DELAY100MS
-    MODULE:  .\Code\Obj\NRF24L01.obj (NRF24L01)
-    ADDRESS: 0087H
-Program Size: data=43.5 xdata=298 code=1947
+Program Size: data=45.5 xdata=316 code=2017
 creating hex file from ".\Code\Obj\censor_tm_ADC+RF"...
-".\Code\Obj\censor_tm_ADC+RF" - 0 Error(s), 10 Warning(s).
-\censor_tm_ADC+RF"...
-".\Code\Obj\censor_tm_ADC+RF" - 0 Error(s), 11 Warning(s).
-PR?ADCHX711_INITIAL?I2C_ADC_HX711
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?NRF_SEND?NRF24L01
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?NRF_CLEAR_IRQ?NRF24L01
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?LED_SWITCH_STATE?GPIO
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?BUTTON_READ?GPIO
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?SWITCH_STATE_POWER_RF?GPIO
-*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
-    SYMBOL:  _TIMER3_DELAY100MS
-    MODULE:  .\Code\Obj\NRF24L01.obj (NRF24L01)
+".\Code\Obj\censor_tm_ADC+RF" - 0 Error(s), 8 Warning(s).
+Load "C:\\Users\\MASTER.CERN\\Desktop\\PROGRAMM COD\\CENSOR\\Code\\Obj\\censor_tm_ADC+RF" 
+Flash Erase Done.
+Flash Write Done: 2017 bytes programmed.
+Flash Verify Done: 2017 bytes verified.
+" 
+Flash Erase Done.
+Flash Write Done: 1994 bytes programmed.
+Flash Verify Done: 1994 bytes verified.
+F" 
+Flash Erase Done.
+Flash Write Done: 1896 bytes programmed.
+Flash Verify Done: 1896 bytes verified.
+FERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  VALUEDELAY
+    MODULE:  .\Code\Obj\Interface_com.obj (INTERFACE_COM)
+    ADDRESS: 075AH
 *** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
-    SYMBOL:  _TIMER3_DELAY100MS
-    MODULE:  .\Code\Obj\NRF24L01.obj (NRF24L01)
-    ADDRESS: 007FH
-Program Size: data=43.5 xdata=346 code=2020
-Target not created.
+    SYMBOL:  VALUEDELAY
+    MODULE:  .\Code\Obj\Interface_com.obj (INTERFACE_COM)
+    ADDRESS: 075CH
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  VALUEDELAY
+    MODULE:  .\Code\Obj\Interface_com.obj (INTERFACE_COM)
+    ADDRESS: 0760H
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  VALUEDELAY
+    MODULE:  .\Code\Obj\Interface_com.obj (INTERFACE_COM)
+    ADDRESS: 07B0H
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  VALUEDELAY
+    MODULE:  .\Code\Obj\Interface_com.obj (INTERFACE_COM)
+    ADDRESS: 07B2H
+Program Size: data=43.5 xdata=298 code=2007
+creating hex file from ".\Code\Obj\censor_tm_ADC+RF"...
+".\Code\Obj\censor_tm_ADC+RF" - 0 Error(s), 17 Warning(s).
