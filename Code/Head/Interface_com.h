@@ -11,8 +11,8 @@
 #define FREQ_480KHZ_L 0xFD
 //********************************************************
 /*USE FREQ IN void init_CLK*/
-#define FREQ_H FREQ_120KHZ_H         // setting freq
-#define FREQ_L FREQ_120KHZ_L
+#define FREQ_H FREQ_480KHZ_H         // setting freq
+#define FREQ_L FREQ_480KHZ_L
 
 //********************************************************
 //  USE:

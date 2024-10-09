@@ -65,7 +65,10 @@ void Process_work_RF(void){
 	if( NRF_get() ){
 		/*mainStateProgressSPI++;*/
 	}
-	PIN_LED_GREEN = ~PIN_LED_GREEN;
+	if(readBuf[0] == 0x78){
+			PIN_LED_GREEN = ~PIN_LED_GREEN;
+	}
+	
 	// пока прочитать статус и самостоятельно считать
 	//	а после настроить прерывание по нему ( извлекать)
 	//	флага нет , не считывать данные и пропускать процедуру

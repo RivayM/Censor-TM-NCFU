@@ -14,11 +14,11 @@ xdata struct NRF_PACKET_SPI packetRX = {
 	{W_REG|NRF_CONFIG	,0x0F},		//	CONFIG
 	{W_REG|EN_AA			,0x3f},		//	EN_AA
 	{W_REG|SETUP_AW		,0x03},		//	SETUP_AW
-	{W_REG|RF_CH			,0x4C},		//	RF_CH		
-	{W_REG|RF_SETUP		,0x0F},		//	RF_SETUP
-	{W_REG|EN_RXADDR	,0x02},		//	EN_RXADDR		
-	{W_REG|DYNPD			,0x03},		//	DYNPD
-	{W_REG|FEATURE		,0x06},		//	FEATURE
+	{W_REG|RF_CH			,0x78},		//	RF_CH		
+	{W_REG|RF_SETUP		,0x07},		//	RF_SETUP
+	{W_REG|EN_RXADDR	,0x03},		//	EN_RXADDR		
+	{W_REG|DYNPD			,0x00},		//	DYNPD
+	{W_REG|FEATURE		,0x00},		//	FEATURE
 	
 	{W_REG|RX_PW_P0		,0x01},		//	RX_PW_P0
 	{W_REG|RX_PW_P1		,0x01},		//	RX_PW_P0
@@ -38,6 +38,38 @@ xdata struct NRF_PACKET_SPI packetRX = {
 	
 	{FLUSH_RX					,NOP}			//	FLUSH		
 };
+
+xdata struct NRF_PACKET_SPI packetRX_READ = {
+	/*reg:						,value:   */
+	{R_REG|NRF_CONFIG	},		//	CONFIG
+	{R_REG|EN_AA			},		//	EN_AA
+	{R_REG|SETUP_AW		},		//	SETUP_AW
+	{R_REG|RF_CH			},		//	RF_CH		
+	{R_REG|RF_SETUP		},		//	RF_SETUP
+	{R_REG|EN_RXADDR	},		//	EN_RXADDR		
+	{R_REG|DYNPD			},		//	DYNPD
+	{R_REG|FEATURE		},		//	FEATURE
+	
+	{R_REG|RX_PW_P0		},		//	RX_PW_P0
+	{R_REG|RX_PW_P1		},		//	RX_PW_P0
+	{R_REG|RX_PW_P2		},		//	RX_PW_P0
+	{R_REG|RX_PW_P3		},		//	RX_PW_P0
+	{R_REG|RX_PW_P4		},		//	RX_PW_P0
+	{R_REG|RX_PW_P5		},		//	RX_PW_P0
+	//adr write lsbyte first
+	{R_REG|TX_ADDR		},		//	TX_ADDR	
+	
+	{R_REG|RX_ADDR_P0	},		//	RX_ADDR0
+	{R_REG|RX_ADDR_P1	},		//	RX_ADDR0
+	{R_REG|RX_ADDR_P2	},		//	RX_ADDR0
+	{R_REG|RX_ADDR_P3	},		//	RX_ADDR0
+	{R_REG|RX_ADDR_P4	},		//	RX_ADDR0
+	{R_REG|RX_ADDR_P5	},		//	RX_ADDR0
+	
+	{FLUSH_RX					}			//	FLUSH		
+};
+
+
 
 //**************************************************************************
 //  struct for send mode TX
@@ -79,8 +111,8 @@ bit NRF_init(struct NRF_PACKET_SPI *packet){
 		case START_PROCESS: NRF_CE = 0;									break;
 		
 		case 1:	/*Send_SPI_NRF( packet->vCONFIG,		2 );*/	break;
-		case 2: /*NRF_delay10();*/													break;
-		case 3: Send_SPI_NRF( packet->vEN_AA,			2 );	break;	
+		case 2: NRF_delay10();													break;
+		case 3: Send_SPI_NRF( packet->vEN_AA,			2 );	break;
 		case 4:	Send_SPI_NRF( packet->vSETUP_AW,	2 );	break;	
 		case 5:	Send_SPI_NRF( packet->vRF_CH, 		2 );	break;	
 		case 6:	Send_SPI_NRF( packet->vRF_SETUP, 	2 );	break;	
@@ -131,25 +163,28 @@ bit NRF_get(/*struct DATA_PACKET_SAVE *packet*/){
 	switch(currentProcess){
 		case START_PROCESS: /*NRF_CE = 1;*/		break;
 		case 1: NRF_CE = 1;										break;
-		case 2: /*NRF_delay10();*/						break;
-		case 3: /*NRF_CE = 0;		*/						break;	
-		case 4: NRF_ack_status();							break;
+		case 2: NRF_delay10();								break;
+		case 3: /*NRF_CE = 0;*/								break;	
+		case 4: 
+			NRF_ack_status();	
+			NRF_read_value(); 
+			break;
 		case 5:
-			// нужно делать асk + прочить PPP
-			NRF_read_value(); 	
-			COMMAND_W_ACK_PAYLOAD[0] = W_ACK_PL + (readBuf[0] & RX_P_NO);	
+			// W_ACK_PL -> [0] = 10101PPP 		
+			//COMMAND_W_ACK_PAYLOAD[0] = W_ACK_PL + ((readBuf[0] & RX_P_NO) >> 1);
+			//COMMAND_W_ACK_PAYLOAD[1] = (readBuf[0] & RX_P_NO) >> 1;
 		case 6:	
-			Send_SPI_NRF( &COMMAND_READ_RF, 2 );
+			Send_SPI_NRF( &COMMAND_READ_RF, 3 );
+			NRF_read_value(); 
 			break;
 		case 7:
 			//записать обратно прочитнные байты
-			NRF_read_value(); 
-			COMMAND_W_ACK_PAYLOAD[1] = readBuf[1];
+			//COMMAND_W_ACK_PAYLOAD[2] = 0x01;
 			// и так далее
 			break;
 		//ack вернуть тот же ответ???
 		case 8:	
-			Send_SPI_NRF(&COMMAND_W_ACK_PAYLOAD, 2);
+			//Send_SPI_NRF(&COMMAND_W_ACK_PAYLOAD, 3);
 			break;
 		/*case 1: NRF_ack_status();						break; 
 		case 2: NRF_CE = 1;										break;
@@ -221,6 +256,7 @@ void NRF_read_value(void){
 	int i;
 	for(i = 0; i < NRF_MASSIV_SIZE;i++){
 		readBuf[i] = valueBufferArrayRx[i];
+		//valueBufferArrayRx[i] = 0x00;  				// forced zeroing
 	}
 }
 
