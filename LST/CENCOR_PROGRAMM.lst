@@ -1,4 +1,4 @@
-C51 COMPILER V9.53.0.0   CENCOR_PROGRAMM                                                   10/09/2024 15:05:16 PAGE 1   
+C51 COMPILER V9.53.0.0   CENCOR_PROGRAMM                                                   10/10/2024 14:26:52 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE CENCOR_PROGRAMM
@@ -62,7 +62,7 @@ line level    source
   51   2          case TX_MODE:
   52   2            if(NRF_init(&packetTX)){    // end init rf?
   53   3              mainStateProgressSPI++;   // process ->end go to next
-C51 COMPILER V9.53.0.0   CENCOR_PROGRAMM                                                   10/09/2024 15:05:16 PAGE 2   
+C51 COMPILER V9.53.0.0   CENCOR_PROGRAMM                                                   10/10/2024 14:26:52 PAGE 2   
 
   54   3            }
   55   2          case RX_MODE:
@@ -73,61 +73,78 @@ line level    source
   60   2        }
   61   1      }
   62          
-  63          /*main work RF*/
-  64          void Process_work_RF(void){
-  65   1        if( NRF_get() ){
-  66   2          /*mainStateProgressSPI++;*/
-  67   2        }
-  68   1        if(readBuf[0] == 0x78){
-  69   2            PIN_LED_GREEN = ~PIN_LED_GREEN;
-  70   2        }
-  71   1        
-  72   1        // пока прочитать статус и самостоятельно считать
-  73   1        //  а после настроить прерывание по нему ( извлекать)
-  74   1        //  флага нет , не считывать данные и пропускать процедуру
-  75   1        // считывания
-  76   1      }
-  77          
-  78          //********************************************************
-  79          // ISR SPI
-  80          //********************************************************
-  81          void ISR_Timer0() interrupt 1 {         // <Interface_com.H>
-  82   1        if(FlagInComSPIGlobal){ 
-  83   2          if(FlagInComDelay){
-  84   3            InCom_Delay();                    //  Spi delay
-  85   3          } 
-  86   2          else{
-  87   3            InCom_SPI_exchange();             //  main exchange SPI
-  88   3          } 
-  89   2        }
-  90   1      }
-  91          
-  92          //********************************************************
-  93          // ISR ADC
-  94          //********************************************************
-  95          /*void ISR_INT0() interrupt 0 {  // INT0
-  96            if(FlagInComSPIGlobal){ InCom_SPI_exchange();}
-  97          }*/
-  98          
-  99          //********************************************************
- 100          // ISR NRF
- 101          //********************************************************
- 102          void ISR_INT1() interrupt 2 {  // INT1
- 103   1        FlagDataReadReady = 1;
- 104   1        PIN_LED_RED = ~PIN_LED_RED;
- 105   1      }
- 106          
- 107          
+  63          
+  64          
+  65          /*main work RF*/
+  66          void Process_work_RF(void){
+  67   1        if(NRF_init(&packetRX_READ)){   // end init rf?
+  68   2            mainStateProgressSPI++;   // process ->end go to next
+  69   2        }
+  70   1        //прочитать то что я записал
+  71   1        //#ifndef TX
+  72   1      
+  73   1        /*
+  74   1        if( NRF_send() ){
+  75   1          PIN_LED_RED = ~PIN_LED_RED;
+  76   1        }
+  77   1        PIN_LED_GREEN = ~PIN_LED_GREEN;
+  78   1      
+  79   1        */
+  80   1        //#ifndef RX
+  81   1        /*
+  82   1        if( NRF_get() ){
+  83   1          PIN_LED_RED = ~PIN_LED_RED;
+  84   1        }
+  85   1        if(readBuf[1] != 0x00){
+  86   1            PIN_LED_GREEN = ~PIN_LED_GREEN;
+  87   1        }
+  88   1        */
+  89   1        // пока прочитать статус и самостоятельно считать
+  90   1        //  а после настроить прерывание по нему ( извлекать)
+  91   1        //  флага нет , не считывать данные и пропускать процедуру
+  92   1        // считывания
+  93   1      }
+  94          
+  95          //********************************************************
+  96          // ISR SPI
+  97          //********************************************************
+  98          void ISR_Timer0() interrupt 1 {         // <Interface_com.H>
+  99   1        if(FlagInComSPIGlobal){ 
+ 100   2          if(FlagInComDelay){
+ 101   3            InCom_Delay();                    //  Spi delay
+ 102   3          } 
+ 103   2          else{
+ 104   3            InCom_SPI_exchange();             //  main exchange SPI
+ 105   3          } 
+ 106   2        }
+ 107   1      }
  108          
- 109          
- 110          
- 111          
+ 109          //********************************************************
+ 110          // ISR ADC
+ 111          //********************************************************
+ 112          /*void ISR_INT0() interrupt 0 {  // INT0
+ 113            if(FlagInComSPIGlobal){ InCom_SPI_exchange();}
+ 114          }*/
+ 115          
+C51 COMPILER V9.53.0.0   CENCOR_PROGRAMM                                                   10/10/2024 14:26:52 PAGE 3   
+
+ 116          //********************************************************
+ 117          // ISR NRF
+ 118          //********************************************************
+ 119          void ISR_INT1() interrupt 2 {  // INT1
+ 120   1        FlagDataReadReady = 1;
+ 121   1        PIN_LED_RED = ~PIN_LED_RED;
+ 122   1      }
+ 123          
+ 124          
+ 125          
+ 126          
+ 127          
+ 128          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    186    ----
-C51 COMPILER V9.53.0.0   CENCOR_PROGRAMM                                                   10/09/2024 15:05:16 PAGE 3   
-
+   CODE SIZE        =    199    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =      4    ----
    PDATA SIZE       =   ----    ----

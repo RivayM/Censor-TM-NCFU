@@ -70,14 +70,17 @@ void InCom_SPI_Input_in_buffer(unsigned char *outSideBuffer){
 	unsigned char buf;
 	buf = *outSideBuffer;
 	if(counterBit == 0){         // start bit
-		if(SPI_MSB){
-			*outSideBuffer = 0x80;   
-			return;
+		if(SPI_DATA_BIT){
+			*outSideBuffer = 0x80;   // SPI_MSB
 		}
+		else{ 
+			*outSideBuffer = 0x01;   // SPI_LSB
+		}
+		return;
 	}
 	if(counterBit < BUFFER_SPI){ // next bit
-		if(SPI_MSB)	buf = buf + (0x01 << counterBit -1);
-		else 				buf = buf + (0x01 << counterBit);
+		if(SPI_DATA_BIT )	buf = buf + (0x01 << counterBit -1);	// SPI_MSB
+		else							buf = buf + (0x01 << counterBit);			// SPI_LSB
 		*outSideBuffer = buf;	
 	}
 }
@@ -88,8 +91,8 @@ bit InCom_SPI_Output_in_buffer(unsigned char *outSideBuffer){
 	unsigned char buf;
 	buf = *outSideBuffer;  
 	if (counterBit == 0){	 									// start bit
-		if(SPI_MSB){ buf = buf & 0x01; } 		 	// mask MSB
-		else       { buf = buf & 0x80; } 			// mask LSB
+		if(SPI_DATA_BIT){ buf = buf & 0x01; } // mask MSB
+		else       			{ buf = buf & 0x80; } // mask LSB
 	}
 	if( counterBit < 8 && counterBit != 0){	// next bit 
 		buf = buf & (0x01 << counterBit);

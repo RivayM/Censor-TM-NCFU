@@ -24,9 +24,9 @@ if(FlagInComSPIGlobal){ InCom_SPI_exchange();}
 //********************************************************
 //  for SPI
 //********************************************************
-#define BUFFER_SPI 8   // amount bit in packet(byte)
+#define BUFFER_SPI 	 8 // amount bit in packet(byte)
 #define BUFFER_SPI_MASSIV_SIZE NRF24_BUFFER_MASSIV_SIZE // amount packet(byte)
-#define SPI_MSB 1      // or use SPI_LSB = 0
+#define SPI_DATA_BIT 1 // or use SPI_LSB = 0 ; SPI_MSB = 1
 extern unsigned char valueBufferArrayTx[BUFFER_SPI_MASSIV_SIZE];  
 extern unsigned char valueBufferArrayRx[BUFFER_SPI_MASSIV_SIZE];  
 

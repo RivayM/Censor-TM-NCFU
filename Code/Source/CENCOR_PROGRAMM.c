@@ -60,15 +60,32 @@ void Process_init_RF(void){
 	}
 }
 
+
+
 /*main work RF*/
 void Process_work_RF(void){
-	if( NRF_get() ){
-		/*mainStateProgressSPI++;*/
+	if(NRF_init(&packetRX_READ)){  	// end init rf?
+			mainStateProgressSPI++;   // process ->end go to next
 	}
-	if(readBuf[0] == 0x78){
+	//прочитать то что я записал
+	//#ifndef TX
+
+	/*
+	if( NRF_send() ){
+		PIN_LED_RED = ~PIN_LED_RED;
+	}
+	PIN_LED_GREEN = ~PIN_LED_GREEN;
+
+	*/
+	//#ifndef RX
+	/*
+	if( NRF_get() ){
+		PIN_LED_RED = ~PIN_LED_RED;
+	}
+	if(readBuf[1] != 0x00){
 			PIN_LED_GREEN = ~PIN_LED_GREEN;
 	}
-	
+	*/
 	// пока прочитать статус и самостоятельно считать
 	//	а после настроить прерывание по нему ( извлекать)
 	//	флага нет , не считывать данные и пропускать процедуру

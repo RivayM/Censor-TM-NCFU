@@ -74,7 +74,11 @@ xdata struct NRF_PACKET_SPI packetRX_READ = {
 //**************************************************************************
 //  struct for send mode TX
 //**************************************************************************
-xdata struct NRF_PACKET_SPI packetTX;
+xdata struct NRF_PACKET_SPI packetTX = {
+	/*reg:						,value:   */
+	{W_REG|NRF_CONFIG	,0x0E},		//	CONFIG
+
+};
 
 //**************************************************************************
 // NRF24L01
@@ -82,11 +86,15 @@ xdata struct NRF_PACKET_SPI packetTX;
 
 bit FlagDataReadReady = 0;
 int currentProcess = 0;
+
+int test = 1;
 //**************************************************************************
 // ARRAY
 //**************************************************************************
 
 xdata unsigned char readBuf[NRF_MASSIV_SIZE]={0x00}; 
+xdata unsigned char COMMAND_SEND_RF[NRF_MASSIV_SIZE] = 
+		{W_TX_PL /*next byte for data send[1-x]*/};
 xdata unsigned char COMMAND_READ_RF[NRF_MASSIV_SIZE] = 
 		{R_RX_PL};
 xdata	unsigned char COMMAND_CLEAR_FLUSH_RX[NRF_MASSIV_SIZE] = 
@@ -102,16 +110,13 @@ xdata	unsigned char COMMAND_READ_FIFO_STATUS[NRF_MASSIV_SIZE] =
 xdata	unsigned char COMMAND_W_ACK_PAYLOAD[NRF_MASSIV_SIZE] = 
 		{W_ACK_PL | /*PPP*/ 0x00};		
 
-		
-		
-		
 /*initialization RF*/
 bit NRF_init(struct NRF_PACKET_SPI *packet){
 	switch(currentProcess){
 		case START_PROCESS: NRF_CE = 0;									break;
 		
 		case 1:	/*Send_SPI_NRF( packet->vCONFIG,		2 );*/	break;
-		case 2: NRF_delay10();													break;
+		case 2: NRF_delay();														break;
 		case 3: Send_SPI_NRF( packet->vEN_AA,			2 );	break;
 		case 4:	Send_SPI_NRF( packet->vSETUP_AW,	2 );	break;	
 		case 5:	Send_SPI_NRF( packet->vRF_CH, 		2 );	break;	
@@ -136,7 +141,7 @@ bit NRF_init(struct NRF_PACKET_SPI *packet){
 		case 21:Send_SPI_NRF( packet->vRX_ADDR4,	2 );	break;
 		case 22:Send_SPI_NRF( packet->vRX_ADDR5,	2 );	break;
 		case 23:Send_SPI_NRF( packet->vCONFIG,		2 );	break;
-		case 24: NRF_delay10();													break;
+		case 24: NRF_delay();														break;
 		
 		case 25:NRF_CE = 1;															break;
 		case 26:currentProcess = END_PROCESS;						break;
@@ -145,16 +150,33 @@ bit NRF_init(struct NRF_PACKET_SPI *packet){
 	return Check_Out();
 }
 
+/*NRF change mode to RX or TX */
+bit NRF_change_mode_RF(struct NRF_PACKET_SPI *packet, bit stateCeEnd){
+	switch(currentProcess){
+		case START_PROCESS: NRF_CE = 0;									break;
+		case 1: NRF_delay();														break;
+		case 2: Send_SPI_NRF( packet->vCONFIG,			2 );break;
+		case 3:	NRF_delay();														break;
+		case 4:	NRF_CE = stateCeEnd;										break;
+		case 5:	currentProcess = END_PROCESS;						break;
+		default: break;
+	}
+	return Check_Out();
+}
+
 /*NRF send(radio) */
 bit NRF_send(/*struct DATA_PACKET_SEND *packet*/){
 	switch(currentProcess){
-		case START_PROCESS: NRF_CE = 0;									break;
+		case START_PROCESS: NRF_CE = 0;								break;
+		case 1: COMMAND_SEND_RF[1] =test;							break;		
+		case 2: Send_SPI_NRF( &COMMAND_SEND_RF, 2 );	break;
+		case 3: test++;
+		case 4: NRF_CE = 1;														break;
+		case 5: NRF_delay();NRF_delay();NRF_delay();	break;
+		case 6: NRF_CE = 0;														break;	
+		case 7: currentProcess = END_PROCESS;					break;
 		default: break;
 	}
-	//процесс очистки.
-	// дергать сe ( как ардуино гдето 200микросекунд или более)
-	//или попробовать ждать прерывание об окончании отправки пакета
-	// и се= 0
 	return Check_Out();
 }
 
@@ -163,7 +185,7 @@ bit NRF_get(/*struct DATA_PACKET_SAVE *packet*/){
 	switch(currentProcess){
 		case START_PROCESS: /*NRF_CE = 1;*/		break;
 		case 1: NRF_CE = 1;										break;
-		case 2: NRF_delay10();								break;
+		case 2: NRF_delay();									break;
 		case 3: /*NRF_CE = 0;*/								break;	
 		case 4: 
 			NRF_ack_status();	
@@ -174,7 +196,7 @@ bit NRF_get(/*struct DATA_PACKET_SAVE *packet*/){
 			//COMMAND_W_ACK_PAYLOAD[0] = W_ACK_PL + ((readBuf[0] & RX_P_NO) >> 1);
 			//COMMAND_W_ACK_PAYLOAD[1] = (readBuf[0] & RX_P_NO) >> 1;
 		case 6:	
-			Send_SPI_NRF( &COMMAND_READ_RF, 3 );
+			Send_SPI_NRF( &COMMAND_READ_RF, 2 );
 			NRF_read_value(); 
 			break;
 		case 7:
@@ -229,6 +251,8 @@ bit NRF_get(/*struct DATA_PACKET_SAVE *packet*/){
 	return Check_Out();
 }	
 
+
+
 /*send info for SPI*/
 void Send_SPI_NRF(unsigned char *message,int amountMessage){
 	int i;
@@ -273,8 +297,8 @@ bit Check_Out(){
 }
 
 /*NRF delay(wait)*/
-void NRF_delay10(void){
-	InCom_Set_Delay(START_DELAY);
+void NRF_delay(void){
+	InCom_Set_Delay(DELAY);
 }
 
 

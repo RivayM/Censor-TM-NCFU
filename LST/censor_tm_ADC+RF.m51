@@ -1,4 +1,4 @@
-BL51 BANKED LINKER/LOCATER V6.22                                                        10/09/2024  15:05:17  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22                                                        10/10/2024  14:26:53  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
@@ -38,18 +38,20 @@ LINK MAP OF MODULE:  .\Code\Obj\censor_tm_ADC+RF (MAIN)
             * * * * * * *   D A T A   M E M O R Y   * * * * * * *
             REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
             DATA    0008H     0014H     UNIT         ?DT?INTERFACE_COM
-            DATA    001CH     0002H     UNIT         ?DT?NRF24L01
-                    001EH     0002H                  *** GAP ***
+            DATA    001CH     0004H     UNIT         ?DT?NRF24L01
             BIT     0020H.0   0000H.2   UNIT         ?BI?INTERFACE_COM
             BIT     0020H.2   0000H.2   UNIT         _BIT_GROUP_
-            BIT     0020H.4   0000H.1   UNIT         ?BI?NRF24L01
-                    0020H.5   0000H.3                *** GAP ***
-            DATA    0021H     000EH     UNIT         _DATA_GROUP_
-            IDATA   002FH     0001H     UNIT         ?STACK
+            BIT     0020H.4   0000H.1   UNIT         ?BI?_NRF_CHANGE_MODE_RF?NRF24L01
+            BIT     0020H.5   0000H.1   UNIT         ?BI?NRF24L01
+                    0020H.6   0000H.2                *** GAP ***
+            DATA    0021H     000BH     UNIT         _DATA_GROUP_
+            DATA    002CH     0006H     UNIT         ?DT?NRF_ACK_STATUS?NRF24L01
+            DATA    0032H     0003H     UNIT         ?DT?_NRF_CHANGE_MODE_RF?NRF24L01
+            IDATA   0035H     0001H     UNIT         ?STACK
 
             * * * * * * *  X D A T A   M E M O R Y  * * * * * * *
-            XDATA   0000H     01BCH     UNIT         ?XD?NRF24L01
-            XDATA   01BCH     0004H     UNIT         ?XD?CENCOR_PROGRAMM
+            XDATA   0000H     01C2H     UNIT         ?XD?NRF24L01
+            XDATA   01C2H     0004H     UNIT         ?XD?CENCOR_PROGRAMM
 
             * * * * * * *   C O D E   M E M O R Y   * * * * * * *
             CODE    0000H     0003H     ABSOLUTE     
@@ -57,41 +59,42 @@ LINK MAP OF MODULE:  .\Code\Obj\censor_tm_ADC+RF (MAIN)
             CODE    000BH     0003H     ABSOLUTE     
             CODE    000EH     0005H     UNIT         ?PR?INCOM_SPI_CLK_INIT?INTERFACE_COM
             CODE    0013H     0003H     ABSOLUTE     
-            CODE    0016H     017DH     UNIT         ?C_INITSEG
-            CODE    0193H     0161H     UNIT         ?C?LIB_CODE
-BL51 BANKED LINKER/LOCATER V6.22                                                      10/09/2024  15:05:17  PAGE 2
+BL51 BANKED LINKER/LOCATER V6.22                                                      10/10/2024  14:26:53  PAGE 2
 
 
-            CODE    02F4H     015DH     UNIT         ?PR?_NRF_INIT?NRF24L01
-            CODE    0451H     008CH     UNIT         ?C_C51STARTUP
-            CODE    04DDH     0060H     UNIT         ?PR?INCOM_SPI?INTERFACE_COM
-            CODE    053DH     0046H     UNIT         ?PR?NRF_GET?NRF24L01
-            CODE    0583H     0046H     UNIT         ?PR?PROCESS_INIT_RF?CENCOR_PROGRAMM
-            CODE    05C9H     0046H     UNIT         ?PR?ISR_TIMER0?CENCOR_PROGRAMM
-            CODE    060FH     0040H     UNIT         ?PR?_SEND_SPI_NRF?NRF24L01
-            CODE    064FH     0039H     UNIT         ?PR?ADCHX711_READ?I2C_ADC_HX711
-            CODE    0688H     0036H     UNIT         ?PR?_INCOM_SPI_OUTPUT_IN_BUFFER?INTERFACE_COM
-            CODE    06BEH     0031H     UNIT         ?PR?_INCOM_SPI_INPUT_IN_BUFFER?INTERFACE_COM
-            CODE    06EFH     0030H     UNIT         ?PR?GPIO_INIT?GPIO
-            CODE    071FH     0021H     UNIT         ?PR?NRF_READ_VALUE?NRF24L01
-            CODE    0740H     0020H     UNIT         ?PR?NRF_ACK_STATUS?NRF24L01
-            CODE    0760H     001CH     UNIT         ?PR?INCOM_SPI_EXCHANGE?INTERFACE_COM
-            CODE    077CH     001CH     UNIT         ?PR?WORK_NRF?CENCOR_PROGRAMM
-            CODE    0798H     001BH     UNIT         ?PR?CHECK_OUT?NRF24L01
-            CODE    07B3H     0014H     UNIT         ?PR?INCOM_DELAY?INTERFACE_COM
-            CODE    07C7H     0012H     UNIT         ?PR?MAIN?MAIN
-            CODE    07D9H     0011H     UNIT         ?PR?INCOM_SPI_INIT_TIMER?INTERFACE_COM
-            CODE    07EAH     000EH     UNIT         ?PR?NRF_SEND?NRF24L01
-            CODE    07F8H     000DH     UNIT         ?PR?NRF_CLEAR_IRQ?NRF24L01
-            CODE    0805H     000DH     UNIT         ?PR?PROCESS_WORK_RF?CENCOR_PROGRAMM
-            CODE    0812H     000AH     UNIT         ?PR?SWITCH_STATE_POWER_RF?GPIO
-            CODE    081CH     0009H     UNIT         ?PR?_INCOM_SET_DELAY?INTERFACE_COM
-            CODE    0825H     0007H     UNIT         ?PR?NRF_DELAY10?NRF24L01
-            CODE    082CH     0006H     UNIT         ?CO?NRF24L01
-            CODE    0832H     0005H     UNIT         ?PR?ISR_INT1?CENCOR_PROGRAMM
-            CODE    0837H     0003H     UNIT         ?PR?BUTTON_READ?GPIO
-            CODE    083AH     0003H     UNIT         ?PR?INCOM_SPI_START?INTERFACE_COM
-            CODE    083DH     0001H     UNIT         ?PR?LED_SWITCH_STATE?GPIO
+            CODE    0016H     0212H     UNIT         ?C_INITSEG
+            CODE    0228H     0161H     UNIT         ?C?LIB_CODE
+            CODE    0389H     015DH     UNIT         ?PR?_NRF_INIT?NRF24L01
+            CODE    04E6H     008CH     UNIT         ?C_C51STARTUP
+            CODE    0572H     0060H     UNIT         ?PR?NRF_SEND?NRF24L01
+            CODE    05D2H     0060H     UNIT         ?PR?INCOM_SPI?INTERFACE_COM
+            CODE    0632H     0046H     UNIT         ?PR?_SEND_SPI_NRF?NRF24L01
+            CODE    0678H     0046H     UNIT         ?PR?PROCESS_INIT_RF?CENCOR_PROGRAMM
+            CODE    06BEH     0046H     UNIT         ?PR?ISR_TIMER0?CENCOR_PROGRAMM
+            CODE    0704H     0045H     UNIT         ?PR?_NRF_CHANGE_MODE_RF?NRF24L01
+            CODE    0749H     0040H     UNIT         ?PR?NRF_GET?NRF24L01
+            CODE    0789H     0039H     UNIT         ?PR?ADCHX711_READ?I2C_ADC_HX711
+            CODE    07C2H     0036H     UNIT         ?PR?_INCOM_SPI_OUTPUT_IN_BUFFER?INTERFACE_COM
+            CODE    07F8H     0031H     UNIT         ?PR?_INCOM_SPI_INPUT_IN_BUFFER?INTERFACE_COM
+            CODE    0829H     0030H     UNIT         ?PR?GPIO_INIT?GPIO
+            CODE    0859H     0021H     UNIT         ?PR?NRF_READ_VALUE?NRF24L01
+            CODE    087AH     0020H     UNIT         ?PR?NRF_ACK_STATUS?NRF24L01
+            CODE    089AH     001CH     UNIT         ?PR?INCOM_SPI_EXCHANGE?INTERFACE_COM
+            CODE    08B6H     001CH     UNIT         ?PR?WORK_NRF?CENCOR_PROGRAMM
+            CODE    08D2H     001BH     UNIT         ?PR?CHECK_OUT?NRF24L01
+            CODE    08EDH     001AH     UNIT         ?PR?PROCESS_WORK_RF?CENCOR_PROGRAMM
+            CODE    0907H     0014H     UNIT         ?PR?INCOM_DELAY?INTERFACE_COM
+            CODE    091BH     0012H     UNIT         ?PR?MAIN?MAIN
+            CODE    092DH     0011H     UNIT         ?PR?INCOM_SPI_INIT_TIMER?INTERFACE_COM
+            CODE    093EH     000DH     UNIT         ?PR?NRF_CLEAR_IRQ?NRF24L01
+            CODE    094BH     000AH     UNIT         ?PR?SWITCH_STATE_POWER_RF?GPIO
+            CODE    0955H     0009H     UNIT         ?PR?_INCOM_SET_DELAY?INTERFACE_COM
+            CODE    095EH     0007H     UNIT         ?PR?NRF_DELAY?NRF24L01
+            CODE    0965H     0006H     UNIT         ?CO?NRF24L01
+            CODE    096BH     0005H     UNIT         ?PR?ISR_INT1?CENCOR_PROGRAMM
+            CODE    0970H     0003H     UNIT         ?PR?BUTTON_READ?GPIO
+            CODE    0973H     0003H     UNIT         ?PR?INCOM_SPI_START?INTERFACE_COM
+            CODE    0976H     0001H     UNIT         ?PR?LED_SWITCH_STATE?GPIO
 
 
 
@@ -116,12 +119,12 @@ SEGMENT                                             BIT_GROUP          DATA_GROU
 
 ?C_C51STARTUP                                    -----    -----      -----    -----
   +--> ?PR?MAIN?MAIN
+BL51 BANKED LINKER/LOCATER V6.22                                                      10/10/2024  14:26:53  PAGE 3
+
+
   +--> ?C_INITSEG
 
 ?PR?MAIN?MAIN                                    -----    -----      -----    -----
-BL51 BANKED LINKER/LOCATER V6.22                                                      10/09/2024  15:05:17  PAGE 3
-
-
   +--> ?PR?GPIO_INIT?GPIO
   +--> ?PR?INCOM_SPI_INIT_TIMER?INTERFACE_COM
   +--> ?PR?INCOM_SPI_CLK_INIT?INTERFACE_COM
@@ -138,28 +141,17 @@ SEGMENT                                             BIT_GROUP          DATA_GROU
 
 ?PR?_NRF_INIT?NRF24L01                           -----    -----      0024H    0003H
   +--> ?PR?_SEND_SPI_NRF?NRF24L01
-  +--> ?PR?NRF_DELAY10?NRF24L01
+  +--> ?PR?NRF_DELAY?NRF24L01
   +--> ?PR?CHECK_OUT?NRF24L01
 
-?PR?_SEND_SPI_NRF?NRF24L01                       -----    -----      002AH    0005H
+?PR?_SEND_SPI_NRF?NRF24L01                       -----    -----      0027H    0005H
   +--> ?PR?INCOM_SPI_START?INTERFACE_COM
 
-?PR?NRF_DELAY10?NRF24L01                         -----    -----      -----    -----
+?PR?NRF_DELAY?NRF24L01                           -----    -----      -----    -----
   +--> ?PR?_INCOM_SET_DELAY?INTERFACE_COM
 
 ?PR?PROCESS_WORK_RF?CENCOR_PROGRAMM              -----    -----      -----    -----
-  +--> ?PR?NRF_GET?NRF24L01
-
-?PR?NRF_GET?NRF24L01                             -----    -----      -----    -----
-  +--> ?PR?NRF_DELAY10?NRF24L01
-  +--> ?PR?NRF_ACK_STATUS?NRF24L01
-  +--> ?PR?_SEND_SPI_NRF?NRF24L01
-  +--> ?PR?NRF_READ_VALUE?NRF24L01
-  +--> ?PR?CHECK_OUT?NRF24L01
-
-?PR?NRF_ACK_STATUS?NRF24L01                      -----    -----      0024H    0006H
-  +--> ?CO?NRF24L01
-  +--> ?PR?_SEND_SPI_NRF?NRF24L01
+  +--> ?PR?_NRF_INIT?NRF24L01
 
 
 
@@ -178,10 +170,7 @@ SYMBOL TABLE OF MODULE:  .\Code\Obj\censor_tm_ADC+RF (MAIN)
   D:00D8H         PUBLIC        PWMCON0
   D:00A8H         PUBLIC        IE
   D:00B8H         PUBLIC        IP
-  C:07C7H         PUBLIC        main
-BL51 BANKED LINKER/LOCATER V6.22                                                      10/09/2024  15:05:17  PAGE 4
-
-
+  C:091BH         PUBLIC        main
   D:0098H         PUBLIC        SCON
   D:0088H         PUBLIC        TCON
   D:00F8H         PUBLIC        SCON_1
@@ -190,14 +179,17 @@ SYMBOL TABLE OF MODULE:  .\Code\Obj\censor_tm_ADC+RF (MAIN)
   D:00C8H         PUBLIC        T2CON
   D:00D0H         PUBLIC        PSW
   -------         PROC          MAIN
-  C:07C7H         LINE#         7
-  C:07C7H         LINE#         11
-  C:07CAH         LINE#         12
-  C:07CDH         LINE#         13
-  C:07D2H         LINE#         15
-  C:07D4H         LINE#         21
-  C:07D4H         LINE#         25
-  C:07D7H         LINE#         27
+BL51 BANKED LINKER/LOCATER V6.22                                                      10/10/2024  14:26:53  PAGE 4
+
+
+  C:091BH         LINE#         7
+  C:091BH         LINE#         11
+  C:091EH         LINE#         12
+  C:0921H         LINE#         13
+  C:0926H         LINE#         15
+  C:0928H         LINE#         21
+  C:0928H         LINE#         25
+  C:092BH         LINE#         27
   -------         ENDPROC       MAIN
   -------         ENDMOD        MAIN
 
@@ -218,7 +210,7 @@ SYMBOL TABLE OF MODULE:  .\Code\Obj\censor_tm_ADC+RF (MAIN)
   D:00F8H         PUBLIC        SCON_1
   D:00E8H         PUBLIC        ADCCON0
   D:00C0H         PUBLIC        I2CON
-  C:064FH         PUBLIC        ADCHX711_Read
+  C:0789H         PUBLIC        ADCHX711_Read
   D:00C8H         PUBLIC        T2CON
   D:00D0H         PUBLIC        PSW
   -------         PROC          ADCHX711_INITIAL
@@ -232,26 +224,26 @@ SYMBOL TABLE OF MODULE:  .\Code\Obj\censor_tm_ADC+RF (MAIN)
   D:0004H         SYMBOL        Count
   D:0003H         SYMBOL        i
   -------         ENDDO         
-  C:064FH         LINE#         16
-  C:064FH         LINE#         20
-  C:0651H         LINE#         21
-  C:0659H         LINE#         22
-  C:065BH         LINE#         23
-  C:066BH         LINE#         24
-  C:066DH         LINE#         25
-BL51 BANKED LINKER/LOCATER V6.22                                                      10/09/2024  15:05:17  PAGE 5
+  C:0789H         LINE#         16
+  C:0789H         LINE#         20
+  C:078BH         LINE#         21
+  C:0793H         LINE#         22
+  C:0795H         LINE#         23
+  C:07A5H         LINE#         24
+  C:07A7H         LINE#         25
+  C:07ACH         LINE#         26
+  C:07AEH         LINE#         27
+  C:07B2H         LINE#         29
+  C:07B4H         LINE#         30
+  C:07B6H         LINE#         31
+  C:07B7H         LINE#         32
+  C:07B9H         LINE#         33
+  C:07BDH         LINE#         34
+BL51 BANKED LINKER/LOCATER V6.22                                                      10/10/2024  14:26:53  PAGE 5
 
 
-  C:0672H         LINE#         26
-  C:0674H         LINE#         27
-  C:0678H         LINE#         29
-  C:067AH         LINE#         30
-  C:067CH         LINE#         31
-  C:067DH         LINE#         32
-  C:067FH         LINE#         33
-  C:0683H         LINE#         34
-  C:0687H         LINE#         35
-  C:0687H         LINE#         36
+  C:07C1H         LINE#         35
+  C:07C1H         LINE#         36
   -------         ENDPROC       ADCHX711_READ
   -------         ENDMOD        I2C_ADC_HX711
 
@@ -259,173 +251,203 @@ SYMBOL TABLE OF MODULE:  .\Code\Obj\censor_tm_ADC+RF (MAIN)
   C:0000H         SYMBOL        _ICE_DUMMY_
   D:0080H         PUBLIC        P0
   D:0090H         PUBLIC        P1
-  C:0740H         PUBLIC        NRF_ack_status
+  C:087AH         PUBLIC        NRF_ack_status
   D:00A0H         PUBLIC        P2
   D:00B0H         PUBLIC        P3
+  X:0000H         PUBLIC        COMMAND_SEND_RF
   D:00D8H         PUBLIC        PWMCON0
-  C:053DH         PUBLIC        NRF_get
+  C:0749H         PUBLIC        NRF_get
   D:00A8H         PUBLIC        IE
   D:00B8H         PUBLIC        IP
-  X:0000H         PUBLIC        COMMAND_CLEAR_IRQ
-  C:07F8H         PUBLIC        NRF_clear_IRQ
-  C:060FH         PUBLIC        _Send_SPI_NRF
-  X:0006H         PUBLIC        packetRX_READ
-  X:008AH         PUBLIC        packetRX
-  X:010EH         PUBLIC        packetTX
+  X:0006H         PUBLIC        COMMAND_CLEAR_IRQ
+  C:093EH         PUBLIC        NRF_clear_IRQ
+  C:0638H         PUBLIC        _Send_SPI_NRF
+  X:000CH         PUBLIC        packetRX_READ
+  X:0090H         PUBLIC        packetRX
+  X:0114H         PUBLIC        packetTX
   B:0090H.1       PUBLIC        P11
+  C:0704H         PUBLIC        _NRF_change_mode_RF
   D:0098H         PUBLIC        SCON
   D:0088H         PUBLIC        TCON
-  C:0825H         PUBLIC        NRF_delay10
-  X:0192H         PUBLIC        COMMAND_CLEAR_FLUSH_RX
-  X:0198H         PUBLIC        readBuf
-  X:019EH         PUBLIC        COMMAND_CLEAR_FLUSH_TX
-  X:01A4H         PUBLIC        COMMAND_READ_PIPE0
-  C:082CH         SYMBOL        _?ix1000
+  X:0198H         PUBLIC        COMMAND_CLEAR_FLUSH_RX
+  X:019EH         PUBLIC        readBuf
+  X:01A4H         PUBLIC        COMMAND_CLEAR_FLUSH_TX
+  X:01AAH         PUBLIC        COMMAND_READ_PIPE0
+  D:001CH         PUBLIC        test
+  C:0965H         SYMBOL        _?ix1000
   D:00F8H         PUBLIC        SCON_1
-  X:01AAH         PUBLIC        COMMAND_READ_FIFO_STATUS
-  X:01B0H         PUBLIC        COMMAND_W_ACK_PAYLOAD
+  X:01B0H         PUBLIC        COMMAND_READ_FIFO_STATUS
+  X:01B6H         PUBLIC        COMMAND_W_ACK_PAYLOAD
+  C:095EH         PUBLIC        NRF_delay
   D:00E8H         PUBLIC        ADCCON0
   D:00C0H         PUBLIC        I2CON
-  C:071FH         PUBLIC        NRF_read_value
+  C:0859H         PUBLIC        NRF_read_value
   D:00C8H         PUBLIC        T2CON
-  D:001CH         PUBLIC        currentProcess
-  B:0020H.4       PUBLIC        FlagDataReadReady
-  C:07EAH         PUBLIC        NRF_send
-  X:01B6H         PUBLIC        COMMAND_READ_RF
+  D:001EH         PUBLIC        currentProcess
+  B:0020H.5       PUBLIC        FlagDataReadReady
+  C:0572H         PUBLIC        NRF_send
+  X:01BCH         PUBLIC        COMMAND_READ_RF
   D:00D0H         PUBLIC        PSW
-  C:0798H         PUBLIC        Check_Out
-  C:02F4H         PUBLIC        _NRF_init
+  C:08D2H         PUBLIC        Check_Out
+  C:0389H         PUBLIC        _NRF_init
   -------         PROC          _NRF_INIT
   D:0024H         SYMBOL        packet
-  C:02F4H         LINE#         109
-  C:02FAH         LINE#         110
-BL51 BANKED LINKER/LOCATER V6.22                                                      10/09/2024  15:05:17  PAGE 6
+  C:0389H         LINE#         114
+  C:038FH         LINE#         115
+  C:03F8H         LINE#         116
+  C:03FDH         LINE#         118
+  C:03FDH         LINE#         119
+  C:0400H         LINE#         120
+  C:0409H         LINE#         121
+BL51 BANKED LINKER/LOCATER V6.22                                                      10/10/2024  14:26:53  PAGE 6
 
 
-  C:0363H         LINE#         111
-  C:0368H         LINE#         113
-  C:0368H         LINE#         114
-  C:036BH         LINE#         115
-  C:0374H         LINE#         116
-  C:037CH         LINE#         117
-  C:0384H         LINE#         118
-  C:038CH         LINE#         119
-  C:0394H         LINE#         120
-  C:039CH         LINE#         121
-  C:03A4H         LINE#         123
-  C:03ACH         LINE#         125
-  C:03B4H         LINE#         126
-  C:03BCH         LINE#         127
-  C:03C4H         LINE#         128
-  C:03CCH         LINE#         129
-  C:03D4H         LINE#         130
-  C:03DCH         LINE#         132
-  C:03E4H         LINE#         133
-  C:03F3H         LINE#         134
-  C:0402H         LINE#         135
-  C:0411H         LINE#         136
-  C:0420H         LINE#         137
-  C:042FH         LINE#         138
-  C:043EH         LINE#         139
-  C:0443H         LINE#         141
-  C:0447H         LINE#         142
-  C:044DH         LINE#         143
-  C:044DH         LINE#         144
-  C:044DH         LINE#         145
-  C:0450H         LINE#         146
+  C:0411H         LINE#         122
+  C:0419H         LINE#         123
+  C:0421H         LINE#         124
+  C:0429H         LINE#         125
+  C:0431H         LINE#         126
+  C:0439H         LINE#         128
+  C:0441H         LINE#         130
+  C:0449H         LINE#         131
+  C:0451H         LINE#         132
+  C:0459H         LINE#         133
+  C:0461H         LINE#         134
+  C:0469H         LINE#         135
+  C:0471H         LINE#         137
+  C:0479H         LINE#         138
+  C:0488H         LINE#         139
+  C:0497H         LINE#         140
+  C:04A6H         LINE#         141
+  C:04B5H         LINE#         142
+  C:04C4H         LINE#         143
+  C:04D3H         LINE#         144
+  C:04D8H         LINE#         146
+  C:04DCH         LINE#         147
+  C:04E2H         LINE#         148
+  C:04E2H         LINE#         149
+  C:04E2H         LINE#         150
+  C:04E5H         LINE#         151
   -------         ENDPROC       _NRF_INIT
+  -------         PROC          _NRF_CHANGE_MODE_RF
+  D:0032H         SYMBOL        packet
+  B:0020H.4       SYMBOL        stateCeEnd
+  C:0704H         LINE#         154
+  C:070AH         LINE#         155
+  C:0723H         LINE#         156
+  C:0727H         LINE#         157
+  C:0729H         LINE#         158
+  C:0734H         LINE#         159
+  C:0739H         LINE#         160
+  C:073FH         LINE#         161
+  C:0745H         LINE#         162
+  C:0745H         LINE#         163
+  C:0745H         LINE#         164
+  C:0748H         LINE#         165
+  -------         ENDPROC       _NRF_CHANGE_MODE_RF
   -------         PROC          NRF_SEND
-  C:07EAH         LINE#         149
-  C:07EAH         LINE#         150
-  C:07F2H         LINE#         151
-  C:07F4H         LINE#         152
-  C:07F4H         LINE#         153
-  C:07F4H         LINE#         158
-  C:07F7H         LINE#         159
+  C:0572H         LINE#         168
+  C:0572H         LINE#         169
+  C:059CH         LINE#         170
+  C:05A0H         LINE#         171
+  C:05A8H         LINE#         172
+  C:05B1H         LINE#         173
+  C:05B9H         LINE#         174
+  C:05BDH         LINE#         175
+  C:05C8H         LINE#         176
+  C:05C8H         LINE#         177
+  C:05CEH         LINE#         178
+  C:05CEH         LINE#         179
+  C:05CEH         LINE#         180
+BL51 BANKED LINKER/LOCATER V6.22                                                      10/10/2024  14:26:53  PAGE 7
+
+
+  C:05D1H         LINE#         181
   -------         ENDPROC       NRF_SEND
   -------         PROC          NRF_GET
-  C:053DH         LINE#         162
-  C:053DH         LINE#         163
-  C:0559H         LINE#         164
-  C:0559H         LINE#         165
-  C:055DH         LINE#         166
-  C:0562H         LINE#         167
-  C:0562H         LINE#         168
-  C:0562H         LINE#         169
-  C:0565H         LINE#         170
-  C:0565H         LINE#         171
-  C:0567H         LINE#         172
-  C:0567H         LINE#         176
-  C:0567H         LINE#         177
-  C:0574H         LINE#         178
-  C:0577H         LINE#         179
-BL51 BANKED LINKER/LOCATER V6.22                                                      10/09/2024  15:05:17  PAGE 7
-
-
-  C:0579H         LINE#         180
-  C:0579H         LINE#         184
-  C:0579H         LINE#         186
-  C:0579H         LINE#         188
-  C:0579H         LINE#         226
-  C:057FH         LINE#         227
-  C:057FH         LINE#         228
-  C:057FH         LINE#         229
-  C:0582H         LINE#         230
+  C:0749H         LINE#         184
+  C:0749H         LINE#         185
+  C:0765H         LINE#         186
+  C:0765H         LINE#         187
+  C:0769H         LINE#         188
+  C:076EH         LINE#         189
+  C:076EH         LINE#         190
+  C:076EH         LINE#         191
+  C:0771H         LINE#         192
+  C:0771H         LINE#         193
+  C:0773H         LINE#         194
+  C:0773H         LINE#         198
+  C:0773H         LINE#         199
+  C:077AH         LINE#         200
+  C:077DH         LINE#         201
+  C:077FH         LINE#         202
+  C:077FH         LINE#         206
+  C:077FH         LINE#         208
+  C:077FH         LINE#         210
+  C:077FH         LINE#         248
+  C:0785H         LINE#         249
+  C:0785H         LINE#         250
+  C:0785H         LINE#         251
+  C:0788H         LINE#         252
   -------         ENDPROC       NRF_GET
+  C:0634H         SYMBOL        L?0111
+  -------         PROC          L?0110
+  -------         ENDPROC       L?0110
+  C:0634H         SYMBOL        L?0111
   -------         PROC          _SEND_SPI_NRF
-  D:002AH         SYMBOL        message
-  D:002DH         SYMBOL        amountMessage
+  D:0027H         SYMBOL        message
+  D:002AH         SYMBOL        amountMessage
   -------         DO            
   D:0006H         SYMBOL        i
   -------         ENDDO         
-  C:060FH         LINE#         233
-  C:0619H         LINE#         235
-  C:062BH         LINE#         236
-  C:063FH         LINE#         237
-  C:0646H         LINE#         238
-  C:064CH         LINE#         239
+  C:0638H         LINE#         257
+  C:0642H         LINE#         259
+  C:0654H         LINE#         260
+  C:0668H         LINE#         261
+  C:066FH         LINE#         262
+  C:0675H         LINE#         263
   -------         ENDPROC       _SEND_SPI_NRF
   -------         PROC          NRF_CLEAR_IRQ
-  C:07F8H         LINE#         243
-  C:07F8H         LINE#         244
+  C:093EH         LINE#         267
+  C:093EH         LINE#         268
   -------         ENDPROC       NRF_CLEAR_IRQ
   -------         PROC          NRF_ACK_STATUS
   -------         DO            
-  D:0024H         SYMBOL        array
+  D:002CH         SYMBOL        array
   -------         ENDDO         
-  C:0740H         LINE#         248
-  C:0740H         LINE#         249
-  C:0753H         LINE#         251
+  C:087AH         LINE#         272
+  C:087AH         LINE#         273
+  C:088DH         LINE#         275
   -------         ENDPROC       NRF_ACK_STATUS
+BL51 BANKED LINKER/LOCATER V6.22                                                      10/10/2024  14:26:53  PAGE 8
+
+
   -------         PROC          NRF_READ_VALUE
   -------         DO            
   D:0006H         SYMBOL        i
   -------         ENDDO         
-  C:071FH         LINE#         255
-  C:071FH         LINE#         257
-  C:0722H         LINE#         258
-  C:0734H         LINE#         260
-  C:073FH         LINE#         261
+  C:0859H         LINE#         279
+  C:0859H         LINE#         281
+  C:085CH         LINE#         282
+  C:086EH         LINE#         284
+  C:0879H         LINE#         285
   -------         ENDPROC       NRF_READ_VALUE
   -------         PROC          CHECK_OUT
-  C:0798H         LINE#         264
-  C:0798H         LINE#         265
-  C:07A2H         LINE#         266
-  C:07A7H         LINE#         267
-  C:07A9H         LINE#         268
-  C:07A9H         LINE#         269
-  C:07A9H         LINE#         270
-  C:07B1H         LINE#         271
-  C:07B2H         LINE#         272
-  C:07B2H         LINE#         273
+  C:08D2H         LINE#         288
+  C:08D2H         LINE#         289
+  C:08DCH         LINE#         290
+  C:08E1H         LINE#         291
+  C:08E3H         LINE#         292
+  C:08E3H         LINE#         293
+  C:08E3H         LINE#         294
+  C:08EBH         LINE#         295
+  C:08ECH         LINE#         296
+  C:08ECH         LINE#         297
   -------         ENDPROC       CHECK_OUT
-BL51 BANKED LINKER/LOCATER V6.22                                                      10/09/2024  15:05:17  PAGE 8
-
-
-  -------         PROC          NRF_DELAY10
-  C:0825H         LINE#         276
-  C:0825H         LINE#         277
-  -------         ENDPROC       NRF_DELAY10
+  -------         PROC          NRF_DELAY
+  C:095EH         LINE#         300
+  C:095EH         LINE#         301
+  -------         ENDPROC       NRF_DELAY
   -------         ENDMOD        NRF24L01
 
   -------         MODULE        GPIO
@@ -448,44 +470,44 @@ SYMBOL TABLE OF MODULE:  .\Code\Obj\censor_tm_ADC+RF (MAIN)
   D:0098H         PUBLIC        SCON
   B:0090H.4       PUBLIC        P14
   D:0088H         PUBLIC        TCON
-  C:0812H         PUBLIC        Switch_State_Power_RF
+  C:094BH         PUBLIC        Switch_State_Power_RF
   D:00F8H         PUBLIC        SCON_1
-  C:06EFH         PUBLIC        GPIO_init
+  C:0829H         PUBLIC        GPIO_init
   B:00A8H.2       PUBLIC        EX1
-  C:083DH         PUBLIC        Led_Switch_State
+  C:0976H         PUBLIC        Led_Switch_State
   D:00E8H         PUBLIC        ADCCON0
   D:00C0H         PUBLIC        I2CON
-  C:0837H         PUBLIC        Button_Read
+  C:0970H         PUBLIC        Button_Read
   D:00C8H         PUBLIC        T2CON
+BL51 BANKED LINKER/LOCATER V6.22                                                      10/10/2024  14:26:53  PAGE 9
+
+
   D:00E9H         PUBLIC        PICON
   D:00D0H         PUBLIC        PSW
   D:00EAH         PUBLIC        PINEN
   D:00EBH         PUBLIC        PIPEN
   -------         PROC          LED_SWITCH_STATE
-  C:083DH         LINE#         8
+  C:0976H         LINE#         8
   -------         ENDPROC       LED_SWITCH_STATE
   -------         PROC          BUTTON_READ
-  C:0837H         LINE#         9
+  C:0970H         LINE#         9
   -------         ENDPROC       BUTTON_READ
   -------         PROC          SWITCH_STATE_POWER_RF
-  C:0812H         LINE#         10
-  C:0812H         LINE#         11
-  C:081BH         LINE#         12
+  C:094BH         LINE#         10
+  C:094BH         LINE#         11
+  C:0954H         LINE#         12
   -------         ENDPROC       SWITCH_STATE_POWER_RF
   -------         PROC          GPIO_INIT
-  C:06EFH         LINE#         14
-  C:06EFH         LINE#         16
-  C:06FCH         LINE#         17
-  C:0702H         LINE#         18
-  C:0708H         LINE#         19
-  C:070EH         LINE#         27
-BL51 BANKED LINKER/LOCATER V6.22                                                      10/09/2024  15:05:17  PAGE 9
-
-
-  C:0711H         LINE#         28
-  C:071AH         LINE#         30
-  C:071CH         LINE#         36
-  C:071EH         LINE#         38
+  C:0829H         LINE#         14
+  C:0829H         LINE#         16
+  C:0836H         LINE#         17
+  C:083CH         LINE#         18
+  C:0842H         LINE#         19
+  C:0848H         LINE#         27
+  C:084BH         LINE#         28
+  C:0854H         LINE#         30
+  C:0856H         LINE#         36
+  C:0858H         LINE#         38
   -------         ENDPROC       GPIO_INIT
   -------         ENDMOD        GPIO
 
@@ -517,32 +539,32 @@ SYMBOL TABLE OF MODULE:  .\Code\Obj\censor_tm_ADC+RF (MAIN)
   D:00A8H         PUBLIC        IE
   D:0008H         PUBLIC        valueDelay
   D:00B8H         PUBLIC        IP
+BL51 BANKED LINKER/LOCATER V6.22                                                      10/10/2024  14:26:53  PAGE 10
+
+
   B:0020H.0       PUBLIC        FlagInComSPIGlobal
   D:000AH         PUBLIC        counterByte
-  C:07D9H         PUBLIC        InCom_SPI_init_Timer
-  C:04DDH         PUBLIC        InCom_SPI
+  C:092DH         PUBLIC        InCom_SPI_init_Timer
+  C:05D2H         PUBLIC        InCom_SPI
   D:000CH         PUBLIC        counterBit
-  C:07B3H         PUBLIC        InCom_Delay
+  C:0907H         PUBLIC        InCom_Delay
   B:0080H.0       PUBLIC        P00
   B:0080H.1       PUBLIC        P01
   B:0090H.0       PUBLIC        P10
-  C:06BEH         PUBLIC        _InCom_SPI_Input_in_buffer
-  C:0688H         PUBLIC        _InCom_SPI_Output_in_buffer
+  C:07F8H         PUBLIC        _InCom_SPI_Input_in_buffer
+  C:07C2H         PUBLIC        _InCom_SPI_Output_in_buffer
   D:0098H         PUBLIC        SCON
   D:0089H         PUBLIC        TMOD
   D:0088H         PUBLIC        TCON
   B:0090H.5       PUBLIC        P15
-  C:083AH         PUBLIC        InCom_SPI_start
-  C:081CH         PUBLIC        _InCom_Set_Delay
+  C:0973H         PUBLIC        InCom_SPI_start
+  C:0955H         PUBLIC        _InCom_Set_Delay
   D:00F8H         PUBLIC        SCON_1
   B:0020H.1       PUBLIC        FlagInComDelay
   B:00A8H.1       PUBLIC        ET0
   D:008CH         PUBLIC        TH0
   D:000EH         PUBLIC        valueBufferArrayRx
-BL51 BANKED LINKER/LOCATER V6.22                                                      10/09/2024  15:05:17  PAGE 10
-
-
-  C:0760H         PUBLIC        InCom_SPI_exchange
+  C:089AH         PUBLIC        InCom_SPI_exchange
   D:0014H         PUBLIC        valueBufferArrayTx
   D:008AH         PUBLIC        TL0
   B:0088H.4       PUBLIC        TR0
@@ -553,116 +575,116 @@ SYMBOL TABLE OF MODULE:  .\Code\Obj\censor_tm_ADC+RF (MAIN)
   C:000EH         PUBLIC        InCom_SPI_CLK_init
   D:00D0H         PUBLIC        PSW
   -------         PROC          INCOM_SPI_INIT_TIMER
-  C:07D9H         LINE#         19
-  C:07D9H         LINE#         20
-  C:07DFH         LINE#         21
-  C:07E2H         LINE#         22
-  C:07E5H         LINE#         23
-  C:07E7H         LINE#         24
-  C:07E9H         LINE#         25
+  C:092DH         LINE#         19
+  C:092DH         LINE#         20
+  C:0933H         LINE#         21
+  C:0936H         LINE#         22
+  C:0939H         LINE#         23
+  C:093BH         LINE#         24
+  C:093DH         LINE#         25
   -------         ENDPROC       INCOM_SPI_INIT_TIMER
   -------         PROC          INCOM_SPI_EXCHANGE
-  C:0760H         LINE#         28
-  C:0760H         LINE#         29
+  C:089AH         LINE#         28
+  C:089AH         LINE#         29
   -------         ENDPROC       INCOM_SPI_EXCHANGE
   -------         PROC          INCOM_SPI
   B:0020H.2       SYMBOL        valueMosi
   D:0021H         SYMBOL        outSideBuffer
-  C:04DDH         LINE#         36
-  C:04DDH         LINE#         37
-  C:04E3H         LINE#         38
-  C:04E5H         LINE#         39
-  C:04E5H         LINE#         40
-  C:04E8H         LINE#         41
-  C:04F2H         LINE#         43
-  C:04F2H         LINE#         44
-  C:04F4H         LINE#         45
-  C:04F6H         LINE#         46
-  C:04F8H         LINE#         47
-  C:04FDH         LINE#         48
-  C:050FH         LINE#         49
-  C:0511H         LINE#         50
-  C:0516H         LINE#         51
-  C:0518H         LINE#         52
-  C:0519H         LINE#         53
-  C:0521H         LINE#         54
-  C:0522H         LINE#         56
-  C:0522H         LINE#         57
-  C:0524H         LINE#         58
-  C:0528H         LINE#         59
-  C:052BH         LINE#         60
-  C:0534H         LINE#         61
-  C:0534H         LINE#         62
-  C:053CH         LINE#         63
-  C:053CH         LINE#         64
-  C:053CH         LINE#         65
-  C:053CH         LINE#         66
+  C:05D2H         LINE#         36
+  C:05D2H         LINE#         37
+  C:05D8H         LINE#         38
+  C:05DAH         LINE#         39
+  C:05DAH         LINE#         40
+  C:05DDH         LINE#         41
+  C:05E7H         LINE#         43
+  C:05E7H         LINE#         44
+  C:05E9H         LINE#         45
+BL51 BANKED LINKER/LOCATER V6.22                                                      10/10/2024  14:26:53  PAGE 11
+
+
+  C:05EBH         LINE#         46
+  C:05EDH         LINE#         47
+  C:05F2H         LINE#         48
+  C:0604H         LINE#         49
+  C:0606H         LINE#         50
+  C:060BH         LINE#         51
+  C:060DH         LINE#         52
+  C:060EH         LINE#         53
+  C:0616H         LINE#         54
+  C:0617H         LINE#         56
+  C:0617H         LINE#         57
+  C:0619H         LINE#         58
+  C:061DH         LINE#         59
+  C:0620H         LINE#         60
+  C:0629H         LINE#         61
+  C:0629H         LINE#         62
+  C:0631H         LINE#         63
+  C:0631H         LINE#         64
+  C:0631H         LINE#         65
+  C:0631H         LINE#         66
   -------         ENDPROC       INCOM_SPI
   -------         PROC          _INCOM_SPI_INPUT_IN_BUFFER
-BL51 BANKED LINKER/LOCATER V6.22                                                      10/09/2024  15:05:17  PAGE 11
-
-
   D:0001H         SYMBOL        outSideBuffer
   -------         DO            
   D:0007H         SYMBOL        buf
   -------         ENDDO         
-  C:06BEH         LINE#         69
-  C:06BEH         LINE#         71
-  C:06C2H         LINE#         72
-  C:06C8H         LINE#         73
-  C:06C8H         LINE#         74
-  C:06CCH         LINE#         76
-  C:06CCH         LINE#         77
-  C:06CCH         LINE#         78
-  C:06D9H         LINE#         79
-  C:06EAH         LINE#         80
-  C:06EAH         LINE#         81
-  C:06EEH         LINE#         82
-  C:06EEH         LINE#         83
+  C:07F8H         LINE#         69
+  C:07F8H         LINE#         71
+  C:07FCH         LINE#         72
+  C:0802H         LINE#         73
+  C:0802H         LINE#         74
+  C:0806H         LINE#         76
+  C:0806H         LINE#         77
+  C:0806H         LINE#         78
+  C:0813H         LINE#         79
+  C:0824H         LINE#         80
+  C:0824H         LINE#         81
+  C:0828H         LINE#         82
+  C:0828H         LINE#         83
   -------         ENDPROC       _INCOM_SPI_INPUT_IN_BUFFER
   -------         PROC          _INCOM_SPI_OUTPUT_IN_BUFFER
   D:0001H         SYMBOL        outSideBuffer
   -------         DO            
   D:0007H         SYMBOL        buf
   -------         ENDDO         
-  C:0688H         LINE#         87
-  C:0688H         LINE#         89
-  C:068CH         LINE#         90
-  C:0692H         LINE#         91
-  C:0695H         LINE#         92
-  C:0695H         LINE#         93
-  C:0695H         LINE#         94
-  C:06A8H         LINE#         95
-  C:06B7H         LINE#         96
-  C:06B7H         LINE#         97
-  C:06BDH         LINE#         98
+  C:07C2H         LINE#         87
+  C:07C2H         LINE#         89
+  C:07C6H         LINE#         90
+  C:07CCH         LINE#         91
+  C:07CFH         LINE#         92
+  C:07CFH         LINE#         93
+  C:07CFH         LINE#         94
+  C:07E2H         LINE#         95
+  C:07F1H         LINE#         96
+  C:07F1H         LINE#         97
+  C:07F7H         LINE#         98
   -------         ENDPROC       _INCOM_SPI_OUTPUT_IN_BUFFER
+BL51 BANKED LINKER/LOCATER V6.22                                                      10/10/2024  14:26:53  PAGE 12
+
+
   -------         PROC          INCOM_DELAY
-  C:07B3H         LINE#         107
-  C:07B3H         LINE#         108
-  C:07C2H         LINE#         109
-  C:07C2H         LINE#         110
-  C:07C4H         LINE#         111
-  C:07C6H         LINE#         112
-  C:07C6H         LINE#         113
+  C:0907H         LINE#         107
+  C:0907H         LINE#         108
+  C:0916H         LINE#         109
+  C:0916H         LINE#         110
+  C:0918H         LINE#         111
+  C:091AH         LINE#         112
+  C:091AH         LINE#         113
   -------         ENDPROC       INCOM_DELAY
   -------         PROC          _INCOM_SET_DELAY
   D:0006H         SYMBOL        delay
-  C:081CH         LINE#         116
-  C:081CH         LINE#         117
-  C:0820H         LINE#         118
-  C:0822H         LINE#         119
-  C:0824H         LINE#         120
+  C:0955H         LINE#         116
+  C:0955H         LINE#         117
+  C:0959H         LINE#         118
+  C:095BH         LINE#         119
+  C:095DH         LINE#         120
   -------         ENDPROC       _INCOM_SET_DELAY
   -------         PROC          INCOM_SPI_CLK_INIT
   B:0020H.3       SYMBOL        init
   C:000EH         LINE#         123
   -------         ENDPROC       INCOM_SPI_CLK_INIT
   -------         PROC          INCOM_SPI_START
-BL51 BANKED LINKER/LOCATER V6.22                                                      10/09/2024  15:05:17  PAGE 12
-
-
-  C:083AH         LINE#         125
+  C:0973H         LINE#         125
   -------         ENDPROC       INCOM_SPI_START
   -------         ENDMOD        INTERFACE_COM
 
@@ -671,87 +693,84 @@ SYMBOL TABLE OF MODULE:  .\Code\Obj\censor_tm_ADC+RF (MAIN)
   D:0080H         PUBLIC        P0
   D:0090H         PUBLIC        P1
   D:00A0H         PUBLIC        P2
-  C:0805H         PUBLIC        Process_work_RF
+  C:08EDH         PUBLIC        Process_work_RF
   D:00B0H         PUBLIC        P3
-  C:05C9H         PUBLIC        ISR_Timer0
+  C:06BEH         PUBLIC        ISR_Timer0
   D:00D8H         PUBLIC        PWMCON0
   D:00A8H         PUBLIC        IE
   D:00B8H         PUBLIC        IP
   B:0080H.2       PUBLIC        P02
   D:0098H         PUBLIC        SCON
   D:0088H         PUBLIC        TCON
-  B:0090H.6       PUBLIC        P16
-  X:01BCH         PUBLIC        modeRF
+  X:01C2H         PUBLIC        modeRF
   D:00F8H         PUBLIC        SCON_1
   D:00E8H         PUBLIC        ADCCON0
   D:00C0H         PUBLIC        I2CON
   D:00C8H         PUBLIC        T2CON
-  C:0832H         PUBLIC        ISR_INT1
-  C:077CH         PUBLIC        Work_NRF
-  C:0583H         PUBLIC        Process_init_RF
-  X:01BEH         PUBLIC        mainStateProgressSPI
+  C:096BH         PUBLIC        ISR_INT1
+  C:08B6H         PUBLIC        Work_NRF
+  C:0678H         PUBLIC        Process_init_RF
+  X:01C4H         PUBLIC        mainStateProgressSPI
   D:00D0H         PUBLIC        PSW
   -------         PROC          WORK_NRF
-  C:077CH         LINE#         27
-  C:077CH         LINE#         29
-  C:077FH         LINE#         31
-  C:077FH         LINE#         32
-  C:077FH         LINE#         33
-  C:0791H         LINE#         34
-  C:0791H         LINE#         35
-  C:0794H         LINE#         36
-  C:0794H         LINE#         38
-  C:0794H         LINE#         39
-  C:0797H         LINE#         40
-  C:0797H         LINE#         43
-  C:0797H         LINE#         44
-  C:0797H         LINE#         45
-  C:0797H         LINE#         46
+  C:08B6H         LINE#         27
+  C:08B6H         LINE#         29
+  C:08B9H         LINE#         31
+  C:08B9H         LINE#         32
+  C:08B9H         LINE#         33
+  C:08CBH         LINE#         34
+BL51 BANKED LINKER/LOCATER V6.22                                                      10/10/2024  14:26:53  PAGE 13
+
+
+  C:08CBH         LINE#         35
+  C:08CEH         LINE#         36
+  C:08CEH         LINE#         38
+  C:08CEH         LINE#         39
+  C:08D1H         LINE#         40
+  C:08D1H         LINE#         43
+  C:08D1H         LINE#         44
+  C:08D1H         LINE#         45
+  C:08D1H         LINE#         46
   -------         ENDPROC       WORK_NRF
   -------         PROC          PROCESS_INIT_RF
-  C:0583H         LINE#         49
-  C:0583H         LINE#         50
-  C:0596H         LINE#         51
-  C:0596H         LINE#         52
-  C:05A1H         LINE#         53
-  C:05AFH         LINE#         54
-  C:05AFH         LINE#         55
-  C:05AFH         LINE#         56
-  C:05BAH         LINE#         57
-  C:05C8H         LINE#         58
-BL51 BANKED LINKER/LOCATER V6.22                                                      10/09/2024  15:05:17  PAGE 13
-
-
-  C:05C8H         LINE#         59
-  C:05C8H         LINE#         60
-  C:05C8H         LINE#         61
+  C:0678H         LINE#         49
+  C:0678H         LINE#         50
+  C:068BH         LINE#         51
+  C:068BH         LINE#         52
+  C:0696H         LINE#         53
+  C:06A4H         LINE#         54
+  C:06A4H         LINE#         55
+  C:06A4H         LINE#         56
+  C:06AFH         LINE#         57
+  C:06BDH         LINE#         58
+  C:06BDH         LINE#         59
+  C:06BDH         LINE#         60
+  C:06BDH         LINE#         61
   -------         ENDPROC       PROCESS_INIT_RF
   -------         PROC          PROCESS_WORK_RF
-  C:0805H         LINE#         64
-  C:0805H         LINE#         65
-  C:0808H         LINE#         67
-  C:0808H         LINE#         68
-  C:080FH         LINE#         69
-  C:0811H         LINE#         70
-  C:0811H         LINE#         76
+  C:08EDH         LINE#         66
+  C:08EDH         LINE#         67
+  C:08F8H         LINE#         68
+  C:0906H         LINE#         69
+  C:0906H         LINE#         93
   -------         ENDPROC       PROCESS_WORK_RF
   -------         PROC          ISR_TIMER0
-  C:05C9H         LINE#         81
-  C:05E6H         LINE#         82
-  C:05E9H         LINE#         83
-  C:05ECH         LINE#         84
-  C:05EFH         LINE#         85
-  C:05F1H         LINE#         86
-  C:05F1H         LINE#         87
-  C:05F4H         LINE#         88
-  C:05F4H         LINE#         89
-  C:05F4H         LINE#         90
+  C:06BEH         LINE#         98
+  C:06DBH         LINE#         99
+  C:06DEH         LINE#         100
+  C:06E1H         LINE#         101
+  C:06E4H         LINE#         102
+  C:06E6H         LINE#         103
+  C:06E6H         LINE#         104
+  C:06E9H         LINE#         105
+  C:06E9H         LINE#         106
+  C:06E9H         LINE#         107
   -------         ENDPROC       ISR_TIMER0
   -------         PROC          ISR_INT1
-  C:0832H         LINE#         102
-  C:0832H         LINE#         103
-  C:0834H         LINE#         104
-  C:0836H         LINE#         105
+  C:096BH         LINE#         119
+  C:096BH         LINE#         120
+  C:096DH         LINE#         121
+  C:096FH         LINE#         122
   -------         ENDPROC       ISR_INT1
   -------         ENDMOD        CENCOR_PROGRAMM
 
@@ -760,6 +779,9 @@ SYMBOL TABLE OF MODULE:  .\Code\Obj\censor_tm_ADC+RF (MAIN)
   D:0080H         PUBLIC        P0
   D:0090H         PUBLIC        P1
   D:00A0H         PUBLIC        P2
+BL51 BANKED LINKER/LOCATER V6.22                                                      10/10/2024  14:26:53  PAGE 14
+
+
   D:00B0H         PUBLIC        P3
   D:00D8H         PUBLIC        PWMCON0
   D:00A8H         PUBLIC        IE
@@ -779,9 +801,6 @@ SYMBOL TABLE OF MODULE:  .\Code\Obj\censor_tm_ADC+RF (MAIN)
   D:0090H         PUBLIC        P1
   D:00A0H         PUBLIC        P2
   D:00B0H         PUBLIC        P3
-BL51 BANKED LINKER/LOCATER V6.22                                                      10/09/2024  15:05:17  PAGE 14
-
-
   D:00D8H         PUBLIC        PWMCON0
   D:00A8H         PUBLIC        IE
   D:00B8H         PUBLIC        IP
@@ -795,30 +814,39 @@ SYMBOL TABLE OF MODULE:  .\Code\Obj\censor_tm_ADC+RF (MAIN)
   -------         ENDMOD        DELAY
 
   -------         MODULE        ?C?COPY
-  C:0263H         PUBLIC        ?C?COPY
+  C:02F8H         PUBLIC        ?C?COPY
   -------         ENDMOD        ?C?COPY
 
   -------         MODULE        ?C?CLDPTR
-  C:0289H         PUBLIC        ?C?CLDPTR
+  C:031EH         PUBLIC        ?C?CLDPTR
   -------         ENDMOD        ?C?CLDPTR
 
   -------         MODULE        ?C?CLDOPTR
-  C:02A2H         PUBLIC        ?C?CLDOPTR
+  C:0337H         PUBLIC        ?C?CLDOPTR
   -------         ENDMOD        ?C?CLDOPTR
 
   -------         MODULE        ?C?CSTPTR
-  C:02CFH         PUBLIC        ?C?CSTPTR
+  C:0364H         PUBLIC        ?C?CSTPTR
   -------         ENDMOD        ?C?CSTPTR
 
   -------         MODULE        ?C?LSHL
-  C:02E1H         PUBLIC        ?C?LSHL
+  C:0376H         PUBLIC        ?C?LSHL
   -------         ENDMOD        ?C?LSHL
 
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?ADCHX711_INITIAL?I2C_ADC_HX711
 
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_NRF_CHANGE_MODE_RF?NRF24L01
+
+BL51 BANKED LINKER/LOCATER V6.22                                                      10/10/2024  14:26:53  PAGE 15
+
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?NRF_SEND?NRF24L01
+
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?NRF_GET?NRF24L01
 
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?NRF_CLEAR_IRQ?NRF24L01
@@ -832,5 +860,5 @@ SYMBOL TABLE OF MODULE:  .\Code\Obj\censor_tm_ADC+RF (MAIN)
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?SWITCH_STATE_POWER_RF?GPIO
 
-Program Size: data=45.5 xdata=448 code=2110
-LINK/LOCATE RUN COMPLETE.  6 WARNING(S),  0 ERROR(S)
+Program Size: data=53.6 xdata=454 code=2423
+LINK/LOCATE RUN COMPLETE.  8 WARNING(S),  0 ERROR(S)

@@ -7,7 +7,7 @@
 /******************************/
 /*SETINGS*/
 /******************************/
-#define START_DELAY  10          		 // first start
+#define DELAY  30          		 			 // 
 /******************************/
 /*Commands*/
 /******************************/
@@ -103,6 +103,7 @@ extern struct NRF_PACKET_SPI{  //PACKET vXXXX -> v= value XXX=REGISTR
 
 extern xdata struct NRF_PACKET_SPI packetRX;
 extern xdata struct NRF_PACKET_SPI packetTX;
+extern xdata struct NRF_PACKET_SPI packetRX_READ;
 
 /*длительные процессы*/
 bit NRF_init(struct NRF_PACKET_SPI *packet);
@@ -112,6 +113,7 @@ bit NRF_send(/*struct DATA_PACKET_SEND *packet*/);
 bit NRF_clear_FIFO(void);
 bit NRF_send(void);
 bit NRF_get(void);
+bit NRF_change_mode_RF(struct NRF_PACKET_SPI *packet, bit stateCeEnd);
 
 /*вспомогательное*/
 void NRF_clear_IRQ(void);
@@ -119,7 +121,7 @@ void NRF_ack_status(void);
 void NRF_read_value(void);
 void Send_SPI_NRF(unsigned char *message,int amountMessage);
 bit Check_Out(void);
-void NRF_delay10(void);
+void NRF_delay(void);
 
 #endif
 
