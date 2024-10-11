@@ -16,7 +16,8 @@ void GPIO_init(){
 	Set_All_GPIO_Quasi_Mode;
 	P14_Input_Mode;									// PIN_BUTTON
 	P17_Input_Mode;									// NRF_IRQ
-	P00_PushPull_Mode; 							// SPI_MOSI
+	P00_PushPull_Mode; 							// SPI_MoSi
+	P01_Input_Mode;									// SPI_MiSO
 	
 	//	P11_PushPull_Mode;
 	//	P15_PushPull_Mode;

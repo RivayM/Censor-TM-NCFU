@@ -1,4 +1,4 @@
-C51 COMPILER V9.53.0.0   INTERFACE_COM                                                     10/10/2024 14:26:52 PAGE 1   
+C51 COMPILER V9.53.0.0   INTERFACE_COM                                                     10/11/2024 14:52:36 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE INTERFACE_COM
@@ -38,119 +38,129 @@ line level    source
   27          /* main func(for timer) */
   28          void InCom_SPI_exchange(void){
   29   1        InCom_SPI( 
-  30   1        InCom_SPI_Output_in_buffer(
-  31   1          &valueBufferArrayTx[counterByte]),   // buf  for Tx
-  32   1        &valueBufferArrayRx[counterByte]);     // buf  for Rx
+  30   1          InCom_SPI_Data_Convert_Bit(
+  31   1            &valueBufferArrayTx[counterByte]),  // buf  for TX
+  32   1          &valueBufferArrayRx[counterByte]);    // buf  for RX
   33   1      }
   34          
   35          /* exchange bitwise operation */
-  36          void InCom_SPI(bit valueMosi, unsigned char *outSideBuffer){ 
+  36          void InCom_SPI(unsigned char valueMosi, unsigned char *outSideBuffer){ 
   37   1        if(counterBit) {                      // CPOL 
   38   2          PIN_CLK_SPI =~PIN_CLK_SPI;          // clocking
   39   2        }                 
   40   1        if( PIN_CLK_SPI == 0) {               // CPHA
-  41   2          switch(counterBit){                 // Start
-  42   3            /******************************/
-  43   3            case BUFFER_SPI:                  // End packet
-  44   3              PIN_MOSI_SPI = 1;
-  45   3              PIN_MISO_SPI = 1;
-  46   3              PIN_CLK_SPI  = 0; 
-  47   3              counterBit = 0;
-  48   3              if(counterByte == amountByteArrayForSend - 1){ // end exchange
-  49   4                PIN_CS_SPI  = 1;
-  50   4                counterByte = 0;
-  51   4                FlagInComSPIGlobal = 0; 
-  52   4              }
-  53   3              else counterByte++;                 // next packet
-C51 COMPILER V9.53.0.0   INTERFACE_COM                                                     10/10/2024 14:26:52 PAGE 2   
+  41   2      /******************************/
+  42   2          switch(counterBit){                 // Start
+  43   3            // End bit packet
+  44   3            case BUFFER_SPI:                  
+  45   3              PIN_MOSI_SPI = 1;
+  46   3              //PIN_MISO_SPI = 1;
+  47   3              PIN_CLK_SPI  = 0; 
+  48   3              counterBit   = 0;
+  49   3              InCom_SPI_exchange_end();       // continue?
+  50   3              InCom_SPI_Data_Convert_Byte();  // next packet
+  51   3              break;
+  52   3            // process going
+  53   3            default: 
+C51 COMPILER V9.53.0.0   INTERFACE_COM                                                     10/11/2024 14:52:36 PAGE 2   
 
-  54   3              break;
-  55   3            /******************************/
-  56   3            default:                          // process going
-  57   3              PIN_CS_SPI   = 0;
-  58   3              PIN_MOSI_SPI = valueMosi;       // send MoSi
-  59   3              if ( PIN_MISO_SPI == 1){      // send MiSo  
-  60   4                InCom_SPI_Input_in_buffer(outSideBuffer);
+  54   3              PIN_CS_SPI   = 0;
+  55   3              if(valueMosi){PIN_MOSI_SPI = 1;}// send MoSi
+  56   3              else{         PIN_MOSI_SPI = 0;}
+  57   3              
+  58   3              if ( PIN_MISO_SPI == 1){        // send MiSo  
+  59   4                outSideBuffer = outSideBuffer +
+  60   4                InCom_SPI_Data_Convert_Bit(outSideBuffer);
   61   4              } 
-  62   3              counterBit++;                   // next bit
-  63   3              break;
-  64   3          }
-  65   2        }
-  66   1      }
-  67          
-  68          /* save reading bit in buf */
-  69          void InCom_SPI_Input_in_buffer(unsigned char *outSideBuffer){
-  70   1        unsigned char buf;
-  71   1        buf = *outSideBuffer;
-  72   1        if(counterBit == 0){         // start bit
-  73   2          if(SPI_MSB){
-  74   3            *outSideBuffer = 0x80;   
-  75   3            return;
-  76   3          }
-  77   2        }
-  78   1        if(counterBit < BUFFER_SPI){ // next bit
-  79   2          if(SPI_MSB) buf = buf + (0x01 << counterBit -1);
-  80   2          else        buf = buf + (0x01 << counterBit);
-  81   2          *outSideBuffer = buf; 
-  82   2        }
-  83   1      }
-  84          
-  85          
-  86          /* read buf and send bit*/
-  87          bit InCom_SPI_Output_in_buffer(unsigned char *outSideBuffer){
-  88   1        unsigned char buf;
-  89   1        buf = *outSideBuffer;  
-  90   1        if (counterBit == 0){                   // start bit
-  91   2          if(SPI_MSB){ buf = buf & 0x01; }      // mask MSB
-  92   2          else       { buf = buf & 0x80; }      // mask LSB
-  93   2        }
-  94   1        if( counterBit < 8 && counterBit != 0){ // next bit 
-  95   2          buf = buf & (0x01 << counterBit);
-  96   2        }
-  97   1        if(buf) { return 1; } else { return 0; } 
-  98   1      }
-  99          
- 100          
- 101          
- 102          
- 103          
- 104          
- 105          
- 106          /*Delay = 1 timer cycle timer*/
- 107          void InCom_Delay(){
- 108   1        if(valueDelay){ valueDelay--; }
- 109   1        else{ 
- 110   2          FlagInComDelay = 0; 
- 111   2          FlagInComSPIGlobal = 0;
- 112   2        }
- 113   1      }
- 114          
- 115          /*SET Delay = 1 timer cycle timer*/
-C51 COMPILER V9.53.0.0   INTERFACE_COM                                                     10/10/2024 14:26:52 PAGE 3   
+  62   3              
+  63   3              counterBit++;                   // next bit
+  64   3              break;
+  65   3          }
+  66   2        }
+  67   1      /******************************/  
+  68   1      }
+  69          
+  70          /* In the latest BYTE exchange SPI*/
+  71          void InCom_SPI_exchange_end(void){  
+  72   1        #if SPI_DATA_BYTE == 1
+                  if(counterByte == 0){ 
+                    InCom_SPI_End();  // SPI_MSbyte
+                  }
+                #else
+  77   1          if(counterByte == amountByteArrayForSend - 1){ 
+  78   2            InCom_SPI_End();  // SPI_LSbyte
+  79   2          }
+  80   1        #endif
+  81   1      }
+  82          
+  83          /* In the end exchange SPI*/
+  84          void InCom_SPI_End(void){
+  85   1        PIN_CS_SPI  = 1;
+  86   1        FlagInComSPIGlobal = 0; 
+  87   1      }
+  88          
+  89          
+  90          /* Convert DATA BYTE*/
+  91          void InCom_SPI_Data_Convert_Byte(){ 
+  92   1        #if SPI_DATA_BYTE == 1
+                  counterByte--;     // SPI_MSbyte 
+                #else
+  95   1          counterByte++;     // SPI_LSbyte
+  96   1        #endif
+  97   1      }
+  98          
+  99          /*Convert DATA BIT*/
+ 100          unsigned char InCom_SPI_Data_Convert_Bit(unsigned char *outSideBuffer){
+ 101   1        unsigned char buf;
+ 102   1        buf = *outSideBuffer;  
+ 103   1        #if SPI_DATA_BIT == 1
+ 104   1          buf = buf & 0x01 << (BUFFER_SPI - counterBit - 1);// SPI_MSB
+ 105   1        #else
+                  buf = buf & 0x01 << counterBit;                   // SPI_LSB
+                #endif
+ 108   1        return buf;
+ 109   1      }
+ 110          
+ 111          /*Delay = 1 timer cycle timer*/
+ 112          void InCom_Delay(){
+ 113   1        if(valueDelay){ valueDelay--; }
+ 114   1        else{ 
+ 115   2          FlagInComDelay = 0; 
+C51 COMPILER V9.53.0.0   INTERFACE_COM                                                     10/11/2024 14:52:36 PAGE 3   
 
- 116          void InCom_Set_Delay(int delay){
- 117   1        valueDelay = delay;
- 118   1        FlagInComDelay = 1;
- 119   1        FlagInComSPIGlobal = 1;
- 120   1      }
- 121          
- 122          /* init clk */
- 123          void InCom_SPI_CLK_init(bit init){ PIN_CLK_SPI = init;}
- 124          
- 125          void InCom_SPI_start(void){FlagInComSPIGlobal = 1;}
-*** WARNING C294 IN LINE 80 OF Code\Source\Interface_com.c: unreachable code
-*** WARNING C294 IN LINE 92 OF Code\Source\Interface_com.c: unreachable code
+ 116   2          FlagInComSPIGlobal = 0;
+ 117   2        }
+ 118   1      }
+ 119          
+ 120          /*SET Delay = 1 timer cycle timer*/
+ 121          void InCom_Set_Delay(int delay){
+ 122   1        valueDelay = delay;
+ 123   1        FlagInComDelay = 1;
+ 124   1        FlagInComSPIGlobal = 1;
+ 125   1      }
+ 126          
+ 127          /* init clk */
+ 128          void InCom_SPI_CLK_init(bit init){ PIN_CLK_SPI = init;}
+ 129          /* Start exchange spi */
+ 130          void InCom_SPI_start(void){
+ 131   1        #if SPI_DATA_BYTE == 1
+                  counterByte = amountByteArrayForSend -1;
+                #else
+ 134   1          counterByte = 0;
+ 135   1        #endif
+ 136   1        FlagInComSPIGlobal = 1;
+ 137   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    281    ----
+   CODE SIZE        =    228    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =     20       3
+   DATA SIZE        =     20       4
    IDATA SIZE       =   ----    ----
-   BIT SIZE         =      2       2
+   BIT SIZE         =      2       1
 END OF MODULE INFORMATION.
 
 
-C51 COMPILATION COMPLETE.  2 WARNING(S),  0 ERROR(S)
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

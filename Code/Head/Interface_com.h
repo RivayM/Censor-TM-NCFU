@@ -24,9 +24,10 @@ if(FlagInComSPIGlobal){ InCom_SPI_exchange();}
 //********************************************************
 //  for SPI
 //********************************************************
-#define BUFFER_SPI 	 8 // amount bit in packet(byte)
+#define BUFFER_SPI 	 	8 // amount bit in packet(byte)
 #define BUFFER_SPI_MASSIV_SIZE NRF24_BUFFER_MASSIV_SIZE // amount packet(byte)
-#define SPI_DATA_BIT 1 // or use SPI_LSB = 0 ; SPI_MSB = 1
+#define SPI_DATA_BIT 	1 // or use SPI_LSB = 0 ; SPI_MSB = 1
+#define SPI_DATA_BYTE 0 // or use SPI_LSbyte = 0 ; SPI_MSbyte = 1
 extern unsigned char valueBufferArrayTx[BUFFER_SPI_MASSIV_SIZE];  
 extern unsigned char valueBufferArrayRx[BUFFER_SPI_MASSIV_SIZE];  
 
@@ -45,15 +46,21 @@ extern bit FlagInComDelay;         // allow delay
 #define PIN_MISO_SPI   P01
 #define PIN_CS_SPI     P15
 
-void InCom_SPI_init_Timer(void);
-bit InCom_SPI_Output_in_buffer(unsigned char *outSideBuffer);
-void InCom_SPI(bit valueMosi, unsigned char *outSideBuffer );
-void InCom_SPI_CLK_init(bit init);
-void InCom_SPI_Input_in_buffer(unsigned char *outSideBuffer);
+
+unsigned char InCom_SPI_Data_Convert_Bit(unsigned char *outSideBuffer);
+void InCom_SPI_Data_Convert_Byte();
+
+void InCom_SPI(unsigned char valueMosi, unsigned char *outSideBuffer);
+void InCom_SPI_End(void);
+void InCom_SPI_exchange_end(void);  
 void InCom_SPI_exchange(void);    
+
+void InCom_SPI_init_Timer(void);
+void InCom_SPI_CLK_init(bit init);
 void InCom_SPI_start(void);
 void InCom_Set_Delay(int delay);
 void InCom_Delay();
+
 
 //********************************************************
 

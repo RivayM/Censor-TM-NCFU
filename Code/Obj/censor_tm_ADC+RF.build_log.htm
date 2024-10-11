@@ -32,8 +32,6 @@ compiling NRF24L01.c...
 compiling GPIO.c...
 compiling NRF_ex.c...
 compiling Interface_com.c...
-Code\Source\Interface_com.c(80): warning C294: unreachable code
-Code\Source\Interface_com.c(92): warning C294: unreachable code
 compiling CENCOR_PROGRAMM.c...
 compiling Common.c...
 compiling Delay.c...
@@ -45,19 +43,25 @@ linking...
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?NRF_SEND?NRF24L01
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?NRF_GET?NRF24L01
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?NRF_CLEAR_IRQ?NRF24L01
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?NRF_ACK_STATUS?NRF24L01
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?NRF_READ_VALUE?NRF24L01
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?LED_SWITCH_STATE?GPIO
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?BUTTON_READ?GPIO
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?SWITCH_STATE_POWER_RF?GPIO
-Program Size: data=53.6 xdata=454 code=2423
+Program Size: data=54.5 xdata=454 code=2358
 creating hex file from ".\Code\Obj\censor_tm_ADC+RF"...
-".\Code\Obj\censor_tm_ADC+RF" - 0 Error(s), 10 Warning(s).
+".\Code\Obj\censor_tm_ADC+RF" - 0 Error(s), 9 Warning(s).
 Load "C:\\Users\\MASTER.CERN\\Desktop\\PROGRAMM COD\\CENSOR\\Code\\Obj\\censor_tm_ADC+RF" 
 Flash Erase Done.
-Flash Write Done: 2423 bytes programmed.
-Flash Verify Done: 2423 bytes verified.
+Flash Write Done: 2358 bytes programmed.
+Flash Verify Done: 2358 bytes verified.
+ash Erase Done.
+Flash Write Done: 2344 bytes programmed.
+Flash Verify Done: 2344 bytes verified.
+Obj\censor_tm_ADC+RF" - 0 Error(s), 14 Warning(s).

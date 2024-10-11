@@ -27,84 +27,86 @@ void InCom_SPI_init_Timer(){
 /* main func(for timer) */
 void InCom_SPI_exchange(void){
 	InCom_SPI( 
-	InCom_SPI_Output_in_buffer(
-		&valueBufferArrayTx[counterByte]),   // buf  for Tx
-	&valueBufferArrayRx[counterByte]);	   // buf  for Rx
+		InCom_SPI_Data_Convert_Bit(
+			&valueBufferArrayTx[counterByte]),	// buf  for TX
+		&valueBufferArrayRx[counterByte]);		// buf  for RX
 }
 
 /* exchange bitwise operation */
-void InCom_SPI(bit valueMosi, unsigned char *outSideBuffer){ 
+void InCom_SPI(unsigned char valueMosi, unsigned char *outSideBuffer){ 
 	if(counterBit) {                      // CPOL 
 		PIN_CLK_SPI =~PIN_CLK_SPI;          // clocking
 	}  								
 	if( PIN_CLK_SPI == 0) {       				// CPHA
+/******************************/
 		switch(counterBit){		 							// Start
-			/******************************/
-			case BUFFER_SPI:          				// End packet
+			// End bit packet
+			case BUFFER_SPI:          				
 				PIN_MOSI_SPI = 1;
-				PIN_MISO_SPI = 1;
+				//PIN_MISO_SPI = 1;
 				PIN_CLK_SPI  = 0;	
-				counterBit = 0;
-				if(counterByte == amountByteArrayForSend - 1){ // end exchange
-					PIN_CS_SPI  = 1;
-					counterByte = 0;
-					FlagInComSPIGlobal = 0; 
-				}
-				else counterByte++;                 // next packet
+				counterBit   = 0;
+				InCom_SPI_exchange_end();       // continue?
+				InCom_SPI_Data_Convert_Byte();  // next packet
 				break;
-			/******************************/
-			default:                  				// process going
+			// process going
+			default: 
 				PIN_CS_SPI   = 0;
-				PIN_MOSI_SPI = valueMosi; 			// send MoSi
-				if ( PIN_MISO_SPI == 1){      // send MiSo 	
-					InCom_SPI_Input_in_buffer(outSideBuffer);
+				if(valueMosi){PIN_MOSI_SPI = 1;}// send MoSi
+				else{ 				PIN_MOSI_SPI = 0;}
+				
+				if ( PIN_MISO_SPI == 1){      	// send MiSo 	
+					outSideBuffer = outSideBuffer +
+					InCom_SPI_Data_Convert_Bit(outSideBuffer);
 				}	
+				
 				counterBit++; 									// next bit
 				break;
 		}
 	}
+/******************************/	
 }
 
-/* save reading bit in buf */
-void InCom_SPI_Input_in_buffer(unsigned char *outSideBuffer){
-	unsigned char buf;
-	buf = *outSideBuffer;
-	if(counterBit == 0){         // start bit
-		if(SPI_DATA_BIT){
-			*outSideBuffer = 0x80;   // SPI_MSB
+/* In the latest BYTE exchange SPI*/
+void InCom_SPI_exchange_end(void){	
+	#if SPI_DATA_BYTE == 1
+		if(counterByte == 0){ 
+			InCom_SPI_End();  // SPI_MSbyte
 		}
-		else{ 
-			*outSideBuffer = 0x01;   // SPI_LSB
+	#else
+		if(counterByte == amountByteArrayForSend - 1){ 
+			InCom_SPI_End();  // SPI_LSbyte
 		}
-		return;
-	}
-	if(counterBit < BUFFER_SPI){ // next bit
-		if(SPI_DATA_BIT )	buf = buf + (0x01 << counterBit -1);	// SPI_MSB
-		else							buf = buf + (0x01 << counterBit);			// SPI_LSB
-		*outSideBuffer = buf;	
-	}
+	#endif
+}
+
+/* In the end exchange SPI*/
+void InCom_SPI_End(void){
+	PIN_CS_SPI  = 1;
+	FlagInComSPIGlobal = 0; 
 }
 
 
-/* read buf and send bit*/
-bit InCom_SPI_Output_in_buffer(unsigned char *outSideBuffer){
+/* Convert DATA BYTE*/
+void InCom_SPI_Data_Convert_Byte(){	
+	#if SPI_DATA_BYTE == 1
+		counterByte--;     // SPI_MSbyte 
+	#else
+		counterByte++;     // SPI_LSbyte
+	#endif
+}
+
+/*Convert DATA BIT*/
+unsigned char InCom_SPI_Data_Convert_Bit(unsigned char *outSideBuffer){
 	unsigned char buf;
 	buf = *outSideBuffer;  
-	if (counterBit == 0){	 									// start bit
-		if(SPI_DATA_BIT){ buf = buf & 0x01; } // mask MSB
-		else       			{ buf = buf & 0x80; } // mask LSB
-	}
-	if( counterBit < 8 && counterBit != 0){	// next bit 
-		buf = buf & (0x01 << counterBit);
-	}
-	if(buf) { return 1; } else { return 0; } 
+	#if SPI_DATA_BIT == 1
+		buf = buf & 0x01 << (BUFFER_SPI - counterBit - 1);// SPI_MSB
+	#else
+		buf = buf & 0x01 << counterBit; 									// SPI_LSB
+	#endif
+	return buf;
 }
-
-
-
-
-
-
 
 /*Delay = 1 timer cycle timer*/
 void InCom_Delay(){
@@ -124,5 +126,12 @@ void InCom_Set_Delay(int delay){
 
 /* init clk */
 void InCom_SPI_CLK_init(bit init){ PIN_CLK_SPI = init;}
-
-void InCom_SPI_start(void){FlagInComSPIGlobal = 1;}
+/* Start exchange spi */
+void InCom_SPI_start(void){
+	#if SPI_DATA_BYTE == 1
+		counterByte = amountByteArrayForSend -1;
+	#else
+		counterByte = 0;
+	#endif
+	FlagInComSPIGlobal = 1;
+}

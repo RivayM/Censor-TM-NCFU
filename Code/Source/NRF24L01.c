@@ -14,9 +14,9 @@ xdata struct NRF_PACKET_SPI packetRX = {
 	{W_REG|NRF_CONFIG	,0x0F},		//	CONFIG
 	{W_REG|EN_AA			,0x3f},		//	EN_AA
 	{W_REG|SETUP_AW		,0x03},		//	SETUP_AW
-	{W_REG|RF_CH			,0x78},		//	RF_CH		
-	{W_REG|RF_SETUP		,0x07},		//	RF_SETUP
-	{W_REG|EN_RXADDR	,0x03},		//	EN_RXADDR		
+	{W_REG|RF_CH			,0x6E},		//	RF_CH		
+	{W_REG|RF_SETUP		,0x05},		//	RF_SETUP
+	{W_REG|EN_RXADDR	,0x1F},		//	EN_RXADDR		
 	{W_REG|DYNPD			,0x00},		//	DYNPD
 	{W_REG|FEATURE		,0x00},		//	FEATURE
 	
@@ -56,7 +56,6 @@ xdata struct NRF_PACKET_SPI packetRX_READ = {
 	{R_REG|RX_PW_P3		},		//	RX_PW_P0
 	{R_REG|RX_PW_P4		},		//	RX_PW_P0
 	{R_REG|RX_PW_P5		},		//	RX_PW_P0
-	//adr write lsbyte first
 	{R_REG|TX_ADDR		},		//	TX_ADDR	
 	
 	{R_REG|RX_ADDR_P0	},		//	RX_ADDR0
@@ -96,7 +95,7 @@ xdata unsigned char readBuf[NRF_MASSIV_SIZE]={0x00};
 xdata unsigned char COMMAND_SEND_RF[NRF_MASSIV_SIZE] = 
 		{W_TX_PL /*next byte for data send[1-x]*/};
 xdata unsigned char COMMAND_READ_RF[NRF_MASSIV_SIZE] = 
-		{R_RX_PL};
+		{R_RX_PL,0xFF,0xFF};
 xdata	unsigned char COMMAND_CLEAR_FLUSH_RX[NRF_MASSIV_SIZE] = 
 		{FLUSH_RX};
 xdata	unsigned char	COMMAND_CLEAR_FLUSH_TX[NRF_MASSIV_SIZE] = 
@@ -187,64 +186,15 @@ bit NRF_get(/*struct DATA_PACKET_SAVE *packet*/){
 		case 1: NRF_CE = 1;										break;
 		case 2: NRF_delay();									break;
 		case 3: /*NRF_CE = 0;*/								break;	
-		case 4: 
-			NRF_ack_status();	
-			NRF_read_value(); 
-			break;
-		case 5:
-			// W_ACK_PL -> [0] = 10101PPP 		
-			//COMMAND_W_ACK_PAYLOAD[0] = W_ACK_PL + ((readBuf[0] & RX_P_NO) >> 1);
-			//COMMAND_W_ACK_PAYLOAD[1] = (readBuf[0] & RX_P_NO) >> 1;
-		case 6:	
+		case 4:	
 			Send_SPI_NRF( &COMMAND_READ_RF, 2 );
-			NRF_read_value(); 
 			break;
-		case 7:
-			//записать обратно прочитнные байты
-			//COMMAND_W_ACK_PAYLOAD[2] = 0x01;
-			// и так далее
-			break;
-		//ack вернуть тот же ответ???
-		case 8:	
-			//Send_SPI_NRF(&COMMAND_W_ACK_PAYLOAD, 3);
-			break;
-		/*case 1: NRF_ack_status();						break; 
-		case 2: NRF_CE = 1;										break;
-		case 3: NRF_delay10();								break;
-		case 4: NRF_CE = 0;										break;	
-		case 5: Send_SPI_NRF( &COMMAND_CLEAR_IRQ, 				2 );break;
-		case 6:	Send_SPI_NRF( &COMMAND_READ_RF, 					2 );break;
-		case 7:	Send_SPI_NRF( &COMMAND_READ_FIFO_STATUS,	2 );break;*/
-/////////////////////////////////////////////////////////////////////
-		/*case 1: 
-			Send_SPI_NRF( &COMMAND_CLEAR_FLUSH_RX, 	2 );
-			break;			
-		case 2: 
-			NRF_delay10(); 
-			break;
-		case 3: 
-			Send_SPI_NRF( &COMMAND_CLEAR_IRQ, 			2 );
-			break;
-		case 4: 
-			NRF_ack_status();							
-			break; 
 		case 5:	
-				Send_SPI_NRF( &COMMAND_READ_RF, 			5 );
-			break;*/
-/////////////////////////////////////////////////////////////////////
-		/*case 1: NRF_delay10();							break;	
-		case 2: NRF_CE = 0;										break;
-		case 3: Send_SPI_NRF( &COMMAND_CLEAR_FLUSH_TX, 	2 );break; 
-		case 4: NRF_ack_status();							break; 
-		case 5:	NRF_read_value();							break;
-		case 6:	Send_SPI_NRF( &COMMAND_READ_RF, 				5 );break;
-		case 7:	Send_SPI_NRF( &COMMAND_READ_PIPE0, 			4 );break;	
-		case 8: Send_SPI_NRF( &COMMAND_CLEAR_FLUSH_RX, 	2 );break;			
-		case 9: Send_SPI_NRF( &COMMAND_CLEAR_FLUSH_TX, 	2 );break;			
-		case 10:Send_SPI_NRF( &COMMAND_CLEAR_IRQ, 			2 );break;
-		case 11:NRF_CE = 1;										break;
-		case 12:NRF_delay10();								break;
-		case 13: NRF_CE = 0;							break;	*/
+			Send_SPI_NRF( &COMMAND_CLEAR_FLUSH_RX, 2 );
+			break;
+		case 6:	
+			Send_SPI_NRF( &COMMAND_CLEAR_IRQ, 2 );
+			break;
 		case 9: currentProcess = END_PROCESS;break;
 		default: break;
 	}
