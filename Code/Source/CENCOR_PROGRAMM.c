@@ -10,6 +10,13 @@ xdata int modeRF = RX_MODE;						// mode by default
 //********************************************************
 // MAIN FUNC - work censor
 //********************************************************
+void init_device(){
+	GPIO_init();
+	SPI_init_Timer();
+	SPI_CLK_init(0);
+	
+	set_EA;										// enable interrupts
+}
 
 //********************************************************
 //  Work with periphery /led/button
@@ -74,14 +81,14 @@ void Process_work_RF(void){
 		PIN_LED_RED = ~PIN_LED_RED;
 	}
 	PIN_LED_GREEN = ~PIN_LED_GREEN;
-
 	*/
+	
 	//#ifndef RX
 	
 	if( NRF_get() ){
 		PIN_LED_RED = ~PIN_LED_RED;
 	}
-	if(readBuf[1] != 0x00){
+	if(readBuf[1] != 0x30){
 			PIN_LED_GREEN = ~PIN_LED_GREEN;
 	}
 	
@@ -97,10 +104,10 @@ void Process_work_RF(void){
 void ISR_Timer0() interrupt 1 {  				// <Interface_com.H>
 	if(FlagInComSPIGlobal){ 
 		if(FlagInComDelay){
-			InCom_Delay(); 										//	Spi delay
+			SPI_Delay(); 											//	Spi delay
 		} 
 		else{
-			InCom_SPI_exchange();							//	main exchange SPI
+			SPI_exchange_start();							//	main exchange SPI
 		} 
 	}
 }

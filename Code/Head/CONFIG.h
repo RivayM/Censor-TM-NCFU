@@ -6,15 +6,18 @@
 
 #ifndef CONFIG
 #define CONFIG
+//**************************************************************************
 /* WORK NRF24 ( mode)										*/
+//**************************************************************************
 #define TX_MODE  1 											//  
 #define RX_MODE  2 											//  
 #define RTX_MODE 3  										//  
 #define NRF24_BUFFER_MASSIV_SIZE 5 + 1 	// amount byte dor sent to spi
 
 extern xdata int modeRF;                // mode by default
-
+//**************************************************************************
 /* MAIN processes												*/
+//**************************************************************************
 #define END_PROCESS  	999								//  
 #define START_PROCESS  0								//  
 #define DATA_PACKET_MASSIV_SIZE 10

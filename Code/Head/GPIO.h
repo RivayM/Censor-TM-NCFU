@@ -25,36 +25,37 @@
 //**************************************************************************
 #ifndef GPIO
 #define GPIO
-/* main */
+/* device / main */
 #define PIN_LED_RED P02
 #define PIN_LED_GREEN P16
-#define PIN_BUTTON P14
-#define PIN_RF_ON P12
-#define PIN_ADC_ON P04
+#define PIN_BUTTON 	P14
+#define PIN_RF_ON 	P12
+#define PIN_ADC_ON 	P04
 
 /* <UART_XXX.h> */
-#define UART_TX P06
-#define UART_RX P07
+#define UART_TX 		P06
+#define UART_RX 		P07
 
 /* <FRAM_XXX.h> */ // +SPI.h
-#define FRAM_HOLD P06
-#define FRAM_WP P07
+#define FRAM_HOLD 	P06
+#define FRAM_WP 		P07
 
 /* <I2C_ADC_HX711.h> */
-#define	ADSK P05
-#define ADOUT P20						//INT0
+#define	ADSK 				P05
+#define ADOUT 			P20				//INT0
 
 /* <SPI.h>  */
-#define SPI_MISO P01
-#define SPI_MOSI P00
-#define SPI_SCK P10
-#define SPI_CSN P15
-#define SPI_CSFRAM P13
+#define SPI_MISO 		P01
+#define SPI_MOSI 		P00
+#define SPI_SCK 		P10
+#define SPI_CSRF 		P15
+#define SPI_CSFRAM 	P13
 
 /* <NRF24.h>  */
-#define NRF_CE P11
-#define NRF_IRQ P17					//INT1
+#define NRF_CE 			P11
+#define NRF_IRQ 		P17				//INT1
 
+/* FUNC  */
 void Led_Switch_State();
 bit Button_Read();
 int Switch_State_Power_RF();

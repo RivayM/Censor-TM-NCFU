@@ -2,17 +2,17 @@
 //  NRF24L01 
 //***********************************************************************************************************
 #include <GPIO.h>
-#include <Interface_com.H>
+#include <SPI_prog.H>
 #include <NRF24L01.H>
 #include <N76E003.h>
 
 //**************************************************************************
-//  struct for send mode RX
+/*  struct for send mode RX  */
 //**************************************************************************
 xdata struct NRF_PACKET_SPI packetRX = {
 	/*reg:						,value:   */
 	{W_REG|NRF_CONFIG	,0x0F},		//	CONFIG
-	{W_REG|EN_AA			,0x3f},		//	EN_AA
+	{W_REG|EN_AA			,0x00},		//	EN_AA
 	{W_REG|SETUP_AW		,0x03},		//	SETUP_AW
 	{W_REG|RF_CH			,0x6E},		//	RF_CH		
 	{W_REG|RF_SETUP		,0x05},		//	RF_SETUP
@@ -38,7 +38,16 @@ xdata struct NRF_PACKET_SPI packetRX = {
 	
 	{FLUSH_RX					,NOP}			//	FLUSH		
 };
-
+//**************************************************************************
+/*  struct for send mode TX  */
+//**************************************************************************
+xdata struct NRF_PACKET_SPI packetTX = {
+	/*reg:						,value:   */
+	{W_REG|NRF_CONFIG	,0x0E},		//	CONFIG
+};
+//**************************************************************************
+/*  struct for READ state reg  */
+//**************************************************************************
 xdata struct NRF_PACKET_SPI packetRX_READ = {
 	/*reg:						,value:   */
 	{R_REG|NRF_CONFIG	},		//	CONFIG
@@ -68,47 +77,34 @@ xdata struct NRF_PACKET_SPI packetRX_READ = {
 	{FLUSH_RX					}			//	FLUSH		
 };
 
-
-
-//**************************************************************************
-//  struct for send mode TX
-//**************************************************************************
-xdata struct NRF_PACKET_SPI packetTX = {
-	/*reg:						,value:   */
-	{W_REG|NRF_CONFIG	,0x0E},		//	CONFIG
-
-};
-
-//**************************************************************************
-// NRF24L01
-//**************************************************************************
-
-bit FlagDataReadReady = 0;
-int currentProcess = 0;
-
-int test = 1;
 //**************************************************************************
 // ARRAY
 //**************************************************************************
-
-xdata unsigned char readBuf[NRF_MASSIV_SIZE]={0x00}; 
-xdata unsigned char COMMAND_SEND_RF[NRF_MASSIV_SIZE] = 
+xdata unsigned char COMMAND_SEND_RF				[NRF_MASSIV_SIZE] = 
 		{W_TX_PL /*next byte for data send[1-x]*/};
-xdata unsigned char COMMAND_READ_RF[NRF_MASSIV_SIZE] = 
-		{R_RX_PL,0xFF,0xFF};
+xdata unsigned char COMMAND_READ_RF				[NRF_MASSIV_SIZE] = 
+		{R_RX_PL};
 xdata	unsigned char COMMAND_CLEAR_FLUSH_RX[NRF_MASSIV_SIZE] = 
 		{FLUSH_RX};
 xdata	unsigned char	COMMAND_CLEAR_FLUSH_TX[NRF_MASSIV_SIZE] = 
 		{FLUSH_TX};
-xdata	unsigned char COMMAND_CLEAR_IRQ[NRF_MASSIV_SIZE] = 
+xdata	unsigned char COMMAND_CLEAR_IRQ			[NRF_MASSIV_SIZE] = 
 		{W_REG|STATUS,0x70};
-xdata	unsigned char COMMAND_READ_PIPE0[NRF_MASSIV_SIZE] = 
+xdata	unsigned char COMMAND_READ_PIPE0		[NRF_MASSIV_SIZE] = 
 		{RX_PW_P0};			
-xdata	unsigned char COMMAND_READ_FIFO_STATUS[NRF_MASSIV_SIZE] = 
+xdata	unsigned char COMMAND_READ_FIFO_STAT[NRF_MASSIV_SIZE] = 
 		{FIFO_STATUS};		
-xdata	unsigned char COMMAND_W_ACK_PAYLOAD[NRF_MASSIV_SIZE] = 
-		{W_ACK_PL | /*PPP*/ 0x00};		
+xdata	unsigned char COMMAND_W_ACK_PAYLOAD	[NRF_MASSIV_SIZE] = 
+		{W_ACK_PL + /*need get(in status) ->PPP*/ 0x00};	
+		
+//**************************************************************************
+/* NRF24L01 additional        */
+//**************************************************************************
+xdata unsigned char readBuf[NRF_MASSIV_SIZE]={0x00}; 
 
+bit FlagDataReadReady = 0;
+int currentProcess = 0;
+		
 /*initialization RF*/
 bit NRF_init(struct NRF_PACKET_SPI *packet){
 	switch(currentProcess){
@@ -167,13 +163,13 @@ bit NRF_change_mode_RF(struct NRF_PACKET_SPI *packet, bit stateCeEnd){
 bit NRF_send(/*struct DATA_PACKET_SEND *packet*/){
 	switch(currentProcess){
 		case START_PROCESS: NRF_CE = 0;								break;
-		case 1: COMMAND_SEND_RF[1] =test;							break;		
+		case 1: COMMAND_SEND_RF[1]++;									break;		
 		case 2: Send_SPI_NRF( &COMMAND_SEND_RF, 2 );	break;
-		case 3: test++;
-		case 4: NRF_CE = 1;														break;
-		case 5: NRF_delay();NRF_delay();NRF_delay();	break;
-		case 6: NRF_CE = 0;														break;	
-		case 7: currentProcess = END_PROCESS;					break;
+		case 5: NRF_CE = 1;														break;
+		case 6: NRF_delay();NRF_delay();NRF_delay();	break;
+		case 7: NRF_CE = 0;														break;
+		case 8: Send_SPI_NRF( &COMMAND_CLEAR_IRQ, 2 );break;
+		case 9: currentProcess = END_PROCESS;					break;
 		default: break;
 	}
 	return Check_Out();
@@ -182,17 +178,17 @@ bit NRF_send(/*struct DATA_PACKET_SEND *packet*/){
 /*NRF get(radio) */
 bit NRF_get(/*struct DATA_PACKET_SAVE *packet*/){
 	switch(currentProcess){
-		case START_PROCESS: /*NRF_CE = 1;*/		break;
-		case 1: NRF_CE = 1;										break;
-		case 2: NRF_delay();									break;
-		case 3: /*NRF_CE = 0;*/								break;	
+		case START_PROCESS: /*NRF_CE = 1;*/					break;
+		case 1: NRF_CE = 1;													break;
+		case 2: NRF_delay();NRF_delay();NRF_delay();break;
+		case 3: /*NRF_CE = 0;*/											break;	
 		case 4:	
 			Send_SPI_NRF( &COMMAND_READ_RF, 2 );
 			break;
-		case 5:	
+		case 7:	
 			Send_SPI_NRF( &COMMAND_CLEAR_FLUSH_RX, 2 );
 			break;
-		case 6:	
+		case 8:	
 			Send_SPI_NRF( &COMMAND_CLEAR_IRQ, 2 );
 			break;
 		case 9: currentProcess = END_PROCESS;break;
@@ -201,8 +197,6 @@ bit NRF_get(/*struct DATA_PACKET_SAVE *packet*/){
 	return Check_Out();
 }	
 
-
-
 /*send info for SPI*/
 void Send_SPI_NRF(unsigned char *message,int amountMessage){
 	int i;
@@ -210,7 +204,7 @@ void Send_SPI_NRF(unsigned char *message,int amountMessage){
 		valueBufferArrayTx[i] = *(message + i);
 	}		
 	amountByteArrayForSend = amountMessage;
-	InCom_SPI_start();      			//start exchange
+	SPI_Start();      			//start exchange
 }
 
 /* clear all flags*/		
@@ -248,7 +242,7 @@ bit Check_Out(){
 
 /*NRF delay(wait)*/
 void NRF_delay(void){
-	InCom_Set_Delay(DELAY);
+	SPI_Delay_Set(DELAY);
 }
 
 

@@ -9,14 +9,11 @@ void main(){
 	/****************/
 	/*		init      */
 	/****************/	
-	GPIO_init();
-	InCom_SPI_init_Timer();
-	InCom_SPI_CLK_init(0);
-	
-	set_EA;										// enable interrupts
+	init_device();
 	/****************/
 	/* start work   */
 	/****************/
+	
 	/****************/
   while(1){
 	/****************/

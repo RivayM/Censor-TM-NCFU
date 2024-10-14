@@ -9,7 +9,15 @@
 #include <CONFIG.h>
 #include <N76E003.h>
 #include <NRF24L01.H>
-#include <Interface_com.H>
+#include <SPI_prog.H>
+
+//********************************************************
+// MAIN FUNC - work censor
+//********************************************************
+
+void init_device(void);
+
+
 
 //********************************************************
 //  Work with NRF and FRAM 

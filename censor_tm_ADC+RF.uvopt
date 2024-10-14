@@ -257,8 +257,8 @@
       <Focus>0</Focus>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\Code\Head\Interface_com.h</PathWithFileName>
-      <FilenameWithoutPath>Interface_com.h</FilenameWithoutPath>
+      <PathWithFileName>.\Code\Head\CONFIG.h</PathWithFileName>
+      <FilenameWithoutPath>CONFIG.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -270,8 +270,8 @@
       <Focus>0</Focus>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\Code\Head\CONFIG.h</PathWithFileName>
-      <FilenameWithoutPath>CONFIG.h</FilenameWithoutPath>
+      <PathWithFileName>.\Code\Head\CENCOR_PROGRAMM.h</PathWithFileName>
+      <FilenameWithoutPath>CENCOR_PROGRAMM.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -283,8 +283,8 @@
       <Focus>0</Focus>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\Code\Head\CENCOR_PROGRAMM.h</PathWithFileName>
-      <FilenameWithoutPath>CENCOR_PROGRAMM.h</FilenameWithoutPath>
+      <PathWithFileName>.\Code\Head\SPI_prog.h</PathWithFileName>
+      <FilenameWithoutPath>SPI_prog.h</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -369,8 +369,8 @@
       <Focus>0</Focus>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\Code\Source\Interface_com.c</PathWithFileName>
-      <FilenameWithoutPath>Interface_com.c</FilenameWithoutPath>
+      <PathWithFileName>.\Code\Source\CENCOR_PROGRAMM.c</PathWithFileName>
+      <FilenameWithoutPath>CENCOR_PROGRAMM.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -382,8 +382,8 @@
       <Focus>0</Focus>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>.\Code\Source\CENCOR_PROGRAMM.c</PathWithFileName>
-      <FilenameWithoutPath>CENCOR_PROGRAMM.c</FilenameWithoutPath>
+      <PathWithFileName>.\Code\Source\SPI_prog.c</PathWithFileName>
+      <FilenameWithoutPath>SPI_prog.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>

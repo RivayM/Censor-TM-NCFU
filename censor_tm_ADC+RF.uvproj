@@ -383,11 +383,6 @@
               <FilePath>.\Code\Head\NRF_ex.h</FilePath>
             </File>
             <File>
-              <FileName>Interface_com.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Code\Head\Interface_com.h</FilePath>
-            </File>
-            <File>
               <FileName>CONFIG.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Code\Head\CONFIG.h</FilePath>
@@ -396,6 +391,11 @@
               <FileName>CENCOR_PROGRAMM.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Code\Head\CENCOR_PROGRAMM.h</FilePath>
+            </File>
+            <File>
+              <FileName>SPI_prog.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Code\Head\SPI_prog.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -428,14 +428,14 @@
               <FilePath>.\Code\Source\NRF_ex.c</FilePath>
             </File>
             <File>
-              <FileName>Interface_com.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Code\Source\Interface_com.c</FilePath>
-            </File>
-            <File>
               <FileName>CENCOR_PROGRAMM.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Code\Source\CENCOR_PROGRAMM.c</FilePath>
+            </File>
+            <File>
+              <FileName>SPI_prog.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Code\Source\SPI_prog.c</FilePath>
             </File>
           </Files>
         </Group>

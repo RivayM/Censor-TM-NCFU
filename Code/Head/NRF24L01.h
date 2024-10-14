@@ -59,11 +59,15 @@
 /******************************/
 /*ARRAY*/
 /******************************/
-extern xdata unsigned char COMMAND_READ_RF[NRF_MASSIV_SIZE];
-extern xdata unsigned char COMMAND_CLEAR_FLUSH_RX[NRF_MASSIV_SIZE];
-extern xdata unsigned char COMMAND_CLEAR_FLUSH_TX[NRF_MASSIV_SIZE]; 
-extern xdata unsigned char COMMAND_CLEAR_IRQ[NRF_MASSIV_SIZE]; 
-		
+extern xdata unsigned char COMMAND_SEND_RF				[NRF_MASSIV_SIZE];
+extern xdata unsigned char COMMAND_READ_RF				[NRF_MASSIV_SIZE];
+extern xdata unsigned char COMMAND_CLEAR_FLUSH_RX	[NRF_MASSIV_SIZE];
+extern xdata unsigned char COMMAND_CLEAR_FLUSH_TX	[NRF_MASSIV_SIZE]; 
+extern xdata unsigned char COMMAND_CLEAR_IRQ			[NRF_MASSIV_SIZE]; 
+extern xdata unsigned char COMMAND_READ_PIPE0			[NRF_MASSIV_SIZE];
+extern xdata unsigned char COMMAND_READ_FIFO_STAT	[NRF_MASSIV_SIZE];
+extern xdata unsigned char COMMAND_W_ACK_PAYLOAD	[NRF_MASSIV_SIZE];
+
 /******************************/
 /*OTHER*/
 /******************************/
@@ -105,7 +109,7 @@ extern xdata struct NRF_PACKET_SPI packetRX;
 extern xdata struct NRF_PACKET_SPI packetTX;
 extern xdata struct NRF_PACKET_SPI packetRX_READ;
 
-/*длительные процессы*/
+/*long processes - require waiting*/
 bit NRF_init(struct NRF_PACKET_SPI *packet);
 bit NRF_get(/*struct DATA_PACKET_SAVE *packet*/);
 bit NRF_send(/*struct DATA_PACKET_SEND *packet*/);
@@ -115,7 +119,7 @@ bit NRF_send(void);
 bit NRF_get(void);
 bit NRF_change_mode_RF(struct NRF_PACKET_SPI *packet, bit stateCeEnd);
 
-/*вспомогательное*/
+/*additional*/
 void NRF_clear_IRQ(void);
 void NRF_ack_status(void);
 void NRF_read_value(void);
