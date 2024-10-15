@@ -8,19 +8,26 @@
 //********************************************************
 // set FREQ  (TIMER0)
 //********************************************************
+#define FREQ_030KHZ_H 0xFF
+#define FREQ_030KHZ_L 0xF9
 #define FREQ_120KHZ_H 0xFF
 #define FREQ_120KHZ_L 0xFB
 #define FREQ_480KHZ_H 0xFF
 #define FREQ_480KHZ_L 0xFD
 
 /*USE FREQ IN void init_CLK*/
-#define FREQ_H FREQ_480KHZ_H         // setting freq
-#define FREQ_L FREQ_480KHZ_L
+#define FREQ_H FREQ_030KHZ_H         // setting freq
+#define FREQ_L FREQ_030KHZ_L
 
-   /*  USE:
-void ISR_Timer0() interrupt 1 {
-  //code
-}  */
+extern bit TactTimer0;
+
+  /*  USE:
+		void ISR_Timer0() interrupt 1 {
+			if(FlagInComSPIGlobal){ 
+				TactTimer0 = ~TactTimer0;
+			}
+		}  
+*/
 
 //********************************************************
 // SPI
@@ -35,10 +42,12 @@ extern unsigned char valueBufferArrayRx[BUFFER_SPI_MASSIV_SIZE];
 extern int counterBit; 							// current bit in packet(byte)
 extern int counterByte; 						// current packet(byte)
 extern int amountByteArrayForSend; 	// current packet(byte) for SEND
-extern bit FlagInComSPIGlobal;  	 	// Permission (exchange)
+extern bit FlagSPIGlobal;  	 				// Permission (exchange)
+extern bit FlagSPIExchange;  	 			// 
 
-extern int valueDelay;             	// delay values 1 = 1 timer cycle timer
-extern bit FlagInComDelay;         	// allow delay
+
+extern int valueDelay;             	// delay values 1 = 1 timer cycle timer ->TactTimer0
+extern bit FlagSPIDelay;        	 	// allow delay
 
 
 /* PINS -> USE GPIO.h FOR SPI*/

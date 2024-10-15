@@ -5,6 +5,7 @@
 #include <CENCOR_PROGRAMM.h>
 
 void main(){
+	//int count = 0;
 	
 	/****************/
 	/*		init      */
@@ -13,12 +14,13 @@ void main(){
 	/****************/
 	/* start work   */
 	/****************/
-	
+	//FlagSPIGlobal = 1;
 	/****************/
   while(1){
 	/****************/
 	/*  main work   */
 	/****************/
+		//PIN_CLK_SPI = TactTimer0;
 		Work_NRF();
 		//PIN_LED_RED = Button_Read();  //чтение кнопки
 	}

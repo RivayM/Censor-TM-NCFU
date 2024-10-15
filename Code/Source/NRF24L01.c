@@ -163,7 +163,7 @@ bit NRF_change_mode_RF(struct NRF_PACKET_SPI *packet, bit stateCeEnd){
 bit NRF_send(/*struct DATA_PACKET_SEND *packet*/){
 	switch(currentProcess){
 		case START_PROCESS: NRF_CE = 0;								break;
-		case 1: COMMAND_SEND_RF[1]++;									break;		
+		case 1: COMMAND_SEND_RF[1] = 0x30;						break;		
 		case 2: Send_SPI_NRF( &COMMAND_SEND_RF, 2 );	break;
 		case 5: NRF_CE = 1;														break;
 		case 6: NRF_delay();NRF_delay();NRF_delay();	break;

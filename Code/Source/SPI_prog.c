@@ -1,5 +1,5 @@
 //********************************************************
-//  Interface common
+//  PROG_SPI 
 //********************************************************
 #include <SPI_prog.H>
 #include <N76E003.H>
@@ -7,17 +7,22 @@
 unsigned char valueBufferArrayTx[BUFFER_SPI_MASSIV_SIZE];  
 unsigned char valueBufferArrayRx[BUFFER_SPI_MASSIV_SIZE];  
 
-int amountByteArrayForSend = BUFFER_SPI_MASSIV_SIZE; 
-int counterBit             = 0;   
-int counterByte            = 0;
-bit FlagInComSPIGlobal     = 0;  
+int amountByteArrayForSend 	= BUFFER_SPI_MASSIV_SIZE; 
+int counterBit            	= 0;   
+int counterByte           	= 0;
 
-int	valueDelay						 = 0;
-bit FlagInComDelay				 = 0;
+bit FlagSPIGlobal						= 0;
+bit FlagExchangeSPIStart		= 0;
+
+int	valueDelay						 	= 0;
+bit FlagSPIDelay				 		= 0;
+
+bit TactTimer0				 			= 0;
+
 
 /* Init timer and start */
 void SPI_init_Timer(){
-	TIMER0_MODE1_ENABLE;			// Mode timer
+	TIMER0_MODE2_ENABLE;			// Mode timer
 	TH0 = FREQ_H;           	// setting freq:
   TL0 = FREQ_L; 						// 
 	set_ET0;									// enable Timer0 interrupt
@@ -34,13 +39,13 @@ void SPI_exchange_start(void){
 
 /* exchange bitwise operation */
 void SPI_exchange_do(unsigned char valueMosi, unsigned char *outSideBuffer){ 
-	if(counterBit) {                      // CPOL 
+	if(counterBit) {                      // CPOL - when start clk
 		PIN_CLK_SPI =~PIN_CLK_SPI;          // clocking
-	}  								
-	if( PIN_CLK_SPI == 0) {       				// CPHA
+	}  		
+	if( PIN_CLK_SPI == 0) {       				// CPHA - when next bit
 /******************************/
 		switch(counterBit){		 							// Start
-			// End bit packet
+/*End bit packet	*/
 			case BUFFER_SPI:          				
 				PIN_MOSI_SPI = 1;
 				//PIN_MISO_SPI = 1;
@@ -49,18 +54,22 @@ void SPI_exchange_do(unsigned char valueMosi, unsigned char *outSideBuffer){
 				SPI_exchange_end();       // continue?
 				SPI_Data_Convert_Byte();  // next packet
 				break;
-			// process going
-			default: 
+/* process going	*/
+			default  /* 0 - 7 */: 
 				PIN_CS_SPI   = 0;
-				if(valueMosi){PIN_MOSI_SPI = 1;}// send MoSi
+/* send MoSi	*/
+				if(valueMosi){PIN_MOSI_SPI = 1;}
 				else{ 				PIN_MOSI_SPI = 0;}
-				
-				if ( PIN_MISO_SPI == 1){      	// send MiSo 	
+/* send MiSo	*/
+				if ( PIN_MISO_SPI == 1){      	 	
 					outSideBuffer = outSideBuffer +
 					SPI_Data_Convert_Bit(outSideBuffer);
 				}	
-				
-				counterBit++; 									// next bit
+/* next bit		*/
+				if(counterBit == 7){
+				  counterBit = 7;
+				}
+				counterBit++; 									
 				break;
 		}
 	}
@@ -83,28 +92,38 @@ void SPI_exchange_end(void){
 /* In the end exchange SPI*/
 void SPI_End(void){
 	PIN_CS_SPI  = 1;
-	FlagInComSPIGlobal = 0; 
+	FlagSPIGlobal = 0; 
 }
 
 
 /* Convert DATA BYTE*/
 void SPI_Data_Convert_Byte(){	
-	#if SPI_DATA_BYTE == 1
-		counterByte--;     // SPI_MSbyte 
-	#else
-		counterByte++;     // SPI_LSbyte
-	#endif
+#if SPI_DATA_BYTE == 1
+	counterByte--;     // SPI_MSbyte 
+#else
+	counterByte++;     // SPI_LSbyte
+#endif
 }
 
 /*Convert DATA BIT*/
 unsigned char SPI_Data_Convert_Bit(unsigned char *outSideBuffer){
 	unsigned char buf;
 	buf = *outSideBuffer;  
-	#if SPI_DATA_BIT == 1
+#if SPI_DATA_BIT == 1
+	if(counterBit >= BUFFER_SPI - 1){ 
+		buf = buf & 0x01; 
+	}
+	else {
 		buf = buf & 0x01 << (BUFFER_SPI - counterBit - 1);// SPI_MSB
-	#else
+	}
+#else
+	if(counterBit >= BUFFER_SPI - 1){
+		buf = buf & 0x01 << BUFFER_SPI - 1;
+	}
+	else{
 		buf = buf & 0x01 << counterBit; 									// SPI_LSB
-	#endif
+	}
+#endif
 	return buf;
 }
 
@@ -112,16 +131,16 @@ unsigned char SPI_Data_Convert_Bit(unsigned char *outSideBuffer){
 void SPI_Delay(){
 	if(valueDelay){	valueDelay--;	}
 	else{	
-		FlagInComDelay = 0;	
-		FlagInComSPIGlobal = 0;
+		FlagSPIDelay = 0;	
+		FlagSPIGlobal = 0;
 	}
 }
 
 /*SET Delay = 1 timer cycle timer*/
 void SPI_Delay_Set(int delay){
 	valueDelay = delay;
-	FlagInComDelay = 1;
-	FlagInComSPIGlobal = 1;
+	FlagSPIDelay = 1;
+	FlagSPIGlobal = 1;
 }
 
 /* init clk */
@@ -133,5 +152,5 @@ void SPI_Start(void){
 	#else
 		counterByte = 0;
 	#endif
-	FlagInComSPIGlobal = 1;
+	FlagSPIGlobal = 1;
 }
