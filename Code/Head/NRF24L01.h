@@ -7,7 +7,10 @@
 /******************************/
 /*SETINGS*/
 /******************************/
-#define DELAY  3000          		 		 // 
+#define NRF_DELAY  			3000         // 
+#define NRF_DELAY_LONG  1000         // 
+#define NRF_DELAY_MID  	500          // 
+#define NRF_DELAY_SHORT 100				   // 
 /******************************/
 /*Commands*/
 /******************************/
@@ -76,7 +79,7 @@ extern bit FlagDataReadReady;
 extern int currentProcess;      		 // current progress
 extern xdata unsigned char readBuf[NRF_MASSIV_SIZE];      // buffer 
 	
-extern struct NRF_PACKET_SPI{  //PACKET vXXXX -> v= value XXX=REGISTR
+extern struct NRF_PACKET_SPI{  
 	unsigned char vCONFIG			[NRF_MASSIV_SIZE];			// 
 	unsigned char vEN_AA			[NRF_MASSIV_SIZE];			//
 	unsigned char vSETUP_AW		[NRF_MASSIV_SIZE];			//
@@ -105,9 +108,10 @@ extern struct NRF_PACKET_SPI{  //PACKET vXXXX -> v= value XXX=REGISTR
 	unsigned char vFLUSH			[NRF_MASSIV_SIZE];			//	
 };
 
+
 extern xdata struct NRF_PACKET_SPI packetRX;
 extern xdata struct NRF_PACKET_SPI packetTX;
-extern xdata struct NRF_PACKET_SPI packetRX_READ;
+extern xdata struct NRF_PACKET_SPI packetREAD;
 
 /*long processes - require waiting*/
 bit NRF_init(struct NRF_PACKET_SPI *packet);
@@ -125,7 +129,7 @@ void NRF_ack_status(void);
 void NRF_read_value(void);
 void Send_SPI_NRF(unsigned char *message,int amountMessage);
 bit Check_Out(void);
-void NRF_delay(void);
+void NRF_delay(int delayValue);
 
 #endif
 

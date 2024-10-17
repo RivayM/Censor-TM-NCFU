@@ -19,7 +19,6 @@ bit FlagSPIDelay				 		= 0;
 
 bit TactTimer0				 			= 0;
 
-
 /* Init timer and start */
 void SPI_init_Timer(){
 	TIMER0_MODE2_ENABLE;			// Mode timer
@@ -109,6 +108,11 @@ void SPI_Data_Convert_Byte(){
 unsigned char SPI_Data_Convert_Bit(unsigned char *outSideBuffer){
 	unsigned char buf;
 	buf = *outSideBuffer;  
+	/*
+	in Nuvaton, shift operations by 0, we go to -1 
+	and force the register to go around in a circle 
+	(the whole cycle) - long operation
+	*/
 #if SPI_DATA_BIT == 1
 	if(counterBit >= BUFFER_SPI - 1){ 
 		buf = buf & 0x01; 
@@ -129,7 +133,9 @@ unsigned char SPI_Data_Convert_Bit(unsigned char *outSideBuffer){
 
 /*Delay = 1 timer cycle timer*/
 void SPI_Delay(){
-	if(valueDelay){	valueDelay--;	}
+	if(valueDelay){	
+		valueDelay--;	
+	}
 	else{	
 		FlagSPIDelay = 0;	
 		FlagSPIGlobal = 0;
@@ -144,13 +150,16 @@ void SPI_Delay_Set(int delay){
 }
 
 /* init clk */
-void SPI_CLK_init(bit value){ PIN_CLK_SPI = value;}
+void SPI_CLK_init(bit value){ 
+	PIN_CLK_SPI = value;
+}
+
 /* Start exchange spi */
 void SPI_Start(void){
-	#if SPI_DATA_BYTE == 1
-		counterByte = amountByteArrayForSend -1;
-	#else
-		counterByte = 0;
-	#endif
+#if SPI_DATA_BYTE == 1
+	counterByte = amountByteArrayForSend -1;
+#else
+	counterByte = 0;
+#endif
 	FlagSPIGlobal = 1;
 }

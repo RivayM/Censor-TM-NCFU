@@ -1,4 +1,4 @@
-C51 COMPILER V9.53.0.0   NRF24L01                                                          10/15/2024 15:56:22 PAGE 1   
+C51 COMPILER V9.53.0.0   NRF24L01                                                          10/16/2024 11:57:51 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE NRF24L01
@@ -20,7 +20,7 @@ line level    source
    7          #include <N76E003.h>
    8          
    9          //**************************************************************************
-  10          /*  struct for send mode RX  */
+  10          /*  struct for send mode RX     */
   11          //**************************************************************************
   12          xdata struct NRF_PACKET_SPI packetRX = {
   13            /*reg:            ,value:   */
@@ -52,17 +52,17 @@ line level    source
   39            {FLUSH_RX         ,NOP}     //  FLUSH   
   40          };
   41          //**************************************************************************
-  42          /*  struct for send mode TX  */
+  42          /*  struct for send mode TX     */
   43          //**************************************************************************
   44          xdata struct NRF_PACKET_SPI packetTX = {
   45            /*reg:            ,value:   */
   46            {W_REG|NRF_CONFIG ,0x0E},   //  CONFIG
   47          };
   48          //**************************************************************************
-  49          /*  struct for READ state reg  */
+  49          /*  struct for READ state reg   */
   50          //**************************************************************************
-  51          xdata struct NRF_PACKET_SPI packetRX_READ = {
-C51 COMPILER V9.53.0.0   NRF24L01                                                          10/15/2024 15:56:22 PAGE 2   
+  51          xdata struct NRF_PACKET_SPI packetREAD = {
+C51 COMPILER V9.53.0.0   NRF24L01                                                          10/16/2024 11:57:51 PAGE 2   
 
   52            /*reg:            ,value:   */
   53            {R_REG|NRF_CONFIG },    //  CONFIG
@@ -93,7 +93,7 @@ line level    source
   78          };
   79          
   80          //**************************************************************************
-  81          // ARRAY
+  81          /* ARRAY                        */
   82          //**************************************************************************
   83          xdata unsigned char COMMAND_SEND_RF       [NRF_MASSIV_SIZE] = 
   84              {W_TX_PL /*next byte for data send[1-x]*/};
@@ -125,10 +125,10 @@ line level    source
  110   1        switch(currentProcess){
  111   2          case START_PROCESS: NRF_CE = 0;                 break;
  112   2          
- 113   2          case 1: /*Send_SPI_NRF( packet->vCONFIG,    2 );*/  break;
-C51 COMPILER V9.53.0.0   NRF24L01                                                          10/15/2024 15:56:22 PAGE 3   
+ 113   2        //case 1: Send_SPI_NRF( packet->vCONFIG,    2 );  break;
+C51 COMPILER V9.53.0.0   NRF24L01                                                          10/16/2024 11:57:51 PAGE 3   
 
- 114   2          case 2: NRF_delay();                            break;
+ 114   2          case 2: NRF_delay(1);                           break;
  115   2          case 3: Send_SPI_NRF( packet->vEN_AA,     2 );  break;
  116   2          case 4: Send_SPI_NRF( packet->vSETUP_AW,  2 );  break;  
  117   2          case 5: Send_SPI_NRF( packet->vRF_CH,     2 );  break;  
@@ -153,7 +153,7 @@ line level    source
  136   2          case 21:Send_SPI_NRF( packet->vRX_ADDR4,  2 );  break;
  137   2          case 22:Send_SPI_NRF( packet->vRX_ADDR5,  2 );  break;
  138   2          case 23:Send_SPI_NRF( packet->vCONFIG,    2 );  break;
- 139   2          case 24: NRF_delay();                           break;
+ 139   2          case 24: NRF_delay(1);                            break;
  140   2          
  141   2          case 25:NRF_CE = 1;                             break;
  142   2          case 26:currentProcess = END_PROCESS;           break;
@@ -166,9 +166,9 @@ line level    source
  149          bit NRF_change_mode_RF(struct NRF_PACKET_SPI *packet, bit stateCeEnd){
  150   1        switch(currentProcess){
  151   2          case START_PROCESS: NRF_CE = 0;                 break;
- 152   2          case 1: NRF_delay();                            break;
+ 152   2          case 1: NRF_delay(1);                           break;
  153   2          case 2: Send_SPI_NRF( packet->vCONFIG,      2 );break;
- 154   2          case 3: NRF_delay();                            break;
+ 154   2          case 3: NRF_delay(1);                           break;
  155   2          case 4: NRF_CE = stateCeEnd;                    break;
  156   2          case 5: currentProcess = END_PROCESS;           break;
  157   2          default: break;
@@ -183,14 +183,14 @@ line level    source
  166   2          case 1: COMMAND_SEND_RF[1] = 0x30;            break;    
  167   2          case 2: Send_SPI_NRF( &COMMAND_SEND_RF, 2 );  break;
  168   2          case 5: NRF_CE = 1;                           break;
- 169   2          case 6: NRF_delay();NRF_delay();NRF_delay();  break;
+ 169   2          case 6: NRF_delay(1); break;
  170   2          case 7: NRF_CE = 0;                           break;
  171   2          case 8: Send_SPI_NRF( &COMMAND_CLEAR_IRQ, 2 );break;
  172   2          case 9: currentProcess = END_PROCESS;         break;
  173   2          default: break;
  174   2        }
  175   1        return Check_Out();
-C51 COMPILER V9.53.0.0   NRF24L01                                                          10/15/2024 15:56:22 PAGE 4   
+C51 COMPILER V9.53.0.0   NRF24L01                                                          10/16/2024 11:57:51 PAGE 4   
 
  176   1      }
  177          
@@ -199,7 +199,7 @@ line level    source
  180   1        switch(currentProcess){
  181   2          case START_PROCESS: /*NRF_CE = 1;*/         break;
  182   2          case 1: NRF_CE = 1;                         break;
- 183   2          case 2: NRF_delay();NRF_delay();NRF_delay();break;
+ 183   2          case 2: NRF_delay(1);break;
  184   2          case 3: /*NRF_CE = 0;*/                     break;  
  185   2          case 4: 
  186   2            Send_SPI_NRF( &COMMAND_READ_RF, 2 );
@@ -254,7 +254,7 @@ line level    source
  235   2          return 1;
  236   2        }
  237   1        else {
-C51 COMPILER V9.53.0.0   NRF24L01                                                          10/15/2024 15:56:22 PAGE 5   
+C51 COMPILER V9.53.0.0   NRF24L01                                                          10/16/2024 11:57:51 PAGE 5   
 
  238   2          currentProcess++;
  239   2          return 0;
@@ -262,8 +262,8 @@ line level    source
  241   1      }
  242          
  243          /*NRF delay(wait)*/
- 244          void NRF_delay(void){
- 245   1        SPI_Delay_Set(DELAY);
+ 244          void NRF_delay(int delayValue){
+ 245   1        SPI_Delay_Set(delayValue);
  246   1      }
  247          
  248          
@@ -275,7 +275,7 @@ line level    source
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    782    ----
+   CODE SIZE        =    770    ----
    CONSTANT SIZE    =      6    ----
    XDATA SIZE       =    450    ----
    PDATA SIZE       =   ----    ----
