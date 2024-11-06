@@ -110,8 +110,8 @@ bit NRF_init(struct NRF_PACKET_SPI *packet){
 	switch(currentProcess){
 		case START_PROCESS: NRF_CE = 0;									break;
 		
-	//case 1:	Send_SPI_NRF( packet->vCONFIG,		2 );	break;
-		case 2: NRF_delay(1);														break;
+		case 1:	NRF_delay(NRF_DELAY_MID);								break;
+		case 2: NRF_delay(NRF_DELAY_MID);								break;
 		case 3: Send_SPI_NRF( packet->vEN_AA,			2 );	break;
 		case 4:	Send_SPI_NRF( packet->vSETUP_AW,	2 );	break;	
 		case 5:	Send_SPI_NRF( packet->vRF_CH, 		2 );	break;	
@@ -136,7 +136,7 @@ bit NRF_init(struct NRF_PACKET_SPI *packet){
 		case 21:Send_SPI_NRF( packet->vRX_ADDR4,	2 );	break;
 		case 22:Send_SPI_NRF( packet->vRX_ADDR5,	2 );	break;
 		case 23:Send_SPI_NRF( packet->vCONFIG,		2 );	break;
-		case 24: NRF_delay(1);														break;
+		case 24: NRF_delay(NRF_DELAY_MID);							break;
 		
 		case 25:NRF_CE = 1;															break;
 		case 26:currentProcess = END_PROCESS;						break;
@@ -149,9 +149,9 @@ bit NRF_init(struct NRF_PACKET_SPI *packet){
 bit NRF_change_mode_RF(struct NRF_PACKET_SPI *packet, bit stateCeEnd){
 	switch(currentProcess){
 		case START_PROCESS: NRF_CE = 0;									break;
-		case 1: NRF_delay(1);														break;
+		case 1: NRF_delay(NRF_DELAY_MID);								break;
 		case 2: Send_SPI_NRF( packet->vCONFIG,			2 );break;
-		case 3:	NRF_delay(1);														break;
+		case 3:	NRF_delay(NRF_DELAY_MID);								break;
 		case 4:	NRF_CE = stateCeEnd;										break;
 		case 5:	currentProcess = END_PROCESS;						break;
 		default: break;
@@ -176,15 +176,14 @@ bit NRF_send(/*struct DATA_PACKET_SEND *packet*/){
 }
 
 /*NRF get(radio) */
-bit NRF_get(/*struct DATA_PACKET_SAVE *packet*/){
+bit NRF_get(/*how amoun byte*/){
 	switch(currentProcess){
-		case START_PROCESS: /*NRF_CE = 1;*/					break;
-		case 1: NRF_CE = 1;													break;
-		case 2: NRF_delay(1);break;
-		case 3: /*NRF_CE = 0;*/											break;	
+		case START_PROCESS: NRF_CE = 1;					break;
+		case 2: NRF_delay(NRF_DELAY_SHORT);     break;
+		case 3: /*NRF_CE = 0;*/									break;	
 		case 4:	
-			Send_SPI_NRF( &COMMAND_READ_RF, 2 );
-			break;
+			Send_SPI_NRF( &COMMAND_READ_RF, 2/*how amoun byte*/ );
+		break;
 		case 7:	
 			Send_SPI_NRF( &COMMAND_CLEAR_FLUSH_RX, 2 );
 			break;

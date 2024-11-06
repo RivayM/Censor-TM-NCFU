@@ -24,16 +24,16 @@ void GPIO_init(){
 	//  P10_PushPull_Mode;
 	//	P01_PushPull_Mode;
 	//	P04_PushPull_Mode;
-	//Enable_INT_Port0
+	//	Enable_INT_Port0
 	Enable_INT_Port1;
 	Enable_BIT0_LowLevel_Trig;
-	//set_EPI;									// dont work with timer 0
+	//	set_EPI;										// dont work with timer 0
 	set_EX1;
 	
 	/*start state pin*/
-	//PIN_LED_GREEN = 1;
-	//PIN_LED_RED = 1;
-	//PIN_RF_ON = 1 ;
+	//	PIN_LED_GREEN = 1;
+	//	PIN_LED_RED = 1;
+	//	PIN_RF_ON = 1 ;
 	NRF_CE = 0;
 
 }

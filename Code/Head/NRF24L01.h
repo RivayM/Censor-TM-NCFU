@@ -4,6 +4,7 @@
 #ifndef NRF24L01
 #define NRF24L01
 #define NRF_MASSIV_SIZE NRF24_BUFFER_MASSIV_SIZE		// size buffer
+
 /******************************/
 /*SETINGS*/
 /******************************/
@@ -11,6 +12,7 @@
 #define NRF_DELAY_LONG  1000         // 
 #define NRF_DELAY_MID  	500          // 
 #define NRF_DELAY_SHORT 100				   // 
+
 /******************************/
 /*Commands*/
 /******************************/
