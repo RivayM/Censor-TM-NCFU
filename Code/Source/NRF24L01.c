@@ -160,13 +160,15 @@ bit NRF_change_mode_RF(struct NRF_PACKET_SPI *packet, bit stateCeEnd){
 }
 
 /*NRF send(radio) */
-bit NRF_send(/*struct DATA_PACKET_SEND *packet*/){
+bit NRF_send(/*amount bytes*/){
 	switch(currentProcess){
 		case START_PROCESS: NRF_CE = 0;								break;
-		case 1: COMMAND_SEND_RF[1] = 0x30;						break;		
-		case 2: Send_SPI_NRF( &COMMAND_SEND_RF, 2 );	break;
+		case 1: /*write something value*/;						break;
+		case 2: 
+			Send_SPI_NRF( &COMMAND_SEND_RF,/*amount bytes*/ 2 );	
+			break;
 		case 5: NRF_CE = 1;														break;
-		case 6: NRF_delay(1);	break;
+		case 6: NRF_delay(NRF_DELAY_SHORT);						break;
 		case 7: NRF_CE = 0;														break;
 		case 8: Send_SPI_NRF( &COMMAND_CLEAR_IRQ, 2 );break;
 		case 9: currentProcess = END_PROCESS;					break;
@@ -176,14 +178,14 @@ bit NRF_send(/*struct DATA_PACKET_SEND *packet*/){
 }
 
 /*NRF get(radio) */
-bit NRF_get(/*how amoun byte*/){
+bit NRF_get(/*amount bytes*/){
 	switch(currentProcess){
 		case START_PROCESS: NRF_CE = 1;					break;
 		case 2: NRF_delay(NRF_DELAY_SHORT);     break;
 		case 3: /*NRF_CE = 0;*/									break;	
 		case 4:	
-			Send_SPI_NRF( &COMMAND_READ_RF, 2/*how amoun byte*/ );
-		break;
+			Send_SPI_NRF( &COMMAND_READ_RF, /*amount bytes*/ 2 );
+			break;
 		case 7:	
 			Send_SPI_NRF( &COMMAND_CLEAR_FLUSH_RX, 2 );
 			break;

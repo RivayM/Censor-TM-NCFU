@@ -11,7 +11,7 @@
 #define NRF_DELAY  			3000         // 
 #define NRF_DELAY_LONG  1000         // 
 #define NRF_DELAY_MID  	500          // 
-#define NRF_DELAY_SHORT 100				   // 
+#define NRF_DELAY_SHORT 150				   // 
 
 /******************************/
 /*Commands*/
@@ -117,8 +117,8 @@ extern xdata struct NRF_PACKET_SPI packetREAD;
 
 /*long processes - require waiting*/
 bit NRF_init(struct NRF_PACKET_SPI *packet);
-bit NRF_get(/*struct DATA_PACKET_SAVE *packet*/);
-bit NRF_send(/*struct DATA_PACKET_SEND *packet*/);
+bit NRF_get(/*amount bytes*/);
+bit NRF_send(/*amount bytes*/);
 
 bit NRF_clear_FIFO(void);
 bit NRF_send(void);
