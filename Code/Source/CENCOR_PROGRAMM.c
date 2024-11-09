@@ -34,31 +34,13 @@ void init_device(){
 //********************************************************
 
 void Work_NRF(){
-	
 	if(FlagSPIGlobal) {    				// work spi
-/*	waiting	*/
-		//if( TactTimer0 ){						// work Timer0
-/* tact on 1	*/
-			/*if(FlagSPIDelay){
-				SPI_Delay(); 						// delay SPI
-			} 
-			else{
-				SPI_exchange_start();		// exchange SPI
-			} 
-		}	
-		else{*/
-/* tact on 0	*/
-		//}
+		/*	waiting	*/
 	}
 	else{
 		switch(mainStateProgressSPI){
-			case START_PROCESS: 	
-				Process_init_RF();
-				break; 				
-/*main work RF*/
-			case 1: 
-				Process_work_RF();
-				break;
+			case START_PROCESS: 	Process_init_RF();		break; 				
+			case 1: Process_work_RF();									break;
 			// case 2: init FRAM
 			// case 3: Work with FRAM
 			case END_PROCESS:break;
@@ -68,37 +50,13 @@ void Work_NRF(){
 
 /*init radio  NRF24*/
 void Process_init_RF(void){
-	switch(modeRF){
-		case TX_MODE:
-			if(NRF_init(&packetTX)){  	// end init rf?
-				mainStateProgressSPI++;   // process ->end go to next
-			}
-		case RX_MODE:
-			if(NRF_init(&packetRX)){  	// end init rf?
-				mainStateProgressSPI++;   // process ->end go to next
-			}
-		default:break;
+	if(NRF_init(&packetRX)){  	// end init rf?
+		mainStateProgressSPI++;   // process ->end go to next
 	}
 }
 
 /*main work RF*/
 void Process_work_RF(void){
-	/*
-	if(NRF_init(&packetRX_READ)){  	// end init rf?
-			//mainStateProgressSPI++;   // process ->end go to next
-	}*/
-	//прочитать то что я записал
-	//#ifndef TX
-
-	/*
-	if( NRF_send() ){
-		PIN_LED_RED = ~PIN_LED_RED;
-	}
-	//PIN_LED_GREEN = ~PIN_LED_GREEN;
-	
-	*/
-	//#ifndef RX
-	
 	if( NRF_get() ){
 		PIN_LED_RED = ~PIN_LED_RED;
 	}
@@ -107,8 +65,8 @@ void Process_work_RF(void){
 	}
 	
 	// пока прочитать статус и самостоятельно считать
-	//	а после настроить прерывание по нему ( извлекать)
-	//	флага нет , не считывать данные и пропускать процедуру
+	// а после настроить прерывание по нему ( извлекать)
+	// флага нет , не считывать данные и пропускать процедуру
 	// считывания
 }
 
@@ -125,7 +83,6 @@ void ISR_Timer0() interrupt 1 {  				// <Interface_com.H>
 			else{
 				SPI_exchange_start();		// exchange SPI
 			} 
-		
 	}
 }
 
