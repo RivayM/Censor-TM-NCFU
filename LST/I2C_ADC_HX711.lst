@@ -1,4 +1,4 @@
-C51 COMPILER V9.53.0.0   I2C_ADC_HX711                                                     10/16/2024 11:57:50 PAGE 1   
+C51 COMPILER V9.53.0.0   I2C_ADC_HX711                                                     11/11/2024 11:51:25 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE I2C_ADC_HX711
@@ -26,23 +26,23 @@ line level    source
   15          
   16          unsigned long ADCHX711_Read(void){
   17   1        unsigned long Count;
-  18   1        unsigned char i;
+  18   1        /*unsigned char i;
   19   1        //прочитать -> { ADDO = 0 } -> начать извлечение
   20   1        ADSK = 0;
   21   1        Count = 0;
   22   1        for(i = 0; i < SIZE_DATA; i++ ){
-  23   2          if(ADOUT) Count++;
-  24   2          ADSK = 1;
-  25   2          Count = Count<<1;
-  26   2          ADSK = 0;
-  27   2        }
+  23   1          if(ADOUT) Count++;
+  24   1          ADSK = 1;
+  25   1          Count = Count<<1;
+  26   1          ADSK = 0;
+  27   1        }
   28   1        // cделать оставшиеся исмпульсы согласно настройке
   29   1        for(i = 0; i < ( PD_SCK - SIZE_DATA ); i++ ){
-  30   2          ADSK = 1;
-  31   2          _nop_();
-  32   2          ADSK = 0;
-  33   2        }
-  34   1        Count = Count^0x800000;  
+  30   1          ADSK = 1;
+  31   1          _nop_();
+  32   1          ADSK = 0;
+  33   1        }*/
+  34   1        Count = 0x800000;  
   35   1        return Count;
   36   1      }
   37          
@@ -54,7 +54,7 @@ line level    source
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =     65    ----
+   CODE SIZE        =     17    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
@@ -63,7 +63,7 @@ MODULE INFORMATION:   STATIC OVERLAYABLE
    BIT SIZE         =   ----    ----
 END OF MODULE INFORMATION.
 
-C51 COMPILER V9.53.0.0   I2C_ADC_HX711                                                     10/16/2024 11:57:50 PAGE 2   
+C51 COMPILER V9.53.0.0   I2C_ADC_HX711                                                     11/11/2024 11:51:25 PAGE 2   
 
 
 C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

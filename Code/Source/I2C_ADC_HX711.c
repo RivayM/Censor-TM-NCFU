@@ -15,7 +15,7 @@ void ADCHX711_Initial(void){
 
 unsigned long ADCHX711_Read(void){
 	unsigned long Count;
-	unsigned char i;
+	/*unsigned char i;
 	//прочитать -> { ADDO = 0 } -> начать извлечение
 	ADSK = 0;
 	Count = 0;
@@ -30,8 +30,8 @@ unsigned long ADCHX711_Read(void){
 		ADSK = 1;
 		_nop_();
 		ADSK = 0;
-	}
-	Count = Count^0x800000;  
+	}*/
+	Count = 0x800000;  
 	return Count;
 }
 

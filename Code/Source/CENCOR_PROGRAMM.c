@@ -5,9 +5,7 @@
 #include <CENCOR_PROGRAMM.h>
 
 xdata int mainStateProgressSPI = 0;  	// state main func.( work cencor)
-xdata int modeRF = RX_MODE;						// mode by default
 
-bit tact = 0;
 
 //********************************************************
 // MAIN FUNC - work censor
@@ -30,7 +28,7 @@ void init_device(){
 
 
 //********************************************************
-//  Work with NRF and FRAM 
+//  Work with NRF and FRAM (spi)
 //********************************************************
 
 void Work_NRF(){
@@ -50,17 +48,17 @@ void Work_NRF(){
 
 /*init radio  NRF24*/
 void Process_init_RF(void){
-	if(NRF_init(&packetRX)){  	// end init rf?
+	if(NRF_init()){  	// end init rf?
 		mainStateProgressSPI++;   // process ->end go to next
 	}
 }
 
-/*main work RF*/
+/*main work NRF24*/
 void Process_work_RF(void){
 	if( NRF_get() ){
-		PIN_LED_RED = ~PIN_LED_RED;
+		
 	}
-	if(readBuf[1] != 0x30){
+	if(readBuf[1]){
 			PIN_LED_GREEN = ~PIN_LED_GREEN;
 	}
 	
@@ -75,8 +73,6 @@ void Process_work_RF(void){
 //********************************************************
 void ISR_Timer0() interrupt 1 {  				// <Interface_com.H>
 	if(FlagSPIGlobal){ 
-		//TactTimer0 =~ TactTimer0;
-		
 			if(FlagSPIDelay){
 				SPI_Delay(); 						// delay SPI
 			} 

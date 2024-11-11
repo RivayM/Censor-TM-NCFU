@@ -4,7 +4,6 @@
 #ifndef NRF24L01
 #define NRF24L01
 #define NRF_MASSIV_SIZE NRF24_BUFFER_MASSIV_SIZE		// size buffer
-
 /******************************/
 /*SETINGS*/
 /******************************/
@@ -64,6 +63,7 @@
 /******************************/
 /*ARRAY*/
 /******************************/
+extern xdata unsigned char COMMAND_STAT						[NRF_MASSIV_SIZE];
 extern xdata unsigned char COMMAND_SEND_RF				[NRF_MASSIV_SIZE];
 extern xdata unsigned char COMMAND_READ_RF				[NRF_MASSIV_SIZE];
 extern xdata unsigned char COMMAND_CLEAR_FLUSH_RX	[NRF_MASSIV_SIZE];
@@ -77,11 +77,12 @@ extern xdata unsigned char COMMAND_W_ACK_PAYLOAD	[NRF_MASSIV_SIZE];
 /*OTHER*/
 /******************************/
 
+extern bit modeRF;
 extern bit FlagDataReadReady;
 extern int currentProcess;      		 // current progress
 extern xdata unsigned char readBuf[NRF_MASSIV_SIZE];      // buffer 
 	
-extern struct NRF_PACKET_SPI{  
+struct NRF_PACKET_SPI{  
 	unsigned char vCONFIG			[NRF_MASSIV_SIZE];			// 
 	unsigned char vEN_AA			[NRF_MASSIV_SIZE];			//
 	unsigned char vSETUP_AW		[NRF_MASSIV_SIZE];			//
@@ -111,26 +112,25 @@ extern struct NRF_PACKET_SPI{
 };
 
 
-extern xdata struct NRF_PACKET_SPI packetRX;
-extern xdata struct NRF_PACKET_SPI packetTX;
-extern xdata struct NRF_PACKET_SPI packetREAD;
+xdata struct NRF_PACKET_SPI packetRX;
+xdata struct NRF_PACKET_SPI packetTX;
+xdata struct NRF_PACKET_SPI packetREAD;
 
 /*long processes - require waiting*/
-bit NRF_init(struct NRF_PACKET_SPI *packet);
-bit NRF_get(/*amount bytes*/);
-bit NRF_send(/*amount bytes*/);
+bit NRF_init(void);
+bit NRF_get(void/*amount bytes*/);
+bit NRF_send(void/*amount bytes*/);
 
 bit NRF_clear_FIFO(void);
 bit NRF_send(void);
 bit NRF_get(void);
-bit NRF_change_mode_RF(struct NRF_PACKET_SPI *packet, bit stateCeEnd);
+bit NRF_change_mode_RF();
+
+bit Check_Out(void);
 
 /*additional*/
-void NRF_clear_IRQ(void);
-void NRF_ack_status(void);
 void NRF_read_value(void);
 void Send_SPI_NRF(unsigned char *message,int amountMessage);
-bit Check_Out(void);
 void NRF_delay(int delayValue);
 
 #endif

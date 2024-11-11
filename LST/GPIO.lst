@@ -1,4 +1,4 @@
-C51 COMPILER V9.53.0.0   GPIO                                                              10/16/2024 11:57:51 PAGE 1   
+C51 COMPILER V9.53.0.0   GPIO                                                              11/11/2024 11:51:25 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE GPIO
@@ -35,16 +35,16 @@ line level    source
   24   1        //  P10_PushPull_Mode;
   25   1        //  P01_PushPull_Mode;
   26   1        //  P04_PushPull_Mode;
-  27   1        //Enable_INT_Port0
+  27   1        //  Enable_INT_Port0
   28   1        Enable_INT_Port1;
   29   1        Enable_BIT0_LowLevel_Trig;
-  30   1        //set_EPI;                  // dont work with timer 0
+  30   1        //  set_EPI;                    // dont work with timer 0
   31   1        set_EX1;
   32   1        
   33   1        /*start state pin*/
-  34   1        //PIN_LED_GREEN = 1;
-  35   1        //PIN_LED_RED = 1;
-  36   1        //PIN_RF_ON = 1 ;
+  34   1        //  PIN_LED_GREEN = 1;
+  35   1        //  PIN_LED_RED = 1;
+  36   1        //  PIN_RF_ON = 1 ;
   37   1        NRF_CE = 0;
   38   1      
   39   1      }

@@ -9,12 +9,10 @@
 //**************************************************************************
 /* WORK NRF24 ( mode)										*/
 //**************************************************************************
-#define TX_MODE  1 											//  
-#define RX_MODE  2 											//  
-#define RTX_MODE 3  										//  
+#define TX_MODE  0 											//  
+#define RX_MODE  1 											//  
 #define NRF24_BUFFER_MASSIV_SIZE 5 + 1 	// amount byte dor sent to spi
 
-extern xdata int modeRF;                // mode by default
 //**************************************************************************
 /* MAIN processes												*/
 //**************************************************************************
