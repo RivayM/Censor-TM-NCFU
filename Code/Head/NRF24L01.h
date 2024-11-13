@@ -3,6 +3,7 @@
 /******************************/
 #ifndef NRF24L01
 #define NRF24L01
+
 #define NRF_MASSIV_SIZE NRF24_BUFFER_MASSIV_SIZE		// size buffer
 /******************************/
 /*SETINGS*/
@@ -63,15 +64,15 @@
 /******************************/
 /*ARRAY*/
 /******************************/
-extern xdata unsigned char COMMAND_STAT						[NRF_MASSIV_SIZE];
-extern xdata unsigned char COMMAND_SEND_RF				[NRF_MASSIV_SIZE];
-extern xdata unsigned char COMMAND_READ_RF				[NRF_MASSIV_SIZE];
-extern xdata unsigned char COMMAND_CLEAR_FLUSH_RX	[NRF_MASSIV_SIZE];
-extern xdata unsigned char COMMAND_CLEAR_FLUSH_TX	[NRF_MASSIV_SIZE]; 
-extern xdata unsigned char COMMAND_CLEAR_IRQ			[NRF_MASSIV_SIZE]; 
-extern xdata unsigned char COMMAND_READ_PIPE0			[NRF_MASSIV_SIZE];
-extern xdata unsigned char COMMAND_READ_FIFO_STAT	[NRF_MASSIV_SIZE];
-extern xdata unsigned char COMMAND_W_ACK_PAYLOAD	[NRF_MASSIV_SIZE];
+static xdata unsigned char COMMAND_STAT						[NRF_MASSIV_SIZE];
+static xdata unsigned char COMMAND_SEND_RF				[NRF_MASSIV_SIZE];
+static xdata unsigned char COMMAND_READ_RF				[NRF_MASSIV_SIZE];
+static xdata unsigned char COMMAND_CLEAR_FLUSH_RX	[NRF_MASSIV_SIZE];
+static xdata unsigned char COMMAND_CLEAR_FLUSH_TX	[NRF_MASSIV_SIZE]; 
+static xdata unsigned char COMMAND_CLEAR_IRQ			[NRF_MASSIV_SIZE]; 
+static xdata unsigned char COMMAND_READ_PIPE0			[NRF_MASSIV_SIZE];
+static xdata unsigned char COMMAND_READ_FIFO_STAT	[NRF_MASSIV_SIZE];
+static xdata unsigned char COMMAND_W_ACK_PAYLOAD	[NRF_MASSIV_SIZE];
 
 /******************************/
 /*OTHER*/
@@ -112,9 +113,9 @@ struct NRF_PACKET_SPI{
 };
 
 
-xdata struct NRF_PACKET_SPI packetRX;
-xdata struct NRF_PACKET_SPI packetTX;
-xdata struct NRF_PACKET_SPI packetREAD;
+static xdata struct NRF_PACKET_SPI packetRX;
+static xdata struct NRF_PACKET_SPI packetTX;
+static xdata struct NRF_PACKET_SPI packetREAD;
 
 /*long processes - require waiting*/
 bit NRF_init(void);

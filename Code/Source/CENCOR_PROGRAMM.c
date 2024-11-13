@@ -4,8 +4,8 @@
 
 #include <CENCOR_PROGRAMM.h>
 
-xdata int mainStateProgressSPI = 0;  	// state main func.( work cencor)
-
+xdata int mainStateProgressSPI = 0;  	// number current process spi
+xdata int mainStateProgressADC = 0;		// number current process adc
 
 //********************************************************
 // MAIN FUNC - work censor
@@ -14,7 +14,6 @@ void init_device(){
 	GPIO_init();
 	SPI_init_Timer();
 	SPI_CLK_init(0);
-	
 	set_EA;										// enable interrupts
 }
 

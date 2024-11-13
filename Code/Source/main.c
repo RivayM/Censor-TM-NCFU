@@ -21,7 +21,7 @@ void main(){
 	/****************/
   while(1){
 	Work_NRF();
-	PIN_LED_RED = Button_Read();  //чтение кнопки
+	
 	}
 }
 

@@ -5,12 +5,6 @@
 #include <GPIO.h>
 #include <N76E003.h>
 
-void Led_Switch_State(){}
-bit Button_Read(){return PIN_BUTTON;}
-int Switch_State_Power_RF(){
-	return PIN_RF_ON =~PIN_RF_ON;
-}
-
 void GPIO_init(){
 	/*setting pin*/
 	Set_All_GPIO_Quasi_Mode;
