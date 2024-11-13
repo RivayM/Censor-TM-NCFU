@@ -4,7 +4,6 @@
 
 #include <CENCOR_PROGRAMM.h>
 
-xdata int mainStateProgressSPI = 0;  	// number current process spi
 xdata int mainStateProgressADC = 0;		// number current process adc
 
 //********************************************************
@@ -29,6 +28,8 @@ void init_device(){
 //********************************************************
 //  Work with NRF and FRAM (spi)
 //********************************************************
+#ifdef USE_RADIO
+xdata int mainStateProgressSPI = 0;  	// number current process spi
 
 void Work_NRF(){
 	if(FlagSPIGlobal) {    				// work spi
@@ -67,10 +68,12 @@ void Process_work_RF(void){
 	// считывания
 }
 
+#endif /*include radio in project*/
 //********************************************************
 // ISR SPI
 //********************************************************
 void ISR_Timer0() interrupt 1 {  				// <Interface_com.H>
+	#ifdef USE_RADIO
 	if(FlagSPIGlobal){ 
 			if(FlagSPIDelay){
 				SPI_Delay(); 						// delay SPI
@@ -79,6 +82,7 @@ void ISR_Timer0() interrupt 1 {  				// <Interface_com.H>
 				SPI_exchange_start();		// exchange SPI
 			} 
 	}
+	#endif /*include radio in project*/
 }
 
 //********************************************************

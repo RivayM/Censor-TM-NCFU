@@ -1,10 +1,10 @@
-BL51 BANKED LINKER/LOCATER V6.22                                                        11/13/2024  14:32:44  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22                                                        11/13/2024  16:28:41  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
 D:\USR\KEIL_V5\C51\BIN\BL51.EXE .\Code\Obj\main.obj, .\Code\Obj\I2C_ADC_HX711.obj, .\Code\Obj\NRF24L01.obj, .\Code\Obj\G
->> PIO.obj, .\Code\Obj\NRF_ex.obj, .\Code\Obj\CENCOR_PROGRAMM.obj, .\Code\Obj\SPI_prog.obj, .\Code\Obj\Common.obj, .\Cod
->> e\Obj\Delay.obj TO .\Code\Obj\censor_tm_ADC+RF PRINT (.\LST\censor_tm_ADC+RF.m51) RAMSIZE (256)
+>> PIO.obj, .\Code\Obj\CENCOR_PROGRAMM.obj, .\Code\Obj\SPI_prog.obj, .\Code\Obj\Common.obj, .\Code\Obj\Delay.obj TO .\Co
+>> de\Obj\censor_tm_ADC+RF PRINT (.\LST\censor_tm_ADC+RF.m51) RAMSIZE (256)
 
 
 MEMORY MODEL: SMALL
@@ -15,7 +15,6 @@ INPUT MODULES INCLUDED:
   .\Code\Obj\I2C_ADC_HX711.obj (I2C_ADC_HX711)
   .\Code\Obj\NRF24L01.obj (NRF24L01)
   .\Code\Obj\GPIO.obj (GPIO)
-  .\Code\Obj\NRF_ex.obj (NRF_EX)
   .\Code\Obj\CENCOR_PROGRAMM.obj (CENCOR_PROGRAMM)
   .\Code\Obj\SPI_prog.obj (SPI_PROG)
   .\Code\Obj\Common.obj (COMMON)
@@ -59,10 +58,10 @@ LINK MAP OF MODULE:  .\Code\Obj\censor_tm_ADC+RF (MAIN)
             CODE    0233H     0158H     UNIT         ?PR?NRF_INIT?NRF24L01
             CODE    038BH     008CH     UNIT         ?C_C51STARTUP
             CODE    0417H     0064H     UNIT         ?PR?_SPI_EXCHANGE_DO?SPI_PROG
-BL51 BANKED LINKER/LOCATER V6.22                                                      11/13/2024  14:32:44  PAGE 2
-
-
             CODE    047BH     0058H     UNIT         ?PR?NRF_SEND?NRF24L01
+BL51 BANKED LINKER/LOCATER V6.22                                                      11/13/2024  16:28:41  PAGE 2
+
+
             CODE    04D3H     0051H     UNIT         ?PR?NRF_CHANGE_MODE_RF?NRF24L01
             CODE    0524H     004CH     UNIT         ?PR?NRF_GET?NRF24L01
             CODE    0570H     0046H     UNIT         ?PR?ISR_TIMER0?CENCOR_PROGRAMM
@@ -119,10 +118,10 @@ SEGMENT                                        BIT_GROUP          DATA_GROUP
   +--> ?PR?MAIN?MAIN
   +--> ?C_INITSEG
 
-BL51 BANKED LINKER/LOCATER V6.22                                                      11/13/2024  14:32:44  PAGE 3
-
-
 ?PR?MAIN?MAIN                               -----    -----      -----    -----
+BL51 BANKED LINKER/LOCATER V6.22                                                      11/13/2024  16:28:41  PAGE 3
+
+
   +--> ?PR?INIT_DEVICE?CENCOR_PROGRAMM
   +--> ?PR?_SPI_DELAY_SET?SPI_PROG
   +--> ?PR?WORK_NRF?CENCOR_PROGRAMM
@@ -173,16 +172,16 @@ SYMBOL TABLE OF MODULE:  .\Code\Obj\censor_tm_ADC+RF (MAIN)
   D:0090H         PUBLIC        P1
   D:00A0H         PUBLIC        P2
   D:00B0H         PUBLIC        P3
-  X:038EH         SYMBOL        COMMAND_SEND_RF
   D:00D8H         PUBLIC        PWMCON0
+  X:038EH         SYMBOL        COMMAND_SEND_RF
   D:00A8H         PUBLIC        IE
-  X:0394H         SYMBOL        COMMAND_CLEAR_IRQ
   D:00B8H         PUBLIC        IP
+  X:0394H         SYMBOL        COMMAND_CLEAR_IRQ
   X:039AH         SYMBOL        packetREAD
-BL51 BANKED LINKER/LOCATER V6.22                                                      11/13/2024  14:32:44  PAGE 4
-
-
   X:041EH         SYMBOL        COMMAND_STAT
+BL51 BANKED LINKER/LOCATER V6.22                                                      11/13/2024  16:28:41  PAGE 4
+
+
   X:0424H         SYMBOL        COMMAND_READ_FIFO_STAT
   C:075DH         PUBLIC        main
   X:042AH         SYMBOL        packetRX
@@ -205,7 +204,7 @@ SYMBOL TABLE OF MODULE:  .\Code\Obj\censor_tm_ADC+RF (MAIN)
   C:0760H         LINE#         18
   C:0767H         LINE#         22
   C:0767H         LINE#         23
-  C:076AH         LINE#         25
+  C:076AH         LINE#         24
   -------         ENDPROC       MAIN
   -------         ENDMOD        MAIN
 
@@ -239,10 +238,10 @@ SYMBOL TABLE OF MODULE:  .\Code\Obj\censor_tm_ADC+RF (MAIN)
   -------         DO            
   D:0004H         SYMBOL        Count
   -------         ENDDO         
-BL51 BANKED LINKER/LOCATER V6.22                                                      11/13/2024  14:32:44  PAGE 5
-
-
   C:0786H         LINE#         16
+BL51 BANKED LINKER/LOCATER V6.22                                                      11/13/2024  16:28:41  PAGE 5
+
+
   C:0786H         LINE#         34
   C:078EH         LINE#         35
   C:078EH         LINE#         36
@@ -299,10 +298,10 @@ SYMBOL TABLE OF MODULE:  .\Code\Obj\censor_tm_ADC+RF (MAIN)
   C:02A4H         LINE#         125
   C:02ADH         LINE#         126
   C:02B6H         LINE#         127
-BL51 BANKED LINKER/LOCATER V6.22                                                      11/13/2024  14:32:44  PAGE 6
-
-
   C:02BFH         LINE#         128
+BL51 BANKED LINKER/LOCATER V6.22                                                      11/13/2024  16:28:41  PAGE 6
+
+
   C:02C8H         LINE#         129
   C:02D1H         LINE#         130
   C:02DAH         LINE#         131
@@ -359,10 +358,10 @@ SYMBOL TABLE OF MODULE:  .\Code\Obj\censor_tm_ADC+RF (MAIN)
   C:04B1H         LINE#         189
   C:04B5H         LINE#         190
   C:04BEH         LINE#         191
-BL51 BANKED LINKER/LOCATER V6.22                                                      11/13/2024  14:32:44  PAGE 7
-
-
   C:04BEH         LINE#         192
+BL51 BANKED LINKER/LOCATER V6.22                                                      11/13/2024  16:28:41  PAGE 7
+
+
   C:04C9H         LINE#         193
   C:04CFH         LINE#         194
   C:04CFH         LINE#         195
@@ -419,10 +418,10 @@ SYMBOL TABLE OF MODULE:  .\Code\Obj\censor_tm_ADC+RF (MAIN)
   C:06EEH         LINE#         237
   C:06EEH         LINE#         238
   C:06EEH         LINE#         239
-BL51 BANKED LINKER/LOCATER V6.22                                                      11/13/2024  14:32:44  PAGE 8
-
-
   C:06F6H         LINE#         240
+BL51 BANKED LINKER/LOCATER V6.22                                                      11/13/2024  16:28:41  PAGE 8
+
+
   C:06F7H         LINE#         241
   C:06F7H         LINE#         242
   -------         ENDPROC       CHECK_OUT
@@ -476,42 +475,24 @@ SYMBOL TABLE OF MODULE:  .\Code\Obj\censor_tm_ADC+RF (MAIN)
   -------         ENDPROC       GPIO_INIT
   -------         ENDMOD        GPIO
 
-  -------         MODULE        NRF_EX
-  C:0000H         SYMBOL        _ICE_DUMMY_
-  D:0080H         PUBLIC        P0
-BL51 BANKED LINKER/LOCATER V6.22                                                      11/13/2024  14:32:44  PAGE 9
-
-
-  D:0090H         PUBLIC        P1
-  D:00A0H         PUBLIC        P2
-  D:00B0H         PUBLIC        P3
-  D:00D8H         PUBLIC        PWMCON0
-  D:00A8H         PUBLIC        IE
-  D:00B8H         PUBLIC        IP
-  D:0098H         PUBLIC        SCON
-  D:0088H         PUBLIC        TCON
-  D:00F8H         PUBLIC        SCON_1
-  D:00E8H         PUBLIC        ADCCON0
-  D:00C0H         PUBLIC        I2CON
-  D:00C8H         PUBLIC        T2CON
-  D:00D0H         PUBLIC        PSW
-  -------         ENDMOD        NRF_EX
-
   -------         MODULE        CENCOR_PROGRAMM
   C:0000H         SYMBOL        _ICE_DUMMY_
   D:0080H         PUBLIC        P0
   D:0090H         PUBLIC        P1
+BL51 BANKED LINKER/LOCATER V6.22                                                      11/13/2024  16:28:41  PAGE 9
+
+
   D:00A0H         PUBLIC        P2
   C:077AH         PUBLIC        Process_work_RF
   D:00B0H         PUBLIC        P3
   C:0570H         PUBLIC        ISR_Timer0
   B:00A8H.7       PUBLIC        EA
-  X:01C8H         SYMBOL        COMMAND_SEND_RF
   D:00D8H         PUBLIC        PWMCON0
+  X:01C8H         SYMBOL        COMMAND_SEND_RF
   C:076CH         PUBLIC        init_device
   D:00A8H         PUBLIC        IE
-  X:01CEH         SYMBOL        COMMAND_CLEAR_IRQ
   D:00B8H         PUBLIC        IP
+  X:01CEH         SYMBOL        COMMAND_CLEAR_IRQ
   X:01D4H         SYMBOL        packetREAD
   X:0258H         SYMBOL        COMMAND_STAT
   X:025EH         SYMBOL        COMMAND_READ_FIFO_STAT
@@ -537,71 +518,68 @@ SYMBOL TABLE OF MODULE:  .\Code\Obj\censor_tm_ADC+RF (MAIN)
   X:0388H         SYMBOL        COMMAND_READ_RF
   D:00D0H         PUBLIC        PSW
   -------         PROC          INIT_DEVICE
+  C:076CH         LINE#         12
   C:076CH         LINE#         13
-  C:076CH         LINE#         14
-BL51 BANKED LINKER/LOCATER V6.22                                                      11/13/2024  14:32:44  PAGE 10
-
-
-  C:076FH         LINE#         15
-  C:0772H         LINE#         16
-  C:0777H         LINE#         17
-  C:0779H         LINE#         18
+  C:076FH         LINE#         14
+  C:0772H         LINE#         15
+  C:0777H         LINE#         16
+  C:0779H         LINE#         17
   -------         ENDPROC       INIT_DEVICE
   -------         PROC          WORK_NRF
-  C:06C1H         LINE#         33
   C:06C1H         LINE#         34
-  C:06C4H         LINE#         36
+  C:06C1H         LINE#         35
   C:06C4H         LINE#         37
   C:06C4H         LINE#         38
-  C:06D6H         LINE#         39
-  C:06D9H         LINE#         40
-  C:06DCH         LINE#         43
+  C:06C4H         LINE#         39
+  C:06D6H         LINE#         40
+  C:06D9H         LINE#         41
   C:06DCH         LINE#         44
   C:06DCH         LINE#         45
   C:06DCH         LINE#         46
+  C:06DCH         LINE#         47
   -------         ENDPROC       WORK_NRF
   -------         PROC          PROCESS_INIT_RF
-  C:0724H         LINE#         49
+BL51 BANKED LINKER/LOCATER V6.22                                                      11/13/2024  16:28:41  PAGE 10
+
+
   C:0724H         LINE#         50
-  C:0729H         LINE#         51
-  C:0737H         LINE#         52
+  C:0724H         LINE#         51
+  C:0729H         LINE#         52
   C:0737H         LINE#         53
+  C:0737H         LINE#         54
   -------         ENDPROC       PROCESS_INIT_RF
   -------         PROC          PROCESS_WORK_RF
-  C:077AH         LINE#         56
   C:077AH         LINE#         57
-  C:077DH         LINE#         59
+  C:077AH         LINE#         58
   C:077DH         LINE#         60
-  C:0783H         LINE#         61
-  C:0785H         LINE#         62
-  C:0785H         LINE#         68
+  C:077DH         LINE#         61
+  C:0783H         LINE#         62
+  C:0785H         LINE#         63
+  C:0785H         LINE#         69
   -------         ENDPROC       PROCESS_WORK_RF
   -------         PROC          ISR_TIMER0
-  C:0570H         LINE#         73
-  C:058DH         LINE#         74
-  C:0590H         LINE#         75
-  C:0593H         LINE#         76
-  C:0596H         LINE#         77
-  C:0598H         LINE#         78
-  C:0598H         LINE#         79
-  C:059BH         LINE#         80
-  C:059BH         LINE#         81
-  C:059BH         LINE#         82
+  C:0570H         LINE#         75
+  C:058DH         LINE#         77
+  C:0590H         LINE#         78
+  C:0593H         LINE#         79
+  C:0596H         LINE#         80
+  C:0598H         LINE#         81
+  C:0598H         LINE#         82
+  C:059BH         LINE#         83
+  C:059BH         LINE#         84
+  C:059BH         LINE#         86
   -------         ENDPROC       ISR_TIMER0
   -------         PROC          ISR_INT1
-  C:000EH         LINE#         94
-  C:000EH         LINE#         95
-  C:0010H         LINE#         96
-  C:0012H         LINE#         97
+  C:000EH         LINE#         98
+  C:000EH         LINE#         99
+  C:0010H         LINE#         100
+  C:0012H         LINE#         101
   -------         ENDPROC       ISR_INT1
   -------         ENDMOD        CENCOR_PROGRAMM
 
   -------         MODULE        SPI_PROG
   C:0000H         SYMBOL        _ICE_DUMMY_
   D:0080H         PUBLIC        P0
-BL51 BANKED LINKER/LOCATER V6.22                                                      11/13/2024  14:32:44  PAGE 11
-
-
   D:0090H         PUBLIC        P1
   D:00A0H         PUBLIC        P2
   D:00B0H         PUBLIC        P3
@@ -621,6 +599,9 @@ SYMBOL TABLE OF MODULE:  .\Code\Obj\censor_tm_ADC+RF (MAIN)
   B:0090H.0       PUBLIC        P10
   D:0098H         PUBLIC        SCON
   D:0089H         PUBLIC        TMOD
+BL51 BANKED LINKER/LOCATER V6.22                                                      11/13/2024  16:28:41  PAGE 11
+
+
   D:0088H         PUBLIC        TCON
   B:0090H.5       PUBLIC        P15
   C:0738H         PUBLIC        SPI_Delay
@@ -659,9 +640,6 @@ SYMBOL TABLE OF MODULE:  .\Code\Obj\censor_tm_ADC+RF (MAIN)
   C:06F8H         LINE#         33
   -------         ENDPROC       SPI_EXCHANGE_START
   -------         PROC          _SPI_EXCHANGE_DO
-BL51 BANKED LINKER/LOCATER V6.22                                                      11/13/2024  14:32:44  PAGE 12
-
-
   D:0021H         SYMBOL        valueMosi
   D:0022H         SYMBOL        outSideBuffer
   C:0417H         LINE#         40
@@ -681,6 +659,9 @@ SYMBOL TABLE OF MODULE:  .\Code\Obj\censor_tm_ADC+RF (MAIN)
   C:0443H         LINE#         58
   C:0445H         LINE#         60
   C:044DH         LINE#         61
+BL51 BANKED LINKER/LOCATER V6.22                                                      11/13/2024  16:28:41  PAGE 12
+
+
   C:044FH         LINE#         63
   C:0452H         LINE#         64
   C:0465H         LINE#         66
@@ -719,9 +700,6 @@ SYMBOL TABLE OF MODULE:  .\Code\Obj\censor_tm_ADC+RF (MAIN)
   C:0676H         LINE#         108
   C:0676H         LINE#         110
   C:067AH         LINE#         117
-BL51 BANKED LINKER/LOCATER V6.22                                                      11/13/2024  14:32:44  PAGE 13
-
-
   C:0687H         LINE#         118
   C:068AH         LINE#         119
   C:068CH         LINE#         120
@@ -741,6 +719,9 @@ SYMBOL TABLE OF MODULE:  .\Code\Obj\censor_tm_ADC+RF (MAIN)
   C:074BH         LINE#         142
   C:074BH         LINE#         143
   -------         ENDPROC       SPI_DELAY
+BL51 BANKED LINKER/LOCATER V6.22                                                      11/13/2024  16:28:41  PAGE 13
+
+
   -------         PROC          _SPI_DELAY_SET
   D:0006H         SYMBOL        delay
   C:0798H         LINE#         146
@@ -779,9 +760,6 @@ SYMBOL TABLE OF MODULE:  .\Code\Obj\censor_tm_ADC+RF (MAIN)
   D:00C0H         PUBLIC        I2CON
   D:00C8H         PUBLIC        T2CON
   D:00D0H         PUBLIC        PSW
-BL51 BANKED LINKER/LOCATER V6.22                                                      11/13/2024  14:32:44  PAGE 14
-
-
   -------         ENDMOD        COMMON
 
   -------         MODULE        DELAY
@@ -801,6 +779,9 @@ SYMBOL TABLE OF MODULE:  .\Code\Obj\censor_tm_ADC+RF (MAIN)
   D:00C8H         PUBLIC        T2CON
   D:00D0H         PUBLIC        PSW
   -------         ENDMOD        DELAY
+BL51 BANKED LINKER/LOCATER V6.22                                                      11/13/2024  16:28:41  PAGE 14
+
+
 
   -------         MODULE        ?C?CLDPTR
   C:05B6H         PUBLIC        ?C?CLDPTR

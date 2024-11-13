@@ -1,4 +1,4 @@
-C51 COMPILER V9.53.0.0   SPI_PROG                                                          11/13/2024 14:35:26 PAGE 1   
+C51 COMPILER V9.53.0.0   SPI_PROG                                                          11/13/2024 16:28:41 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE SPI_PROG
@@ -62,7 +62,7 @@ line level    source
   51   3              PIN_CLK_SPI  = 0; 
   52   3              counterBit   = 0;
   53   3              SPI_exchange_end();       // continue?
-C51 COMPILER V9.53.0.0   SPI_PROG                                                          11/13/2024 14:35:26 PAGE 2   
+C51 COMPILER V9.53.0.0   SPI_PROG                                                          11/13/2024 16:28:41 PAGE 2   
 
   54   3              SPI_Data_Convert_Byte();  // next packet
   55   3              break;
@@ -126,7 +126,7 @@ line level    source
  113   1        and force the register to go around in a circle 
  114   1        (the whole cycle) - long operation
  115   1        */
-C51 COMPILER V9.53.0.0   SPI_PROG                                                          11/13/2024 14:35:26 PAGE 3   
+C51 COMPILER V9.53.0.0   SPI_PROG                                                          11/13/2024 16:28:41 PAGE 3   
 
  116   1      #if SPI_DATA_BIT == 1
  117   1        if(counterBit >= BUFFER_SPI - 1){ 

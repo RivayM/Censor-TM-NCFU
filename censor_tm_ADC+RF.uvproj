@@ -378,11 +378,6 @@
               <FilePath>.\Code\Head\GPIO.h</FilePath>
             </File>
             <File>
-              <FileName>NRF_ex.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Code\Head\NRF_ex.h</FilePath>
-            </File>
-            <File>
               <FileName>CONFIG.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Code\Head\CONFIG.h</FilePath>
@@ -421,11 +416,6 @@
               <FileName>GPIO.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Code\Source\GPIO.c</FilePath>
-            </File>
-            <File>
-              <FileName>NRF_ex.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Code\Source\NRF_ex.c</FilePath>
             </File>
             <File>
               <FileName>CENCOR_PROGRAMM.c</FileName>

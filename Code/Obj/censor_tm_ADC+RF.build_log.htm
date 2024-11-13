@@ -22,22 +22,21 @@ Dialog DLL:      TP51.DLL V2.58
  
 <h2>Project:</h2>
 C:\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\censor_tm_ADC+RF.uvproj
-Project File Date:  10/14/2024
+Project File Date:  11/13/2024
 
 <h2>Output:</h2>
 Rebuild target 'censor_tm_ADC+RF'
 compiling main.c...
 compiling I2C_ADC_HX711.c...
 compiling NRF24L01.c...
-Code\Source\NRF24L01.c(125): error C200: left side of '->' requires struct/union pointer
 compiling GPIO.c...
-compiling NRF_ex.c...
 compiling CENCOR_PROGRAMM.c...
 compiling SPI_prog.c...
 compiling Common.c...
 compiling Delay.c...
-Target not created.
-2C_ADC_HX711
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?ADCHX711_INITIAL?I2C_ADC_HX711
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?NRF_CHANGE_MODE_RF?NRF24L01
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
@@ -47,70 +46,965 @@ Target not created.
 Program Size: data=40.7 xdata=1360 code=1974
 creating hex file from ".\Code\Obj\censor_tm_ADC+RF"...
 ".\Code\Obj\censor_tm_ADC+RF" - 0 Error(s), 4 Warning(s).
-.obj (CENCOR_PROGRAMM)
-*** ERROR L104: MULTIPLE PUBLIC DEFINITIONS
-    SYMBOL:  PACKETREAD
-    MODULE:  .\Code\Obj\CENCOR_PROGRAMM.obj (CENCOR_PROGRAMM)
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?ADCHX711_INITIAL?I2C_ADC_HX711
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?NRF_CHANGE_MODE_RF?NRF24L01
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?NRF_SEND?NRF24L01
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?NRF_READ_VALUE?NRF24L01
-Program Size: data=40.7 xdata=1360 code=1974
-Target not created.
-1)
-*** ERROR L104: MULTIPLE PUBLIC DEFINITIONS
-    SYMBOL:  COMMAND_CLEAR_IRQ
-    MODULE:  .\Code\Obj\NRF24L01.obj (NRF24L01)
-*** ERROR L104: MULTIPLE PUBLIC DEFINITIONS
-    SYMBOL:  COMMAND_SEND_RF
-    MODULE:  .\Code\Obj\NRF24L01.obj (NRF24L01)
-*** ERROR L104: MULTIPLE PUBLIC DEFINITIONS
-    SYMBOL:  COMMAND_READ_RF
-    MODULE:  .\Code\Obj\CENCOR_PROGRAMM.obj (CENCOR_PROGRAMM)
-*** ERROR L104: MULTIPLE PUBLIC DEFINITIONS
-    SYMBOL:  COMMAND_W_ACK_PAYLOAD
-    MODULE:  .\Code\Obj\CENCOR_PROGRAMM.obj (CENCOR_PROGRAMM)
-*** ERROR L104: MULTIPLE PUBLIC DEFINITIONS
-    SYMBOL:  COMMAND_READ_PIPE0
-    MODULE:  .\Code\Obj\CENCOR_PROGRAMM.obj (CENCOR_PROGRAMM)
-*** ERROR L104: MULTIPLE PUBLIC DEFINITIONS
-    SYMBOL:  COMMAND_CLEAR_FLUSH_TX
-    MODULE:  .\Code\Obj\CENCOR_PROGRAMM.obj (CENCOR_PROGRAMM)
-*** ERROR L104: MULTIPLE PUBLIC DEFINITIONS
-    SYMBOL:  COMMAND_CLEAR_FLUSH_RX
-    MODULE:  .\Code\Obj\CENCOR_PROGRAMM.obj (CENCOR_PROGRAMM)
-*** ERROR L104: MULTIPLE PUBLIC DEFINITIONS
-    SYMBOL:  PACKETTX
-    MODULE:  .\Code\Obj\CENCOR_PROGRAMM.obj (CENCOR_PROGRAMM)
-*** ERROR L104: MULTIPLE PUBLIC DEFINITIONS
-    SYMBOL:  PACKETRX
-    MODULE:  .\Code\Obj\CENCOR_PROGRAMM.obj (CENCOR_PROGRAMM)
-*** ERROR L104: MULTIPLE PUBLIC DEFINITIONS
-    SYMBOL:  COMMAND_READ_FIFO_STAT
-    MODULE:  .\Code\Obj\CENCOR_PROGRAMM.obj (CENCOR_PROGRAMM)
-*** ERROR L104: MULTIPLE PUBLIC DEFINITIONS
-    SYMBOL:  COMMAND_STAT
-    MODULE:  .\Code\Obj\CENCOR_PROGRAMM.obj (CENCOR_PROGRAMM)
-*** ERROR L104: MULTIPLE PUBLIC DEFINITIONS
-    SYMBOL:  PACKETREAD
-    MODULE:  .\Code\Obj\CENCOR_PROGRAMM.obj (CENCOR_PROGRAMM)
-*** ERROR L104: MULTIPLE PUBLIC DEFINITIONS
-    SYMBOL:  COMMAND_CLEAR_IRQ
-    MODULE:  .\Code\Obj\CENCOR_PROGRAMM.obj (CENCOR_PROGRAMM)
-*** ERROR L104: MULTIPLE PUBLIC DEFINITIONS
-    SYMBOL:  COMMAND_SEND_RF
-    MODULE:  .\Code\Obj\CENCOR_PROGRAMM.obj (CENCOR_PROGRAMM)
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?ADCHX711_INITIAL?I2C_ADC_HX711
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?NRF_CHANGE_MODE_RF?NRF24L01
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?NRF_SEND?NRF24L01
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?NRF_READ_VALUE?NRF24L01
-Program Size: data=40.7 xdata=1360 code=1974
+on size: [0]
+.\Code\Head\NRF24L01.h(70): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
+.\Code\Head\NRF24L01.h(70): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(71): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
+.\Code\Head\NRF24L01.h(71): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(72): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
+.\Code\Head\NRF24L01.h(72): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(73): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
+.\Code\Head\NRF24L01.h(73): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(74): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
+.\Code\Head\NRF24L01.h(74): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(75): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
+.\Code\Head\NRF24L01.h(75): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(84): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
+.\Code\Head\NRF24L01.h(84): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(87): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
+.\Code\Head\NRF24L01.h(87): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(88): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(89): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(90): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(91): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(92): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(93): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(94): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(96): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(97): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(98): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(99): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(100): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(101): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(103): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(105): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(106): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(107): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(108): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(109): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(110): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(112): error C136: invalid dimension size: [0]
+compiling I2C_ADC_HX711.c...
+.\Code\Head\SPI_prog.h(47): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
+.\Code\Head\SPI_prog.h(47): error C136: invalid dimension size: [0]
+.\Code\Head\SPI_prog.h(48): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
+.\Code\Head\SPI_prog.h(48): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(67): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
+.\Code\Head\NRF24L01.h(67): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(68): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
+.\Code\Head\NRF24L01.h(68): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(69): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
+.\Code\Head\NRF24L01.h(69): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(70): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
+.\Code\Head\NRF24L01.h(70): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(71): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
+.\Code\Head\NRF24L01.h(71): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(72): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
+.\Code\Head\NRF24L01.h(72): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(73): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
+.\Code\Head\NRF24L01.h(73): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(74): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
+.\Code\Head\NRF24L01.h(74): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(75): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
+.\Code\Head\NRF24L01.h(75): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(84): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
+.\Code\Head\NRF24L01.h(84): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(87): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
+.\Code\Head\NRF24L01.h(87): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(88): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(89): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(90): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(91): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(92): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(93): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(94): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(96): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(97): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(98): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(99): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(100): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(101): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(103): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(105): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(106): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(107): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(108): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(109): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(110): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(112): error C136: invalid dimension size: [0]
+\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Function_define.h(7): error C231: 'BIT': redefinition
+\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Function_define.h(8): error C231: 'UINT8': redefinition
+\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Function_define.h(9): error C231: 'UINT16': redefinition
+\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Function_define.h(10): error C141: syntax error near 'UINT32'
+\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Function_define.h(12): error C231: 'uint8_t': redefinition
+\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Function_define.h(13): error C231: 'uint16_t': redefinition
+\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Function_define.h(14): error C141: syntax error near 'uint32_t'
+\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Function_define.h(16): error C231: 'int8_t': redefinition
+\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Function_define.h(17): error C231: 'int16_t': redefinition
+\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Function_define.h(18): error C141: syntax error near 'int32_t'
+.\Lib_nuvoton\N76E003.H(9): error C231: 'P0': redefinition
+.\Lib_nuvoton\N76E003.H(10): error C231: 'SP': redefinition
+.\Lib_nuvoton\N76E003.H(11): error C231: 'DPL': redefinition
+.\Lib_nuvoton\N76E003.H(12): error C231: 'DPH': redefinition
+.\Lib_nuvoton\N76E003.H(13): error C231: 'RCTRIM0': redefinition
+.\Lib_nuvoton\N76E003.H(14): error C231: 'RCTRIM1': redefinition
+.\Lib_nuvoton\N76E003.H(15): error C231: 'RWK': redefinition
+.\Lib_nuvoton\N76E003.H(16): error C231: 'PCON': redefinition
+.\Lib_nuvoton\N76E003.H(18): error C231: 'TCON': redefinition
+.\Lib_nuvoton\N76E003.H(19): error C231: 'TMOD': redefinition
+.\Lib_nuvoton\N76E003.H(20): error C231: 'TL0': redefinition
+.\Lib_nuvoton\N76E003.H(21): error C231: 'TL1': redefinition
+.\Lib_nuvoton\N76E003.H(22): error C231: 'TH0': redefinition
+.\Lib_nuvoton\N76E003.H(23): error C231: 'TH1': redefinition
+.\Lib_nuvoton\N76E003.H(24): error C231: 'CKCON': redefinition
+.\Lib_nuvoton\N76E003.H(25): error C231: 'WKCON': redefinition
+.\Lib_nuvoton\N76E003.H(27): error C231: 'P1': redefinition
+.\Lib_nuvoton\N76E003.H(28): error C231: 'SFRS': redefinition
+.\Lib_nuvoton\N76E003.H(29): error C231: 'CAPCON0': redefinition
+.\Lib_nuvoton\N76E003.H(30): error C231: 'CAPCON1': redefinition
+.\Lib_nuvoton\N76E003.H(31): error C231: 'CAPCON2': redefinition
+.\Lib_nuvoton\N76E003.H(32): error C231: 'CKDIV': redefinition
+.\Lib_nuvoton\N76E003.H(33): error C231: 'CKSWT': redefinition
+.\Lib_nuvoton\N76E003.H(34): error C231: 'CKEN': redefinition
+.\Lib_nuvoton\N76E003.H(36): error C231: 'SCON': redefinition
+.\Lib_nuvoton\N76E003.H(37): error C231: 'SBUF': redefinition
+.\Lib_nuvoton\N76E003.H(38): error C231: 'SBUF_1': redefinition
+.\Lib_nuvoton\N76E003.H(39): error C231: 'EIE': redefinition
+.\Lib_nuvoton\N76E003.H(40): error C231: 'EIE1': redefinition
+.\Lib_nuvoton\N76E003.H(41): error C231: 'CHPCON': redefinition
+.\Lib_nuvoton\N76E003.H(43): error C231: 'P2': redefinition
+.\Lib_nuvoton\N76E003.H(44): error C231: 'AUXR1': redefinition
+.\Lib_nuvoton\N76E003.H(45): error C231: 'BODCON0': redefinition
+.\Lib_nuvoton\N76E003.H(46): error C231: 'IAPTRG': redefinition
+.\Lib_nuvoton\N76E003.H(47): error C231: 'IAPUEN': redefinition
+.\Lib_nuvoton\N76E003.H(48): error C231: 'IAPAL': redefinition
+.\Lib_nuvoton\N76E003.H(49): error C231: 'IAPAH': redefinition
+.\Lib_nuvoton\N76E003.H(51): error C231: 'IE': redefinition
+.\Lib_nuvoton\N76E003.H(52): error C231: 'SADDR': redefinition
+.\Lib_nuvoton\N76E003.H(53): error C231: 'WDCON': redefinition
+.\Lib_nuvoton\N76E003.H(54): error C231: 'BODCON1': redefinition
+.\Lib_nuvoton\N76E003.H(55): error C231: 'P3M1': redefinition
+.\Lib_nuvoton\N76E003.H(56): error C231: 'P3S': redefinition
+.\Lib_nuvoton\N76E003.H(57): error C231: 'P3M2': redefinition
+.\Lib_nuvoton\N76E003.H(58): error C231: 'P3SR': redefinition
+.\Lib_nuvoton\N76E003.H(59): error C231: 'IAPFD': redefinition
+.\Lib_nuvoton\N76E003.H(60): error C231: 'IAPCN': redefinition
+.\Lib_nuvoton\N76E003.H(62): error C231: 'P3': redefinition
+.\Lib_nuvoton\N76E003.H(63): error C231: 'P0M1': redefinition
+.\Lib_nuvoton\N76E003.H(64): error C231: 'P0S': redefinition
+.\Lib_nuvoton\N76E003.H(65): error C231: 'P0M2': redefinition
+.\Lib_nuvoton\N76E003.H(66): error C231: 'P0SR': redefinition
+.\Lib_nuvoton\N76E003.H(67): error C231: 'P1M1': redefinition
+.\Lib_nuvoton\N76E003.H(68): error C231: 'P1S': redefinition
+.\Lib_nuvoton\N76E003.H(69): error C231: 'P1M2': redefinition
+.\Lib_nuvoton\N76E003.H(70): error C231: 'P1SR': redefinition
+.\Lib_nuvoton\N76E003.H(71): error C231: 'P2S': redefinition
+.\Lib_nuvoton\N76E003.H(72): error C231: 'IPH': redefinition
+.\Lib_nuvoton\N76E003.H(73): error C231: 'PWMINTC': redefinition
+.\Lib_nuvoton\N76E003.H(75): error C231: 'IP': redefinition
+.\Lib_nuvoton\N76E003.H(76): error C231: 'SADEN': redefinition
+.\Lib_nuvoton\N76E003.H(77): error C231: 'SADEN_1': redefinition
+.\Lib_nuvoton\N76E003.H(78): error C231: 'SADDR_1': redefinition
+.\Lib_nuvoton\N76E003.H(79): error C231: 'I2DAT': redefinition
+.\Lib_nuvoton\N76E003.H(80): error C231: 'I2STAT': redefinition
+.\Lib_nuvoton\N76E003.H(81): error C231: 'I2CLK': redefinition
+.\Lib_nuvoton\N76E003.H(82): error C231: 'I2TOC': redefinition
+.\Lib_nuvoton\N76E003.H(84): error C231: 'I2CON': redefinition
+.\Lib_nuvoton\N76E003.H(85): error C231: 'I2ADDR': redefinition
+.\Lib_nuvoton\N76E003.H(86): error C231: 'ADCRL': redefinition
+.\Lib_nuvoton\N76E003.H(87): error C231: 'ADCRH': redefinition
+.\Lib_nuvoton\N76E003.H(88): error C231: 'T3CON': redefinition
+.\Lib_nuvoton\N76E003.H(89): error C231: 'PWM4H': redefinition
+.\Lib_nuvoton\N76E003.H(90): error C231: 'RL3': redefinition
+.\Lib_nuvoton\N76E003.H(91): error C231: 'PWM5H': redefinition
+.\Lib_nuvoton\N76E003.H(92): error C231: 'RH3': redefinition
+.\Lib_nuvoton\N76E003.H(93): error C231: 'PIOCON1': redefinition
+.\Lib_nuvoton\N76E003.H(94): error C231: 'TA': redefinition
+.\Lib_nuvoton\N76E003.H(96): error C231: 'T2CON': redefinition
+.\Lib_nuvoton\N76E003.H(97): error C231: 'T2MOD': redefinition
+.\Lib_nuvoton\N76E003.H(98): error C231: 'RCMP2L': redefinition
+.\Lib_nuvoton\N76E003.H(99): error C231: 'RCMP2H': redefinition
+.\Lib_nuvoton\N76E003.H(100): error C231: 'TL2': redefinition
+.\Lib_nuvoton\N76E003.H(101): error C231: 'PWM4L': redefinition
+.\Lib_nuvoton\N76E003.H(102): error C231: 'TH2': redefinition
+.\Lib_nuvoton\N76E003.H(103): error C231: 'PWM5L': redefinition
+.\Lib_nuvoton\N76E003.H(104): error C231: 'ADCMPL': redefinition
+.\Lib_nuvoton\N76E003.H(105): error C231: 'ADCMPH': redefinition
+.\Lib_nuvoton\N76E003.H(107): error C231: 'PSW': redefinition
+.\Lib_nuvoton\N76E003.H(108): error C231: 'PWMPH': redefinition
+.\Lib_nuvoton\N76E003.H(109): error C231: 'PWM0H': redefinition
+.\Lib_nuvoton\N76E003.H(110): error C231: 'PWM1H': redefinition
+.\Lib_nuvoton\N76E003.H(111): error C231: 'PWM2H': redefinition
+.\Lib_nuvoton\N76E003.H(112): error C231: 'PWM3H': redefinition
+.\Lib_nuvoton\N76E003.H(113): error C231: 'PNP': redefinition
+.\Lib_nuvoton\N76E003.H(114): error C231: 'FBD': redefinition
+.\Lib_nuvoton\N76E003.H(116): error C231: 'PWMCON0': redefinition
+.\Lib_nuvoton\N76E003.H(117): error C231: 'PWMPL': redefinition
+.\Lib_nuvoton\N76E003.H(118): error C231: 'PWM0L': redefinition
+.\Lib_nuvoton\N76E003.H(119): error C231: 'PWM1L': redefinition
+.\Lib_nuvoton\N76E003.H(120): error C231: 'PWM2L': redefinition
+.\Lib_nuvoton\N76E003.H(121): error C231: 'PWM3L': redefinition
+.\Lib_nuvoton\N76E003.H(122): error C231: 'PIOCON0': redefinition
+.\Lib_nuvoton\N76E003.H(123): error C231: 'PWMCON1': redefinition
+.\Lib_nuvoton\N76E003.H(125): error C231: 'ACC': redefinition
+.\Lib_nuvoton\N76E003.H(126): error C231: 'ADCCON1': redefinition
+.\Lib_nuvoton\N76E003.H(127): error C231: 'ADCCON2': redefinition
+.\Lib_nuvoton\N76E003.H(128): error C231: 'ADCDLY': redefinition
+.\Lib_nuvoton\N76E003.H(129): error C231: 'C0L': redefinition
+.\Lib_nuvoton\N76E003.H(130): error C231: 'C0H': redefinition
+.\Lib_nuvoton\N76E003.H(131): error C231: 'C1L': redefinition
+.\Lib_nuvoton\N76E003.H(132): error C231: 'C1H': redefinition
+.\Lib_nuvoton\N76E003.H(134): error C231: 'ADCCON0': redefinition
+.\Lib_nuvoton\N76E003.H(135): error C231: 'PICON': redefinition
+.\Lib_nuvoton\N76E003.H(136): error C231: 'PINEN': redefinition
+.\Lib_nuvoton\N76E003.H(137): error C231: 'PIPEN': redefinition
+.\Lib_nuvoton\N76E003.H(138): error C231: 'PIF': redefinition
+.\Lib_nuvoton\N76E003.H(139): error C231: 'C2L': redefinition
+.\Lib_nuvoton\N76E003.H(140): error C231: 'C2H': redefinition
+.\Lib_nuvoton\N76E003.H(141): error C231: 'EIP': redefinition
+.\Lib_nuvoton\N76E003.H(143): error C231: 'B': redefinition
+.\Lib_nuvoton\N76E003.H(144): error C231: 'CAPCON3': redefinition
+.\Lib_nuvoton\N76E003.H(145): error C231: 'CAPCON4': redefinition
+.\Lib_nuvoton\N76E003.H(146): error C231: 'SPCR': redefinition
+.\Lib_nuvoton\N76E003.H(147): error C231: 'SPCR2': redefinition
+.\Lib_nuvoton\N76E003.H(148): error C231: 'SPSR': redefinition
+.\Lib_nuvoton\N76E003.H(149): error C231: 'SPDR': redefinition
+.\Lib_nuvoton\N76E003.H(150): error C231: 'AINDIDS': redefinition
+.\Lib_nuvoton\N76E003.H(151): error C231: 'EIPH': redefinition
+.\Lib_nuvoton\N76E003.H(153): error C231: 'SCON_1': redefinition
+.\Lib_nuvoton\N76E003.H(154): error C231: 'PDTEN': redefinition
+.\Lib_nuvoton\N76E003.H(155): error C231: 'PDTCNT': redefinition
+.\Lib_nuvoton\N76E003.H(156): error C231: 'PMEN': redefinition
+.\Lib_nuvoton\N76E003.H(157): error C231: 'PMD': redefinition
+.\Lib_nuvoton\N76E003.H(158): error C231: 'EIP1': redefinition
+.\Lib_nuvoton\N76E003.H(159): error C231: 'EIPH1': redefinition
+.\Lib_nuvoton\N76E003.H(163): error C231: 'SM0_1': redefinition
+.\Lib_nuvoton\N76E003.H(164): error C231: 'FE_1': redefinition
+.\Lib_nuvoton\N76E003.H(165): error C231: 'SM1_1': redefinition
+.\Lib_nuvoton\N76E003.H(166): error C231: 'SM2_1': redefinition
+.\Lib_nuvoton\N76E003.H(167): error C231: 'REN_1': redefinition
+.\Lib_nuvoton\N76E003.H(168): error C231: 'TB8_1': redefinition
+.\Lib_nuvoton\N76E003.H(169): error C231: 'RB8_1': redefinition
+.\Lib_nuvoton\N76E003.H(170): error C231: 'TI_1': redefinition
+.\Lib_nuvoton\N76E003.H(171): error C231: 'RI_1': redefinition
+.\Lib_nuvoton\N76E003.H(174): error C231: 'ADCF': redefinition
+.\Lib_nuvoton\N76E003.H(175): error C231: 'ADCS': redefinition
+.\Lib_nuvoton\N76E003.H(176): error C231: 'ETGSEL1': redefinition
+.\Lib_nuvoton\N76E003.H(177): error C231: 'ETGSEL0': redefinition
+.\Lib_nuvoton\N76E003.H(178): error C231: 'ADCHS3': redefinition
+.\Lib_nuvoton\N76E003.H(179): error C231: 'ADCHS2': redefinition
+.\Lib_nuvoton\N76E003.H(180): error C231: 'ADCHS1': redefinition
+.\Lib_nuvoton\N76E003.H(181): error C231: 'ADCHS0': redefinition
+.\Lib_nuvoton\N76E003.H(184): error C231: 'PWMRUN': redefinition
+.\Lib_nuvoton\N76E003.H(185): error C231: 'LOAD': redefinition
+.\Lib_nuvoton\N76E003.H(186): error C231: 'PWMF': redefinition
+.\Lib_nuvoton\N76E003.H(187): error C231: 'CLRPWM': redefinition
+.\Lib_nuvoton\N76E003.H(191): error C231: 'CY': redefinition
+.\Lib_nuvoton\N76E003.H(192): error C231: 'AC': redefinition
+.\Lib_nuvoton\N76E003.H(193): error C231: 'F0': redefinition
+.\Lib_nuvoton\N76E003.H(194): error C231: 'RS1': redefinition
+.\Lib_nuvoton\N76E003.H(195): error C231: 'RS0': redefinition
+.\Lib_nuvoton\N76E003.H(196): error C231: 'OV': redefinition
+.\Lib_nuvoton\N76E003.H(197): error C231: 'P': redefinition
+.\Lib_nuvoton\N76E003.H(200): error C231: 'TF2': redefinition
+.\Lib_nuvoton\N76E003.H(201): error C231: 'TR2': redefinition
+.\Lib_nuvoton\N76E003.H(202): error C231: 'CM_RL2': redefinition
+.\Lib_nuvoton\N76E003.H(205): error C231: 'I2CEN': redefinition
+.\Lib_nuvoton\N76E003.H(206): error C231: 'STA': redefinition
+.\Lib_nuvoton\N76E003.H(207): error C231: 'STO': redefinition
+.\Lib_nuvoton\N76E003.H(208): error C231: 'SI': redefinition
+.\Lib_nuvoton\N76E003.H(209): error C231: 'AA': redefinition
+.\Lib_nuvoton\N76E003.H(210): error C231: 'I2CPX': redefinition
+.\Lib_nuvoton\N76E003.H(213): error C231: 'PADC': redefinition
+.\Lib_nuvoton\N76E003.H(214): error C231: 'PBOD': redefinition
+.\Lib_nuvoton\N76E003.H(215): error C231: 'PS': redefinition
+.\Lib_nuvoton\N76E003.H(216): error C231: 'PT1': redefinition
+.\Lib_nuvoton\N76E003.H(217): error C231: 'PX1': redefinition
+.\Lib_nuvoton\N76E003.H(218): error C231: 'PT0': redefinition
+.\Lib_nuvoton\N76E003.H(219): error C231: 'PX0': redefinition
+.\Lib_nuvoton\N76E003.H(222): error C231: 'P30': redefinition
+.\Lib_nuvoton\N76E003.H(226): error C231: 'EA': redefinition
+.\Lib_nuvoton\N76E003.H(227): error C231: 'EADC': redefinition
+.\Lib_nuvoton\N76E003.H(228): error C231: 'EBOD': redefinition
+.\Lib_nuvoton\N76E003.H(229): error C231: 'ES': redefinition
+.\Lib_nuvoton\N76E003.H(230): error C231: 'ET1': redefinition
+.\Lib_nuvoton\N76E003.H(231): error C231: 'EX1': redefinition
+.\Lib_nuvoton\N76E003.H(232): error C231: 'ET0': redefinition
+.\Lib_nuvoton\N76E003.H(233): error C231: 'EX0': redefinition
+.\Lib_nuvoton\N76E003.H(236): error C231: 'P20': redefinition
+.\Lib_nuvoton\N76E003.H(239): error C231: 'SM0': redefinition
+.\Lib_nuvoton\N76E003.H(240): error C231: 'FE': redefinition
+.\Lib_nuvoton\N76E003.H(241): error C231: 'SM1': redefinition
+.\Lib_nuvoton\N76E003.H(242): error C231: 'SM2': redefinition
+.\Lib_nuvoton\N76E003.H(243): error C231: 'REN': redefinition
+.\Lib_nuvoton\N76E003.H(244): error C231: 'TB8': redefinition
+.\Lib_nuvoton\N76E003.H(245): error C231: 'RB8': redefinition
+.\Lib_nuvoton\N76E003.H(246): error C231: 'TI': redefinition
+.\Lib_nuvoton\N76E003.H(247): error C231: 'RI': redefinition
+.\Lib_nuvoton\N76E003.H(250): error C231: 'P17': redefinition
+.\Lib_nuvoton\N76E003.H(251): error C231: 'P16': redefinition
+.\Lib_nuvoton\N76E003.H(252): error C231: 'TXD_1': redefinition
+.\Lib_nuvoton\N76E003.H(253): error C231: 'P15': redefinition
+.\Lib_nuvoton\N76E003.H(254): error C231: 'P14': redefinition
+.\Lib_nuvoton\N76E003.H(255): error C231: 'SDA': redefinition
+.\Lib_nuvoton\N76E003.H(256): error C231: 'P13': redefinition
+.\Lib_nuvoton\N76E003.H(257): error C231: 'SCL': redefinition
+.\Lib_nuvoton\N76E003.H(258): error C231: 'P12': redefinition
+.\Lib_nuvoton\N76E003.H(259): error C231: 'P11': redefinition
+.\Lib_nuvoton\N76E003.H(260): error C231: 'P10': redefinition
+.\Lib_nuvoton\N76E003.H(263): error C231: 'TF1': redefinition
+.\Lib_nuvoton\N76E003.H(264): error C231: 'TR1': redefinition
+.\Lib_nuvoton\N76E003.H(265): error C231: 'TF0': redefinition
+.\Lib_nuvoton\N76E003.H(266): error C231: 'TR0': redefinition
+.\Lib_nuvoton\N76E003.H(267): error C231: 'IE1': redefinition
+.\Lib_nuvoton\N76E003.H(268): error C231: 'IT1': redefinition
+.\Lib_nuvoton\N76E003.H(269): error C231: 'IE0': redefinition
+.\Lib_nuvoton\N76E003.H(270): error C231: 'IT0': redefinition
+.\Lib_nuvoton\N76E003.H(274): error C231: 'P07': redefinition
+.\Lib_nuvoton\N76E003.H(275): error C231: 'RXD': redefinition
+.\Lib_nuvoton\N76E003.H(276): error C231: 'P06': redefinition
+.\Lib_nuvoton\N76E003.H(277): error C231: 'TXD': redefinition
+.\Lib_nuvoton\N76E003.H(278): error C231: 'P05': redefinition
+.\Lib_nuvoton\N76E003.H(279): error C231: 'P04': redefinition
+.\Lib_nuvoton\N76E003.H(280): error C231: 'STADC': redefinition
+.\Lib_nuvoton\N76E003.H(281): error C231: 'P03': redefinition
+.\Lib_nuvoton\N76E003.H(282): error C231: 'P02': redefinition
+.\Lib_nuvoton\N76E003.H(283): error C231: 'RXD_1': redefinition
+.\Lib_nuvoton\N76E003.H(284): error C231: 'P01': redefinition
+.\Lib_nuvoton\N76E003.H(285): error C231: 'MISO': redefinition
+.\Lib_nuvoton\N76E003.H(286): error C231: 'P00': redefinition
+.\Lib_nuvoton\N76E003.H(287): error C231: 'MOSI': redefinition
+compiling NRF24L01.c...
+.\Code\Head\NRF24L01.h(67): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
+.\Code\Head\NRF24L01.h(67): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(68): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
+.\Code\Head\NRF24L01.h(68): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(69): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
+.\Code\Head\NRF24L01.h(69): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(70): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
+.\Code\Head\NRF24L01.h(70): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(71): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
+.\Code\Head\NRF24L01.h(71): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(72): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
+.\Code\Head\NRF24L01.h(72): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(73): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
+.\Code\Head\NRF24L01.h(73): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(74): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
+.\Code\Head\NRF24L01.h(74): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(75): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
+.\Code\Head\NRF24L01.h(75): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(84): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
+.\Code\Head\NRF24L01.h(84): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(87): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
+.\Code\Head\NRF24L01.h(87): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(88): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(89): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(90): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(91): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(92): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(93): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(94): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(96): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(97): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(98): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(99): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(100): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(101): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(103): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(105): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(106): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(107): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(108): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(109): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(110): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(112): error C136: invalid dimension size: [0]
+\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Function_define.h(7): error C231: 'BIT': redefinition
+\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Function_define.h(8): error C231: 'UINT8': redefinition
+\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Function_define.h(9): error C231: 'UINT16': redefinition
+\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Function_define.h(10): error C141: syntax error near 'UINT32'
+\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Function_define.h(12): error C231: 'uint8_t': redefinition
+\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Function_define.h(13): error C231: 'uint16_t': redefinition
+\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Function_define.h(14): error C141: syntax error near 'uint32_t'
+\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Function_define.h(16): error C231: 'int8_t': redefinition
+\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Function_define.h(17): error C231: 'int16_t': redefinition
+\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Function_define.h(18): error C141: syntax error near 'int32_t'
+.\Lib_nuvoton\N76E003.h(9): error C231: 'P0': redefinition
+.\Lib_nuvoton\N76E003.h(10): error C231: 'SP': redefinition
+.\Lib_nuvoton\N76E003.h(11): error C231: 'DPL': redefinition
+.\Lib_nuvoton\N76E003.h(12): error C231: 'DPH': redefinition
+.\Lib_nuvoton\N76E003.h(13): error C231: 'RCTRIM0': redefinition
+.\Lib_nuvoton\N76E003.h(14): error C231: 'RCTRIM1': redefinition
+.\Lib_nuvoton\N76E003.h(15): error C231: 'RWK': redefinition
+.\Lib_nuvoton\N76E003.h(16): error C231: 'PCON': redefinition
+.\Lib_nuvoton\N76E003.h(18): error C231: 'TCON': redefinition
+.\Lib_nuvoton\N76E003.h(19): error C231: 'TMOD': redefinition
+.\Lib_nuvoton\N76E003.h(20): error C231: 'TL0': redefinition
+.\Lib_nuvoton\N76E003.h(21): error C231: 'TL1': redefinition
+.\Lib_nuvoton\N76E003.h(22): error C231: 'TH0': redefinition
+.\Lib_nuvoton\N76E003.h(23): error C231: 'TH1': redefinition
+.\Lib_nuvoton\N76E003.h(24): error C231: 'CKCON': redefinition
+.\Lib_nuvoton\N76E003.h(25): error C231: 'WKCON': redefinition
+.\Lib_nuvoton\N76E003.h(27): error C231: 'P1': redefinition
+.\Lib_nuvoton\N76E003.h(28): error C231: 'SFRS': redefinition
+.\Lib_nuvoton\N76E003.h(29): error C231: 'CAPCON0': redefinition
+.\Lib_nuvoton\N76E003.h(30): error C231: 'CAPCON1': redefinition
+.\Lib_nuvoton\N76E003.h(31): error C231: 'CAPCON2': redefinition
+.\Lib_nuvoton\N76E003.h(32): error C231: 'CKDIV': redefinition
+.\Lib_nuvoton\N76E003.h(33): error C231: 'CKSWT': redefinition
+.\Lib_nuvoton\N76E003.h(34): error C231: 'CKEN': redefinition
+.\Lib_nuvoton\N76E003.h(36): error C231: 'SCON': redefinition
+.\Lib_nuvoton\N76E003.h(37): error C231: 'SBUF': redefinition
+.\Lib_nuvoton\N76E003.h(38): error C231: 'SBUF_1': redefinition
+.\Lib_nuvoton\N76E003.h(39): error C231: 'EIE': redefinition
+.\Lib_nuvoton\N76E003.h(40): error C231: 'EIE1': redefinition
+.\Lib_nuvoton\N76E003.h(41): error C231: 'CHPCON': redefinition
+.\Lib_nuvoton\N76E003.h(43): error C231: 'P2': redefinition
+.\Lib_nuvoton\N76E003.h(44): error C231: 'AUXR1': redefinition
+.\Lib_nuvoton\N76E003.h(45): error C231: 'BODCON0': redefinition
+.\Lib_nuvoton\N76E003.h(46): error C231: 'IAPTRG': redefinition
+.\Lib_nuvoton\N76E003.h(47): error C231: 'IAPUEN': redefinition
+.\Lib_nuvoton\N76E003.h(48): error C231: 'IAPAL': redefinition
+.\Lib_nuvoton\N76E003.h(49): error C231: 'IAPAH': redefinition
+.\Lib_nuvoton\N76E003.h(51): error C231: 'IE': redefinition
+.\Lib_nuvoton\N76E003.h(52): error C231: 'SADDR': redefinition
+.\Lib_nuvoton\N76E003.h(53): error C231: 'WDCON': redefinition
+.\Lib_nuvoton\N76E003.h(54): error C231: 'BODCON1': redefinition
+.\Lib_nuvoton\N76E003.h(55): error C231: 'P3M1': redefinition
+.\Lib_nuvoton\N76E003.h(56): error C231: 'P3S': redefinition
+.\Lib_nuvoton\N76E003.h(57): error C231: 'P3M2': redefinition
+.\Lib_nuvoton\N76E003.h(58): error C231: 'P3SR': redefinition
+.\Lib_nuvoton\N76E003.h(59): error C231: 'IAPFD': redefinition
+.\Lib_nuvoton\N76E003.h(60): error C231: 'IAPCN': redefinition
+.\Lib_nuvoton\N76E003.h(62): error C231: 'P3': redefinition
+.\Lib_nuvoton\N76E003.h(63): error C231: 'P0M1': redefinition
+.\Lib_nuvoton\N76E003.h(64): error C231: 'P0S': redefinition
+.\Lib_nuvoton\N76E003.h(65): error C231: 'P0M2': redefinition
+.\Lib_nuvoton\N76E003.h(66): error C231: 'P0SR': redefinition
+.\Lib_nuvoton\N76E003.h(67): error C231: 'P1M1': redefinition
+.\Lib_nuvoton\N76E003.h(68): error C231: 'P1S': redefinition
+.\Lib_nuvoton\N76E003.h(69): error C231: 'P1M2': redefinition
+.\Lib_nuvoton\N76E003.h(70): error C231: 'P1SR': redefinition
+.\Lib_nuvoton\N76E003.h(71): error C231: 'P2S': redefinition
+.\Lib_nuvoton\N76E003.h(72): error C231: 'IPH': redefinition
+.\Lib_nuvoton\N76E003.h(73): error C231: 'PWMINTC': redefinition
+.\Lib_nuvoton\N76E003.h(75): error C231: 'IP': redefinition
+.\Lib_nuvoton\N76E003.h(76): error C231: 'SADEN': redefinition
+.\Lib_nuvoton\N76E003.h(77): error C231: 'SADEN_1': redefinition
+.\Lib_nuvoton\N76E003.h(78): error C231: 'SADDR_1': redefinition
+.\Lib_nuvoton\N76E003.h(79): error C231: 'I2DAT': redefinition
+.\Lib_nuvoton\N76E003.h(80): error C231: 'I2STAT': redefinition
+.\Lib_nuvoton\N76E003.h(81): error C231: 'I2CLK': redefinition
+.\Lib_nuvoton\N76E003.h(82): error C231: 'I2TOC': redefinition
+.\Lib_nuvoton\N76E003.h(84): error C231: 'I2CON': redefinition
+.\Lib_nuvoton\N76E003.h(85): error C231: 'I2ADDR': redefinition
+.\Lib_nuvoton\N76E003.h(86): error C231: 'ADCRL': redefinition
+.\Lib_nuvoton\N76E003.h(87): error C231: 'ADCRH': redefinition
+.\Lib_nuvoton\N76E003.h(88): error C231: 'T3CON': redefinition
+.\Lib_nuvoton\N76E003.h(89): error C231: 'PWM4H': redefinition
+.\Lib_nuvoton\N76E003.h(90): error C231: 'RL3': redefinition
+.\Lib_nuvoton\N76E003.h(91): error C231: 'PWM5H': redefinition
+.\Lib_nuvoton\N76E003.h(92): error C231: 'RH3': redefinition
+.\Lib_nuvoton\N76E003.h(93): error C231: 'PIOCON1': redefinition
+.\Lib_nuvoton\N76E003.h(94): error C231: 'TA': redefinition
+.\Lib_nuvoton\N76E003.h(96): error C231: 'T2CON': redefinition
+.\Lib_nuvoton\N76E003.h(97): error C231: 'T2MOD': redefinition
+.\Lib_nuvoton\N76E003.h(98): error C231: 'RCMP2L': redefinition
+.\Lib_nuvoton\N76E003.h(99): error C231: 'RCMP2H': redefinition
+.\Lib_nuvoton\N76E003.h(100): error C231: 'TL2': redefinition
+.\Lib_nuvoton\N76E003.h(101): error C231: 'PWM4L': redefinition
+.\Lib_nuvoton\N76E003.h(102): error C231: 'TH2': redefinition
+.\Lib_nuvoton\N76E003.h(103): error C231: 'PWM5L': redefinition
+.\Lib_nuvoton\N76E003.h(104): error C231: 'ADCMPL': redefinition
+.\Lib_nuvoton\N76E003.h(105): error C231: 'ADCMPH': redefinition
+.\Lib_nuvoton\N76E003.h(107): error C231: 'PSW': redefinition
+.\Lib_nuvoton\N76E003.h(108): error C231: 'PWMPH': redefinition
+.\Lib_nuvoton\N76E003.h(109): error C231: 'PWM0H': redefinition
+.\Lib_nuvoton\N76E003.h(110): error C231: 'PWM1H': redefinition
+.\Lib_nuvoton\N76E003.h(111): error C231: 'PWM2H': redefinition
+.\Lib_nuvoton\N76E003.h(112): error C231: 'PWM3H': redefinition
+.\Lib_nuvoton\N76E003.h(113): error C231: 'PNP': redefinition
+.\Lib_nuvoton\N76E003.h(114): error C231: 'FBD': redefinition
+.\Lib_nuvoton\N76E003.h(116): error C231: 'PWMCON0': redefinition
+.\Lib_nuvoton\N76E003.h(117): error C231: 'PWMPL': redefinition
+.\Lib_nuvoton\N76E003.h(118): error C231: 'PWM0L': redefinition
+.\Lib_nuvoton\N76E003.h(119): error C231: 'PWM1L': redefinition
+.\Lib_nuvoton\N76E003.h(120): error C231: 'PWM2L': redefinition
+.\Lib_nuvoton\N76E003.h(121): error C231: 'PWM3L': redefinition
+.\Lib_nuvoton\N76E003.h(122): error C231: 'PIOCON0': redefinition
+.\Lib_nuvoton\N76E003.h(123): error C231: 'PWMCON1': redefinition
+.\Lib_nuvoton\N76E003.h(125): error C231: 'ACC': redefinition
+.\Lib_nuvoton\N76E003.h(126): error C231: 'ADCCON1': redefinition
+.\Lib_nuvoton\N76E003.h(127): error C231: 'ADCCON2': redefinition
+.\Lib_nuvoton\N76E003.h(128): error C231: 'ADCDLY': redefinition
+.\Lib_nuvoton\N76E003.h(129): error C231: 'C0L': redefinition
+.\Lib_nuvoton\N76E003.h(130): error C231: 'C0H': redefinition
+.\Lib_nuvoton\N76E003.h(131): error C231: 'C1L': redefinition
+.\Lib_nuvoton\N76E003.h(132): error C231: 'C1H': redefinition
+.\Lib_nuvoton\N76E003.h(134): error C231: 'ADCCON0': redefinition
+.\Lib_nuvoton\N76E003.h(135): error C231: 'PICON': redefinition
+.\Lib_nuvoton\N76E003.h(136): error C231: 'PINEN': redefinition
+.\Lib_nuvoton\N76E003.h(137): error C231: 'PIPEN': redefinition
+.\Lib_nuvoton\N76E003.h(138): error C231: 'PIF': redefinition
+.\Lib_nuvoton\N76E003.h(139): error C231: 'C2L': redefinition
+.\Lib_nuvoton\N76E003.h(140): error C231: 'C2H': redefinition
+.\Lib_nuvoton\N76E003.h(141): error C231: 'EIP': redefinition
+.\Lib_nuvoton\N76E003.h(143): error C231: 'B': redefinition
+.\Lib_nuvoton\N76E003.h(144): error C231: 'CAPCON3': redefinition
+.\Lib_nuvoton\N76E003.h(145): error C231: 'CAPCON4': redefinition
+.\Lib_nuvoton\N76E003.h(146): error C231: 'SPCR': redefinition
+.\Lib_nuvoton\N76E003.h(147): error C231: 'SPCR2': redefinition
+.\Lib_nuvoton\N76E003.h(148): error C231: 'SPSR': redefinition
+.\Lib_nuvoton\N76E003.h(149): error C231: 'SPDR': redefinition
+.\Lib_nuvoton\N76E003.h(150): error C231: 'AINDIDS': redefinition
+.\Lib_nuvoton\N76E003.h(151): error C231: 'EIPH': redefinition
+.\Lib_nuvoton\N76E003.h(153): error C231: 'SCON_1': redefinition
+.\Lib_nuvoton\N76E003.h(154): error C231: 'PDTEN': redefinition
+.\Lib_nuvoton\N76E003.h(155): error C231: 'PDTCNT': redefinition
+.\Lib_nuvoton\N76E003.h(156): error C231: 'PMEN': redefinition
+.\Lib_nuvoton\N76E003.h(157): error C231: 'PMD': redefinition
+.\Lib_nuvoton\N76E003.h(158): error C231: 'EIP1': redefinition
+.\Lib_nuvoton\N76E003.h(159): error C231: 'EIPH1': redefinition
+.\Lib_nuvoton\N76E003.h(163): error C231: 'SM0_1': redefinition
+.\Lib_nuvoton\N76E003.h(164): error C231: 'FE_1': redefinition
+.\Lib_nuvoton\N76E003.h(165): error C231: 'SM1_1': redefinition
+.\Lib_nuvoton\N76E003.h(166): error C231: 'SM2_1': redefinition
+.\Lib_nuvoton\N76E003.h(167): error C231: 'REN_1': redefinition
+.\Lib_nuvoton\N76E003.h(168): error C231: 'TB8_1': redefinition
+.\Lib_nuvoton\N76E003.h(169): error C231: 'RB8_1': redefinition
+.\Lib_nuvoton\N76E003.h(170): error C231: 'TI_1': redefinition
+.\Lib_nuvoton\N76E003.h(171): error C231: 'RI_1': redefinition
+.\Lib_nuvoton\N76E003.h(174): error C231: 'ADCF': redefinition
+.\Lib_nuvoton\N76E003.h(175): error C231: 'ADCS': redefinition
+.\Lib_nuvoton\N76E003.h(176): error C231: 'ETGSEL1': redefinition
+.\Lib_nuvoton\N76E003.h(177): error C231: 'ETGSEL0': redefinition
+.\Lib_nuvoton\N76E003.h(178): error C231: 'ADCHS3': redefinition
+.\Lib_nuvoton\N76E003.h(179): error C231: 'ADCHS2': redefinition
+.\Lib_nuvoton\N76E003.h(180): error C231: 'ADCHS1': redefinition
+.\Lib_nuvoton\N76E003.h(181): error C231: 'ADCHS0': redefinition
+.\Lib_nuvoton\N76E003.h(184): error C231: 'PWMRUN': redefinition
+.\Lib_nuvoton\N76E003.h(185): error C231: 'LOAD': redefinition
+.\Lib_nuvoton\N76E003.h(186): error C231: 'PWMF': redefinition
+.\Lib_nuvoton\N76E003.h(187): error C231: 'CLRPWM': redefinition
+.\Lib_nuvoton\N76E003.h(191): error C231: 'CY': redefinition
+.\Lib_nuvoton\N76E003.h(192): error C231: 'AC': redefinition
+.\Lib_nuvoton\N76E003.h(193): error C231: 'F0': redefinition
+.\Lib_nuvoton\N76E003.h(194): error C231: 'RS1': redefinition
+.\Lib_nuvoton\N76E003.h(195): error C231: 'RS0': redefinition
+.\Lib_nuvoton\N76E003.h(196): error C231: 'OV': redefinition
+.\Lib_nuvoton\N76E003.h(197): error C231: 'P': redefinition
+.\Lib_nuvoton\N76E003.h(200): error C231: 'TF2': redefinition
+.\Lib_nuvoton\N76E003.h(201): error C231: 'TR2': redefinition
+.\Lib_nuvoton\N76E003.h(202): error C231: 'CM_RL2': redefinition
+.\Lib_nuvoton\N76E003.h(205): error C231: 'I2CEN': redefinition
+.\Lib_nuvoton\N76E003.h(206): error C231: 'STA': redefinition
+.\Lib_nuvoton\N76E003.h(207): error C231: 'STO': redefinition
+.\Lib_nuvoton\N76E003.h(208): error C231: 'SI': redefinition
+.\Lib_nuvoton\N76E003.h(209): error C231: 'AA': redefinition
+.\Lib_nuvoton\N76E003.h(210): error C231: 'I2CPX': redefinition
+.\Lib_nuvoton\N76E003.h(213): error C231: 'PADC': redefinition
+.\Lib_nuvoton\N76E003.h(214): error C231: 'PBOD': redefinition
+.\Lib_nuvoton\N76E003.h(215): error C231: 'PS': redefinition
+.\Lib_nuvoton\N76E003.h(216): error C231: 'PT1': redefinition
+.\Lib_nuvoton\N76E003.h(217): error C231: 'PX1': redefinition
+.\Lib_nuvoton\N76E003.h(218): error C231: 'PT0': redefinition
+.\Lib_nuvoton\N76E003.h(219): error C231: 'PX0': redefinition
+.\Lib_nuvoton\N76E003.h(222): error C231: 'P30': redefinition
+.\Lib_nuvoton\N76E003.h(226): error C231: 'EA': redefinition
+.\Lib_nuvoton\N76E003.h(227): error C231: 'EADC': redefinition
+.\Lib_nuvoton\N76E003.h(228): error C231: 'EBOD': redefinition
+.\Lib_nuvoton\N76E003.h(229): error C231: 'ES': redefinition
+.\Lib_nuvoton\N76E003.h(230): error C231: 'ET1': redefinition
+.\Lib_nuvoton\N76E003.h(231): error C231: 'EX1': redefinition
+.\Lib_nuvoton\N76E003.h(232): error C231: 'ET0': redefinition
+.\Lib_nuvoton\N76E003.h(233): error C231: 'EX0': redefinition
+.\Lib_nuvoton\N76E003.h(236): error C231: 'P20': redefinition
+.\Lib_nuvoton\N76E003.h(239): error C231: 'SM0': redefinition
+.\Lib_nuvoton\N76E003.h(240): error C231: 'FE': redefinition
+.\Lib_nuvoton\N76E003.h(241): error C231: 'SM1': redefinition
+.\Lib_nuvoton\N76E003.h(242): error C231: 'SM2': redefinition
+.\Lib_nuvoton\N76E003.h(243): error C231: 'REN': redefinition
+.\Lib_nuvoton\N76E003.h(244): error C231: 'TB8': redefinition
+.\Lib_nuvoton\N76E003.h(245): error C231: 'RB8': redefinition
+.\Lib_nuvoton\N76E003.h(246): error C231: 'TI': redefinition
+.\Lib_nuvoton\N76E003.h(247): error C231: 'RI': redefinition
+.\Lib_nuvoton\N76E003.h(250): error C231: 'P17': redefinition
+.\Lib_nuvoton\N76E003.h(251): error C231: 'P16': redefinition
+.\Lib_nuvoton\N76E003.h(252): error C231: 'TXD_1': redefinition
+.\Lib_nuvoton\N76E003.h(253): error C231: 'P15': redefinition
+.\Lib_nuvoton\N76E003.h(254): error C231: 'P14': redefinition
+.\Lib_nuvoton\N76E003.h(255): error C231: 'SDA': redefinition
+.\Lib_nuvoton\N76E003.h(256): error C231: 'P13': redefinition
+.\Lib_nuvoton\N76E003.h(257): error C231: 'SCL': redefinition
+.\Lib_nuvoton\N76E003.h(258): error C231: 'P12': redefinition
+.\Lib_nuvoton\N76E003.h(259): error C231: 'P11': redefinition
+.\Lib_nuvoton\N76E003.h(260): error C231: 'P10': redefinition
+.\Lib_nuvoton\N76E003.h(263): error C231: 'TF1': redefinition
+.\Lib_nuvoton\N76E003.h(264): error C231: 'TR1': redefinition
+.\Lib_nuvoton\N76E003.h(265): error C231: 'TF0': redefinition
+.\Lib_nuvoton\N76E003.h(266): error C231: 'TR0': redefinition
+.\Lib_nuvoton\N76E003.h(267): error C231: 'IE1': redefinition
+.\Lib_nuvoton\N76E003.h(268): error C231: 'IT1': redefinition
+.\Lib_nuvoton\N76E003.h(269): error C231: 'IE0': redefinition
+.\Lib_nuvoton\N76E003.h(270): error C231: 'IT0': redefinition
+.\Lib_nuvoton\N76E003.h(274): error C231: 'P07': redefinition
+.\Lib_nuvoton\N76E003.h(275): error C231: 'RXD': redefinition
+.\Lib_nuvoton\N76E003.h(276): error C231: 'P06': redefinition
+.\Lib_nuvoton\N76E003.h(277): error C231: 'TXD': redefinition
+.\Lib_nuvoton\N76E003.h(278): error C231: 'P05': redefinition
+.\Lib_nuvoton\N76E003.h(279): error C231: 'P04': redefinition
+.\Lib_nuvoton\N76E003.h(280): error C231: 'STADC': redefinition
+.\Lib_nuvoton\N76E003.h(281): error C231: 'P03': redefinition
+.\Lib_nuvoton\N76E003.h(282): error C231: 'P02': redefinition
+.\Lib_nuvoton\N76E003.h(283): error C231: 'RXD_1': redefinition
+.\Lib_nuvoton\N76E003.h(284): error C231: 'P01': redefinition
+.\Lib_nuvoton\N76E003.h(285): error C231: 'MISO': redefinition
+.\Lib_nuvoton\N76E003.h(286): error C231: 'P00': redefinition
+.\Lib_nuvoton\N76E003.h(287): error C231: 'MOSI': redefinition
+Code\Source\NRF24L01.c(90): error C231: 'COMMAND_STAT': redefinition
+Code\Source\NRF24L01.c(92): error C231: 'COMMAND_SEND_RF': redefinition
+Code\Source\NRF24L01.c(94): error C231: 'COMMAND_READ_RF': redefinition
+Code\Source\NRF24L01.c(96): error C231: 'COMMAND_CLEAR_FLUSH_RX': redefinition
+Code\Source\NRF24L01.c(98): error C231: 'COMMAND_CLEAR_FLUSH_TX': redefinition
+Code\Source\NRF24L01.c(100): error C231: 'COMMAND_CLEAR_IRQ': redefinition
+Code\Source\NRF24L01.c(102): error C231: 'COMMAND_READ_PIPE0': redefinition
+Code\Source\NRF24L01.c(104): error C231: 'COMMAND_READ_FIFO_STAT': redefinition
+Code\Source\NRF24L01.c(106): error C231: 'COMMAND_W_ACK_PAYLOAD': redefinition
+Code\Source\NRF24L01.c(113): error C231: 'readBuf': redefinition
+compiling GPIO.c...
+compiling CENCOR_PROGRAMM.c...
+.\Code\Head\SPI_prog.h(47): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
+.\Code\Head\SPI_prog.h(47): error C136: invalid dimension size: [0]
+.\Code\Head\SPI_prog.h(48): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
+.\Code\Head\SPI_prog.h(48): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(67): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
+.\Code\Head\NRF24L01.h(67): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(68): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
+.\Code\Head\NRF24L01.h(68): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(69): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
+.\Code\Head\NRF24L01.h(69): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(70): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
+.\Code\Head\NRF24L01.h(70): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(71): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
+.\Code\Head\NRF24L01.h(71): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(72): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
+.\Code\Head\NRF24L01.h(72): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(73): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
+.\Code\Head\NRF24L01.h(73): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(74): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
+.\Code\Head\NRF24L01.h(74): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(75): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
+.\Code\Head\NRF24L01.h(75): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(84): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
+.\Code\Head\NRF24L01.h(84): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(87): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
+.\Code\Head\NRF24L01.h(87): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(88): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(89): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(90): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(91): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(92): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(93): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(94): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(96): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(97): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(98): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(99): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(100): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(101): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(103): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(105): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(106): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(107): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(108): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(109): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(110): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(112): error C136: invalid dimension size: [0]
+compiling SPI_prog.c...
+.\Code\Head\NRF24L01.h(67): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
+.\Code\Head\NRF24L01.h(67): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(68): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
+.\Code\Head\NRF24L01.h(68): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(69): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
+.\Code\Head\NRF24L01.h(69): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(70): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
+.\Code\Head\NRF24L01.h(70): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(71): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
+.\Code\Head\NRF24L01.h(71): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(72): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
+.\Code\Head\NRF24L01.h(72): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(73): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
+.\Code\Head\NRF24L01.h(73): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(74): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
+.\Code\Head\NRF24L01.h(74): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(75): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
+.\Code\Head\NRF24L01.h(75): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(84): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
+.\Code\Head\NRF24L01.h(84): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(87): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
+.\Code\Head\NRF24L01.h(87): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(88): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(89): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(90): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(91): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(92): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(93): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(94): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(96): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(97): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(98): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(99): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(100): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(101): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(103): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(105): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(106): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(107): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(108): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(109): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(110): error C136: invalid dimension size: [0]
+.\Code\Head\NRF24L01.h(112): error C136: invalid dimension size: [0]
+\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Function_define.h(7): error C231: 'BIT': redefinition
+\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Function_define.h(8): error C231: 'UINT8': redefinition
+\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Function_define.h(9): error C231: 'UINT16': redefinition
+\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Function_define.h(10): error C141: syntax error near 'UINT32'
+\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Function_define.h(12): error C231: 'uint8_t': redefinition
+\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Function_define.h(13): error C231: 'uint16_t': redefinition
+\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Function_define.h(14): error C141: syntax error near 'uint32_t'
+\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Function_define.h(16): error C231: 'int8_t': redefinition
+\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Function_define.h(17): error C231: 'int16_t': redefinition
+\Users\MASTER.CERN\Desktop\PROGRAMM COD\CENSOR\Lib_nuvoton\Function_define.h(18): error C141: syntax error near 'int32_t'
+.\Lib_nuvoton\N76E003.H(9): error C231: 'P0': redefinition
+.\Lib_nuvoton\N76E003.H(10): error C231: 'SP': redefinition
+.\Lib_nuvoton\N76E003.H(11): error C231: 'DPL': redefinition
+.\Lib_nuvoton\N76E003.H(12): error C231: 'DPH': redefinition
+.\Lib_nuvoton\N76E003.H(13): error C231: 'RCTRIM0': redefinition
+.\Lib_nuvoton\N76E003.H(14): error C231: 'RCTRIM1': redefinition
+.\Lib_nuvoton\N76E003.H(15): error C231: 'RWK': redefinition
+.\Lib_nuvoton\N76E003.H(16): error C231: 'PCON': redefinition
+.\Lib_nuvoton\N76E003.H(18): error C231: 'TCON': redefinition
+.\Lib_nuvoton\N76E003.H(19): error C231: 'TMOD': redefinition
+.\Lib_nuvoton\N76E003.H(20): error C231: 'TL0': redefinition
+.\Lib_nuvoton\N76E003.H(21): error C231: 'TL1': redefinition
+.\Lib_nuvoton\N76E003.H(22): error C231: 'TH0': redefinition
+.\Lib_nuvoton\N76E003.H(23): error C231: 'TH1': redefinition
+.\Lib_nuvoton\N76E003.H(24): error C231: 'CKCON': redefinition
+.\Lib_nuvoton\N76E003.H(25): error C231: 'WKCON': redefinition
+.\Lib_nuvoton\N76E003.H(27): error C231: 'P1': redefinition
+.\Lib_nuvoton\N76E003.H(28): error C231: 'SFRS': redefinition
+.\Lib_nuvoton\N76E003.H(29): error C231: 'CAPCON0': redefinition
+.\Lib_nuvoton\N76E003.H(30): error C231: 'CAPCON1': redefinition
+.\Lib_nuvoton\N76E003.H(31): error C231: 'CAPCON2': redefinition
+.\Lib_nuvoton\N76E003.H(32): error C231: 'CKDIV': redefinition
+.\Lib_nuvoton\N76E003.H(33): error C231: 'CKSWT': redefinition
+.\Lib_nuvoton\N76E003.H(34): error C231: 'CKEN': redefinition
+.\Lib_nuvoton\N76E003.H(36): error C231: 'SCON': redefinition
+.\Lib_nuvoton\N76E003.H(37): error C231: 'SBUF': redefinition
+.\Lib_nuvoton\N76E003.H(38): error C231: 'SBUF_1': redefinition
+.\Lib_nuvoton\N76E003.H(39): error C231: 'EIE': redefinition
+.\Lib_nuvoton\N76E003.H(40): error C231: 'EIE1': redefinition
+.\Lib_nuvoton\N76E003.H(41): error C231: 'CHPCON': redefinition
+.\Lib_nuvoton\N76E003.H(43): error C231: 'P2': redefinition
+.\Lib_nuvoton\N76E003.H(44): error C231: 'AUXR1': redefinition
+.\Lib_nuvoton\N76E003.H(45): error C231: 'BODCON0': redefinition
+.\Lib_nuvoton\N76E003.H(46): error C231: 'IAPTRG': redefinition
+.\Lib_nuvoton\N76E003.H(47): error C231: 'IAPUEN': redefinition
+.\Lib_nuvoton\N76E003.H(48): error C231: 'IAPAL': redefinition
+.\Lib_nuvoton\N76E003.H(49): error C231: 'IAPAH': redefinition
+.\Lib_nuvoton\N76E003.H(51): error C231: 'IE': redefinition
+.\Lib_nuvoton\N76E003.H(52): error C231: 'SADDR': redefinition
+.\Lib_nuvoton\N76E003.H(53): error C231: 'WDCON': redefinition
+.\Lib_nuvoton\N76E003.H(54): error C231: 'BODCON1': redefinition
+.\Lib_nuvoton\N76E003.H(55): error C231: 'P3M1': redefinition
+.\Lib_nuvoton\N76E003.H(56): error C231: 'P3S': redefinition
+.\Lib_nuvoton\N76E003.H(57): error C231: 'P3M2': redefinition
+.\Lib_nuvoton\N76E003.H(58): error C231: 'P3SR': redefinition
+.\Lib_nuvoton\N76E003.H(59): error C231: 'IAPFD': redefinition
+.\Lib_nuvoton\N76E003.H(60): error C231: 'IAPCN': redefinition
+.\Lib_nuvoton\N76E003.H(62): error C231: 'P3': redefinition
+.\Lib_nuvoton\N76E003.H(63): error C231: 'P0M1': redefinition
+.\Lib_nuvoton\N76E003.H(64): error C231: 'P0S': redefinition
+.\Lib_nuvoton\N76E003.H(65): error C231: 'P0M2': redefinition
+.\Lib_nuvoton\N76E003.H(66): error C231: 'P0SR': redefinition
+.\Lib_nuvoton\N76E003.H(67): error C231: 'P1M1': redefinition
+.\Lib_nuvoton\N76E003.H(68): error C231: 'P1S': redefinition
+.\Lib_nuvoton\N76E003.H(69): error C231: 'P1M2': redefinition
+.\Lib_nuvoton\N76E003.H(70): error C231: 'P1SR': redefinition
+.\Lib_nuvoton\N76E003.H(71): error C231: 'P2S': redefinition
+.\Lib_nuvoton\N76E003.H(72): error C231: 'IPH': redefinition
+.\Lib_nuvoton\N76E003.H(73): error C231: 'PWMINTC': redefinition
+.\Lib_nuvoton\N76E003.H(75): error C231: 'IP': redefinition
+.\Lib_nuvoton\N76E003.H(76): error C231: 'SADEN': redefinition
+.\Lib_nuvoton\N76E003.H(77): error C231: 'SADEN_1': redefinition
+.\Lib_nuvoton\N76E003.H(78): error C231: 'SADDR_1': redefinition
+.\Lib_nuvoton\N76E003.H(79): error C231: 'I2DAT': redefinition
+.\Lib_nuvoton\N76E003.H(80): error C231: 'I2STAT': redefinition
+.\Lib_nuvoton\N76E003.H(81): error C231: 'I2CLK': redefinition
+.\Lib_nuvoton\N76E003.H(82): error C231: 'I2TOC': redefinition
+.\Lib_nuvoton\N76E003.H(84): error C231: 'I2CON': redefinition
+.\Lib_nuvoton\N76E003.H(85): error C231: 'I2ADDR': redefinition
+.\Lib_nuvoton\N76E003.H(86): error C231: 'ADCRL': redefinition
+.\Lib_nuvoton\N76E003.H(87): error C231: 'ADCRH': redefinition
+.\Lib_nuvoton\N76E003.H(88): error C231: 'T3CON': redefinition
+.\Lib_nuvoton\N76E003.H(89): error C231: 'PWM4H': redefinition
+.\Lib_nuvoton\N76E003.H(90): error C231: 'RL3': redefinition
+.\Lib_nuvoton\N76E003.H(91): error C231: 'PWM5H': redefinition
+.\Lib_nuvoton\N76E003.H(92): error C231: 'RH3': redefinition
+.\Lib_nuvoton\N76E003.H(93): error C231: 'PIOCON1': redefinition
+.\Lib_nuvoton\N76E003.H(94): error C231: 'TA': redefinition
+.\Lib_nuvoton\N76E003.H(96): error C231: 'T2CON': redefinition
+.\Lib_nuvoton\N76E003.H(97): error C231: 'T2MOD': redefinition
+.\Lib_nuvoton\N76E003.H(98): error C231: 'RCMP2L': redefinition
+.\Lib_nuvoton\N76E003.H(99): error C231: 'RCMP2H': redefinition
+.\Lib_nuvoton\N76E003.H(100): error C231: 'TL2': redefinition
+.\Lib_nuvoton\N76E003.H(101): error C231: 'PWM4L': redefinition
+.\Lib_nuvoton\N76E003.H(102): error C231: 'TH2': redefinition
+.\Lib_nuvoton\N76E003.H(103): error C231: 'PWM5L': redefinition
+.\Lib_nuvoton\N76E003.H(104): error C231: 'ADCMPL': redefinition
+.\Lib_nuvoton\N76E003.H(105): error C231: 'ADCMPH': redefinition
+.\Lib_nuvoton\N76E003.H(107): error C231: 'PSW': redefinition
+.\Lib_nuvoton\N76E003.H(108): error C231: 'PWMPH': redefinition
+.\Lib_nuvoton\N76E003.H(109): error C231: 'PWM0H': redefinition
+.\Lib_nuvoton\N76E003.H(110): error C231: 'PWM1H': redefinition
+.\Lib_nuvoton\N76E003.H(111): error C231: 'PWM2H': redefinition
+.\Lib_nuvoton\N76E003.H(112): error C231: 'PWM3H': redefinition
+.\Lib_nuvoton\N76E003.H(113): error C231: 'PNP': redefinition
+.\Lib_nuvoton\N76E003.H(114): error C231: 'FBD': redefinition
+.\Lib_nuvoton\N76E003.H(116): error C231: 'PWMCON0': redefinition
+.\Lib_nuvoton\N76E003.H(117): error C231: 'PWMPL': redefinition
+.\Lib_nuvoton\N76E003.H(118): error C231: 'PWM0L': redefinition
+.\Lib_nuvoton\N76E003.H(119): error C231: 'PWM1L': redefinition
+.\Lib_nuvoton\N76E003.H(120): error C231: 'PWM2L': redefinition
+.\Lib_nuvoton\N76E003.H(121): error C231: 'PWM3L': redefinition
+.\Lib_nuvoton\N76E003.H(122): error C231: 'PIOCON0': redefinition
+.\Lib_nuvoton\N76E003.H(123): error C231: 'PWMCON1': redefinition
+.\Lib_nuvoton\N76E003.H(125): error C231: 'ACC': redefinition
+.\Lib_nuvoton\N76E003.H(126): error C231: 'ADCCON1': redefinition
+.\Lib_nuvoton\N76E003.H(127): error C231: 'ADCCON2': redefinition
+.\Lib_nuvoton\N76E003.H(128): error C231: 'ADCDLY': redefinition
+.\Lib_nuvoton\N76E003.H(129): error C231: 'C0L': redefinition
+.\Lib_nuvoton\N76E003.H(130): error C231: 'C0H': redefinition
+.\Lib_nuvoton\N76E003.H(131): error C231: 'C1L': redefinition
+.\Lib_nuvoton\N76E003.H(132): error C231: 'C1H': redefinition
+.\Lib_nuvoton\N76E003.H(134): error C231: 'ADCCON0': redefinition
+.\Lib_nuvoton\N76E003.H(135): error C231: 'PICON': redefinition
+.\Lib_nuvoton\N76E003.H(136): error C231: 'PINEN': redefinition
+.\Lib_nuvoton\N76E003.H(137): error C231: 'PIPEN': redefinition
+.\Lib_nuvoton\N76E003.H(138): error C231: 'PIF': redefinition
+.\Lib_nuvoton\N76E003.H(139): error C231: 'C2L': redefinition
+.\Lib_nuvoton\N76E003.H(140): error C231: 'C2H': redefinition
+.\Lib_nuvoton\N76E003.H(141): error C231: 'EIP': redefinition
+.\Lib_nuvoton\N76E003.H(143): error C231: 'B': redefinition
+.\Lib_nuvoton\N76E003.H(144): error C231: 'CAPCON3': redefinition
+.\Lib_nuvoton\N76E003.H(145): error C231: 'CAPCON4': redefinition
+.\Lib_nuvoton\N76E003.H(146): error C231: 'SPCR': redefinition
+.\Lib_nuvoton\N76E003.H(147): error C231: 'SPCR2': redefinition
+.\Lib_nuvoton\N76E003.H(148): error C231: 'SPSR': redefinition
+.\Lib_nuvoton\N76E003.H(149): error C231: 'SPDR': redefinition
+.\Lib_nuvoton\N76E003.H(150): error C231: 'AINDIDS': redefinition
+.\Lib_nuvoton\N76E003.H(151): error C231: 'EIPH': redefinition
+.\Lib_nuvoton\N76E003.H(153): error C231: 'SCON_1': redefinition
+.\Lib_nuvoton\N76E003.H(154): error C231: 'PDTEN': redefinition
+.\Lib_nuvoton\N76E003.H(155): error C231: 'PDTCNT': redefinition
+.\Lib_nuvoton\N76E003.H(156): error C231: 'PMEN': redefinition
+.\Lib_nuvoton\N76E003.H(157): error C231: 'PMD': redefinition
+.\Lib_nuvoton\N76E003.H(158): error C231: 'EIP1': redefinition
+.\Lib_nuvoton\N76E003.H(159): error C231: 'EIPH1': redefinition
+.\Lib_nuvoton\N76E003.H(163): error C231: 'SM0_1': redefinition
+.\Lib_nuvoton\N76E003.H(164): error C231: 'FE_1': redefinition
+.\Lib_nuvoton\N76E003.H(165): error C231: 'SM1_1': redefinition
+.\Lib_nuvoton\N76E003.H(166): error C231: 'SM2_1': redefinition
+.\Lib_nuvoton\N76E003.H(167): error C231: 'REN_1': redefinition
+.\Lib_nuvoton\N76E003.H(168): error C231: 'TB8_1': redefinition
+.\Lib_nuvoton\N76E003.H(169): error C231: 'RB8_1': redefinition
+.\Lib_nuvoton\N76E003.H(170): error C231: 'TI_1': redefinition
+.\Lib_nuvoton\N76E003.H(171): error C231: 'RI_1': redefinition
+.\Lib_nuvoton\N76E003.H(174): error C231: 'ADCF': redefinition
+.\Lib_nuvoton\N76E003.H(175): error C231: 'ADCS': redefinition
+.\Lib_nuvoton\N76E003.H(176): error C231: 'ETGSEL1': redefinition
+.\Lib_nuvoton\N76E003.H(177): error C231: 'ETGSEL0': redefinition
+.\Lib_nuvoton\N76E003.H(178): error C231: 'ADCHS3': redefinition
+.\Lib_nuvoton\N76E003.H(179): error C231: 'ADCHS2': redefinition
+.\Lib_nuvoton\N76E003.H(180): error C231: 'ADCHS1': redefinition
+.\Lib_nuvoton\N76E003.H(181): error C231: 'ADCHS0': redefinition
+.\Lib_nuvoton\N76E003.H(184): error C231: 'PWMRUN': redefinition
+.\Lib_nuvoton\N76E003.H(185): error C231: 'LOAD': redefinition
+.\Lib_nuvoton\N76E003.H(186): error C231: 'PWMF': redefinition
+.\Lib_nuvoton\N76E003.H(187): error C231: 'CLRPWM': redefinition
+.\Lib_nuvoton\N76E003.H(191): error C231: 'CY': redefinition
+.\Lib_nuvoton\N76E003.H(192): error C231: 'AC': redefinition
+.\Lib_nuvoton\N76E003.H(193): error C231: 'F0': redefinition
+.\Lib_nuvoton\N76E003.H(194): error C231: 'RS1': redefinition
+.\Lib_nuvoton\N76E003.H(195): error C231: 'RS0': redefinition
+.\Lib_nuvoton\N76E003.H(196): error C231: 'OV': redefinition
+.\Lib_nuvoton\N76E003.H(197): error C231: 'P': redefinition
+.\Lib_nuvoton\N76E003.H(200): error C231: 'TF2': redefinition
+.\Lib_nuvoton\N76E003.H(201): error C231: 'TR2': redefinition
+.\Lib_nuvoton\N76E003.H(202): error C231: 'CM_RL2': redefinition
+.\Lib_nuvoton\N76E003.H(205): error C231: 'I2CEN': redefinition
+.\Lib_nuvoton\N76E003.H(206): error C231: 'STA': redefinition
+.\Lib_nuvoton\N76E003.H(207): error C231: 'STO': redefinition
+.\Lib_nuvoton\N76E003.H(208): error C231: 'SI': redefinition
+.\Lib_nuvoton\N76E003.H(209): error C231: 'AA': redefinition
+.\Lib_nuvoton\N76E003.H(210): error C231: 'I2CPX': redefinition
+.\Lib_nuvoton\N76E003.H(213): error C231: 'PADC': redefinition
+.\Lib_nuvoton\N76E003.H(214): error C231: 'PBOD': redefinition
+.\Lib_nuvoton\N76E003.H(215): error C231: 'PS': redefinition
+.\Lib_nuvoton\N76E003.H(216): error C231: 'PT1': redefinition
+.\Lib_nuvoton\N76E003.H(217): error C231: 'PX1': redefinition
+.\Lib_nuvoton\N76E003.H(218): error C231: 'PT0': redefinition
+.\Lib_nuvoton\N76E003.H(219): error C231: 'PX0': redefinition
+.\Lib_nuvoton\N76E003.H(222): error C231: 'P30': redefinition
+.\Lib_nuvoton\N76E003.H(226): error C231: 'EA': redefinition
+.\Lib_nuvoton\N76E003.H(227): error C231: 'EADC': redefinition
+.\Lib_nuvoton\N76E003.H(228): error C231: 'EBOD': redefinition
+.\Lib_nuvoton\N76E003.H(229): error C231: 'ES': redefinition
+.\Lib_nuvoton\N76E003.H(230): error C231: 'ET1': redefinition
+.\Lib_nuvoton\N76E003.H(231): error C231: 'EX1': redefinition
+.\Lib_nuvoton\N76E003.H(232): error C231: 'ET0': redefinition
+.\Lib_nuvoton\N76E003.H(233): error C231: 'EX0': redefinition
+.\Lib_nuvoton\N76E003.H(236): error C231: 'P20': redefinition
+.\Lib_nuvoton\N76E003.H(239): error C231: 'SM0': redefinition
+.\Lib_nuvoton\N76E003.H(240): error C231: 'FE': redefinition
+.\Lib_nuvoton\N76E003.H(241): error C231: 'SM1': redefinition
+.\Lib_nuvoton\N76E003.H(242): error C231: 'SM2': redefinition
+.\Lib_nuvoton\N76E003.H(243): error C231: 'REN': redefinition
+.\Lib_nuvoton\N76E003.H(244): error C231: 'TB8': redefinition
+.\Lib_nuvoton\N76E003.H(245): error C231: 'RB8': redefinition
+.\Lib_nuvoton\N76E003.H(246): error C231: 'TI': redefinition
+.\Lib_nuvoton\N76E003.H(247): error C231: 'RI': redefinition
+.\Lib_nuvoton\N76E003.H(250): error C231: 'P17': redefinition
+.\Lib_nuvoton\N76E003.H(251): error C231: 'P16': redefinition
+.\Lib_nuvoton\N76E003.H(252): error C231: 'TXD_1': redefinition
+.\Lib_nuvoton\N76E003.H(253): error C231: 'P15': redefinition
+.\Lib_nuvoton\N76E003.H(254): error C231: 'P14': redefinition
+.\Lib_nuvoton\N76E003.H(255): error C231: 'SDA': redefinition
+.\Lib_nuvoton\N76E003.H(256): error C231: 'P13': redefinition
+.\Lib_nuvoton\N76E003.H(257): error C231: 'SCL': redefinition
+.\Lib_nuvoton\N76E003.H(258): error C231: 'P12': redefinition
+.\Lib_nuvoton\N76E003.H(259): error C231: 'P11': redefinition
+.\Lib_nuvoton\N76E003.H(260): error C231: 'P10': redefinition
+.\Lib_nuvoton\N76E003.H(263): error C231: 'TF1': redefinition
+.\Lib_nuvoton\N76E003.H(264): error C231: 'TR1': redefinition
+.\Lib_nuvoton\N76E003.H(265): error C231: 'TF0': redefinition
+.\Lib_nuvoton\N76E003.H(266): error C231: 'TR0': redefinition
+.\Lib_nuvoton\N76E003.H(267): error C231: 'IE1': redefinition
+.\Lib_nuvoton\N76E003.H(268): error C231: 'IT1': redefinition
+.\Lib_nuvoton\N76E003.H(269): error C231: 'IE0': redefinition
+.\Lib_nuvoton\N76E003.H(270): error C231: 'IT0': redefinition
+.\Lib_nuvoton\N76E003.H(274): error C231: 'P07': redefinition
+.\Lib_nuvoton\N76E003.H(275): error C231: 'RXD': redefinition
+.\Lib_nuvoton\N76E003.H(276): error C231: 'P06': redefinition
+.\Lib_nuvoton\N76E003.H(277): error C231: 'TXD': redefinition
+.\Lib_nuvoton\N76E003.H(278): error C231: 'P05': redefinition
+.\Lib_nuvoton\N76E003.H(279): error C231: 'P04': redefinition
+.\Lib_nuvoton\N76E003.H(280): error C231: 'STADC': redefinition
+.\Lib_nuvoton\N76E003.H(281): error C231: 'P03': redefinition
+.\Lib_nuvoton\N76E003.H(282): error C231: 'P02': redefinition
+.\Lib_nuvoton\N76E003.H(283): error C231: 'RXD_1': redefinition
+.\Lib_nuvoton\N76E003.H(284): error C231: 'P01': redefinition
+.\Lib_nuvoton\N76E003.H(285): error C231: 'MISO': redefinition
+.\Lib_nuvoton\N76E003.H(286): error C231: 'P00': redefinition
+.\Lib_nuvoton\N76E003.H(287): error C231: 'MOSI': redefinition
+compiling Common.c...
+compiling Delay.c...
 Target not created.
