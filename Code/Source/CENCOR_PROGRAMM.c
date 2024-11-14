@@ -4,6 +4,7 @@
 
 #include <CENCOR_PROGRAMM.h>
 
+xdata int mainStateProgressSPI = 0;  	// number current process spi
 xdata int mainStateProgressADC = 0;		// number current process adc
 
 //********************************************************
@@ -11,25 +12,31 @@ xdata int mainStateProgressADC = 0;		// number current process adc
 //********************************************************
 void init_device(){
 	GPIO_init();
-	SPI_init_Timer();
+	Init_Timer0();
 	SPI_CLK_init(0);
+	#if	USE_RADIO
+		/*		*/
+	#endif
+	#if USE_ADC
+		/*		*/
+	#endif
+	#if USE_PERIPHERY
+		/*		*/
+	#endif
+	#if USE_DISPLAY
+		/*		*/
+	#endif
+	#if USE_FRAM
+		/*		*/
+	#endif
+
 	set_EA;										// enable interrupts
 }
 
 //********************************************************
-//  Work with periphery /led/button
+//  Work with NRF
 //********************************************************
-
-//********************************************************
-//  Work with ADC
-//********************************************************
-
-
-//********************************************************
-//  Work with NRF and FRAM (spi)
-//********************************************************
-#ifdef USE_RADIO
-xdata int mainStateProgressSPI = 0;  	// number current process spi
+#if USE_RADIO
 
 void Work_NRF(){
 	if(FlagSPIGlobal) {    				// work spi
@@ -68,12 +75,35 @@ void Process_work_RF(void){
 	// считывания
 }
 
+
 #endif /*include radio in project*/
+//********************************************************
+//  Work with periphery /led/button
+//********************************************************
+#if USE_PERIPHERY
+#endif /*include Periphery in project*/
+//********************************************************
+//  Work with ADC
+//********************************************************
+#if USE_ADC
+#endif /*include ADC in project*/
+//********************************************************
+//  FRAM
+//********************************************************
+#if USE_FRAM
+#endif /*include FRAM in project*/
+//********************************************************
+//  DISPLAY
+//********************************************************
+#if USE_DISPLAY
+#endif /*include DISPLAY in project*/
+
+
+
 //********************************************************
 // ISR SPI
 //********************************************************
 void ISR_Timer0() interrupt 1 {  				// <Interface_com.H>
-	#ifdef USE_RADIO
 	if(FlagSPIGlobal){ 
 			if(FlagSPIDelay){
 				SPI_Delay(); 						// delay SPI
@@ -82,7 +112,8 @@ void ISR_Timer0() interrupt 1 {  				// <Interface_com.H>
 				SPI_exchange_start();		// exchange SPI
 			} 
 	}
-	#endif /*include radio in project*/
+	/* добавить сюда i2c?*/
+	
 }
 
 //********************************************************

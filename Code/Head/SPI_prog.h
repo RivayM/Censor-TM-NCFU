@@ -1,43 +1,21 @@
 //********************************************************
 //  PROG_SPI 
 //********************************************************
-#ifndef Interface_common
-#define Interface_common
+#ifndef SPI_prog
+#define SPI_prog
+
 #include "CONFIG.h"
 #include "GPIO.h"
 
-//********************************************************
-// set FREQ  (TIMER0)
-//********************************************************
-#define FREQ_030KHZ_H 0xFF
-#define FREQ_030KHZ_L 0xF9
-#define FREQ_120KHZ_H 0xFF
-#define FREQ_120KHZ_L 0xFB
-#define FREQ_480KHZ_H 0xFF
-#define FREQ_480KHZ_L 0xFD
-
-/*USE FREQ IN void init_CLK*/
-#define FREQ_H FREQ_030KHZ_H         // setting for freq
-#define FREQ_L FREQ_030KHZ_L
-
-extern bit TactTimer0;
-
-/*  USE:
-		void ISR_Timer0() interrupt 1 {
-			if(FlagInComSPIGlobal){ 
-				TactTimer0 = ~TactTimer0;
-			}
-		}  
-*/
-
-//********************************************************
-// SPI
-//********************************************************
 /* PINS -> USE GPIO.h FOR SPI*/
 #define PIN_CLK_SPI   SPI_SCK 			// P10
 #define PIN_MOSI_SPI  SPI_MOSI 			// P00
 #define PIN_MISO_SPI  SPI_MISO 			// P01
 #define PIN_CS_SPI    SPI_CSRF			// P15
+
+/* Settings */
+//#define SPI_CPOL			0							// See void SPI_exchange_do
+//#define SPI_CPHA			0							// See void SPI_exchange_do
 
 #define BUFFER_SPI 	 	8 						// amount bit in packet(byte)
 #define BUFFER_SPI_MASSIV_SIZE NRF24_BUFFER_MASSIV_SIZE // amount packet(byte)
@@ -57,7 +35,6 @@ extern int valueDelay;             	// delay values 1 = 1 timer cycle timer ->Ta
 extern bit FlagSPIDelay;        	 	// allow delay
 
 /* FUNC*/
-void SPI_init_Timer(void);
 void SPI_CLK_init(bit value);
 	
 void SPI_Start(void);
@@ -73,4 +50,4 @@ unsigned char SPI_Data_Convert_Bit(unsigned char *outSideBuffer);
 void SPI_Delay(void);
 void SPI_Delay_Set(int delay);
 
-#endif
+#endif /*SPI_prog*/

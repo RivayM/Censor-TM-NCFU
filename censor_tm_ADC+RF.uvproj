@@ -363,11 +363,6 @@
           <GroupName>head</GroupName>
           <Files>
             <File>
-              <FileName>I2C_ADC_HX711.h</FileName>
-              <FileType>5</FileType>
-              <FilePath>.\Code\Head\I2C_ADC_HX711.h</FilePath>
-            </File>
-            <File>
               <FileName>NRF24L01.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\Code\Head\NRF24L01.h</FilePath>
@@ -392,6 +387,21 @@
               <FileType>5</FileType>
               <FilePath>.\Code\Head\SPI_prog.h</FilePath>
             </File>
+            <File>
+              <FileName>ADC_HX711.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Code\Head\ADC_HX711.h</FilePath>
+            </File>
+            <File>
+              <FileName>I2C_prog.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Code\Head\I2C_prog.h</FilePath>
+            </File>
+            <File>
+              <FileName>Timers.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Code\Head\Timers.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -401,11 +411,6 @@
               <FileName>main.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Code\Source\main.c</FilePath>
-            </File>
-            <File>
-              <FileName>I2C_ADC_HX711.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>.\Code\Source\I2C_ADC_HX711.c</FilePath>
             </File>
             <File>
               <FileName>NRF24L01.c</FileName>
@@ -426,6 +431,21 @@
               <FileName>SPI_prog.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\Code\Source\SPI_prog.c</FilePath>
+            </File>
+            <File>
+              <FileName>ADC_HX711.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Code\Source\ADC_HX711.c</FilePath>
+            </File>
+            <File>
+              <FileName>I2C_prog.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Code\Source\I2C_prog.c</FilePath>
+            </File>
+            <File>
+              <FileName>Timers.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Code\Source\Timers.c</FilePath>
             </File>
           </Files>
         </Group>

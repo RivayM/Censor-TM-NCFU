@@ -1,0 +1,42 @@
+C51 COMPILER V9.53.0.0   TIMERS                                                            11/14/2024 16:52:52 PAGE 1   
+
+
+C51 COMPILER V9.53.0.0, COMPILATION OF MODULE TIMERS
+OBJECT MODULE PLACED IN .\Code\Obj\Timers.obj
+COMPILER INVOKED BY: D:\USR\Keil_v5\C51\BIN\C51.EXE Code\Source\Timers.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\Lib_nuvoton;.
+                    -\Common;.\Code\Head;.\Code\Source;.\Code\Obj;.\LST;.\Output) DEFINE(FOSC_160000) DEBUG OBJECTEXTEND PRINT(.\LST\Timers.l
+                    -st) TABS(2) OBJECT(.\Code\Obj\Timers.obj)
+
+line level    source
+
+   1          //********************************************************
+   2          // TIMER-s init
+   3          //********************************************************
+   4          
+   5          #include <Timers.h>
+   6          #include <N76E003.h>
+   7          
+   8          /* Init timer and start */
+   9          void Init_Timer0(){
+  10   1        TIMER0_MODE2_ENABLE;      // Mode timer
+  11   1        TH0 = FREQ_H;             // setting freq:
+  12   1        TL0 = FREQ_L;             // 
+  13   1        set_ET0;                  // enable Timer0 interrupt
+  14   1        set_TR0;                  // Timer0 run
+  15   1      }
+  16          
+  17          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     17    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

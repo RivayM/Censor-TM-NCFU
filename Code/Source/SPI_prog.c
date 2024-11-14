@@ -17,16 +17,6 @@ bit FlagExchangeSPIStart		= 0;
 int	valueDelay						 	= 0;
 bit FlagSPIDelay				 		= 0;
 
-bit TactTimer0				 			= 0;
-
-/* Init timer and start */
-void SPI_init_Timer(){
-	TIMER0_MODE2_ENABLE;			// Mode timer
-	TH0 = FREQ_H;           	// setting freq:
-  TL0 = FREQ_L; 						// 
-	set_ET0;									// enable Timer0 interrupt
-	set_TR0;                  // Timer0 run
-}
 
 /* main func(for timer) */
 void SPI_exchange_start(void){

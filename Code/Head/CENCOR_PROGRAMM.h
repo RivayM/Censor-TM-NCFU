@@ -5,31 +5,41 @@
 #ifndef CENCOR_PROGRAMM
 #define CENCOR_PROGRAMM
 
-
 //********************************************************
-/*  INCLUDE   If include this project 1=yes , 0=no			*/
+/*  INCLUDE   If include this project 1 = yes , 0 = no	*/
 //********************************************************
-#define USE_RADIO 1     //
+#define USE_RADIO 			1    				//
+#define USE_ADC 				1    				//
+#define USE_PERIPHERY		0    	 			//
+#define USE_FRAM 				0    				//
+#define USE_DISPLAY			0    	 			//
 
 #include <SPI_prog.h>
-
-	#ifdef USE_RADIO
-		#include <NRF24L01.h>
-	#endif /*include radio in project*/
-
-
-#include <I2C_ADC_HX711.h>
-
+#include <Timers.h>
 #include <GPIO.h>
-
 #include <N76E003.H>
-
 #include <CONFIG.h>
+#include <I2C_prog.h>
 
-//#include <Driver_LCD1602.H>
-//#include <I2C_prog.H>
-//#include <Timer0.H>
+#if USE_RADIO
+	#include <NRF24L01.h>
+#endif /*include Radio in project*/
+	
+#if USE_ADC
+	#include <ADC_HX711.h>
+#endif /*include ADC in project*/
 
+#if USE_PERIPHERY
+	#include <Periphery.h>
+#endif /*include ADC in project*/
+	
+#if USE_DISPLAY
+	// #include <Display.H>
+#endif /*include Display in project*/
+	
+#if USE_FRAM
+	// #include <FRAM.H>
+#endif /*include FRAM in project*/
 
 //********************************************************
 // MAIN FUNC - work censor
@@ -51,9 +61,6 @@ void Process_work_RF(void);
 //  Work with ADC
 //********************************************************
 
-
 extern xdata int mainStateProgressADC;
-
-
 
 #endif /*CENCOR_PROGRAMM*/

@@ -29,5 +29,4 @@ void GPIO_init(){
 	//	PIN_LED_RED = 1;
 	//	PIN_RF_ON = 1 ;
 	NRF_CE = 0;
-
 }

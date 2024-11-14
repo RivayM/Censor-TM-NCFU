@@ -1,0 +1,65 @@
+C51 COMPILER V9.53.0.0   I2C_PROG                                                          11/14/2024 16:52:52 PAGE 1   
+
+
+C51 COMPILER V9.53.0.0, COMPILATION OF MODULE I2C_PROG
+OBJECT MODULE PLACED IN .\Code\Obj\I2C_prog.obj
+COMPILER INVOKED BY: D:\USR\Keil_v5\C51\BIN\C51.EXE Code\Source\I2C_prog.c OPTIMIZE(8,SPEED) BROWSE INCDIR(.\Lib_nuvoton
+                    -;.\Common;.\Code\Head;.\Code\Source;.\Code\Obj;.\LST;.\Output) DEFINE(FOSC_160000) DEBUG OBJECTEXTEND PRINT(.\LST\I2C_pr
+                    -og.lst) TABS(2) OBJECT(.\Code\Obj\I2C_prog.obj)
+
+line level    source
+
+   1          //**************************************************************************
+   2          //  I2C_prog
+   3          //**************************************************************************
+   4          
+   5          #include <I2C_prog.h>
+*** ERROR C202 IN LINE 23 OF .\Code\Head\I2C_prog.h: 'BUFFER_SPI_MASSIV_SIZE': undefined identifier
+*** ERROR C136 IN LINE 23 OF .\Code\Head\I2C_prog.h: invalid dimension size: [0]
+*** ERROR C202 IN LINE 24 OF .\Code\Head\I2C_prog.h: 'BUFFER_SPI_MASSIV_SIZE': undefined identifier
+*** ERROR C136 IN LINE 24 OF .\Code\Head\I2C_prog.h: invalid dimension size: [0]
+   6          
+   7          xdata int sizeADR   = I2C_SIZE_ADR;
+   8          xdata int sizeData  = I2C_SIZE_DATA;
+   9          
+  10          void I2C_change_size_ADR  (int *value)  {sizeADR  = *value;}
+  11          void I2C_change_size_DATA (int *value)  {sizeData = *value;}
+  12          
+  13          void I2C_start(){
+  14   1        // интервал
+  15   1        // адрес 7 
+  16   1        // флаги
+  17   1        // количество байт
+  18   1      }
+  19          
+  20          
+  21          void I2C_exchange_start(){
+  22   1        // то что использовать в таймере и чо выставл€ть в момент времени
+  23   1        
+  24   1        
+  25   1      }
+  26          void I2C_exchange_do(){
+  27   1        // здесь мне надо задать cигнал clk 
+  28   1        // пройти мимо
+  29   1        // когда вернусь прочитать
+  30   1        // записать новое значение и пройти мимо ( вернутс€ в начало)
+  31   1        I2C_SDA
+  32   1        
+  33   1        
+  34   1      }
+*** ERROR C202 IN LINE 34 OF Code\Source\I2C_prog.c: 'P20': undefined identifier
+*** ERROR C141 IN LINE 34 OF Code\Source\I2C_prog.c: syntax error near '}'
+  35          void I2C_exchange_end(){
+  36   1        //  все линии в 0 или в 1
+  37   1        // мб добавить сюда настройки
+  38   1      
+  39   1      }
+  40          
+  41          void I2C_delay(){
+  42   1        // верм€€ задержки
+  43   1        // например ширина импульса и следовательно скорость обмена
+  44   1      
+  45   1      }
+  46          
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  6 ERROR(S)
