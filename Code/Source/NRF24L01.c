@@ -120,7 +120,7 @@ bit NRF_init(){
 	switch(currentProcess){
 		case START_PROCESS: NRF_CE = 0;										break;
 		
-		case 1:	NRF_delay(NRF_DELAY_MID);									break;
+		case 1:	NRF_delay(NRF_DELAY_SHORT);								break;
 		case 2: NRF_delay(NRF_DELAY_MID);									break;
 		case 3: Send_SPI_NRF( &packetRX.vEN_AA,			2 );	break;
 		case 4:	Send_SPI_NRF( &packetRX.vSETUP_AW,	2 );	break;	
@@ -213,18 +213,24 @@ bit NRF_get(/*amount bytes*/){
 
 /*send info for SPI*/
 void Send_SPI_NRF(unsigned char *message,int amountMessage){
+	unsigned char adr = 0;
 	int i;
 	for(i = 0; i <= amountMessage; i++){
 		valueBufferArrayTx[i] = *(message + i);
-	}		
+	}
 	amountByteArrayForSend = amountMessage;
-	SPI_Start();      			//start exchange
+	/*
+
+	SPI_write_amount_byte(amountMessage);				// amount byte
+	SPI_write_TX_buf(message);									// write in Buf TX
+	*/
+	SPI_Start();      													// start exchange
 }
 
 /* read last answer for spi*/	
 void NRF_read_value(void){
 	int i;
-	for(i = 0; i < NRF_MASSIV_SIZE;i++){
+	for(i = 0; i < NRF_MASSIV_SIZE; i++){
 		readBuf[i] = valueBufferArrayRx[i];
 	}
 }

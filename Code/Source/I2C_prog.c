@@ -7,8 +7,8 @@
 xdata int sizeADR		=	I2C_SIZE_ADR;
 xdata int sizeData	=	I2C_SIZE_DATA;
 
-void I2C_change_size_ADR	(int *value)	{sizeADR	= *value;}
-void I2C_change_size_DATA	(int *value)	{sizeData	= *value;}
+void I2C_change_size_ADR	(int *value){sizeADR	= *value;}
+void I2C_change_size_DATA	(int *value){sizeData	= *value;}
 
 void I2C_start(){
 	// интервал
@@ -28,7 +28,7 @@ void I2C_exchange_do(){
 	// пройти мимо
 	// когда вернусь прочитать
 	// записать новое значение и пройти мимо ( вернутся в начало)
-	//I2C_SDA
+	
 	
 	
 }

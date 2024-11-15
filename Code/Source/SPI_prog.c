@@ -4,7 +4,7 @@
 #include <SPI_prog.H>
 #include <N76E003.H>
 
-unsigned char valueBufferArrayTx[BUFFER_SPI_MASSIV_SIZE];  
+unsigned char valueBufferArrayTx[BUFFER_SPI_MASSIV_SIZE]; 
 unsigned char valueBufferArrayRx[BUFFER_SPI_MASSIV_SIZE];  
 
 int amountByteArrayForSend 	= BUFFER_SPI_MASSIV_SIZE; 
@@ -17,6 +17,18 @@ bit FlagExchangeSPIStart		= 0;
 int	valueDelay						 	= 0;
 bit FlagSPIDelay				 		= 0;
 
+void SPI_write_amount_byte(int value){amountByteArrayForSend = value;}
+
+unsigned char *SPI_get_RX_buf(){return &valueBufferArrayRx;}
+
+void SPI_write_TX_buf(unsigned char *buf){
+	int  i;
+	for( i = 0; i <= amountByteArrayForSend; i++ ){
+		valueBufferArrayTx[i] = *( buf + i );
+	//	valueBufferArrayTx[i] = 0x33;
+	}
+}
+
 
 /* main func(for timer) */
 void SPI_exchange_start(void){
@@ -28,17 +40,17 @@ void SPI_exchange_start(void){
 
 /* exchange bitwise operation */
 void SPI_exchange_do(unsigned char valueMosi, unsigned char *outSideBuffer){ 
-	if(counterBit) {                      // CPOL - when start clk
+	if(counterBit ||	SPI_CPOL) {         // CPOL - when start clk
 		PIN_CLK_SPI =~PIN_CLK_SPI;          // clocking
 	}  		
-	if( PIN_CLK_SPI == 0) {       				// CPHA - when next bit
+	if( PIN_CLK_SPI == SPI_CPHA) {       	// CPHA - when next bit
 /******************************/
 		switch(counterBit){		 							// Start
 /*End bit packet	*/
 			case BUFFER_SPI:          				
 				PIN_MOSI_SPI = 1;
 				//PIN_MISO_SPI = 1;
-				PIN_CLK_SPI  = 0;	
+				PIN_CLK_SPI  = SPI_CPOL;	
 				counterBit   = 0;
 				SPI_exchange_end();       // continue?
 				SPI_Data_Convert_Byte();  // next packet
@@ -55,9 +67,6 @@ void SPI_exchange_do(unsigned char valueMosi, unsigned char *outSideBuffer){
 					SPI_Data_Convert_Bit(outSideBuffer);
 				}	
 /* next bit		*/
-				if(counterBit == 7){
-				  counterBit = 7;
-				}
 				counterBit++; 									
 				break;
 		}
@@ -67,13 +76,13 @@ void SPI_exchange_do(unsigned char valueMosi, unsigned char *outSideBuffer){
 
 /* In the latest BYTE exchange SPI*/
 void SPI_exchange_end(void){	
-	#if SPI_DATA_BYTE == 1
+	#if SPI_DATA_BYTE == SPI_MS_BYTE
 		if(counterByte == 0){ 
-			SPI_End();  // SPI_MSbyte
+			SPI_End();  
 		}
 	#else
 		if(counterByte == amountByteArrayForSend - 1){ 
-			SPI_End();  // SPI_LSbyte
+			SPI_End();  
 		}
 	#endif
 }
@@ -87,7 +96,7 @@ void SPI_End(void){
 
 /* Convert DATA BYTE*/
 void SPI_Data_Convert_Byte(){	
-#if SPI_DATA_BYTE == 1
+#if SPI_DATA_BYTE == SPI_MS_BYTE
 	counterByte--;     // SPI_MSbyte 
 #else
 	counterByte++;     // SPI_LSbyte
@@ -103,7 +112,7 @@ unsigned char SPI_Data_Convert_Bit(unsigned char *outSideBuffer){
 	and force the register to go around in a circle 
 	(the whole cycle) - long operation
 	*/
-#if SPI_DATA_BIT == 1
+#if SPI_DATA_BIT == SPI_MSB
 	if(counterBit >= BUFFER_SPI - 1){ 
 		buf = buf & 0x01; 
 	}
@@ -146,7 +155,7 @@ void SPI_CLK_init(bit value){
 
 /* Start exchange spi */
 void SPI_Start(void){
-#if SPI_DATA_BYTE == 1
+#if SPI_DATA_BYTE == SPI_MS_BYTE
 	counterByte = amountByteArrayForSend -1;
 #else
 	counterByte = 0;

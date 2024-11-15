@@ -83,7 +83,7 @@ extern bit FlagDataReadReady;
 extern int currentProcess;      		 // current progress
 extern xdata unsigned char readBuf[NRF_MASSIV_SIZE];      // buffer 
 	
-struct NRF_PACKET_SPI{  
+static xdata struct NRF_PACKET_SPI{  
 	unsigned char vCONFIG			[NRF_MASSIV_SIZE];			// 
 	unsigned char vEN_AA			[NRF_MASSIV_SIZE];			//
 	unsigned char vSETUP_AW		[NRF_MASSIV_SIZE];			//

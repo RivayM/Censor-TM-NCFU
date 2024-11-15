@@ -1,4 +1,4 @@
-C51 COMPILER V9.53.0.0   SPI_PROG                                                          11/14/2024 16:52:52 PAGE 1   
+C51 COMPILER V9.53.0.0   SPI_PROG                                                          11/15/2024 16:58:43 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE SPI_PROG
@@ -15,7 +15,7 @@ line level    source
    4          #include <SPI_prog.H>
    5          #include <N76E003.H>
    6          
-   7          unsigned char valueBufferArrayTx[BUFFER_SPI_MASSIV_SIZE];  
+   7          unsigned char valueBufferArrayTx[BUFFER_SPI_MASSIV_SIZE]; 
    8          unsigned char valueBufferArrayRx[BUFFER_SPI_MASSIV_SIZE];  
    9          
   10          int amountByteArrayForSend  = BUFFER_SPI_MASSIV_SIZE; 
@@ -28,154 +28,163 @@ line level    source
   17          int valueDelay              = 0;
   18          bit FlagSPIDelay            = 0;
   19          
-  20          
-  21          /* main func(for timer) */
-  22          void SPI_exchange_start(void){
-  23   1        SPI_exchange_do( 
-  24   1          SPI_Data_Convert_Bit(
-  25   1            &valueBufferArrayTx[counterByte]),  // buf  for TX
-  26   1          &valueBufferArrayRx[counterByte]);    // buf  for RX
-  27   1      }
-  28          
-  29          /* exchange bitwise operation */
-  30          void SPI_exchange_do(unsigned char valueMosi, unsigned char *outSideBuffer){ 
-  31   1        if(counterBit) {                      // CPOL - when start clk
-  32   2          PIN_CLK_SPI =~PIN_CLK_SPI;          // clocking
-  33   2        }     
-  34   1        if( PIN_CLK_SPI == 0) {               // CPHA - when next bit
-  35   2      /******************************/
-  36   2          switch(counterBit){                 // Start
-  37   3      /*End bit packet  */
-  38   3            case BUFFER_SPI:                  
-  39   3              PIN_MOSI_SPI = 1;
-  40   3              //PIN_MISO_SPI = 1;
-  41   3              PIN_CLK_SPI  = 0; 
-  42   3              counterBit   = 0;
-  43   3              SPI_exchange_end();       // continue?
-  44   3              SPI_Data_Convert_Byte();  // next packet
-  45   3              break;
-  46   3      /* process going  */
-  47   3            default  /* 0 - 7 */: 
-  48   3              PIN_CS_SPI   = 0;
-  49   3      /* send MoSi  */
-  50   3              if(valueMosi){PIN_MOSI_SPI = 1;}
-  51   3              else{         PIN_MOSI_SPI = 0;}
-  52   3      /* send MiSo  */
-  53   3              if ( PIN_MISO_SPI == 1){          
-C51 COMPILER V9.53.0.0   SPI_PROG                                                          11/14/2024 16:52:52 PAGE 2   
+  20          void SPI_write_amount_byte(int value){amountByteArrayForSend = value;}
+  21          
+  22          unsigned char *SPI_get_RX_buf(){return &valueBufferArrayRx;}
+  23          
+  24          void SPI_write_TX_buf(unsigned char *buf){
+  25   1        int  i;
+  26   1        for( i = 0; i <= amountByteArrayForSend; i++ ){
+  27   2          valueBufferArrayTx[i] = *( buf + i );
+  28   2        //  valueBufferArrayTx[i] = 0x33;
+  29   2        }
+  30   1      }
+  31          
+  32          
+  33          /* main func(for timer) */
+  34          void SPI_exchange_start(void){
+  35   1        SPI_exchange_do( 
+  36   1          SPI_Data_Convert_Bit(
+  37   1            &valueBufferArrayTx[counterByte]),  // buf  for TX
+  38   1          &valueBufferArrayRx[counterByte]);    // buf  for RX
+  39   1      }
+  40          
+  41          /* exchange bitwise operation */
+  42          void SPI_exchange_do(unsigned char valueMosi, unsigned char *outSideBuffer){ 
+  43   1        if(counterBit ||  SPI_CPOL) {         // CPOL - when start clk
+  44   2          PIN_CLK_SPI =~PIN_CLK_SPI;          // clocking
+  45   2        }     
+  46   1        if( PIN_CLK_SPI == SPI_CPHA) {        // CPHA - when next bit
+  47   2      /******************************/
+  48   2          switch(counterBit){                 // Start
+  49   3      /*End bit packet  */
+  50   3            case BUFFER_SPI:                  
+  51   3              PIN_MOSI_SPI = 1;
+  52   3              //PIN_MISO_SPI = 1;
+  53   3              PIN_CLK_SPI  = SPI_CPOL;  
+C51 COMPILER V9.53.0.0   SPI_PROG                                                          11/15/2024 16:58:43 PAGE 2   
 
-  54   4                outSideBuffer = outSideBuffer +
-  55   4                SPI_Data_Convert_Bit(outSideBuffer);
-  56   4              } 
-  57   3      /* next bit   */
-  58   3              if(counterBit == 7){
-  59   4                counterBit = 7;
-  60   4              }
-  61   3              counterBit++;                   
-  62   3              break;
-  63   3          }
-  64   2        }
-  65   1      /******************************/  
-  66   1      }
-  67          
-  68          /* In the latest BYTE exchange SPI*/
-  69          void SPI_exchange_end(void){  
-  70   1        #if SPI_DATA_BYTE == 1
+  54   3              counterBit   = 0;
+  55   3              SPI_exchange_end();       // continue?
+  56   3              SPI_Data_Convert_Byte();  // next packet
+  57   3              break;
+  58   3      /* process going  */
+  59   3            default  /* 0 - 7 */: 
+  60   3              PIN_CS_SPI   = 0;
+  61   3      /* send MoSi  */
+  62   3              if(valueMosi){PIN_MOSI_SPI = 1;}
+  63   3              else{         PIN_MOSI_SPI = 0;}
+  64   3      /* send MiSo  */
+  65   3              if ( PIN_MISO_SPI == 1){          
+  66   4                outSideBuffer = outSideBuffer +
+  67   4                SPI_Data_Convert_Bit(outSideBuffer);
+  68   4              } 
+  69   3      /* next bit   */
+  70   3              counterBit++;                   
+  71   3              break;
+  72   3          }
+  73   2        }
+  74   1      /******************************/  
+  75   1      }
+  76          
+  77          /* In the latest BYTE exchange SPI*/
+  78          void SPI_exchange_end(void){  
+  79   1        #if SPI_DATA_BYTE == SPI_MS_BYTE
                   if(counterByte == 0){ 
-                    SPI_End();  // SPI_MSbyte
+                    SPI_End();  
                   }
                 #else
-  75   1          if(counterByte == amountByteArrayForSend - 1){ 
-  76   2            SPI_End();  // SPI_LSbyte
-  77   2          }
-  78   1        #endif
-  79   1      }
-  80          
-  81          /* In the end exchange SPI*/
-  82          void SPI_End(void){
-  83   1        PIN_CS_SPI  = 1;
-  84   1        FlagSPIGlobal = 0; 
-  85   1      }
-  86          
-  87          
-  88          /* Convert DATA BYTE*/
-  89          void SPI_Data_Convert_Byte(){ 
-  90   1      #if SPI_DATA_BYTE == 1
+  84   1          if(counterByte == amountByteArrayForSend - 1){ 
+  85   2            SPI_End();  
+  86   2          }
+  87   1        #endif
+  88   1      }
+  89          
+  90          /* In the end exchange SPI*/
+  91          void SPI_End(void){
+  92   1        PIN_CS_SPI  = 1;
+  93   1        FlagSPIGlobal = 0; 
+  94   1      }
+  95          
+  96          
+  97          /* Convert DATA BYTE*/
+  98          void SPI_Data_Convert_Byte(){ 
+  99   1      #if SPI_DATA_BYTE == SPI_MS_BYTE
                 counterByte--;     // SPI_MSbyte 
               #else
-  93   1        counterByte++;     // SPI_LSbyte
-  94   1      #endif
-  95   1      }
-  96          
-  97          /*Convert DATA BIT*/
-  98          unsigned char SPI_Data_Convert_Bit(unsigned char *outSideBuffer){
-  99   1        unsigned char buf;
- 100   1        buf = *outSideBuffer;  
- 101   1        /*
- 102   1        in Nuvaton, shift operations by 0, we go to -1 
- 103   1        and force the register to go around in a circle 
- 104   1        (the whole cycle) - long operation
- 105   1        */
- 106   1      #if SPI_DATA_BIT == 1
- 107   1        if(counterBit >= BUFFER_SPI - 1){ 
- 108   2          buf = buf & 0x01; 
- 109   2        }
- 110   1        else {
- 111   2          buf = buf & 0x01 << (BUFFER_SPI - counterBit - 1);// SPI_MSB
- 112   2        }
- 113   1      #else
+ 102   1        counterByte++;     // SPI_LSbyte
+ 103   1      #endif
+ 104   1      }
+ 105          
+ 106          /*Convert DATA BIT*/
+ 107          unsigned char SPI_Data_Convert_Bit(unsigned char *outSideBuffer){
+ 108   1        unsigned char buf;
+ 109   1        buf = *outSideBuffer;  
+ 110   1        /*
+ 111   1        in Nuvaton, shift operations by 0, we go to -1 
+ 112   1        and force the register to go around in a circle 
+ 113   1        (the whole cycle) - long operation
+ 114   1        */
+ 115   1      #if SPI_DATA_BIT == SPI_MSB
+C51 COMPILER V9.53.0.0   SPI_PROG                                                          11/15/2024 16:58:43 PAGE 3   
+
+ 116   1        if(counterBit >= BUFFER_SPI - 1){ 
+ 117   2          buf = buf & 0x01; 
+ 118   2        }
+ 119   1        else {
+ 120   2          buf = buf & 0x01 << (BUFFER_SPI - counterBit - 1);// SPI_MSB
+ 121   2        }
+ 122   1      #else
                 if(counterBit >= BUFFER_SPI - 1){
                   buf = buf & 0x01 << BUFFER_SPI - 1;
-C51 COMPILER V9.53.0.0   SPI_PROG                                                          11/14/2024 16:52:52 PAGE 3   
-
                 }
                 else{
                   buf = buf & 0x01 << counterBit;                   // SPI_LSB
                 }
               #endif
- 121   1        return buf;
- 122   1      }
- 123          
- 124          /*Delay = 1 timer cycle timer*/
- 125          void SPI_Delay(){
- 126   1        if(valueDelay){ 
- 127   2          valueDelay--; 
- 128   2        }
- 129   1        else{ 
- 130   2          FlagSPIDelay = 0; 
- 131   2          FlagSPIGlobal = 0;
- 132   2        }
- 133   1      }
- 134          
- 135          /*SET Delay = 1 timer cycle timer*/
- 136          void SPI_Delay_Set(int delay){
- 137   1        valueDelay = delay;
- 138   1        FlagSPIDelay = 1;
- 139   1        FlagSPIGlobal = 1;
- 140   1      }
- 141          
- 142          /* init clk */
- 143          void SPI_CLK_init(bit value){ 
- 144   1        PIN_CLK_SPI = value;
- 145   1      }
- 146          
- 147          /* Start exchange spi */
- 148          void SPI_Start(void){
- 149   1      #if SPI_DATA_BYTE == 1
+ 130   1        return buf;
+ 131   1      }
+ 132          
+ 133          /*Delay = 1 timer cycle timer*/
+ 134          void SPI_Delay(){
+ 135   1        if(valueDelay){ 
+ 136   2          valueDelay--; 
+ 137   2        }
+ 138   1        else{ 
+ 139   2          FlagSPIDelay = 0; 
+ 140   2          FlagSPIGlobal = 0;
+ 141   2        }
+ 142   1      }
+ 143          
+ 144          /*SET Delay = 1 timer cycle timer*/
+ 145          void SPI_Delay_Set(int delay){
+ 146   1        valueDelay = delay;
+ 147   1        FlagSPIDelay = 1;
+ 148   1        FlagSPIGlobal = 1;
+ 149   1      }
+ 150          
+ 151          /* init clk */
+ 152          void SPI_CLK_init(bit value){ 
+ 153   1        PIN_CLK_SPI = value;
+ 154   1      }
+ 155          
+ 156          /* Start exchange spi */
+ 157          void SPI_Start(void){
+ 158   1      #if SPI_DATA_BYTE == SPI_MS_BYTE
                 counterByte = amountByteArrayForSend -1;
               #else
- 152   1        counterByte = 0;
- 153   1      #endif
- 154   1        FlagSPIGlobal = 1;
- 155   1      }
+ 161   1        counterByte = 0;
+ 162   1      #endif
+ 163   1        FlagSPIGlobal = 1;
+ 164   1      }
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    242    ----
+   CODE SIZE        =    293    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =   ----    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =     20       4
+   DATA SIZE        =     20       7
    IDATA SIZE       =   ----    ----
    BIT SIZE         =      3       1
 END OF MODULE INFORMATION.

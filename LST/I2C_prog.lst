@@ -1,4 +1,4 @@
-C51 COMPILER V9.53.0.0   I2C_PROG                                                          11/14/2024 16:52:52 PAGE 1   
+C51 COMPILER V9.53.0.0   I2C_PROG                                                          11/15/2024 16:58:43 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE I2C_PROG
@@ -14,16 +14,12 @@ line level    source
    3          //**************************************************************************
    4          
    5          #include <I2C_prog.h>
-*** ERROR C202 IN LINE 23 OF .\Code\Head\I2C_prog.h: 'BUFFER_SPI_MASSIV_SIZE': undefined identifier
-*** ERROR C136 IN LINE 23 OF .\Code\Head\I2C_prog.h: invalid dimension size: [0]
-*** ERROR C202 IN LINE 24 OF .\Code\Head\I2C_prog.h: 'BUFFER_SPI_MASSIV_SIZE': undefined identifier
-*** ERROR C136 IN LINE 24 OF .\Code\Head\I2C_prog.h: invalid dimension size: [0]
    6          
    7          xdata int sizeADR   = I2C_SIZE_ADR;
    8          xdata int sizeData  = I2C_SIZE_DATA;
    9          
-  10          void I2C_change_size_ADR  (int *value)  {sizeADR  = *value;}
-  11          void I2C_change_size_DATA (int *value)  {sizeData = *value;}
+  10          void I2C_change_size_ADR  (int *value){sizeADR  = *value;}
+  11          void I2C_change_size_DATA (int *value){sizeData = *value;}
   12          
   13          void I2C_start(){
   14   1        // интервал
@@ -43,12 +39,10 @@ line level    source
   28   1        // пройти мимо
   29   1        // когда вернусь прочитать
   30   1        // записать новое значение и пройти мимо ( вернутся в начало)
-  31   1        I2C_SDA
+  31   1        
   32   1        
   33   1        
   34   1      }
-*** ERROR C202 IN LINE 34 OF Code\Source\I2C_prog.c: 'P20': undefined identifier
-*** ERROR C141 IN LINE 34 OF Code\Source\I2C_prog.c: syntax error near '}'
   35          void I2C_exchange_end(){
   36   1        //  все линии в 0 или в 1
   37   1        // мб добавить сюда настройки
@@ -62,4 +56,18 @@ line level    source
   45   1      }
   46          
 
-C51 COMPILATION COMPLETE.  0 WARNING(S),  6 ERROR(S)
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     33    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =      4    ----
+   PDATA SIZE       =   ----    ----
+C51 COMPILER V9.53.0.0   I2C_PROG                                                          11/15/2024 16:58:43 PAGE 2   
+
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

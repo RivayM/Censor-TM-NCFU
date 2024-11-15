@@ -23,8 +23,11 @@ static xdata int sizeData;
 //extern unsigned char valueBufferArrayTx[BUFFER_SPI_MASSIV_SIZE];  
 //extern unsigned char valueBufferArrayRx[BUFFER_SPI_MASSIV_SIZE]; 
 
-bit FlagI2cStart;
-bit FlagI2cDelay;
+extern bit FlagI2cStart;
+extern bit FlagI2cDelay;
+
+//extern int counterBit; 			// current bit in packet(byte)
+//extern int counterByte; 		// current packet(byte)
 
 /*	Pins	*/
 #define I2C_SLK 	ADSK					//

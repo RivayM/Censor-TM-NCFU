@@ -33,17 +33,25 @@ compiling CENCOR_PROGRAMM.c...
 compiling SPI_prog.c...
 compiling ADC_HX711.c...
 compiling I2C_prog.c...
-.\Code\Head\I2C_prog.h(23): error C202: 'BUFFER_SPI_MASSIV_SIZE': undefined identifier
-.\Code\Head\I2C_prog.h(23): error C136: invalid dimension size: [0]
-.\Code\Head\I2C_prog.h(24): error C202: 'BUFFER_SPI_MASSIV_SIZE': undefined identifier
-.\Code\Head\I2C_prog.h(24): error C136: invalid dimension size: [0]
-Code\Source\I2C_prog.c(34): error C202: 'P20': undefined identifier
-Code\Source\I2C_prog.c(34): error C141: syntax error near '}'
 compiling Timers.c...
 compiling Common.c...
 compiling Delay.c...
-Target not created.
-EGMENT, IGNORED FOR OVERLAY PROCESS
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?NRF_CHANGE_MODE_RF?NRF24L01
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?NRF_SEND?NRF24L01
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?NRF_READ_VALUE?NRF24L01
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SPI_WRITE_AMOUNT_BYTE?SPI_PROG
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?SPI_GET_RX_BUF?SPI_PROG
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_SPI_WRITE_TX_BUF?SPI_PROG
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?_I2C_CHANGE_SIZE_ADR?I2C_PROG
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?_I2C_CHANGE_SIZE_DATA?I2C_PROG
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?I2C_START?I2C_PROG
@@ -53,83 +61,15 @@ EGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?I2C_EXCHANGE_DO?I2C_PROG
 *** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
     SEGMENT: ?PR?I2C_EXCHANGE_END?I2C_PROG
-Program Size: data=40.6 xdata=1372 code=2040
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?I2C_DELAY?I2C_PROG
+Program Size: data=44.6 xdata=1372 code=2101
 creating hex file from ".\Code\Obj\censor_tm_ADC+RF"...
-".\Code\Obj\censor_tm_ADC+RF" - 0 Error(s), 9 Warning(s).
-: undefined identifier
-.\Code\Head\NRF24L01.h(71): error C136: invalid dimension size: [0]
-.\Code\Head\NRF24L01.h(72): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
-.\Code\Head\NRF24L01.h(72): error C136: invalid dimension size: [0]
-.\Code\Head\NRF24L01.h(73): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
-.\Code\Head\NRF24L01.h(73): error C136: invalid dimension size: [0]
-.\Code\Head\NRF24L01.h(74): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
-.\Code\Head\NRF24L01.h(74): error C136: invalid dimension size: [0]
-.\Code\Head\NRF24L01.h(75): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
-.\Code\Head\NRF24L01.h(75): error C136: invalid dimension size: [0]
-.\Code\Head\NRF24L01.h(84): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
-.\Code\Head\NRF24L01.h(84): error C136: invalid dimension size: [0]
-.\Code\Head\NRF24L01.h(87): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
-.\Code\Head\NRF24L01.h(87): error C136: invalid dimension size: [0]
-.\Code\Head\NRF24L01.h(88): error C136: invalid dimension size: [0]
-.\Code\Head\NRF24L01.h(89): error C136: invalid dimension size: [0]
-.\Code\Head\NRF24L01.h(90): error C136: invalid dimension size: [0]
-.\Code\Head\NRF24L01.h(91): error C136: invalid dimension size: [0]
-.\Code\Head\NRF24L01.h(92): error C136: invalid dimension size: [0]
-.\Code\Head\NRF24L01.h(93): error C136: invalid dimension size: [0]
-.\Code\Head\NRF24L01.h(94): error C136: invalid dimension size: [0]
-.\Code\Head\NRF24L01.h(96): error C136: invalid dimension size: [0]
-.\Code\Head\NRF24L01.h(97): error C136: invalid dimension size: [0]
-.\Code\Head\NRF24L01.h(98): error C136: invalid dimension size: [0]
-.\Code\Head\NRF24L01.h(99): error C136: invalid dimension size: [0]
-.\Code\Head\NRF24L01.h(100): error C136: invalid dimension size: [0]
-.\Code\Head\NRF24L01.h(101): error C136: invalid dimension size: [0]
-.\Code\Head\NRF24L01.h(103): error C136: invalid dimension size: [0]
-.\Code\Head\NRF24L01.h(105): error C136: invalid dimension size: [0]
-.\Code\Head\NRF24L01.h(106): error C136: invalid dimension size: [0]
-.\Code\Head\NRF24L01.h(107): error C136: invalid dimension size: [0]
-.\Code\Head\NRF24L01.h(108): error C136: invalid dimension size: [0]
-.\Code\Head\NRF24L01.h(109): error C136: invalid dimension size: [0]
-.\Code\Head\NRF24L01.h(110): error C136: invalid dimension size: [0]
-.\Code\Head\NRF24L01.h(112): error C136: invalid dimension size: [0]
-Code\Source\NRF24L01.c(90): error C231: 'COMMAND_STAT': redefinition
-Code\Source\NRF24L01.c(92): error C231: 'COMMAND_SEND_RF': redefinition
-Code\Source\NRF24L01.c(94): error C231: 'COMMAND_READ_RF': redefinition
-Code\Source\NRF24L01.c(96): error C231: 'COMMAND_CLEAR_FLUSH_RX': redefinition
-Code\Source\NRF24L01.c(98): error C231: 'COMMAND_CLEAR_FLUSH_TX': redefinition
-Code\Source\NRF24L01.c(100): error C231: 'COMMAND_CLEAR_IRQ': redefinition
-Code\Source\NRF24L01.c(102): error C231: 'COMMAND_READ_PIPE0': redefinition
-Code\Source\NRF24L01.c(104): error C231: 'COMMAND_READ_FIFO_STAT': redefinition
-Code\Source\NRF24L01.c(106): error C231: 'COMMAND_W_ACK_PAYLOAD': redefinition
-Code\Source\NRF24L01.c(113): error C231: 'readBuf': redefinition
-compiling GPIO.c...
-compiling CENCOR_PROGRAMM.c...
-.\Code\Head\SPI_prog.h(22): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
-.\Code\Head\SPI_prog.h(22): error C136: invalid dimension size: [0]
-.\Code\Head\SPI_prog.h(23): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
-.\Code\Head\SPI_prog.h(23): error C136: invalid dimension size: [0]
-compiling SPI_prog.c...
-.\Code\Head\SPI_prog.H(22): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
-.\Code\Head\SPI_prog.H(22): error C136: invalid dimension size: [0]
-.\Code\Head\SPI_prog.H(23): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
-.\Code\Head\SPI_prog.H(23): error C136: invalid dimension size: [0]
-Code\Source\SPI_prog.c(7): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
-Code\Source\SPI_prog.c(7): error C136: invalid dimension size: [0]
-Code\Source\SPI_prog.c(8): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
-Code\Source\SPI_prog.c(8): error C136: invalid dimension size: [0]
-Code\Source\SPI_prog.c(10): error C202: 'NRF24_BUFFER_MASSIV_SIZE': undefined identifier
-Code\Source\SPI_prog.c(32): error C202: 'SPI_SCK': undefined identifier
-Code\Source\SPI_prog.c(34): error C202: 'SPI_SCK': undefined identifier
-Code\Source\SPI_prog.c(39): error C202: 'SPI_MOSI': undefined identifier
-Code\Source\SPI_prog.c(41): error C202: 'SPI_SCK': undefined identifier
-Code\Source\SPI_prog.c(48): error C202: 'SPI_CSRF': undefined identifier
-Code\Source\SPI_prog.c(50): error C202: 'SPI_MOSI': undefined identifier
-Code\Source\SPI_prog.c(51): error C202: 'SPI_MOSI': undefined identifier
-Code\Source\SPI_prog.c(53): error C202: 'SPI_MISO': undefined identifier
-Code\Source\SPI_prog.c(83): error C202: 'SPI_CSRF': undefined identifier
-Code\Source\SPI_prog.c(144): error C202: 'SPI_SCK': undefined identifier
-compiling ADC_HX711.c...
-compiling I2C_prog.c...
-compiling Timers.c...
-compiling Common.c...
-compiling Delay.c...
-Target not created.
+".\Code\Obj\censor_tm_ADC+RF" - 0 Error(s), 13 Warning(s).
+Load "C:\\Users\\MASTER.CERN\\Desktop\\PROGRAMM COD\\CENSOR\\Code\\Obj\\censor_tm_ADC+RF" 
+Flash Erase Done.
+Flash Write Done: 2101 bytes programmed.
+Flash Verify Done: 2101 bytes verified.
+lash Erase Done.
+Flash Write Done: 2125 bytes programmed.
+Flash Verify Done: 2125 bytes verified.
