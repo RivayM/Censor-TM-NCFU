@@ -213,17 +213,8 @@ bit NRF_get(/*amount bytes*/){
 
 /*send info for SPI*/
 void Send_SPI_NRF(unsigned char *message,int amountMessage){
-	unsigned char adr = 0;
-	int i;
-	for(i = 0; i <= amountMessage; i++){
-		valueBufferArrayTx[i] = *(message + i);
-	}
-	amountByteArrayForSend = amountMessage;
-	/*
-
 	SPI_write_amount_byte(amountMessage);				// amount byte
 	SPI_write_TX_buf(message);									// write in Buf TX
-	*/
 	SPI_Start();      													// start exchange
 }
 

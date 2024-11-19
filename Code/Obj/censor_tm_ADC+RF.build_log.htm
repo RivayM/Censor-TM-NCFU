@@ -27,49 +27,121 @@ Project File Date:  11/14/2024
 <h2>Output:</h2>
 Rebuild target 'censor_tm_ADC+RF'
 compiling main.c...
+.\Code\Head\I2C_prog.h(32): error C168: 'bufferTxPacket': array of bit
+.\Code\Head\I2C_prog.h(53): error C141: syntax error near 'void'
+.\Code\Head\I2C_prog.h(53): error C141: syntax error near 'mode', expected ')'
 compiling NRF24L01.c...
 compiling GPIO.c...
 compiling CENCOR_PROGRAMM.c...
+.\Code\Head\I2C_prog.h(32): error C168: 'bufferTxPacket': array of bit
+.\Code\Head\I2C_prog.h(53): error C141: syntax error near 'void'
+.\Code\Head\I2C_prog.h(53): error C141: syntax error near 'mode', expected ')'
 compiling SPI_prog.c...
 compiling ADC_HX711.c...
 compiling I2C_prog.c...
+.\Code\Head\I2C_prog.h(32): error C168: 'bufferTxPacket': array of bit
+.\Code\Head\I2C_prog.h(53): error C141: syntax error near 'void'
+.\Code\Head\I2C_prog.h(53): error C141: syntax error near 'mode', expected ')'
 compiling Timers.c...
 compiling Common.c...
 compiling Delay.c...
-linking...
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?NRF_CHANGE_MODE_RF?NRF24L01
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?NRF_SEND?NRF24L01
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?NRF_READ_VALUE?NRF24L01
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_SPI_WRITE_AMOUNT_BYTE?SPI_PROG
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?SPI_GET_RX_BUF?SPI_PROG
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_SPI_WRITE_TX_BUF?SPI_PROG
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_I2C_CHANGE_SIZE_ADR?I2C_PROG
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?_I2C_CHANGE_SIZE_DATA?I2C_PROG
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?I2C_START?I2C_PROG
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?I2C_EXCHANGE_START?I2C_PROG
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?I2C_EXCHANGE_DO?I2C_PROG
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?I2C_EXCHANGE_END?I2C_PROG
-*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
-    SEGMENT: ?PR?I2C_DELAY?I2C_PROG
-Program Size: data=44.6 xdata=1372 code=2101
-creating hex file from ".\Code\Obj\censor_tm_ADC+RF"...
-".\Code\Obj\censor_tm_ADC+RF" - 0 Error(s), 13 Warning(s).
-Load "C:\\Users\\MASTER.CERN\\Desktop\\PROGRAMM COD\\CENSOR\\Code\\Obj\\censor_tm_ADC+RF" 
-Flash Erase Done.
-Flash Write Done: 2101 bytes programmed.
-Flash Verify Done: 2101 bytes verified.
-lash Erase Done.
-Flash Write Done: 2125 bytes programmed.
-Flash Verify Done: 2125 bytes verified.
+Target not created.
+NRF24L01.h(74): error C127: 'COMMAND_READ_FIFO_STAT': invalid storage class
+.\Code\Head\NRF24L01.h(75): error C127: 'COMMAND_W_ACK_PAYLOAD': invalid storage class
+.\Code\Head\NRF24L01.h(81): error C127: 'modeRF': invalid storage class
+.\Code\Head\NRF24L01.h(82): error C127: 'FlagDataReadReady': invalid storage class
+.\Code\Head\NRF24L01.h(83): error C127: 'currentProcess': invalid storage class
+.\Code\Head\NRF24L01.h(84): error C127: 'readBuf': invalid storage class
+.\Code\Head\NRF24L01.h(116): error C127: 'packetRX': invalid storage class
+.\Code\Head\NRF24L01.h(117): error C127: 'packetTX': invalid storage class
+.\Code\Head\NRF24L01.h(118): error C127: 'packetREAD': invalid storage class
+.\Code\Head\NRF24L01.h(121): error C132: 'NRF_init': not in formal parameter list
+.\Code\Head\NRF24L01.h(122): error C132: 'NRF_get': not in formal parameter list
+.\Code\Head\NRF24L01.h(123): error C132: 'NRF_send': not in formal parameter list
+.\Code\Head\NRF24L01.h(125): error C132: 'NRF_clear_FIFO': not in formal parameter list
+.\Code\Head\NRF24L01.h(126): error C132: 'NRF_send': not in formal parameter list
+.\Code\Head\NRF24L01.h(127): error C132: 'NRF_get': not in formal parameter list
+.\Code\Head\NRF24L01.h(128): error C132: 'NRF_change_mode_RF': not in formal parameter list
+.\Code\Head\NRF24L01.h(130): error C132: 'Check_Out': not in formal parameter list
+.\Code\Head\NRF24L01.h(133): error C132: 'NRF_read_value': not in formal parameter list
+.\Code\Head\NRF24L01.h(134): error C132: '_Send_SPI_NRF': not in formal parameter list
+.\Code\Head\NRF24L01.h(135): error C132: '_NRF_delay': not in formal parameter list
+.\Code\Head\ADC_HX711.h(37): error C132: 'ADCHX711_Read': not in formal parameter list
+.\Code\Head\ADC_HX711.h(38): error C132: 'ADCHX711_Initial': not in formal parameter list
+.\Code\Head\CENCOR_PROGRAMM.h(48): error C132: 'init_device': not in formal parameter list
+.\Code\Head\CENCOR_PROGRAMM.h(54): error C127: 'mainStateProgressSPI': invalid storage class
+.\Code\Head\CENCOR_PROGRAMM.h(56): error C132: 'Work_NRF': not in formal parameter list
+.\Code\Head\CENCOR_PROGRAMM.h(57): error C132: 'ISR_Timer0': not in formal parameter list
+.\Code\Head\CENCOR_PROGRAMM.h(58): error C132: 'Process_init_RF': not in formal parameter list
+.\Code\Head\CENCOR_PROGRAMM.h(59): error C132: 'Process_work_RF': not in formal parameter list
+.\Code\Head\CENCOR_PROGRAMM.h(64): error C127: 'mainStateProgressADC': invalid storage class
+Code\Source\main.c(7): error C132: 'main': not in formal parameter list
+Code\Source\main.c(7): error C141: syntax error near '{'
+Code\Source\main.c(12): error C132: 'init_device': not in formal parameter list
+Code\Source\main.c(18): error C141: syntax error near '100'
+Code\Source\main.c(18): error C132: 'SPI_Delay_Set': not in formal parameter list
+Code\Source\main.c(22): error C141: syntax error near 'while'
+Code\Source\main.c(22): error C141: syntax error near '1'
+Code\Source\main.c(24): error C141: syntax error near '}'
+compiling NRF24L01.c...
+compiling GPIO.c...
+compiling CENCOR_PROGRAMM.c...
+.\Code\Head\I2C_prog.h(53): error C141: syntax error near 'void'
+.\Code\Head\I2C_prog.h(53): error C141: syntax error near 'mode', expected ')'
+.\Code\Head\NRF24L01.h(67): error C127: 'I2C_Get_Buf_RX': invalid storage class
+.\Code\Head\NRF24L01.h(67): error C141: syntax error near 'static'
+.\Code\Head\NRF24L01.h(67): error C127: 'COMMAND_STAT': invalid storage class
+.\Code\Head\NRF24L01.h(68): error C127: 'COMMAND_SEND_RF': invalid storage class
+.\Code\Head\NRF24L01.h(69): error C127: 'COMMAND_READ_RF': invalid storage class
+.\Code\Head\NRF24L01.h(70): error C127: 'COMMAND_CLEAR_FLUSH_RX': invalid storage class
+.\Code\Head\NRF24L01.h(71): error C127: 'COMMAND_CLEAR_FLUSH_TX': invalid storage class
+.\Code\Head\NRF24L01.h(72): error C127: 'COMMAND_CLEAR_IRQ': invalid storage class
+.\Code\Head\NRF24L01.h(73): error C127: 'COMMAND_READ_PIPE0': invalid storage class
+.\Code\Head\NRF24L01.h(74): error C127: 'COMMAND_READ_FIFO_STAT': invalid storage class
+.\Code\Head\NRF24L01.h(75): error C127: 'COMMAND_W_ACK_PAYLOAD': invalid storage class
+.\Code\Head\NRF24L01.h(81): error C127: 'modeRF': invalid storage class
+.\Code\Head\NRF24L01.h(82): error C127: 'FlagDataReadReady': invalid storage class
+.\Code\Head\NRF24L01.h(83): error C127: 'currentProcess': invalid storage class
+.\Code\Head\NRF24L01.h(84): error C127: 'readBuf': invalid storage class
+.\Code\Head\NRF24L01.h(116): error C127: 'packetRX': invalid storage class
+.\Code\Head\NRF24L01.h(117): error C127: 'packetTX': invalid storage class
+.\Code\Head\NRF24L01.h(118): error C127: 'packetREAD': invalid storage class
+.\Code\Head\NRF24L01.h(121): error C132: 'NRF_init': not in formal parameter list
+.\Code\Head\NRF24L01.h(122): error C132: 'NRF_get': not in formal parameter list
+.\Code\Head\NRF24L01.h(123): error C132: 'NRF_send': not in formal parameter list
+.\Code\Head\NRF24L01.h(125): error C132: 'NRF_clear_FIFO': not in formal parameter list
+.\Code\Head\NRF24L01.h(126): error C132: 'NRF_send': not in formal parameter list
+.\Code\Head\NRF24L01.h(127): error C132: 'NRF_get': not in formal parameter list
+.\Code\Head\NRF24L01.h(128): error C132: 'NRF_change_mode_RF': not in formal parameter list
+.\Code\Head\NRF24L01.h(130): error C132: 'Check_Out': not in formal parameter list
+.\Code\Head\NRF24L01.h(133): error C132: 'NRF_read_value': not in formal parameter list
+.\Code\Head\NRF24L01.h(134): error C132: '_Send_SPI_NRF': not in formal parameter list
+.\Code\Head\NRF24L01.h(135): error C132: '_NRF_delay': not in formal parameter list
+.\Code\Head\ADC_HX711.h(37): error C132: 'ADCHX711_Read': not in formal parameter list
+.\Code\Head\ADC_HX711.h(38): error C132: 'ADCHX711_Initial': not in formal parameter list
+.\Code\Head\CENCOR_PROGRAMM.h(48): error C132: 'init_device': not in formal parameter list
+.\Code\Head\CENCOR_PROGRAMM.h(54): error C127: 'mainStateProgressSPI': invalid storage class
+.\Code\Head\CENCOR_PROGRAMM.h(56): error C132: 'Work_NRF': not in formal parameter list
+.\Code\Head\CENCOR_PROGRAMM.h(57): error C132: 'ISR_Timer0': not in formal parameter list
+.\Code\Head\CENCOR_PROGRAMM.h(58): error C132: 'Process_init_RF': not in formal parameter list
+.\Code\Head\CENCOR_PROGRAMM.h(59): error C132: 'Process_work_RF': not in formal parameter list
+.\Code\Head\CENCOR_PROGRAMM.h(64): error C127: 'mainStateProgressADC': invalid storage class
+compiling SPI_prog.c...
+compiling ADC_HX711.c...
+compiling I2C_prog.c...
+.\Code\Head\I2C_prog.h(53): error C141: syntax error near 'void'
+.\Code\Head\I2C_prog.h(53): error C141: syntax error near 'mode', expected ')'
+Code\Source\I2C_prog.c(7): error C127: 'I2C_Get_Buf_RX': invalid storage class
+Code\Source\I2C_prog.c(7): error C141: syntax error near 'bit'
+Code\Source\I2C_prog.c(7): error C127: 'FlagI2cStart': invalid storage class
+Code\Source\I2C_prog.c(8): error C244: 'FlagI2cDelay': can't initialize, bad type or class
+Code\Source\I2C_prog.c(8): error C132: 'FlagI2cDelay': not in formal parameter list
+compiling Timers.c...
+compiling Common.c...
+compiling Delay.c...
+Target not created.
+rce\I2C_prog.c(9): error C132: 'FlagI2cDelay': not in formal parameter list
+compiling Timers.c...
+compiling Common.c...
+compiling Delay.c...
+Target not created.

@@ -27,13 +27,13 @@
 #define SPI_DATA_BIT 		SPI_MSB			// or use SPI_LSB = 0 ; SPI_MSB = 1
 #define SPI_DATA_BYTE 	SPI_LS_BYTE // or use SPI_LSbyte = 0 ; SPI_MSbyte = 1
 
-extern unsigned char valueBufferArrayTx[BUFFER_SPI_MASSIV_SIZE];  
-extern unsigned char valueBufferArrayRx[BUFFER_SPI_MASSIV_SIZE];  
+static unsigned char valueBufferArrayTx[BUFFER_SPI_MASSIV_SIZE];  
+static unsigned char valueBufferArrayRx[BUFFER_SPI_MASSIV_SIZE];  
 
-extern int counterBit; 							// current bit in packet(byte)
-extern int counterByte; 						// current packet(byte)
-extern int amountByteArrayForSend; 	// current packet(byte) for SEND
-extern int valueDelay;             	// delay values 1 = 1 timer cycle timer ->TactTimer0
+static int counterBit; 							// current bit in packet(byte)
+static int counterByte; 						// current packet(byte)
+static int amountByteArrayForSend; 	// current packet(byte) for SEND
+static int valueDelay;             	// delay values 1 = 1 timer cycle timer ->TactTimer0
 
 extern bit FlagSPIGlobal;  	 				// Permission global(all)
 extern bit FlagSPIExchange;  	 			// Permission exchange)

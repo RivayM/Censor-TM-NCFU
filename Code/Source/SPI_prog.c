@@ -25,13 +25,19 @@ void SPI_write_TX_buf(unsigned char *buf){
 	int  i;
 	for( i = 0; i <= amountByteArrayForSend; i++ ){
 		valueBufferArrayTx[i] = *( buf + i );
-	//	valueBufferArrayTx[i] = 0x33;
 	}
 }
 
 
+//********************************************************
+//			_____			 _____				->	CLK
+//			|		|			 |	 |
+//______|		|______|	 |______
+//  f()	 f()	f()		f()	 f()		->	SPI_exchange_start()
+//********************************************************
 /* main func(for timer) */
 void SPI_exchange_start(void){
+	/*every clk launch*/
 	SPI_exchange_do( 
 		SPI_Data_Convert_Bit(
 			&valueBufferArrayTx[counterByte]),	// buf  for TX
@@ -40,23 +46,23 @@ void SPI_exchange_start(void){
 
 /* exchange bitwise operation */
 void SPI_exchange_do(unsigned char valueMosi, unsigned char *outSideBuffer){ 
-	if(counterBit ||	SPI_CPOL) {         // CPOL - when start clk
-		PIN_CLK_SPI =~PIN_CLK_SPI;          // clocking
+	if( counterBit ||	SPI_CPOL ) {        // CPOL - when start clk
+		PIN_CLK_SPI =~ PIN_CLK_SPI;         // clocking
 	}  		
 	if( PIN_CLK_SPI == SPI_CPHA) {       	// CPHA - when next bit
 /******************************/
 		switch(counterBit){		 							// Start
 /*End bit packet	*/
-			case BUFFER_SPI:          				
+			case BUFFER_SPI	/*	max bit	*/:          				
 				PIN_MOSI_SPI = 1;
 				//PIN_MISO_SPI = 1;
 				PIN_CLK_SPI  = SPI_CPOL;	
 				counterBit   = 0;
-				SPI_exchange_end();       // continue?
-				SPI_Data_Convert_Byte();  // next packet
+				SPI_exchange_end();       			// continue?
+				SPI_Data_Convert_Byte();  			// next packet
 				break;
 /* process going	*/
-			default  /* 0 - 7 */: 
+			default  /* 0 -> max bit - 1*/: 
 				PIN_CS_SPI   = 0;
 /* send MoSi	*/
 				if(valueMosi){PIN_MOSI_SPI = 1;}

@@ -1,4 +1,4 @@
-C51 COMPILER V9.53.0.0   NRF24L01                                                          11/15/2024 16:58:43 PAGE 1   
+C51 COMPILER V9.53.0.0   NRF24L01                                                          11/19/2024 15:08:59 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE NRF24L01
@@ -62,7 +62,7 @@ line level    source
   49          /*  struct for send mode TX     */
   50          //**************************************************************************
   51          xdata struct NRF_PACKET_SPI packetTX = {
-C51 COMPILER V9.53.0.0   NRF24L01                                                          11/15/2024 16:58:43 PAGE 2   
+C51 COMPILER V9.53.0.0   NRF24L01                                                          11/19/2024 15:08:59 PAGE 2   
 
   52            /*reg:            ,value:   */
   53            {W_REG|NRF_CONFIG ,0x0E},   //  CONFIG
@@ -126,7 +126,7 @@ line level    source
  111          //**************************************************************************
  112          
  113          xdata unsigned char readBuf[NRF_MASSIV_SIZE]={0x00}; 
-C51 COMPILER V9.53.0.0   NRF24L01                                                          11/15/2024 16:58:43 PAGE 3   
+C51 COMPILER V9.53.0.0   NRF24L01                                                          11/19/2024 15:08:59 PAGE 3   
 
  114          
  115          bit FlagDataReadReady = 0;
@@ -190,7 +190,7 @@ line level    source
  173   2          case 4: /*state CE in end init*/
  174   2            if(modeRF){ NRF_CE = 1;}
  175   2            else{       NRF_CE = 0;}                        break;
-C51 COMPILER V9.53.0.0   NRF24L01                                                          11/15/2024 16:58:43 PAGE 4   
+C51 COMPILER V9.53.0.0   NRF24L01                                                          11/19/2024 15:08:59 PAGE 4   
 
  176   2          
  177   2          case 5: currentProcess = END_PROCESS;             break;
@@ -232,61 +232,52 @@ line level    source
  213          
  214          /*send info for SPI*/
  215          void Send_SPI_NRF(unsigned char *message,int amountMessage){
- 216   1        unsigned char adr = 0;
- 217   1        int i;
- 218   1        for(i = 0; i <= amountMessage; i++){
- 219   2          valueBufferArrayTx[i] = *(message + i);
- 220   2        }
- 221   1        amountByteArrayForSend = amountMessage;
- 222   1        /*
- 223   1      
- 224   1        SPI_write_amount_byte(amountMessage);       // amount byte
- 225   1        SPI_write_TX_buf(message);                  // write in Buf TX
- 226   1        */
- 227   1        SPI_Start();                                // start exchange
- 228   1      }
- 229          
- 230          /* read last answer for spi*/ 
- 231          void NRF_read_value(void){
- 232   1        int i;
- 233   1        for(i = 0; i < NRF_MASSIV_SIZE; i++){
- 234   2          readBuf[i] = valueBufferArrayRx[i];
- 235   2        }
- 236   1      }
- 237          
-C51 COMPILER V9.53.0.0   NRF24L01                                                          11/15/2024 16:58:43 PAGE 5   
+ 216   1        SPI_write_amount_byte(amountMessage);       // amount byte
+ 217   1        SPI_write_TX_buf(message);                  // write in Buf TX
+ 218   1        SPI_Start();                                // start exchange
+ 219   1      }
+ 220          
+ 221          /* read last answer for spi*/ 
+ 222          void NRF_read_value(void){
+ 223   1        int i;
+ 224   1        for(i = 0; i < NRF_MASSIV_SIZE; i++){
+ 225   2          readBuf[i] = valueBufferArrayRx[i];
+ 226   2        }
+ 227   1      }
+ 228          
+ 229          /*check - end process?*/
+ 230          bit Check_Out(){
+ 231   1        if(currentProcess == END_PROCESS){ 
+ 232   2          currentProcess = 0;
+ 233   2          return 1;
+ 234   2        }
+ 235   1        else {
+ 236   2          currentProcess++;
+ 237   2          return 0;
+C51 COMPILER V9.53.0.0   NRF24L01                                                          11/19/2024 15:08:59 PAGE 5   
 
- 238          /*check - end process?*/
- 239          bit Check_Out(){
- 240   1        if(currentProcess == END_PROCESS){ 
- 241   2          currentProcess = 0;
- 242   2          return 1;
- 243   2        }
- 244   1        else {
- 245   2          currentProcess++;
- 246   2          return 0;
- 247   2        }
- 248   1      }
+ 238   2        }
+ 239   1      }
+ 240          
+ 241          /*NRF delay(wait)*/
+ 242          void NRF_delay(int delayValue){
+ 243   1        SPI_Delay_Set(delayValue);
+ 244   1      }
+ 245          
+ 246          
+ 247          
+ 248            
  249          
- 250          /*NRF delay(wait)*/
- 251          void NRF_delay(int delayValue){
- 252   1        SPI_Delay_Set(delayValue);
- 253   1      }
- 254          
- 255          
- 256          
- 257            
- 258          
- 259          
- 260          
+ 250          
+ 251          
 
 
 MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =    729    ----
+   CODE SIZE        =    688    ----
    CONSTANT SIZE    =   ----    ----
    XDATA SIZE       =    456    ----
    PDATA SIZE       =   ----    ----
-   DATA SIZE        =      2       6
+   DATA SIZE        =     22       3
    IDATA SIZE       =   ----    ----
    BIT SIZE         =      2    ----
 END OF MODULE INFORMATION.
