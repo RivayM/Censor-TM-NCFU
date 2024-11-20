@@ -1,4 +1,4 @@
-C51 COMPILER V9.53.0.0   I2C_PROG                                                          11/19/2024 15:08:59 PAGE 1   
+C51 COMPILER V9.53.0.0   I2C_PROG                                                          11/20/2024 16:32:01 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE I2C_PROG
@@ -14,110 +14,160 @@ line level    source
    3          //**************************************************************************
    4          
    5          #include <I2C_prog.h>
-*** ERROR C168 IN LINE 32 OF .\Code\Head\I2C_prog.h: 'bufferTxPacket': array of bit
-*** ERROR C141 IN LINE 53 OF .\Code\Head\I2C_prog.h: syntax error near 'void'
-*** ERROR C141 IN LINE 53 OF .\Code\Head\I2C_prog.h: syntax error near 'mode', expected ')'
-   6          
-   7          bit FlagI2cStart  = 0;
-   8          bit FlagI2cDelay  = 0;
-   9          
-  10          xdata int I2cSizebuf  = I2C_SIZE_PACKET_BUF;
-  11          xdata int sizeADR     = I2C_SIZE_ADR;
-  12          xdata int sizeData    = I2C_SIZE_DATA;
-  13          
-  14          void I2C_change_size_ADR  (int value){sizeADR = value;}
-  15          void I2C_change_size_DATA (int value){sizeData= value;}
-  16          
-  17          //********************************************************
-  18          //      _____      _____        ->  CLK
-  19          //      |   |      |   |
-  20          //______|   |______|   |______
-  21          //  f()  f()  f()   f()  f()    ->  I2C_exchange_start()
-  22          //********************************************************
-  23          /* main func(for timer) */
-  24          void I2C_exchange_start(){
-  25   1        /*every clk launch*/
-  26   1        // то что использовать в таймере и чо выставл€ть в момент времени
-  27   1        
-  28   1        
-  29   1      }
-  30          
+   6          #include <N76E003.H>
+   7          
+   8          bit FlagI2cStart  = 0;
+   9          bit FlagI2cDelay  = 0;
+  10          
+  11          xdata int I2cSizeBuf        = I2C_SIZE_PACKET_BUF;
+  12          xdata int sizeADR           = I2C_SIZE_ADR;
+  13          xdata int sizeData          = I2C_SIZE_DATA;
+  14          int sizeByteForSend = I2C_AMOUNT_PACKETS;
+  15          
+  16          void I2C_change_size_ADR(int value){sizeADR = value;}
+  17          void I2C_change_size_DATA(int value){sizeData= value;}
+  18          void I2C_change_size_BUF(int value){sizeData= value;}
+  19          
+  20          //********************************************************
+  21          //      _____      _____        ->  CLK
+  22          //      |   |      |   |
+  23          //______|   |______|   |______
+  24          //  f()  f()  f()   f()  f()    ->  I2C_exchange_start()
+  25          //********************************************************
+  26          /* main f()for timer/every clk launc. When exchange start*/
+  27          void I2C_exchange_start(){
+  28   1        /*every clk launch*/
+  29   1        
+  30   1      }
   31          
-  32          void I2C_exchange_do(I2cMode mode){
-  33   1        // здесь мне надо задать cигнал clk 
-  34   1        // пройти мимо
-  35   1        // когда вернусь прочитать
-  36   1        // записать новое значение и пройти мимо ( вернутс€ в начало)
-  37   1        
-  38   1        if( counterBit || I2C_CPOL){
-  39   2          
-  40   2        }
-  41   1        
-  42   1        if( I2C_SLK == I2C_CPHA ){
-  43   2          switch(counterBit){             //  start exchange  
-  44   3      /*End bit packet  */
-  45   3            case I2cSizeBuf:  /*  max bit */
-  46   3              /*need next byte?*/
-  47   3              if(counterByte > sizeByteForDend){+
-  48   4                FlagI2cStart  = 0;
-  49   4                I2C_SLK       = 0;
-  50   4                I2C_SDA       = 0;
-C51 COMPILER V9.53.0.0   I2C_PROG                                                          11/19/2024 15:08:59 PAGE 2   
+  32          /*instructions when exchange go */
+  33          void I2C_exchange_do(enum I2cMode mode){
+  34   1        // здесь мне надо задать cигнал clk 
+  35   1        // пройти мимо
+  36   1        // когда вернусь прочитать
+  37   1        // записать новое значение и пройти мимо ( вернутс€ в начало)
+  38   1        
+  39   1        if(counterBit){     
+  40   2          I2C_SLK =~ I2C_SLK;
+  41   2        }
+  42   1        else{ /*counterBit=0*/            // what do when start packet
+  43   2          if(I2C_SLK == I2C_CPOL ){       // check setings
+  44   3            /*don't change state*/
+  45   3          }
+  46   2          else{ 
+  47   3            I2C_SLK =~ I2C_SLK;   
+  48   3          }
+  49   2        }
+  50   1      
+  51   1        if( I2C_SLK == I2C_CPHA ){
+  52   2          switch(counterBit){             //  start exchange  
+  53   3      /*End bit packet  */
+C51 COMPILER V9.53.0.0   I2C_PROG                                                          11/20/2024 16:32:01 PAGE 2   
 
-  51   4              }
-  52   3              else{
-  53   4                counterByte++;            // next byte
-  54   4              }
-  55   3              break;
-  56   3      /* process going  */
-  57   3            default:  /* 0 -> max bit - 1*/
-  58   3              switch(mode){
-  59   4                case SEND:
-  60   4                  //складывать в буфер I2C_SDA
-  61   4                  break;
-  62   4                case READ:
-  63   4                
-  64   4                if(I2C_SDA == 1){
-  65   5                  //прочитать
-  66   5                  }
-  67   4                  break;
-  68   4                default:break;
-  69   4              }
-  70   3            
-  71   3              I2C_SDA = output;
-  72   3      /* next bit   */
-  73   3              counterBit++;     
-  74   3              break;
-  75   3          }
-  76   2          
-  77   2        }
-  78   1      
-  79   1      }
-  80          
-  81          void I2C_exchange_end(){
-  82   1        //  все линии в 0 или в 1
-  83   1        // мб добавить сюда настройки
-  84   1      
-  85   1      }
-  86          
-  87          void I2C_delay(){
-  88   1        // верм€€ задержки
-  89   1        // например ширина импульса и следовательно скорость обмена
-  90   1      
-  91   1      }
-  92          
-  93          void I2C_init_CLK(bit value){
-  94   1        I2C_SLK = value;
-  95   1      }
-  96          
-  97          static bit I2C_Get_Buf_TX(){
-  98   1        return 1;
-  99   1      }
- 100          
- 101          static bit I2C_Get_Buf_RX(){
- 102   1        return 1;
- 103   1      }
- 104          
- 105          
+  54   3            case I2C_SIZE_PACKET_BUF: /*  max bit */
+  55   3              /*need next byte?*/
+  56   3              if(counterByte > sizeByteForSend){
+  57   4                FlagI2cStart  = 0;
+  58   4                I2C_SLK       = 0;
+  59   4                I2C_SDA       = 0;
+  60   4              }
+  61   3              else{
+  62   4                counterByte++;            // next byte
+  63   4              }
+  64   3              break;
+  65   3      /* process going  */
+  66   3            default:  /* 0 -> max bit - 1*/
+  67   3              switch(mode){
+  68   4                case SEND:  
+  69   4                  I2C_SDA = I2C_Get_Bit_Buf_TX();  // get from buf TX
+  70   4                  break;
+  71   4                case READ:
+  72   4                  if(I2C_SDA == 1){I2C_Write_Bit_Buf_RX();}  // read pin and write to buf
+  73   4                  break;
+  74   4                default:break;
+  75   4              }
+  76   3      /* next bit   */
+  77   3              counterBit++; 
+  78   3      /*if will be max size change */
+  79   3              if(counterBit == I2cSizeBuf){ 
+  80   4                counterBit = I2C_SIZE_PACKET_BUF;
+  81   4              }
+  82   3              break;
+  83   3          }
+  84   2          
+  85   2        }
+  86   1      
+  87   1      }
+  88          
+  89          /*instructions exchange end */
+  90          void I2C_exchange_end(){
+  91   1        //  все линии в 0 или в 1
+  92   1        // мб добавить сюда настройки
+  93   1      
+  94   1      }
+  95          
+  96          /*delay = each iteration when the call */
+  97          void I2C_delay(){
+  98   1        // верм€€ задержки
+  99   1        // например ширина импульса и следовательно скорость обмена
+ 100   1      
+ 101   1      }
+ 102          
+ 103          /*init state SLK */
+ 104          void I2C_init_SLK(bit value){
+ 105   1        I2C_SLK = value;
+ 106   1      }
+ 107          
+ 108          /*read TX buf and send bit*/
+ 109          static bit I2C_Get_Bit_Buf_TX(){
+ 110   1        int outValue;
+ 111   1        if( counterBit <=15 ){
+ 112   2          outValue = bufferLowValueTX * (0x01 << counterBit);
+ 113   2        }
+ 114   1        else if(counterBit == 16){  // nuvoton << 15 or >>15 (max)!!!
+ 115   2          outValue = bufferLowValueTX * 0x8000;
+C51 COMPILER V9.53.0.0   I2C_PROG                                                          11/20/2024 16:32:01 PAGE 3   
 
-C51 COMPILATION COMPLETE.  0 WARNING(S),  3 ERROR(S)
+ 116   2        }
+ 117   1        else if(counterBit == 32){  // the same as 16 bit for bufferLowValueTX
+ 118   2          outValue = bufferHighValueTX * 0x8000;
+ 119   2        }
+ 120   1        else if( counterBit > 16 /*&& counterBit!=32*/){
+ 121   2          outValue = bufferHighValueTX * (0x01 << counterBit);
+ 122   2        }
+ 123   1        else {} /*error*/
+ 124   1        return outValue ? 1 : 0;
+ 125   1      }
+ 126          
+ 127          /*write in buf Rx ( if only input = 1!)*/
+ 128          static void I2C_Write_Bit_Buf_RX(){
+ 129   1        if( counterBit <=15 ){
+ 130   2          bufferLowValueRX += (0x01 << counterBit);
+ 131   2        }
+ 132   1        else if(counterBit == 16){  // nuvoton << 15 or >>15 (max)!!!
+ 133   2          bufferLowValueRX += 0x8000;
+ 134   2        }
+ 135   1        else if(counterBit == 32){  // the same as 16 bit for bufferLowValueTX
+ 136   2          bufferHighValueRX += 0x8000;
+ 137   2        }
+ 138   1        else if( counterBit > 16 /*&& counterBit!=32*/){
+ 139   2          bufferHighValueRX += (0x01 << counterBit);
+ 140   2        }
+ 141   1        else {} /*error*/
+ 142   1      }
+ 143          
+ 144          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    394    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =     14    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      6    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =      2       1
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

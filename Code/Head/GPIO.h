@@ -40,7 +40,7 @@
 #define FRAM_HOLD 	P06
 #define FRAM_WP 		P07
 
-/* <I2C_ADC_HX711.h> */
+/* <I2C_prog.h> */
 #define	ADSK 				P05
 #define ADOUT 			P20				//INT0
 

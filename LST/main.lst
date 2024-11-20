@@ -1,4 +1,4 @@
-C51 COMPILER V9.53.0.0   MAIN                                                              11/19/2024 15:08:59 PAGE 1   
+C51 COMPILER V9.53.0.0   MAIN                                                              11/20/2024 16:32:00 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE MAIN
@@ -14,9 +14,6 @@ line level    source
    3          //********************************************************
    4          
    5          #include <CENCOR_PROGRAMM.h>
-*** ERROR C168 IN LINE 32 OF .\Code\Head\I2C_prog.h: 'bufferTxPacket': array of bit
-*** ERROR C141 IN LINE 53 OF .\Code\Head\I2C_prog.h: syntax error near 'void'
-*** ERROR C141 IN LINE 53 OF .\Code\Head\I2C_prog.h: syntax error near 'mode', expected ')'
    6          
    7          void main(){
    8   1        //int count = 0;
@@ -39,4 +36,16 @@ line level    source
   25   1      }
   26          
 
-C51 COMPILATION COMPLETE.  0 WARNING(S),  3 ERROR(S)
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     15    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =    464    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     22    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
