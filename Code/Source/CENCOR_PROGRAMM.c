@@ -119,9 +119,11 @@ void ISR_Timer0() interrupt 1 {  				// <Interface_com.H>
 //********************************************************
 // ISR ADC
 //********************************************************
-/*void ISR_INT0() interrupt 0 {  // INT0
-	if(FlagInComSPIGlobal){ InCom_SPI_exchange();}
-}*/
+void ISR_INT0() interrupt 0 {  // INT0
+	
+	
+	
+}
 
 //********************************************************
 // ISR NRF

@@ -18,20 +18,17 @@
 #define I2C_SIZE_DATA		8					// size 1 packet
 
 #define I2C_SIZE_PACKET_BUF	32+1	// max size 1 packet (2 int + 1 / +1->this end process)
-#define I2C_AMOUNT_PACKETS		6	// max size Packets
-enum I2cMode{
-	SEND = 0,
-	READ = 1
-}; 
+#define I2C_AMOUNT_PACKETS		 6	// max size Packets
 
-static xdata int sizeADR;					//
-static xdata int sizeData;				//
-static int sizeByteForSend;	//
+enum I2cMode{ SEND = 0, READ = 1 }; // For func I2C_exchange_do
 
-static int counterBit; 						// current bit in packet(byte)
-static int counterByte; 					// current packet(byte)
+static xdata int sizeADRI2c;			//
+static xdata int sizeDataI2c;			//
+static xdata int sizeBufI2c;			// <=I2C_SIZE_BUF
+static xdata int sizeByteSendI2C; //
 
-static xdata int I2cSizeBuf;			// <=I2C_SIZE_BUF
+static xdata int counterBitI2c; 	// current bit in packet(byte)
+//static xdata int counterByteI2c; 	// current packet(byte)
 
 static xdata unsigned int bufferLowValueRX;				
 static xdata unsigned int bufferHighValueRX;
@@ -43,22 +40,26 @@ extern bit FlagI2cStart;
 extern bit FlagI2cDelay;
 
 /*	Pins	*/
-#define I2C_SLK 	ADSK						//
-#define	I2C_SDA		ADOUT 					//	
+#define I2C_SLK 		ADSK						//
+#define	I2C_SDA			ADOUT 					//	
 
 /*	Func	*/
-void I2C_change_size_ADR	(int value);				//
-void I2C_change_size_DATA	(int value);				//
+long I2C_Read_Buf();
+void I2C_Write_Buf(long value);
+
+void I2C_change_size_ADR (int value);					//
+void I2C_change_size_DATA(int value);					//
+void I2C_change_size_BUF (int value);					//
+void I2C_change_size_BYTE(int value);					//
 
 void I2C_init_SLK(bit value);									//
 
-void I2C_exchange_start(void);								//
-											
+void I2C_exchange_start(enum I2cMode mode);		//				
 void I2C_exchange_do(enum I2cMode mode);			//
+void I2C_exchange_end(void);									//
 
-void I2C_exchange_end(void);
-	
 void I2C_delay(void);
+void I2C_start();
 
 static bit I2C_Get_Bit_Buf_TX(void);
 static void I2C_Write_Bit_Buf_RX(void);

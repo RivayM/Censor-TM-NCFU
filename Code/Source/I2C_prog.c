@@ -5,17 +5,35 @@
 #include <I2C_prog.h>
 #include <N76E003.H>
 
-bit FlagI2cStart	=	0;
-bit FlagI2cDelay	=	0;
+bit FlagI2cStart					=	0;
+bit FlagI2cDelay					=	0;
 
-xdata int I2cSizeBuf				=	I2C_SIZE_PACKET_BUF;
-xdata int sizeADR						=	I2C_SIZE_ADR;
-xdata int sizeData					=	I2C_SIZE_DATA;
-int sizeByteForSend	=	I2C_AMOUNT_PACKETS;
+xdata int sizeBufI2c			=	I2C_SIZE_PACKET_BUF;
+xdata int sizeADR					=	I2C_SIZE_ADR;
+xdata int sizeData				=	I2C_SIZE_DATA;
+xdata int sizeByteForSend	=	I2C_AMOUNT_PACKETS;
 
-void I2C_change_size_ADR(int value){sizeADR	= value;}
-void I2C_change_size_DATA(int value){sizeData= value;}
-void I2C_change_size_BUF(int value){sizeData= value;}
+xdata int counterBitI2c		= 0;
+xdata int counterByteI2c	= 0;
+
+//**************************************************************************
+/* additional        */
+//**************************************************************************
+
+void I2C_change_size_ADR (int value){sizeADR				= value;}		
+void I2C_change_size_DATA(int value){sizeData				= value;}		
+void I2C_change_size_BUF (int value){sizeBufI2c			= value;}		
+void I2C_change_size_BYTE(int value){sizeByteSendI2C= value;}	
+void I2C_start(){FlagI2cStart	= 1;}	
+void I2C_Write_Buf(long value){
+	bufferLowValueTX 	= 	value & 0x00FF;
+	bufferHighValueTX = ((value & 0xFF00) >> 8) >> 8;
+}
+
+long I2C_Read_Buf(){
+	long buf = (bufferHighValueRX << 8) << 8;
+	return buf + bufferLowValueRX;
+}
 
 //********************************************************
 //			_____			 _____				->	CLK
@@ -24,19 +42,15 @@ void I2C_change_size_BUF(int value){sizeData= value;}
 //  f()	 f()	f()		f()	 f()		->	I2C_exchange_start()
 //********************************************************
 /* main f()for timer/every clk launc. When exchange start*/
-void I2C_exchange_start(){
+void I2C_exchange_start(enum I2cMode mode){
 	/*every clk launch*/
-	
+	//this put next byte
+	I2C_exchange_do(mode/*next byte*/);
 }
 
 /*instructions when exchange go */
 void I2C_exchange_do(enum I2cMode mode){
-	// здесь мне надо задать cигнал clk 
-	// пройти мимо
-	// когда вернусь прочитать
-	// записать новое значение и пройти мимо ( вернутся в начало)
-	
-	if(counterBit){			
+	if(counterBitI2c){			
 		I2C_SLK =~ I2C_SLK;
 	}
 	else{	/*counterBit=0*/ 						// what do when start packet
@@ -45,22 +59,20 @@ void I2C_exchange_do(enum I2cMode mode){
 		}
 		else{ 
 			I2C_SLK =~ I2C_SLK; 	
-		}
+		}		
 	}
 
 	if( I2C_SLK == I2C_CPHA ){
-		switch(counterBit){							//	start exchange	
+		switch(counterBitI2c){						//	start exchange	
 /*End bit packet	*/
 			case I2C_SIZE_PACKET_BUF:	/*	max bit	*/
 				/*need next byte?*/
-				if(counterByte > sizeByteForSend){
-					FlagI2cStart	=	0;
-					I2C_SLK				=	0;
-					I2C_SDA				=	0;
-				}
-				else{
-					counterByte++;						// next byte
-				}
+				//if(counterByteI2c > sizeByteSendI2C){
+					I2C_exchange_end();
+				//}
+				//else{
+				//	counterByteI2c++;						// next byte
+				//}
 				break;
 /* process going	*/
 			default:	/* 0 -> max bit - 1*/
@@ -74,23 +86,24 @@ void I2C_exchange_do(enum I2cMode mode){
 					default:break;
 				}
 /* next bit		*/
-				counterBit++; 
+				counterBitI2c++; 
 /*if will be max size change */
-				if(counterBit == I2cSizeBuf){ 
-					counterBit = I2C_SIZE_PACKET_BUF;
+				if(counterBitI2c == sizeBufI2c){ 
+					counterBitI2c = I2C_SIZE_PACKET_BUF;
 				}
 				break;
 		}
-		
 	}
-
+if(counterBitI2c && I2C_CPHA !=I2C_SLK){
+		I2C_SLK =~ I2C_SLK; 
+	}
 }
 
 /*instructions exchange end */
 void I2C_exchange_end(){
-	//  все линии в 0 или в 1
-	// мб добавить сюда настройки
-
+	FlagI2cStart	=	0;
+	I2C_SLK				=	0;
+	I2C_SDA				=	0;
 }
 
 /*delay = each iteration when the call */
@@ -108,17 +121,17 @@ void I2C_init_SLK(bit value){
 /*read TX buf and send bit*/
 static bit I2C_Get_Bit_Buf_TX(){
 	int outValue;
-	if( counterBit <=15 ){
-		outValue = bufferLowValueTX * (0x01 << counterBit);
+	if( counterBitI2c <=15 ){
+		outValue = bufferLowValueTX * (0x01 << counterBitI2c);
 	}
-	else if(counterBit == 16){	// nuvoton << 15 or >>15 (max)!!!
+	else if(counterBitI2c == 16){	// nuvoton << 15 or >>15 (max)!!!
 		outValue = bufferLowValueTX * 0x8000;
 	}
-	else if(counterBit == 32){  // the same as 16 bit for bufferLowValueTX
+	else if(counterBitI2c == 32){ // the same as 16 bit for bufferLowValueTX
 		outValue = bufferHighValueTX * 0x8000;
 	}
-	else if( counterBit > 16 /*&& counterBit!=32*/){
-		outValue = bufferHighValueTX * (0x01 << counterBit);
+	else if( counterBitI2c > 16 /*&& counterBit!=32*/){
+		outValue = bufferHighValueTX * (0x01 << counterBitI2c);
 	}
 	else {} /*error*/
 	return outValue ? 1 : 0;
@@ -126,17 +139,17 @@ static bit I2C_Get_Bit_Buf_TX(){
 
 /*write in buf Rx ( if only input = 1!)*/
 static void I2C_Write_Bit_Buf_RX(){
-	if( counterBit <=15 ){
-		bufferLowValueRX += (0x01 << counterBit);
+	if( counterBitI2c <=15 ){
+		bufferLowValueRX += (0x01 << counterBitI2c);
 	}
-	else if(counterBit == 16){	// nuvoton << 15 or >>15 (max)!!!
+	else if(counterBitI2c == 16){	// nuvoton << 15 or >>15 (max)!!!
 		bufferLowValueRX += 0x8000;
 	}
-	else if(counterBit == 32){  // the same as 16 bit for bufferLowValueTX
+	else if(counterBitI2c == 32){ // the same as 16 bit for bufferLowValueTX
 		bufferHighValueRX += 0x8000;
 	}
-	else if( counterBit > 16 /*&& counterBit!=32*/){
-		bufferHighValueRX += (0x01 << counterBit);
+	else if( counterBitI2c > 16 /*&& counterBit!=32*/){
+		bufferHighValueRX += (0x01 << counterBitI2c);
 	}
 	else {} /*error*/
 }

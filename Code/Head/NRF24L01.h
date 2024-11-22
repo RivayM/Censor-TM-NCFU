@@ -81,7 +81,7 @@ static xdata unsigned char COMMAND_W_ACK_PAYLOAD	[NRF_MASSIV_SIZE];
 extern bit modeRF;
 extern bit FlagDataReadReady;
 extern int currentProcess;      		 // current progress
-extern xdata unsigned char readBuf[NRF_MASSIV_SIZE];      // buffer 
+extern pdata unsigned char readBuf[NRF_MASSIV_SIZE];      // buffer 
 	
 static xdata struct NRF_PACKET_SPI{  
 	unsigned char vCONFIG			[NRF_MASSIV_SIZE];			// 

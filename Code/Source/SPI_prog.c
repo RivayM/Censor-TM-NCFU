@@ -3,31 +3,29 @@
 //********************************************************
 #include <SPI_prog.H>
 #include <N76E003.H>
+ 
+pdata unsigned char valueBufferArrayTx[BUFFER_SPI_MASSIV_SIZE] = 0;  
+pdata unsigned char valueBufferArrayRx[BUFFER_SPI_MASSIV_SIZE] = 0;
 
-unsigned char valueBufferArrayTx[BUFFER_SPI_MASSIV_SIZE]; 
-unsigned char valueBufferArrayRx[BUFFER_SPI_MASSIV_SIZE];  
+int amountByteForSendSPI 	= BUFFER_SPI_MASSIV_SIZE; 
+int counterBitSPI        	= 0;   
+int counterByteSPI       	= 0;
+int valueDelay						= 0;
 
-int amountByteArrayForSend 	= BUFFER_SPI_MASSIV_SIZE; 
-int counterBit            	= 0;   
-int counterByte           	= 0;
+bit FlagSPIGlobal					= 0;
+bit FlagExchangeSPIStart	= 0;
+bit FlagSPIDelay				 	= 0;
 
-bit FlagSPIGlobal						= 0;
-bit FlagExchangeSPIStart		= 0;
-
-int	valueDelay						 	= 0;
-bit FlagSPIDelay				 		= 0;
-
-void SPI_write_amount_byte(int value){amountByteArrayForSend = value;}
+void SPI_write_amount_byte(int value){amountByteForSendSPI = value;}
 
 unsigned char *SPI_get_RX_buf(){return &valueBufferArrayRx;}
 
 void SPI_write_TX_buf(unsigned char *buf){
 	int  i;
-	for( i = 0; i <= amountByteArrayForSend; i++ ){
+	for( i = 0; i <= amountByteForSendSPI; i++ ){
 		valueBufferArrayTx[i] = *( buf + i );
 	}
 }
-
 
 //********************************************************
 //			_____			 _____				->	CLK
@@ -40,24 +38,33 @@ void SPI_exchange_start(void){
 	/*every clk launch*/
 	SPI_exchange_do( 
 		SPI_Data_Convert_Bit(
-			&valueBufferArrayTx[counterByte]),	// buf  for TX
-		&valueBufferArrayRx[counterByte]);		// buf  for RX
+			&valueBufferArrayTx[counterByteSPI]),	// buf  for TX
+		&valueBufferArrayRx[counterByteSPI]);		// buf  for RX
 }
 
 /* exchange bitwise operation */
 void SPI_exchange_do(unsigned char valueMosi, unsigned char *outSideBuffer){ 
-	if( counterBit ||	SPI_CPOL ) {        // CPOL - when start clk
-		PIN_CLK_SPI =~ PIN_CLK_SPI;         // clocking
-	}  		
-	if( PIN_CLK_SPI == SPI_CPHA) {       	// CPHA - when next bit
 /******************************/
-		switch(counterBit){		 							// Start
+	if(counterBitSPI){			
+		PIN_CLK_SPI =~ PIN_CLK_SPI;
+	}
+	else{	/*counterBit=0*/ 						// what do when start packet
+		if(PIN_CLK_SPI == SPI_CPOL ){				// check setings
+			/*don't change state*/
+		}
+		else{ 
+			PIN_CLK_SPI =~ PIN_CLK_SPI; 	
+		}		
+	}
+	if( PIN_CLK_SPI == SPI_CPHA) {       	// CPHA - when next bit	
+/******************************/
+		switch(counterBitSPI){		 					// Start
 /*End bit packet	*/
 			case BUFFER_SPI	/*	max bit	*/:          				
-				PIN_MOSI_SPI = 1;
-				//PIN_MISO_SPI = 1;
-				PIN_CLK_SPI  = SPI_CPOL;	
-				counterBit   = 0;
+				PIN_MOSI_SPI 		= 1;
+				//PIN_MISO_SPI 	= 1;
+				PIN_CLK_SPI 		= SPI_CPOL;	
+				counterBitSPI		= 0;
 				SPI_exchange_end();       			// continue?
 				SPI_Data_Convert_Byte();  			// next packet
 				break;
@@ -69,25 +76,28 @@ void SPI_exchange_do(unsigned char valueMosi, unsigned char *outSideBuffer){
 				else{ 				PIN_MOSI_SPI = 0;}
 /* send MiSo	*/
 				if ( PIN_MISO_SPI == 1){      	 	
-					outSideBuffer = outSideBuffer +
-					SPI_Data_Convert_Bit(outSideBuffer);
+					outSideBuffer += SPI_Data_Convert_Bit(outSideBuffer);
 				}	
 /* next bit		*/
-				counterBit++; 									
+				counterBitSPI++; 									
 				break;
 		}
 	}
 /******************************/	
+	if(counterBitSPI==0 && SPI_CPHA !=PIN_CLK_SPI){
+		PIN_CLK_SPI =~ PIN_CLK_SPI; 
+	}
+/******************************/
 }
 
 /* In the latest BYTE exchange SPI*/
 void SPI_exchange_end(void){	
 	#if SPI_DATA_BYTE == SPI_MS_BYTE
-		if(counterByte == 0){ 
+		if(counterByteSPI == 0){ 
 			SPI_End();  
 		}
 	#else
-		if(counterByte == amountByteArrayForSend - 1){ 
+		if(counterByteSPI == amountByteForSendSPI - 1){ 
 			SPI_End();  
 		}
 	#endif
@@ -103,9 +113,9 @@ void SPI_End(void){
 /* Convert DATA BYTE*/
 void SPI_Data_Convert_Byte(){	
 #if SPI_DATA_BYTE == SPI_MS_BYTE
-	counterByte--;     // SPI_MSbyte 
+	counterByteSPI--;     // SPI_MSbyte 
 #else
-	counterByte++;     // SPI_LSbyte
+	counterByteSPI++;     // SPI_LSbyte
 #endif
 }
 
@@ -119,20 +129,18 @@ unsigned char SPI_Data_Convert_Bit(unsigned char *outSideBuffer){
 	(the whole cycle) - long operation
 	*/
 #if SPI_DATA_BIT == SPI_MSB
-	if(counterBit >= BUFFER_SPI - 1){ 
-		buf = buf & 0x01; 
-	}
-	else {
-		buf = buf & 0x01 << (BUFFER_SPI - counterBit - 1);// SPI_MSB
-	}
-#else
-	if(counterBit >= BUFFER_SPI - 1){
-		buf = buf & 0x01 << BUFFER_SPI - 1;
-	}
-	else{
-		buf = buf & 0x01 << counterBit; 									// SPI_LSB
-	}
-#endif
+	
+	buf &= (counterBitSPI >= BUFFER_SPI - 1) ? 
+		0x01 : 
+		0x01 << (BUFFER_SPI - counterBitSPI - 1) ;
+
+#else	/*SPI_DATA_BIT == SPI_LSB*/
+	
+	buf &= (counterBitSPI >= BUFFER_SPI - 1) ? 
+		0x01 << BUFFER_SPI - 1 : 
+		0x01 << counterBitSPI ;
+	
+#endif /*SPI_DATA_BIT */
 	return buf;
 }
 
@@ -142,15 +150,15 @@ void SPI_Delay(){
 		valueDelay--;	
 	}
 	else{	
-		FlagSPIDelay = 0;	
+		FlagSPIDelay 	= 0;	
 		FlagSPIGlobal = 0;
 	}
 }
 
 /*SET Delay = 1 timer cycle timer*/
 void SPI_Delay_Set(int delay){
-	valueDelay = delay;
-	FlagSPIDelay = 1;
+	valueDelay 		= delay;
+	FlagSPIDelay 	= 1;
 	FlagSPIGlobal = 1;
 }
 
@@ -162,9 +170,9 @@ void SPI_CLK_init(bit value){
 /* Start exchange spi */
 void SPI_Start(void){
 #if SPI_DATA_BYTE == SPI_MS_BYTE
-	counterByte = amountByteArrayForSend -1;
+	counterByteSPI = amountByteForSendSPI - 1;
 #else
-	counterByte = 0;
+	counterByteSPI = 0;
 #endif
-	FlagSPIGlobal = 1;
+	FlagSPIGlobal  = 1;
 }

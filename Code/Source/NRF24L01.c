@@ -110,7 +110,7 @@ xdata	unsigned char COMMAND_W_ACK_PAYLOAD	[NRF_MASSIV_SIZE] =
 /* NRF24L01 additional        */
 //**************************************************************************
 
-xdata unsigned char readBuf[NRF_MASSIV_SIZE]={0x00}; 
+pdata unsigned char readBuf[NRF_MASSIV_SIZE]={0x00}; 
 
 bit FlagDataReadReady = 0;
 int currentProcess = 0;
