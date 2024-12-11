@@ -86,6 +86,13 @@ void Process_work_RF(void){
 //  Work with ADC
 //********************************************************
 #if USE_ADC
+
+
+void Work_NRF(){
+
+
+}
+
 #endif /*include ADC in project*/
 //********************************************************
 //  FRAM

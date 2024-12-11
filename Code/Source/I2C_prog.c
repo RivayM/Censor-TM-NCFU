@@ -45,7 +45,7 @@ long I2C_Read_Buf(){
 void I2C_exchange_start(enum I2cMode mode){
 	/*every clk launch*/
 	//this put next byte
-	I2C_exchange_do(mode/*next byte*/);
+	I2C_exchange_do(mode/*,next byte(if use array)*/);
 }
 
 /*instructions when exchange go */

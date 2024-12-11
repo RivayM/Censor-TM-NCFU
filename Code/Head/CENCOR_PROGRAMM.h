@@ -53,10 +53,17 @@ void init_device(void);
 
 extern xdata int mainStateProgressSPI;
 
-void Work_NRF(void);
+
 void ISR_Timer0(void);
+
+void Work_NRF(void);
 void Process_init_RF(void);
 void Process_work_RF(void);
+
+void Work_NRF(void);
+void Process_init_ADC(void);
+void Process_work_ADC(void);
+
 //********************************************************
 //  Work with ADC
 //********************************************************

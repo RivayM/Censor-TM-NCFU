@@ -27,8 +27,8 @@ _____________________________
 #define ADC_SLK 		ADSK					//
 #define	ADC_OUT			ADOUT 				//
 
-extern xdata long	valueAChADC;					//
-extern xdata long	valueBChADC;					//
+extern xdata long	valueAChADC;		//
+extern xdata long	valueBChADC;		//
 	
 static bit statusADC;							// from which channel read data
 extern bit FlagDataReadyADC;			//

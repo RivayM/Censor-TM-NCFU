@@ -1,4 +1,4 @@
-C51 COMPILER V9.53.0.0   ADC_HX711                                                         11/22/2024 15:53:04 PAGE 1   
+C51 COMPILER V9.53.0.0   ADC_HX711                                                         12/10/2024 11:10:02 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE ADC_HX711
@@ -62,7 +62,7 @@ line level    source
   51   1        statusADC = 1;
   52   1        I2C_change_size_BUF(B_CH_32);
   53   1        I2C_start();
-C51 COMPILER V9.53.0.0   ADC_HX711                                                         11/22/2024 15:53:04 PAGE 2   
+C51 COMPILER V9.53.0.0   ADC_HX711                                                         12/10/2024 11:10:02 PAGE 2   
 
   54   1        ADCHX711_Read();
   55   1      }

@@ -1,4 +1,4 @@
-C51 COMPILER V9.53.0.0   I2C_PROG                                                          11/22/2024 15:53:04 PAGE 1   
+C51 COMPILER V9.53.0.0   I2C_PROG                                                          12/10/2024 11:10:02 PAGE 1   
 
 
 C51 COMPILER V9.53.0.0, COMPILATION OF MODULE I2C_PROG
@@ -62,7 +62,7 @@ line level    source
   51          /*instructions when exchange go */
   52          void I2C_exchange_do(enum I2cMode mode){
   53   1        if(counterBitI2c){      
-C51 COMPILER V9.53.0.0   I2C_PROG                                                          11/22/2024 15:53:04 PAGE 2   
+C51 COMPILER V9.53.0.0   I2C_PROG                                                          12/10/2024 11:10:02 PAGE 2   
 
   54   2          I2C_SLK =~ I2C_SLK;
   55   2        }
@@ -126,7 +126,7 @@ line level    source
  113   1      
  114   1      }
  115          
-C51 COMPILER V9.53.0.0   I2C_PROG                                                          11/22/2024 15:53:04 PAGE 3   
+C51 COMPILER V9.53.0.0   I2C_PROG                                                          12/10/2024 11:10:02 PAGE 3   
 
  116          /*init state SLK */
  117          void I2C_init_SLK(bit value){
