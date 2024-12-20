@@ -12,6 +12,7 @@ xdata int mainStateProgressADC = 0;		// number current process adc
 //********************************************************
 void init_device(){
 	GPIO_init();
+	
 	Init_Timer0();
 	SPI_CLK_init(0);
 	#if	USE_RADIO
@@ -88,9 +89,8 @@ void Process_work_RF(void){
 #if USE_ADC
 
 
-void Work_NRF(){
-
-
+void Work_ADC(){
+	ADCHX711_Read_CH_A()
 }
 
 #endif /*include ADC in project*/
@@ -119,8 +119,15 @@ void ISR_Timer0() interrupt 1 {  				// <Interface_com.H>
 				SPI_exchange_start();		// exchange SPI
 			} 
 	}
-	/* добавить сюда i2c?*/
-	
+/*********************/
+	if(FlagI2cStart){
+		if(FlagI2cDelay){
+			/*delay i2c*/
+		}
+		else{
+			I2C_exchange_start(SEND);	// mode I2c (adc)
+		}
+	}
 }
 
 //********************************************************

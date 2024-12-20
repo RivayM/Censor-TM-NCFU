@@ -26,6 +26,7 @@ _____________________________
 
 #define ADC_SLK 		ADSK					//
 #define	ADC_OUT			ADOUT 				//
+//#define	ADC_ON			ADC_ON 				//
 
 extern xdata long	valueAChADC;		//
 extern xdata long	valueBChADC;		//

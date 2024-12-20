@@ -12,13 +12,21 @@ void GPIO_init(){
 	P17_Input_Mode;									// NRF_IRQ
 	P00_PushPull_Mode; 							// SPI_MoSi
 	P01_Input_Mode;									// SPI_MiSO
-	
+	/*****************************/
 	//	P11_PushPull_Mode;
 	//	P15_PushPull_Mode;
 	//  P10_PushPull_Mode;
 	//	P01_PushPull_Mode;
 	//	P04_PushPull_Mode;
 	//	Enable_INT_Port0
+	
+	P30_Input_Mode;	 				//	init pin ADCDOUT
+	P04_PushPull_Mode;			//	init pin ADC_ON
+	P04 = 1;								//  on adc
+	P05_PushPull_Mode;			//	init pin ADCCLK 
+	
+	/******************************/
+	
 	Enable_INT_Port1;
 	Enable_BIT0_LowLevel_Trig;
 	//	set_EPI;										// dont work with timer 0

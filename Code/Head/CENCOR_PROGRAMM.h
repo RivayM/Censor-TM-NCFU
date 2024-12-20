@@ -60,7 +60,7 @@ void Work_NRF(void);
 void Process_init_RF(void);
 void Process_work_RF(void);
 
-void Work_NRF(void);
+void Work_ADC(void);
 void Process_init_ADC(void);
 void Process_work_ADC(void);
 

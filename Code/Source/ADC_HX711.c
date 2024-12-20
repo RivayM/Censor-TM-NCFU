@@ -16,7 +16,10 @@ bit ADCHX711_getStat(){return statusADC;}
 
 void ADCHX711_Initial(void){
 	/*	init GPIO				*/
-	/*	ADC_OUT as INT 	*/
+	// P30_Input_Mode;	 			//	ADCDOUT
+	// P04_PushPull_Mode;			//	ADC_ON
+	// P05_PushPull_Mode;			//	ADCCLK 
+	
 }
 
 //**************************************************************************
